@@ -6,6 +6,28 @@
 
 ---
 
+## Getting Started
+
+This is a **documentation example** showing how Magneto AI would be configured for this stack.
+
+To actually use Magneto with this project:
+
+```bash
+# 1. Navigate to your project
+cd your-gatsby-project
+
+# 2. Initialize Magneto with the power packs
+magneto init --with javascript typescript react gatsby contentful algolia netlify jest playwright
+
+# 3. Run analysis
+magneto analyze
+
+# 4. Start using magneto commands
+magneto query "algolia search"
+```
+
+---
+
 ## Project Overview
 
 High-performance marketing website with:

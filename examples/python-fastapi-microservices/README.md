@@ -6,6 +6,28 @@
 
 ---
 
+## Getting Started
+
+This is a **documentation example** showing how Magneto AI would be configured for this stack.
+
+To actually use Magneto with this project:
+
+```bash
+# 1. Navigate to your project
+cd your-python-project
+
+# 2. Initialize Magneto with the power packs
+magneto init --with python fastapi postgresql redis kafka docker aws pytest microservices-saas
+
+# 3. Run analysis
+magneto analyze
+
+# 4. Start using magneto commands
+magneto query "auth middleware"
+```
+
+---
+
 ## Project Overview
 
 Multi-tenant SaaS platform with:
