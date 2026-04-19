@@ -125,6 +125,9 @@ jobs:
         run: |
           git add package.json package-lock.json
           git commit -m "chore: release v${{ steps.version.outputs.VERSION }} [skip ci]"
+          # Delete tag if it exists (idempotent release)
+          git tag -d "v${{ steps.version.outputs.VERSION }}" 2>/dev/null || true
+          git push origin ":refs/tags/v${{ steps.version.outputs.VERSION }}" 2>/dev/null || true
           git tag "v${{ steps.version.outputs.VERSION }}"
           git push origin main --tags
 
