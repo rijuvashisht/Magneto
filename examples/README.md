@@ -33,7 +33,28 @@ A Spring Boot microservice demonstrating:
 - **Security audit** — Multi-agent audit catches what single-pass AI misses
 - **Microservice architecture review** — Domain boundary analysis with contradiction detection
 
-### 3. [Standalone Tasks](./tasks/)
+### 3. [Python FastAPI Microservices](./python-fastapi-microservices/)
+
+Multi-tenant SaaS platform with 4 microservices:
+- **Webhook retry logic** — Cross-service coordination → 4x faster
+- **Tenant race condition bug** — Database isolation → zero retries
+- **E2E tenant onboarding** — Complete flow with Kafka + PostgreSQL
+
+### 4. [Angular + .NET Enterprise](./angular-dotnet-enterprise/)
+
+Enterprise HRMS with full-stack coordination:
+- **Payroll approval workflow** — CQRS + SignalR real-time
+- **Leave request race condition** — Concurrency bug fix
+- **Employee onboarding E2E** — Azure AD + Clean Architecture
+
+### 5. [Node.js + Gatsby Content Site](./nodejs-gatsby-content-site/)
+
+High-performance marketing website:
+- **Algolia faceted search** — 90+ Lighthouse score
+- **Build rate limiting bug** — Contentful optimization → 6x faster
+- **Content publishing E2E** — ISR + Netlify Edge
+
+### 6. [Standalone Tasks](./tasks/)
 
 Individual task files for common scenarios:
 - **Checkout mismatch bug** — Cross-layer bug investigation
@@ -50,6 +71,11 @@ Individual task files for common scenarios:
 | Java security audit | ~120K tokens | ~30K tokens | **75%** |
 | Next.js bundle review | ~80K tokens | ~30K tokens | **63%** |
 | Java architecture review | ~140K tokens | ~35K tokens | **75%** |
+| Python webhook retry (4 services) | ~180K tokens | ~35K tokens | **81%** |
+| Python tenant race condition | ~150K tokens | ~25K tokens | **83%** |
+| Angular/.NET payroll workflow | ~200K tokens | ~45K tokens | **78%** |
+| Gatsby Algolia search | ~120K tokens | ~28K tokens | **77%** |
+| Gatsby build optimization | ~100K tokens | ~22K tokens | **78%** |
 
 ### Monthly Cost for a 10-Developer Team
 
