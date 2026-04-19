@@ -38,22 +38,55 @@
 
 ---
 
-Magneto AI is a multi-agent AI orchestration system that brings structured reasoning, security guardrails, and pluggable intelligence to your codebase. It integrates natively with GitHub Copilot, OpenAI APIs, and optional tools like Graphify.
+Magneto AI is a multi-agent AI orchestration system that brings structured reasoning, security guardrails, and pluggable intelligence to your codebase — designed to work alongside every major AI coding assistant and agent gateway.
 
 ---
 
-## 🧠 What Is Magneto AI?
+## 🧠 About Magneto AI
 
-Magneto AI is **not** another AI wrapper. It is a **reasoning engine** and **control plane** that:
+Magneto AI is **not** another AI wrapper. It is a **reasoning engine**, **governance layer**, and **agent control plane** that sits between your team and any AI coding assistant — enforcing security, planning tasks, and building deep project understanding before a single line is written or deleted.
 
-- **Orchestrates multiple AI agents** with role-based task delegation
-- **Enforces security guardrails** — protected paths, blocked actions, approval workflows
-- **Classifies tasks** and creates execution plans before running anything
-- **Merges agent outputs** with confidence-weighted deduplication
-- **Plugs into your existing workflow** — Copilot, OpenAI, MCP tools
-- **Extends via Power Packs** — language, framework, cloud, and project-type intelligence
+### Works With Every AI Coding Assistant
 
-Think of it as the nervous system connecting your AI tools to your codebase — with the safety controls an enterprise demands.
+Magneto AI acts as the **skill and governance layer** for the full ecosystem of AI coding assistants and agent gateways — so your rules, security checks, and task plans travel with you regardless of which tool you use:
+
+| Assistant / Gateway | Integration |
+|---|---|
+| **GitHub Copilot CLI** | MCP server + `.github/agents/` + `copilot-instructions.md` |
+| **Claude Code** | MCP tools via `mcp.json`, skill files injected into context |
+| **Codex / OpenAI** | Direct API runner with structured JSON task execution |
+| **Cursor** | Skill files + `.cursor/rules/` auto-generated on `magneto init` |
+| **Gemini CLI** | MCP-compatible tool layer (`plan_task`, `security_check`, etc.) |
+| **OpenClaw** | Native plugin on ClawHub — `openclaw plugins install clawhub:openclaw-magneto` |
+| **Factory Droid** | Governance adapter via MCP tool hooks |
+| **Trae** | Skill injection via adapter system |
+| **Google Antigravity** | MCP-compatible `security_check` and `plan_task` tools |
+| **OpenCode** | Prompt generation via `magneto generate` scoped to relevant files only |
+
+One `magneto init`. All assistants governed.
+
+### Turn Any Folder Into a Queryable Knowledge Graph
+
+Magneto AI's `analyze` command ingests your entire project — code, documentation, API specs, design docs, papers, or any structured content — and builds a structured memory graph in `.magneto/memory/`:
+
+```
+magneto analyze
+```
+
+- **Source code** → exports, imports, classes, functions, call graphs, dependency maps
+- **Docs & READMEs** → indexed summaries linked to the modules they describe
+- **Config files** → environment shapes, schema definitions, feature flags
+- **Task history** → past plans and risk assessments feed future decisions
+
+The result: every AI prompt is pre-scoped to only the files that matter — **68% fewer tokens**, faster responses, no hallucinated file paths.
+
+> Pair with the **Graphify adapter** to extend into full visual knowledge graphs across code, papers, images, and video transcripts.
+
+### What It Is Not
+
+Magneto AI is **not** an AI model, a chat interface, or a replacement for your coding assistant. It is the **layer of intelligence underneath** — planning, securing, and contextualizing every task before your assistant runs it.
+
+Think of it as the nervous system connecting your AI tools to your codebase, with the safety controls an enterprise demands.
 
 ---
 
