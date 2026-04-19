@@ -12,6 +12,13 @@ import { generateCommand } from './commands/generate';
 import { analyzeCommand } from './commands/analyze';
 import { queryCommand, pathCommand } from './commands/query';
 import { telepathyCommand } from './commands/telepathy';
+import { 
+  adapterListCommand, 
+  adapterInstallCommand, 
+  adapterRemoveCommand, 
+  adapterConfigCommand, 
+  adapterDoctorCommand 
+} from './commands/adapter';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../package.json') as { version: string };
@@ -244,6 +251,62 @@ Telepathy Levels:
 `)
   .action(async (options) => {
     await telepathyCommand(options);
+  });
+
+const adapter = program
+  .command('adapter')
+  .description('Manage Magneto AI adapters for Claude, Antigravity, Manus, OpenClaw, and Graphify.');
+
+adapter
+  .command('list')
+  .description('List available and installed adapters')
+  .option('--verbose', 'Show detailed information')
+  .action(async (options) => {
+    await adapterListCommand(options);
+  });
+
+adapter
+  .command('install <name>')
+  .description('Install an adapter: claude, antigravity, manus, openclaw, graphify')
+  .option('--api-key <key>', 'API key for adapters that require it (e.g., Manus)')
+  .addHelpText('after', `
+Examples:
+  $ magneto adapter install claude
+  $ magneto adapter install manus --api-key=your_key_here
+  $ magneto adapter install antigravity
+`)
+  .action(async (name, options) => {
+    await adapterInstallCommand(name, options);
+  });
+
+adapter
+  .command('remove <name>')
+  .description('Remove an installed adapter')
+  .option('--force', 'Skip confirmation prompt', false)
+  .action(async (name, options) => {
+    await adapterRemoveCommand(name, options);
+  });
+
+adapter
+  .command('config <name>')
+  .description('Configure an adapter (especially for API-based adapters like Manus)')
+  .option('--set <key>', 'Set a specific config key (e.g., sync.autoPushTasks)')
+  .option('--value <val>', 'Value to set')
+  .addHelpText('after', `
+Examples:
+  $ magneto adapter config manus                    # Interactive configuration
+  $ magneto adapter config manus --set apiKey --value xxx
+  $ magneto adapter config manus --set sync.autoPushTasks --value true
+`)
+  .action(async (name, options) => {
+    await adapterConfigCommand(name, options);
+  });
+
+adapter
+  .command('doctor')
+  .description('Validate all installed adapters are correctly configured')
+  .action(async () => {
+    await adapterDoctorCommand();
   });
 
 program.parse(process.argv);

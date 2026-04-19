@@ -475,6 +475,62 @@ openclaw gateway restart
 
 OpenClaw agents will now automatically use Magneto for task planning, security checks, and context loading on every engineering request.
 
+### Adapter Management Commands
+
+Magneto provides a full CLI for managing adapters after initialization:
+
+```bash
+# List available and installed adapters
+magneto adapter list
+
+# Install an adapter
+magneto adapter install claude
+magneto adapter install manus --api-key=your_key_here
+magneto adapter install antigravity
+
+# Configure an adapter (especially for API-based ones)
+magneto adapter config manus
+magneto adapter config manus --set apiKey --value xxx
+magneto adapter config manus --set sync.autoPushTasks --value true
+
+# Validate all installed adapters
+magneto adapter doctor
+
+# Remove an adapter
+magneto adapter remove claude --force
+```
+
+### Claude Code Adapter
+
+Install the Claude Code adapter to use `/magneto` commands directly in Claude Code:
+
+```bash
+magneto adapter install claude
+```
+
+This creates `.claude/` with:
+- `CLAUDE.md` — Project instructions
+- `skills/magneto/SKILL.md` — `/magneto` slash command
+
+### Google Antigravity Adapter
+
+Install the Antigravity adapter for the Google Antigravity IDE:
+
+```bash
+magneto adapter install antigravity
+```
+
+This creates `.agents/` with Magneto skill files for `/magneto-*` commands.
+
+### Manus AI Adapter
+
+Install the Manus adapter for API-based integration:
+
+```bash
+magneto adapter install manus
+magneto adapter config manus  # Set your API key
+```
+
 ---
 
 ## 🤖 Copilot Integration

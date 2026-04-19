@@ -64,3 +64,9 @@ export function listFiles(dirPath: string, pattern?: RegExp): string[] {
   walk(dirPath);
   return results;
 }
+
+export function deleteDir(dirPath: string): void {
+  if (fs.existsSync(dirPath)) {
+    fs.rmSync(dirPath, { recursive: true, force: true });
+  }
+}

@@ -1,0 +1,408 @@
+{
+  "taskId": "task-1776642259457",
+  "title": "Untitled Task",
+  "context": {
+    "projectRoot": "/Users/rijuvashisht/Documents/AI/magneto",
+    "classification": "feature-implementation",
+    "roles": [
+      "orchestrator",
+      "backend",
+      "tester",
+      "requirements"
+    ],
+    "subAgents": [
+      {
+        "id": "agent-orchestrator",
+        "role": "orchestrator",
+        "model": "gpt-4o",
+        "tools": [
+          "load_context",
+          "security_check",
+          "plan_task",
+          "merge_results"
+        ],
+        "scope": [
+          "**/*"
+        ]
+      },
+      {
+        "id": "agent-backend",
+        "role": "backend",
+        "model": "gpt-4o",
+        "tools": [
+          "load_context",
+          "security_check",
+          "plan_task"
+        ],
+        "scope": [
+          "src/**",
+          "lib/**",
+          "api/**"
+        ]
+      },
+      {
+        "id": "agent-tester",
+        "role": "tester",
+        "model": "gpt-4o",
+        "tools": [
+          "load_context",
+          "security_check"
+        ],
+        "scope": [
+          "test/**",
+          "tests/**",
+          "__tests__/**",
+          "spec/**"
+        ]
+      },
+      {
+        "id": "agent-requirements",
+        "role": "requirements",
+        "model": "gpt-4o",
+        "tools": [
+          "load_context",
+          "security_check"
+        ],
+        "scope": [
+          "docs/**",
+          "requirements/**",
+          "*.md"
+        ]
+      }
+    ],
+    "relevantFiles": [
+      "src/cli.ts",
+      "src/commands/analyze.ts",
+      "src/commands/doctor.ts",
+      "src/commands/generate.ts",
+      "src/commands/init.ts",
+      "src/commands/merge.ts",
+      "src/commands/plan.ts",
+      "src/commands/query.ts",
+      "src/commands/refresh.ts",
+      "src/commands/run.ts",
+      "src/commands/telepathy.ts",
+      "src/core/adapter-loader.ts",
+      "src/core/context.ts",
+      "src/core/detect-packs.ts",
+      "src/core/graph-engine.ts",
+      "src/core/merge-results.ts",
+      "src/core/power-pack-loader.ts",
+      "src/core/scaffold.ts",
+      "src/core/security-engine.ts",
+      "src/core/telepathy.ts",
+      "src/mcp/server.ts",
+      "src/mcp/tools/load-context.ts",
+      "src/mcp/tools/merge-results.ts",
+      "src/mcp/tools/plan-task.ts",
+      "src/mcp/tools/query-graph.ts",
+      "src/mcp/tools/security-check.ts",
+      "src/runners/copilot-cloud.ts",
+      "src/runners/copilot-local.ts",
+      "src/runners/openai.ts",
+      "src/runners/types.ts",
+      "src/utils/fs.ts",
+      "src/utils/logger.ts",
+      "src/utils/paths.ts",
+      "src/utils/task-parser.ts",
+      "tests/core/context.test.ts",
+      "tests/core/detect-packs.test.ts",
+      "tests/core/merge-results.test.ts",
+      "tests/core/security-engine.test.ts"
+    ],
+    "memoryContext": {},
+    "config": {
+      "version": "0.1.0",
+      "projectName": "",
+      "executionMode": "assist",
+      "security": {
+        "protectedPaths": [
+          "*.env",
+          "*.pem",
+          "*.key",
+          "secrets/**"
+        ],
+        "blockedActions": [
+          "delete-database",
+          "drop-table",
+          "rm -rf"
+        ],
+        "approvalRequired": [
+          "deploy",
+          "migrate",
+          "auth-change"
+        ],
+        "maxTelepathyLevel": 2
+      },
+      "powerPacks": [],
+      "adapters": [],
+      "runners": {
+        "default": "openai",
+        "available": [
+          "openai",
+          "copilot-local",
+          "copilot-cloud"
+        ]
+      },
+      "memoryMode": "internal-first",
+      "roles": [
+        "orchestrator",
+        "backend",
+        "tester",
+        "requirements"
+      ]
+    }
+  },
+  "security": {
+    "securityRisk": "low",
+    "approvalRequired": false,
+    "telepathyLevel": 2,
+    "reasons": [
+      "Involves dependency changes"
+    ],
+    "blockedActions": [],
+    "protectedPathsAccessed": []
+  },
+  "steps": [
+    {
+      "order": 1,
+      "role": "analyst",
+      "action": "analyze",
+      "description": "Analyze task: Untitled Task",
+      "inputs": [
+        "Implement the magneto adapter CLI command family for managing adapters (list, install, remove, config, doctor)\n\n# Implement `magneto adapter` Command Family\n\n## Objective\n\nCreate a comprehensive adapter management CLI that allows users to:\n- `magneto adapter list` — Show available and installed adapters\n- `magneto adapter install <name>` — Install an adapter (Claude, Antigravity, Manus, OpenClaw, Graphify)\n- `magneto adapter remove <name>` — Remove an installed adapter\n- `magneto adapter config <name>` — Configure adapter settings (especially API keys for Manus)\n- `magneto adapter doctor` — Validate all adapters are correctly wired\n\n## Context\n\nCurrently, adapters can only be installed via `magneto init --adapter <name>`. Users have no way to:\n1. See which adapters are available\n2. Install adapters after project initialization\n3. Configure API keys (critical for Manus adapter)\n4. Remove adapters they no longer need\n5. Validate adapter setup\n\n## Requirements\n\n### Commands\n\n1. **adapter list**\n   - Scan `src/templates/power-packs/adapters/` for available adapters\n   - Check `.magneto/adapters/` and project root (`.claude/`, `.agents/`, `.openclaw/`) for installed adapters\n   - Show status: available, installed, partially-configured\n   - Display adapter type (file-based vs API-based)\n\n2. **adapter install <name>**\n   - Accept adapter name: claude, antigravity, manus, openclaw, graphify\n   - Copy adapter template files to appropriate locations\n   - Run adapter-specific wiring (wireClaudeAdapter, wireAntigravityAdapter, etc.)\n   - For API-based adapters (Manus), prompt for API key\n   - Update `magneto.config.json` adapters array\n   - Show success message with next steps\n\n3. **adapter remove <name>**\n   - Remove adapter files from project\n   - Clean up adapter-specific folders (`.claude/`, `.agents/`, etc.)\n   - Update `magneto.config.json`\n   - Confirm before destructive operations\n\n4. **adapter config <name>**\n   - Interactive configuration for API-based adapters\n   - For Manus: prompt for MANUS_API_KEY, projectId, sync settings\n   - Read/write to `.magneto/adapters/<name>/config.json`\n   - Validate config after save\n\n5. **adapter doctor**\n   - Check all installed adapters are correctly wired\n   - Verify required files exist\n   - For API adapters: test connectivity\n   - Report issues and suggest fixes\n\n### Files to Create/Modify\n\n**New command file:**\n- `src/commands/adapter.ts` — Main adapter command implementation\n\n**Modify:**\n- `src/cli.ts` — Add `adapter` command with subcommands\n- `src/core/adapter-loader.ts` — Ensure install/remove functions are exported\n\n**Templates:**\n- `src/templates/power-packs/adapters/manus/config.template.json` — Already exists\n- `src/templates/power-packs/adapters/*/adapter.json` — Already exist\n\n## Acceptance Criteria\n\n- [ ] `magneto adapter list` shows all 5 adapters with correct status\n- [ ] `magneto adapter install claude` creates `.claude/` folder with files\n- [ ] `magneto adapter install manus` prompts for API key and creates config\n- [ ] `magneto adapter config manus` allows editing API key\n- [ ] `magneto adapter remove claude` removes `.claude/` folder and updates config\n- [ ] `magneto adapter doctor` validates all installed adapters\n- [ ] All commands have proper help text and examples\n- [ ] Build passes (`npm run build`)\n- [ ] Documentation updated (README.md with new commands)\n\n## Technical Notes\n\n- Reuse existing `loadAdapter()` and adapter wiring functions from `adapter-loader.ts`\n- For `adapter list`, read available adapters from `src/templates/power-packs/adapters/`\n- For installed detection, check `magneto.config.json` adapters array and filesystem\n- Use existing `writeJson()`, `readJson()`, `ensureDir()`, `fileExists()` utilities\n- Follow existing command patterns in `src/commands/`\n- Add TypeScript interfaces for adapter config\n\n## Estimated Effort\n\n- Command implementation: 2-3 hours\n- Testing and refinement: 1 hour\n- Documentation: 30 minutes\n- **Total: ~4 hours**"
+      ],
+      "outputs": [
+        "analysis-report"
+      ]
+    },
+    {
+      "order": 2,
+      "role": "orchestrator",
+      "action": "execute",
+      "description": "Execute orchestrator responsibilities for: Untitled Task",
+      "inputs": [
+        "analysis-report",
+        "src/cli.ts",
+        "src/commands/analyze.ts",
+        "src/commands/doctor.ts",
+        "src/commands/generate.ts",
+        "src/commands/init.ts",
+        "src/commands/merge.ts",
+        "src/commands/plan.ts",
+        "src/commands/query.ts",
+        "src/commands/refresh.ts",
+        "src/commands/run.ts",
+        "src/commands/telepathy.ts",
+        "src/core/adapter-loader.ts",
+        "src/core/context.ts",
+        "src/core/detect-packs.ts",
+        "src/core/graph-engine.ts",
+        "src/core/merge-results.ts",
+        "src/core/power-pack-loader.ts",
+        "src/core/scaffold.ts",
+        "src/core/security-engine.ts",
+        "src/core/telepathy.ts",
+        "src/mcp/server.ts",
+        "src/mcp/tools/load-context.ts",
+        "src/mcp/tools/merge-results.ts",
+        "src/mcp/tools/plan-task.ts",
+        "src/mcp/tools/query-graph.ts",
+        "src/mcp/tools/security-check.ts",
+        "src/runners/copilot-cloud.ts",
+        "src/runners/copilot-local.ts",
+        "src/runners/openai.ts",
+        "src/runners/types.ts",
+        "src/utils/fs.ts",
+        "src/utils/logger.ts",
+        "src/utils/paths.ts",
+        "src/utils/task-parser.ts",
+        "tests/core/context.test.ts",
+        "tests/core/detect-packs.test.ts",
+        "tests/core/merge-results.test.ts",
+        "tests/core/security-engine.test.ts"
+      ],
+      "outputs": [
+        "orchestrator-output"
+      ]
+    },
+    {
+      "order": 3,
+      "role": "backend",
+      "action": "execute",
+      "description": "Execute backend responsibilities for: Untitled Task",
+      "inputs": [
+        "analysis-report",
+        "src/cli.ts",
+        "src/commands/analyze.ts",
+        "src/commands/doctor.ts",
+        "src/commands/generate.ts",
+        "src/commands/init.ts",
+        "src/commands/merge.ts",
+        "src/commands/plan.ts",
+        "src/commands/query.ts",
+        "src/commands/refresh.ts",
+        "src/commands/run.ts",
+        "src/commands/telepathy.ts",
+        "src/core/adapter-loader.ts",
+        "src/core/context.ts",
+        "src/core/detect-packs.ts",
+        "src/core/graph-engine.ts",
+        "src/core/merge-results.ts",
+        "src/core/power-pack-loader.ts",
+        "src/core/scaffold.ts",
+        "src/core/security-engine.ts",
+        "src/core/telepathy.ts",
+        "src/mcp/server.ts",
+        "src/mcp/tools/load-context.ts",
+        "src/mcp/tools/merge-results.ts",
+        "src/mcp/tools/plan-task.ts",
+        "src/mcp/tools/query-graph.ts",
+        "src/mcp/tools/security-check.ts",
+        "src/runners/copilot-cloud.ts",
+        "src/runners/copilot-local.ts",
+        "src/runners/openai.ts",
+        "src/runners/types.ts",
+        "src/utils/fs.ts",
+        "src/utils/logger.ts",
+        "src/utils/paths.ts",
+        "src/utils/task-parser.ts",
+        "tests/core/context.test.ts",
+        "tests/core/detect-packs.test.ts",
+        "tests/core/merge-results.test.ts",
+        "tests/core/security-engine.test.ts"
+      ],
+      "outputs": [
+        "backend-output"
+      ]
+    },
+    {
+      "order": 4,
+      "role": "tester",
+      "action": "execute",
+      "description": "Execute tester responsibilities for: Untitled Task",
+      "inputs": [
+        "analysis-report",
+        "src/cli.ts",
+        "src/commands/analyze.ts",
+        "src/commands/doctor.ts",
+        "src/commands/generate.ts",
+        "src/commands/init.ts",
+        "src/commands/merge.ts",
+        "src/commands/plan.ts",
+        "src/commands/query.ts",
+        "src/commands/refresh.ts",
+        "src/commands/run.ts",
+        "src/commands/telepathy.ts",
+        "src/core/adapter-loader.ts",
+        "src/core/context.ts",
+        "src/core/detect-packs.ts",
+        "src/core/graph-engine.ts",
+        "src/core/merge-results.ts",
+        "src/core/power-pack-loader.ts",
+        "src/core/scaffold.ts",
+        "src/core/security-engine.ts",
+        "src/core/telepathy.ts",
+        "src/mcp/server.ts",
+        "src/mcp/tools/load-context.ts",
+        "src/mcp/tools/merge-results.ts",
+        "src/mcp/tools/plan-task.ts",
+        "src/mcp/tools/query-graph.ts",
+        "src/mcp/tools/security-check.ts",
+        "src/runners/copilot-cloud.ts",
+        "src/runners/copilot-local.ts",
+        "src/runners/openai.ts",
+        "src/runners/types.ts",
+        "src/utils/fs.ts",
+        "src/utils/logger.ts",
+        "src/utils/paths.ts",
+        "src/utils/task-parser.ts",
+        "tests/core/context.test.ts",
+        "tests/core/detect-packs.test.ts",
+        "tests/core/merge-results.test.ts",
+        "tests/core/security-engine.test.ts"
+      ],
+      "outputs": [
+        "tester-output"
+      ]
+    },
+    {
+      "order": 5,
+      "role": "requirements",
+      "action": "execute",
+      "description": "Execute requirements responsibilities for: Untitled Task",
+      "inputs": [
+        "analysis-report",
+        "src/cli.ts",
+        "src/commands/analyze.ts",
+        "src/commands/doctor.ts",
+        "src/commands/generate.ts",
+        "src/commands/init.ts",
+        "src/commands/merge.ts",
+        "src/commands/plan.ts",
+        "src/commands/query.ts",
+        "src/commands/refresh.ts",
+        "src/commands/run.ts",
+        "src/commands/telepathy.ts",
+        "src/core/adapter-loader.ts",
+        "src/core/context.ts",
+        "src/core/detect-packs.ts",
+        "src/core/graph-engine.ts",
+        "src/core/merge-results.ts",
+        "src/core/power-pack-loader.ts",
+        "src/core/scaffold.ts",
+        "src/core/security-engine.ts",
+        "src/core/telepathy.ts",
+        "src/mcp/server.ts",
+        "src/mcp/tools/load-context.ts",
+        "src/mcp/tools/merge-results.ts",
+        "src/mcp/tools/plan-task.ts",
+        "src/mcp/tools/query-graph.ts",
+        "src/mcp/tools/security-check.ts",
+        "src/runners/copilot-cloud.ts",
+        "src/runners/copilot-local.ts",
+        "src/runners/openai.ts",
+        "src/runners/types.ts",
+        "src/utils/fs.ts",
+        "src/utils/logger.ts",
+        "src/utils/paths.ts",
+        "src/utils/task-parser.ts",
+        "tests/core/context.test.ts",
+        "tests/core/detect-packs.test.ts",
+        "tests/core/merge-results.test.ts",
+        "tests/core/security-engine.test.ts"
+      ],
+      "outputs": [
+        "requirements-output"
+      ]
+    },
+    {
+      "order": 6,
+      "role": "orchestrator",
+      "action": "merge",
+      "description": "Merge all agent outputs",
+      "inputs": [
+        "orchestrator-output",
+        "backend-output",
+        "tester-output",
+        "requirements-output"
+      ],
+      "outputs": [
+        "final-report"
+      ]
+    },
+    {
+      "order": 7,
+      "role": "security",
+      "action": "review",
+      "description": "Final security review of merged output",
+      "inputs": [
+        "final-report"
+      ],
+      "outputs": [
+        "approved-report"
+      ]
+    }
+  ],
+  "createdAt": "2026-04-19T23:44:19.466Z"
+}
