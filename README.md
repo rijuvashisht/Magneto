@@ -22,6 +22,14 @@
   <a href="#-cli-reference">CLI Reference</a>
 </p>
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/magneto-ai"><img src="https://img.shields.io/npm/v/magneto-ai?color=brightgreen&label=npm" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/magneto-ai"><img src="https://img.shields.io/npm/dm/magneto-ai?color=blue&label=downloads" alt="npm downloads" /></a>
+  <a href="https://github.com/rijuvashisht/Magneto/actions"><img src="https://github.com/rijuvashisht/Magneto/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://buymeacoffee.com/rijuvashisht"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-☕-yellow" alt="Buy Me a Coffee" /></a>
+  <a href="https://github.com/sponsors/rijuvashisht"><img src="https://img.shields.io/badge/Sponsor-%E2%9D%A4-pink?logo=github" alt="GitHub Sponsors" /></a>
+</p>
+
 ---
 
 <p align="center">
@@ -497,6 +505,27 @@ magneto-ai/
 ## 📄 License
 
 MIT — see [LICENSE](./LICENSE)
+
+---
+
+## ☕ Support This Project
+
+Magneto AI is free and open source. If it saves you time, consider supporting continued development:
+
+<p align="center">
+  <a href="https://buymeacoffee.com/rijuvashisht">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://github.com/sponsors/rijuvashisht">
+    <img src="https://img.shields.io/badge/Sponsor%20on%20GitHub-%E2%9D%A4-pink?style=for-the-badge&logo=github" alt="GitHub Sponsors" height="50" />
+  </a>
+</p>
+
+Your support helps fund:
+- New integrations and power packs
+- Better documentation and examples
+- Long-term maintenance and security updates
 
 ---
 
