@@ -10,6 +10,8 @@ jobs:
   release:
     name: Build, Publish & Release
     runs-on: ubuntu-latest
+    # Skip if this tag was created by the auto-release job in ci.yml
+    if: github.actor != 'github-actions[bot]'
     permissions:
       contents: write  # needed to create GitHub releases
 
