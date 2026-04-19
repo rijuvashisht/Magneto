@@ -1,0 +1,53 @@
+{
+  "version": "0.1.0",
+  "projectName": "nextjs-dashboard",
+  "executionMode": "assist",
+  "security": {
+    "protectedPaths": [
+      "*.env",
+      "*.env.local",
+      "*.env.production",
+      "*.pem",
+      "*.key",
+      "next.config.js",
+      "middleware.ts"
+    ],
+    "blockedActions": [
+      "delete-database",
+      "drop-table",
+      "rm -rf",
+      "deploy-production"
+    ],
+    "approvalRequired": [
+      "deploy",
+      "migrate",
+      "auth-change",
+      "modify-middleware"
+    ],
+    "maxTelepathyLevel": 2
+  },
+  "powerPacks": [
+    "typescript",
+    "nextjs",
+    "react"
+  ],
+  "adapters": [],
+  "runners": {
+    "default": "openai",
+    "available": ["openai", "copilot-local", "copilot-cloud"]
+  },
+  "memoryMode": "internal-first",
+  "roles": ["orchestrator", "backend", "tester", "requirements"],
+  "contextOptimization": {
+    "maxFilesPerAgent": 15,
+    "maxTokensPerAgent": 30000,
+    "scopeStrategy": "task-classified",
+    "excludePatterns": [
+      "node_modules/**",
+      ".next/**",
+      "coverage/**",
+      "public/static/**",
+      "*.lock"
+    ]
+  }
+}
