@@ -4,6 +4,7 @@ import { handlePlanTask } from './tools/plan-task';
 import { handleLoadContext } from './tools/load-context';
 import { handleMergeResults } from './tools/merge-results';
 import { handleSecurityCheck } from './tools/security-check';
+import { handleQueryGraph } from './tools/query-graph';
 
 export interface MCPToolCall {
   tool: string;
@@ -65,6 +66,21 @@ const TOOLS_MANIFEST = {
         required: ['taskFile'],
       },
     },
+    {
+      name: 'query_graph',
+      description: 'Query the knowledge graph to find related code, files, and concepts. Returns a focused subgraph with nodes, edges, communities, and suggested follow-up questions. Use this to quickly locate relevant files before planning tasks.',
+      parameters: {
+        type: 'object',
+        properties: {
+          query: { type: 'string', description: 'Search term to find nodes (file names, class names, function names, or concepts)' },
+          projectRoot: { type: 'string', description: 'Project root directory (default: cwd)' },
+          graphPath: { type: 'string', description: 'Path to graph.json (default: .magneto/memory/graph.json)' },
+          budget: { type: 'number', description: 'Max token budget for results (default: 2000)' },
+          dfs: { type: 'boolean', description: 'Use depth-first search instead of breadth-first (default: false)' },
+        },
+        required: ['query'],
+      },
+    },
   ],
 };
 
@@ -78,6 +94,8 @@ async function handleToolCall(call: MCPToolCall): Promise<MCPToolResult> {
       return handleMergeResults(call.arguments);
     case 'security_check':
       return handleSecurityCheck(call.arguments);
+    case 'query_graph':
+      return handleQueryGraph(call.arguments);
     default:
       return { success: false, data: null, error: `Unknown tool: ${call.tool}` };
   }

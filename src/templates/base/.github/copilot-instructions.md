@@ -25,3 +25,4 @@ This project uses the **Magneto AI Reasoning Framework**.
 - `load_context` — Load project context
 - `merge_results` — Merge agent outputs
 - `security_check` — Validate security constraints
+- `query_graph` — Query the knowledge graph to find related code, files, and concepts. Use this first to locate relevant files before planning tasks.
