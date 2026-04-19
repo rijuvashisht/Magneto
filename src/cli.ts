@@ -11,6 +11,7 @@ import { mergeCommand } from './commands/merge';
 import { generateCommand } from './commands/generate';
 import { analyzeCommand } from './commands/analyze';
 import { queryCommand, pathCommand } from './commands/query';
+import { telepathyCommand } from './commands/telepathy';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../package.json') as { version: string };
@@ -213,6 +214,36 @@ Examples:
 `)
   .action(async (nodeA, nodeB, options) => {
     await pathCommand(nodeA, nodeB, options);
+  });
+
+program
+  .command('telepathy')
+  .description('Automatic task discovery and execution. Discovers tasks from Jira, GitHub, requirements folder; auto-classifies and executes with appropriate telepathy level.')
+  .option('--dry-run', 'Show what would be done without executing')
+  .option('--auto', 'Auto-approve and execute all compatible tasks')
+  .option('--source <type>', 'Task source filter (all|jira|github|requirements|tasks)', 'all')
+  .addHelpText('after', `
+Examples:
+  $ magneto telepathy              # Discover and classify tasks
+  $ magneto telepathy --dry-run    # Preview without executing
+  $ magneto telepathy --auto       # Auto-execute compatible tasks
+  $ magneto telepathy --source jira # Only Jira tasks
+
+How it works:
+  1. Discovers tasks from configured sources
+  2. Auto-classifies (feature/bug/security/performance)
+  3. Assigns roles based on task type
+  4. Determines telepathy level (0-3) based on risk
+  5. Auto-executes (Level 2-3) or generates plan (Level 0-1)
+
+Telepathy Levels:
+  Level 0: Manual — Generate prompts only
+  Level 1: Assisted — Generate plan, require approval
+  Level 2: Semi-auto — Execute low-risk tasks
+  Level 3: Full auto — Execute with minimal oversight
+`)
+  .action(async (options) => {
+    await telepathyCommand(options);
   });
 
 program.parse(process.argv);
