@@ -1,0 +1,30 @@
+{
+  "name": "openclaw-magneto",
+  "version": "1.0.1",
+  "type": "module",
+  "description": "Magneto AI governance and security guardrails for OpenClaw agents — task planning, compliance hooks, and security checks across all channels.",
+  "author": "rijuvashisht",
+  "license": "MIT",
+  "homepage": "https://github.com/rijuvashisht/Magneto",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rijuvashisht/Magneto.git",
+    "directory": "packages/openclaw-plugin"
+  },
+  "keywords": ["openclaw", "magneto", "ai", "governance", "security", "guardrails", "compliance"],
+  "openclaw": {
+    "extensions": ["./index.ts"],
+    "compat": {
+      "pluginApi": ">=2026.3.24-beta.2",
+      "minGatewayVersion": "2026.3.24-beta.2"
+    },
+    "build": {
+      "openclawVersion": "2026.3.24-beta.2",
+      "pluginSdkVersion": "2026.3.24-beta.2"
+    }
+  },
+  "devDependencies": {
+    "@sinclair/typebox": "^0.34.0",
+    "typescript": "^5.5.0"
+  }
+}
