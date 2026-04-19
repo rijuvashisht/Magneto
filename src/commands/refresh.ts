@@ -8,11 +8,11 @@ export async function refreshCommand(): Promise<void> {
   const projectRoot = resolveProjectRoot();
 
   if (!isMagnetoProject(projectRoot)) {
-    logger.error('Not a Magneto project. Run "magneto init" first.');
+    logger.error('Not a Magneto AI project. Run "magneto init" first.');
     process.exit(1);
   }
 
-  logger.info('Refreshing Magneto configuration...');
+  logger.info('Refreshing Magneto AI configuration...');
 
   // Re-scaffold base structure (preserves existing config)
   await scaffold(projectRoot, { preserveConfig: true });
@@ -26,5 +26,5 @@ export async function refreshCommand(): Promise<void> {
     }
   }
 
-  logger.success('Magneto configuration refreshed.');
+  logger.success('Magneto AI configuration refreshed.');
 }

@@ -1,7 +1,7 @@
 {
   "name": "graphify",
   "version": "1.0.0",
-  "description": "Graphify adapter — imports dependency graph data from .graphify-out/graph.json into Magneto memory",
+  "description": "Imports Graphify dependency graph data into Magneto AI memory",
   "inputPath": ".graphify-out/graph.json",
   "outputMapping": {
     "nodes": "memory.graph.nodes",

@@ -19,7 +19,7 @@ export async function initCommand(options: InitOptions): Promise<void> {
     return;
   }
 
-  logger.info('Initializing Magneto framework...');
+  logger.info('Initializing Magneto AI...');
 
   // Scaffold base structure
   await scaffold(projectRoot);
@@ -45,7 +45,7 @@ export async function initCommand(options: InitOptions): Promise<void> {
     logger.success('Adapters loaded');
   }
 
-  logger.success('Magneto initialized successfully!');
+  logger.success('Magneto AI initialized successfully!');
   logger.info(`Project root: ${projectRoot}`);
   logger.info('Run "magneto doctor" to validate your setup.');
 }

@@ -108,6 +108,7 @@ describe('mergeResults', () => {
     const result = mergeResults([]);
     expect(result.findings).toHaveLength(0);
     expect(result.risks).toHaveLength(0);
+    expect(result.contradictions).toHaveLength(0);
     expect(result.confidence).toBe(0);
     expect(result.agentCount).toBe(0);
     expect(result.overallRisk).toBe('low');
@@ -124,5 +125,49 @@ describe('mergeResults', () => {
     // Higher confidences are weighted more
     expect(result.confidence).toBeGreaterThan(0.6);
     expect(result.confidence).toBeLessThanOrEqual(1.0);
+  });
+
+  it('should include contradictions field in output', () => {
+    const outputs: AgentOutput[] = [
+      {
+        agentId: 'agent-backend',
+        role: 'backend',
+        findings: [
+          { source: 'backend', content: 'Simple validation check', confidence: 0.8 },
+        ],
+        confidence: 0.8,
+      },
+    ];
+
+    const result = mergeResults(outputs);
+    expect(result.contradictions).toBeDefined();
+    expect(Array.isArray(result.contradictions)).toBe(true);
+  });
+
+  it('should detect code-vs-requirement contradictions', () => {
+    const outputs: AgentOutput[] = [
+      {
+        agentId: 'agent-requirements',
+        role: 'requirements',
+        findings: [
+          { source: 'requirements', content: 'Requirement says should reject expired promo codes', confidence: 0.9 },
+        ],
+        confidence: 0.9,
+      },
+      {
+        agentId: 'agent-backend',
+        role: 'backend',
+        findings: [
+          { source: 'backend', content: 'Code does not reject expired promo codes, allows grace period', confidence: 0.85 },
+        ],
+        confidence: 0.85,
+      },
+    ];
+
+    const result = mergeResults(outputs);
+    expect(result.contradictions.length).toBeGreaterThan(0);
+    const codeVsReq = result.contradictions.find((c) => c.type === 'code-vs-requirement');
+    expect(codeVsReq).toBeDefined();
+    expect(codeVsReq!.sides).toHaveLength(2);
   });
 });

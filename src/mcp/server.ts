@@ -133,7 +133,7 @@ export function startMCPServer(port: number = 3100): http.Server {
   });
 
   server.listen(port, () => {
-    logger.info(`Magneto MCP server running on http://localhost:${port}`);
+    logger.info(`Magneto AI MCP server running on http://localhost:${port}`);
     logger.info('Available tools: plan_task, load_context, merge_results, security_check');
   });
 

@@ -1,4 +1,4 @@
-# Copilot Instructions — Magneto Framework
+# Copilot Instructions — Magneto AI
 
 This project uses the **Magneto AI Reasoning Framework**.
 
@@ -6,7 +6,7 @@ This project uses the **Magneto AI Reasoning Framework**.
 
 1. Always check `.magneto/magneto.config.json` for project configuration
 2. Respect security policies in `.magneto/security/`
-3. Use the Magneto MCP tools when available
+3. Use the Magneto AI MCP tools when available
 4. Follow role-based execution — each agent has a specific domain
 5. Never bypass security guardrails
 6. Report findings with confidence levels

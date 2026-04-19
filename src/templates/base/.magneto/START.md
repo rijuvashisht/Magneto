@@ -1,6 +1,6 @@
-# ⚡ Magneto Framework
+# ⚡ Magneto AI
 
-Welcome to your Magneto-powered project!
+Welcome to your Magneto AI-powered project!
 
 ## Quick Start
 

@@ -14,7 +14,7 @@ const program = new Command();
 program
   .name('magneto')
   .description(
-    'Magneto — AI reasoning framework & agent control plane.\n' +
+    'Magneto AI — AI reasoning framework & agent control plane.\n' +
     'Orchestrate multi-agent AI tasks with security guardrails,\n' +
     'power packs, and Copilot/OpenAI integration.'
   )
@@ -24,7 +24,7 @@ program
   })
   .addHelpText('after', `
 Examples:
-  $ magneto init                              Initialize Magneto in this project
+  $ magneto init                              Initialize Magneto AI in this project
   $ magneto init --with typescript nextjs     Init with power packs
   $ magneto init --adapter graphify           Init with Graphify adapter
   $ magneto doctor                            Validate setup
@@ -38,12 +38,12 @@ Environment variables:
   MAGNETO_COPILOT_CLOUD_TOKEN     Required for the Copilot Cloud runner
   MAGNETO_MCP_PORT                MCP server port (default: 3100)
 
-Documentation: https://github.com/rijuvashisht/magneto-framework#readme
+Documentation: https://github.com/rijuvashisht/Magneto#readme
 `);
 
 program
   .command('init')
-  .description('Initialize Magneto in the current project. Scaffolds .magneto/, .github/agents/, and .vscode/mcp.json.')
+  .description('Initialize Magneto AI in the current project. Scaffolds .magneto/, .github/agents/, and .vscode/mcp.json.')
   .option('--with <packs...>', 'Include power packs (typescript, nextjs, ai-platform, azure)')
   .option('--adapter <adapters...>', 'Include adapters (graphify)')
   .option('--force', 'Overwrite existing configuration', false)
@@ -60,7 +60,7 @@ Examples:
 
 program
   .command('refresh')
-  .description('Refresh Magneto configuration, re-detect power packs, and regenerate scaffolding.')
+  .description('Refresh Magneto AI configuration, re-detect power packs, and regenerate scaffolding.')
   .addHelpText('after', `
 Example:
   $ magneto refresh
@@ -71,7 +71,7 @@ Example:
 
 program
   .command('doctor')
-  .description('Validate Magneto setup and diagnose issues. Checks all required files and directories.')
+  .description('Validate Magneto AI setup and diagnose issues. Checks all required files and directories.')
   .addHelpText('after', `
 Example:
   $ magneto doctor
@@ -95,7 +95,7 @@ Examples:
 
 program
   .command('run <taskFile>')
-  .description('Execute a task through the Magneto pipeline using a specified runner and execution mode.')
+  .description('Execute a task through the Magneto AI pipeline using a specified runner and execution mode.')
   .option('--runner <runner>', 'Runner: openai, copilot-local, copilot-cloud', 'openai')
   .option('--mode <mode>', 'Mode: observe, assist, execute, restricted', 'assist')
   .addHelpText('after', `
