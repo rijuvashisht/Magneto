@@ -1,4 +1,4 @@
-# Publishing Magneto to npm
+# Publishing Magneto AI to npm
 
 ## Prerequisites
 
@@ -59,16 +59,16 @@ Users can install and use immediately:
 
 ```bash
 # Global install
-npm install -g magneto-framework
+npm install -g magneto-ai
 magneto --help
 magneto init
 
 # Or via npx (no install needed)
-npx magneto-framework --help
-npx magneto-framework init --with typescript nextjs
+npx magneto-ai --help
+npx magneto-ai init --with typescript nextjs
 
 # Or as a project devDependency
-npm install --save-dev magneto-framework
+npm install --save-dev magneto-ai
 npx magneto init
 ```
 
@@ -113,14 +113,14 @@ The `bin` field in `package.json` creates the `magneto` CLI command:
 }
 ```
 
-When installed globally (`npm install -g magneto-framework`), the `magneto` command becomes available system-wide.
+When installed globally (`npm install -g magneto-ai`), the `magneto` command becomes available system-wide.
 
 ## Scoped Package (Optional)
 
-If `magneto-framework` is taken, use a scoped name:
+If `magneto-ai` is taken, use a scoped name:
 
 ```json
-"name": "@rijuvashisht/magneto-framework"
+"name": "@rijuvashisht/magneto-ai"
 ```
 
 Then publish with:
@@ -132,5 +132,5 @@ npm publish --access public
 Users install with:
 
 ```bash
-npm install -g @rijuvashisht/magneto-framework
+npm install -g @rijuvashisht/magneto-ai
 ```

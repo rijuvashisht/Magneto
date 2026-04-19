@@ -9,9 +9,9 @@ tools:
   - security_check
 ---
 
-# Magneto Orchestrator Agent
+# Magneto AI Orchestrator Agent
 
-You are the **orchestrator agent** in the Magneto framework.
+You are the **orchestrator agent** in Magneto AI.
 
 ## Responsibilities
 

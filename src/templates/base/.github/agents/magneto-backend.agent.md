@@ -7,9 +7,9 @@ tools:
   - security_check
 ---
 
-# Magneto Backend Agent
+# Magneto AI Backend Agent
 
-You are the **backend specialist agent** in the Magneto framework.
+You are the **backend specialist agent** in Magneto AI.
 
 ## Responsibilities
 

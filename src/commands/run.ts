@@ -15,7 +15,7 @@ export async function runCommand(taskFile: string, options: RunOptions): Promise
   const projectRoot = resolveProjectRoot();
 
   if (!isMagnetoProject(projectRoot)) {
-    logger.error('Not a Magneto project. Run "magneto init" first.');
+    logger.error('Not a Magneto AI project. Run "magneto init" first.');
     process.exit(1);
   }
 

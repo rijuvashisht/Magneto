@@ -60,7 +60,7 @@ export async function doctorCommand(): Promise<void> {
   if (hasFailures) {
     logger.error('Some checks failed. Run "magneto init" to fix.');
   } else {
-    logger.success('All checks passed! Magneto is ready.');
+    logger.success('All checks passed! Magneto AI is ready.');
   }
 }
 

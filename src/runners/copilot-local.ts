@@ -47,7 +47,7 @@ export class CopilotLocalRunner implements Runner {
     const task = input.task;
     const roles = input.context.roles;
 
-    return `# Magneto Task for Copilot
+    return `# Magneto AI Task for Copilot
 
 ## Task
 - **Title:** ${task.title || 'Untitled'}

@@ -24,10 +24,23 @@ export interface AgentOutput {
   metadata?: Record<string, unknown>;
 }
 
+export interface Contradiction {
+  type: 'code-vs-requirement' | 'code-vs-test' | 'requirement-vs-test' | 'agent-vs-agent';
+  sides: { source: string; claim: string; confidence?: number }[];
+  resolution?: {
+    decision: string;
+    action: string[];
+    staleArtifact?: string;
+    confidence: number;
+    requiresHumanReview: boolean;
+  };
+}
+
 export interface MergedOutput {
   taskId: string;
   findings: Finding[];
   risks: Risk[];
+  contradictions: Contradiction[];
   confidence: number;
   overallRisk: 'low' | 'medium' | 'high' | 'critical';
   agentCount: number;
@@ -69,6 +82,9 @@ export function mergeResults(outputs: AgentOutput[]): MergedOutput {
   // Calculate combined confidence
   const combinedConfidence = calculateCombinedConfidence(confidences);
 
+  // Detect contradictions between agents
+  const contradictions = detectContradictions(allFindings, outputs);
+
   // Determine overall risk
   const overallRisk = determineOverallRisk(uniqueRisks);
 
@@ -76,6 +92,7 @@ export function mergeResults(outputs: AgentOutput[]): MergedOutput {
     taskId,
     findings: uniqueFindings,
     risks: uniqueRisks,
+    contradictions,
     confidence: combinedConfidence,
     overallRisk,
     agentCount: outputs.length,
@@ -134,6 +151,123 @@ function calculateCombinedConfidence(confidences: number[]): number {
   }
 
   return Math.round((weightedSum / totalWeight) * 100) / 100;
+}
+
+function detectContradictions(findings: Finding[], outputs: AgentOutput[]): Contradiction[] {
+  const contradictions: Contradiction[] = [];
+
+  // Group findings by normalized topic keywords (first 5 significant words)
+  const topicGroups = new Map<string, Finding[]>();
+  for (const f of findings) {
+    const words = f.content
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, '')
+      .split(/\s+/)
+      .filter((w) => w.length > 3)
+      .slice(0, 5)
+      .sort()
+      .join(' ');
+    if (!words) continue;
+    const group = topicGroups.get(words) || [];
+    group.push(f);
+    topicGroups.set(words, group);
+  }
+
+  // Findings from different agents on the same topic = potential contradiction
+  for (const [, group] of topicGroups) {
+    if (group.length < 2) continue;
+    const sources = new Set(group.map((g) => g.source));
+    if (sources.size < 2) continue;
+
+    // Check if confidence levels diverge significantly (>0.3 gap)
+    const confidences = group.map((g) => g.confidence).sort((a, b) => b - a);
+    const maxGap = confidences[0] - confidences[confidences.length - 1];
+
+    if (maxGap > 0.3) {
+      contradictions.push({
+        type: 'agent-vs-agent',
+        sides: group.map((g) => ({
+          source: g.source,
+          claim: g.content,
+          confidence: g.confidence,
+        })),
+      });
+    }
+  }
+
+  // Check for role-based contradictions (e.g., tester says "test passes" but backend says "code is wrong")
+  const roleFindings = new Map<string, Finding[]>();
+  for (const output of outputs) {
+    if (output.role && output.findings) {
+      roleFindings.set(output.role, output.findings);
+    }
+  }
+
+  const testerFindings = roleFindings.get('tester') || [];
+  const requirementsFindings = roleFindings.get('requirements') || [];
+  const backendFindings = roleFindings.get('backend') || [];
+
+  // Look for code-vs-requirement contradictions
+  for (const req of requirementsFindings) {
+    for (const be of backendFindings) {
+      const reqLower = req.content.toLowerCase();
+      const beLower = be.content.toLowerCase();
+      // If both discuss same topic but with opposing signals
+      const sharedWords = getSharedKeywords(reqLower, beLower);
+      if (sharedWords.length >= 2) {
+        const hasConflictSignal =
+          (reqLower.includes('should') && beLower.includes('does not')) ||
+          (reqLower.includes('required') && beLower.includes('missing')) ||
+          (reqLower.includes('reject') && beLower.includes('allow')) ||
+          (reqLower.includes('stale') || beLower.includes('stale')) ||
+          (reqLower.includes('outdated') || beLower.includes('outdated'));
+
+        if (hasConflictSignal) {
+          contradictions.push({
+            type: 'code-vs-requirement',
+            sides: [
+              { source: req.source, claim: req.content, confidence: req.confidence },
+              { source: be.source, claim: be.content, confidence: be.confidence },
+            ],
+          });
+        }
+      }
+    }
+  }
+
+  // Look for code-vs-test contradictions
+  for (const test of testerFindings) {
+    for (const be of backendFindings) {
+      const testLower = test.content.toLowerCase();
+      const beLower = be.content.toLowerCase();
+      const sharedWords = getSharedKeywords(testLower, beLower);
+      if (sharedWords.length >= 2) {
+        const hasConflictSignal =
+          (testLower.includes('fail') && beLower.includes('correct')) ||
+          (testLower.includes('expects') && beLower.includes('changed')) ||
+          (testLower.includes('stale') || beLower.includes('drift'));
+
+        if (hasConflictSignal) {
+          contradictions.push({
+            type: 'code-vs-test',
+            sides: [
+              { source: test.source, claim: test.content, confidence: test.confidence },
+              { source: be.source, claim: be.content, confidence: be.confidence },
+            ],
+          });
+        }
+      }
+    }
+  }
+
+  logger.debug(`Detected ${contradictions.length} contradictions`);
+  return contradictions;
+}
+
+function getSharedKeywords(a: string, b: string): string[] {
+  const wordsA = new Set(a.split(/\s+/).filter((w) => w.length > 3));
+  const wordsB = new Set(b.split(/\s+/).filter((w) => w.length > 3));
+  return [...wordsA].filter((w) => wordsB.has(w));
 }
 
 function determineOverallRisk(risks: Risk[]): 'low' | 'medium' | 'high' | 'critical' {

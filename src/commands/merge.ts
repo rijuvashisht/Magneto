@@ -55,7 +55,7 @@ export async function mergeCommand(outputDir: string, options: MergeOptions): Pr
 
 function renderMarkdown(merged: MergedOutput): string {
   const lines: string[] = [
-    '# Magneto Merged Report',
+    '# Magneto AI Merged Report',
     '',
     `**Task ID:** ${merged.taskId || 'N/A'}`,
     `**Confidence:** ${(merged.confidence * 100).toFixed(1)}%`,

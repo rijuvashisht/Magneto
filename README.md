@@ -2,7 +2,7 @@
   <img src="docs/images/magneto-helmet.svg" alt="Magneto Logo" width="120" />
 </p>
 
-<h1 align="center">⚡ Magneto Framework</h1>
+<h1 align="center">⚡ Magneto AI</h1>
 
 <p align="center">
   <strong>Repo-local AI reasoning framework & agent control plane for enterprise environments.</strong>
@@ -10,7 +10,7 @@
 
 <p align="center">
   <em>All AI Engineering Tasks. Any Language or Stack. Enterprise Security and Guardrails.<br/>
-  One Magneto To Pull Them All.</em>
+  One Magneto AI To Pull Them All.</em>
 </p>
 
 <p align="center">
@@ -29,13 +29,13 @@
 
 ---
 
-Magneto is a multi-agent AI orchestration system that brings structured reasoning, security guardrails, and pluggable intelligence to your codebase. It integrates natively with GitHub Copilot, OpenAI APIs, and optional tools like Graphify.
+Magneto AI is a multi-agent AI orchestration system that brings structured reasoning, security guardrails, and pluggable intelligence to your codebase. It integrates natively with GitHub Copilot, OpenAI APIs, and optional tools like Graphify.
 
 ---
 
-## 🧠 What Is Magneto?
+## 🧠 What Is Magneto AI?
 
-Magneto is **not** another AI wrapper. It is a **reasoning engine** and **control plane** that:
+Magneto AI is **not** another AI wrapper. It is a **reasoning engine** and **control plane** that:
 
 - **Orchestrates multiple AI agents** with role-based task delegation
 - **Enforces security guardrails** — protected paths, blocked actions, approval workflows
@@ -50,13 +50,13 @@ Think of it as the nervous system connecting your AI tools to your codebase — 
 
 ## ⚙️ Core Capabilities
 
-Magneto unifies task classification, multi-agent orchestration, security evaluation, and result merging into a single framework that any AI coding assistant can plug into.
+Magneto AI unifies task classification, multi-agent orchestration, security evaluation, and result merging into a single framework that any AI coding assistant can plug into.
 
 ### Task Classification & Planning
-Every task is automatically classified into one of 9 categories — `architecture-review`, `bug-fix`, `feature-implementation`, `security-audit`, `performance-review`, `testing`, `requirements-analysis`, `code-review`, or `general` — using keyword analysis against the task title, description, and tags. Based on the classification, Magneto assigns the right roles (orchestrator, backend, tester, requirements) and generates a structured execution plan before any AI agent runs.
+Every task is automatically classified into one of 9 categories — `architecture-review`, `bug-fix`, `feature-implementation`, `security-audit`, `performance-review`, `testing`, `requirements-analysis`, `code-review`, or `general` — using keyword analysis against the task title, description, and tags. Based on the classification, Magneto AI assigns the right roles (orchestrator, backend, tester, requirements) and generates a structured execution plan before any AI agent runs.
 
 ### Multi-Agent Orchestration
-Magneto creates dedicated sub-agents for each assigned role, each with its own model configuration (`gpt-4o`), tool access (`plan_task`, `load_context`, `merge_results`, `security_check`), and scoped file visibility. The orchestrator coordinates the agents; each agent works within its defined scope and constraints.
+Magneto AI creates dedicated sub-agents for each assigned role, each with its own model configuration (`gpt-4o`), tool access (`plan_task`, `load_context`, `merge_results`, `security_check`), and scoped file visibility. The orchestrator coordinates the agents; each agent works within its defined scope and constraints.
 
 ### Security Guardrail Engine
 **Every task is evaluated before execution.** The security engine scans for:
@@ -69,10 +69,10 @@ Magneto creates dedicated sub-agents for each assigned role, each with its own m
 The engine returns a risk level (`low` / `medium` / `high`), whether human approval is required, a list of blocked actions detected, and a **telepathy level** (0–3) that controls how much autonomy the AI agents receive.
 
 ### Confidence-Weighted Result Merging
-After agents complete their analysis, Magneto merges all findings and risks with **content-based deduplication** — identical findings keep the higher confidence score, identical risks keep the higher severity. The overall confidence is calculated using a weighted average that favors high-confidence agents. The final merged output includes an `overallRisk` assessment (`low` → `critical`).
+After agents complete their analysis, Magneto AI merges all findings and risks with **content-based deduplication** — identical findings keep the higher confidence score, identical risks keep the higher severity. The overall confidence is calculated using a weighted average that favors high-confidence agents. The final merged output includes an `overallRisk` assessment (`low` → `critical`).
 
 ### Auto-Detection Power Packs
-Magneto scans your project to automatically detect which Power Packs to activate:
+Magneto AI scans your project to automatically detect which Power Packs to activate:
 - **TypeScript** — detects `tsconfig.json` or `typescript` in dependencies
 - **Next.js** — detects `next` in dependencies
 - **AI Platform** — detects `openai`, `@azure/openai`, `langchain`, or `@langchain/core`
@@ -82,14 +82,14 @@ Magneto scans your project to automatically detect which Power Packs to activate
 Each pack adds domain-specific rules and checks that are injected into agent prompts and execution plans.
 
 ### MCP-Compatible Tool Layer
-Magneto exposes its core engine as 4 MCP tools via an HTTP server, allowing any MCP-compatible client (GitHub Copilot, VS Code, custom agents) to invoke Magneto directly:
+Magneto AI exposes its core engine as 4 MCP tools via an HTTP server, allowing any MCP-compatible client (GitHub Copilot, VS Code, custom agents) to invoke Magneto AI directly:
 - `plan_task` — classify a task and generate an execution plan
 - `load_context` — build full project context with role assignments and file resolution
 - `merge_results` — merge multiple agent output files with deduplication
 - `security_check` — evaluate security constraints and get approval requirements
 
 ### Copilot-Native Integration
-Magneto generates full GitHub Copilot integration out of the box:
+Magneto AI generates full GitHub Copilot integration out of the box:
 - **4 agent definitions** (`magneto-orchestrator`, `magneto-backend`, `magneto-tester`, `magneto-requirements`) in `.github/agents/`
 - **Copilot instructions** in `.github/copilot-instructions.md` teaching Copilot how to use Magneto tools
 - **MCP config** in `.vscode/mcp.json` connecting VS Code to the local MCP server
@@ -108,11 +108,11 @@ Input validation on all task files. Protected path patterns block access to secr
 
 ---
 
-## 🔬 The Magneto Power Model
+## 🔬 The Magneto AI Power Model
 
-Magneto draws its conceptual architecture from electromagnetic forces:
+Magneto AI draws its conceptual architecture from electromagnetic forces:
 
-| Ability | Magneto Capability |
+| Ability | Magneto AI Capability |
 |---|---|
 | **Magnetokinesis** | Multi-agent orchestration — coordinate, delegate, merge |
 | **Force Field** | Security guardrails — block unsafe actions, protect secrets |
@@ -128,14 +128,14 @@ Magneto draws its conceptual architecture from electromagnetic forces:
 ### Install
 
 ```bash
-npm install magneto-framework
+npm install magneto-ai
 ```
 
 Or clone and build:
 
 ```bash
 git clone https://github.com/rijuvashisht/Magneto.git
-cd magneto-framework
+cd Magneto
 npm install
 npm run build
 ```
@@ -242,7 +242,7 @@ evaluateSecurity(task): {
 
 ## 🧩 Power Pack System
 
-Power Packs add domain-specific intelligence to Magneto.
+Power Packs add domain-specific intelligence to Magneto AI.
 
 ### Built-in Packs
 
@@ -271,7 +271,7 @@ Packs live in `.magneto/power-packs/` and contain:
 
 ## 🔌 Adapter System
 
-Adapters integrate external tools into Magneto's memory system.
+Adapters integrate external tools into Magneto AI's memory system.
 
 ### Graphify Adapter
 
@@ -281,20 +281,20 @@ Imports dependency graph data from Graphify:
 magneto init --adapter graphify
 ```
 
-Reads from `.graphify-out/graph.json` and maps into Magneto memory.
+Reads from `.graphify-out/graph.json` and maps into Magneto AI memory.
 
 **Memory modes:**
 
 | Mode | Behavior |
 |---|---|
-| `internal-first` | Magneto's own analysis takes priority; Graphify supplements |
-| `external-first` | Graphify data takes priority; Magneto enriches it |
+| `internal-first` | Magneto AI's own analysis takes priority; Graphify supplements |
+| `external-first` | Graphify data takes priority; Magneto AI enriches it |
 
 ---
 
 ## 🤖 Copilot Integration
 
-Magneto generates full Copilot integration:
+Magneto AI generates full Copilot integration:
 
 ### Agent Definitions (`.github/agents/`)
 
@@ -331,9 +331,9 @@ The runner:
 
 ---
 
-## 📊 Why Magneto vs. Graphify?
+## 📊 Why Magneto AI vs. Graphify?
 
-| Feature | Graphify | Magneto |
+| Feature | Graphify | Magneto AI |
 |---|---|---|
 | Dependency graphs | ✅ Core strength | ✅ Via adapter or native |
 | Multi-agent orchestration | ❌ | ✅ Core feature |
@@ -344,14 +344,14 @@ The runner:
 | Task planning | ❌ | ✅ Plan → Execute → Merge |
 | Enterprise approvals | ❌ | ✅ Sentinel Lock system |
 
-**Magneto doesn't replace Graphify — it can consume it.** Use the Graphify adapter to import dependency data into Magneto's reasoning pipeline.
+**Magneto AI doesn't replace Graphify — it can consume it.** Use the Graphify adapter to import dependency data into Magneto AI's reasoning pipeline.
 
 ---
 
 ##  Project Structure
 
 ```
-magneto-framework/
+magneto-ai/
   src/
     cli.ts                          # CLI entry point
     commands/                       # CLI commands
@@ -402,7 +402,7 @@ magneto-framework/
 
 | Command | Description |
 |---|---|
-| `magneto init` | Initialize Magneto in the current project |
+| `magneto init` | Initialize Magneto AI in the current project |
 | `magneto init --with <packs>` | Initialize with specific power packs |
 | `magneto init --adapter <name>` | Initialize with an adapter |
 | `magneto refresh` | Refresh configuration and detect packs |
@@ -439,5 +439,5 @@ MIT — see [LICENSE](./LICENSE)
 
 <p align="center">
   <img src="docs/images/magneto-helmet.svg" alt="Magneto" width="40" /><br/>
-  Built with ⚡ by the Magneto team.
+  Built with ⚡ by the Magneto AI team.
 </p>

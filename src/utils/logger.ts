@@ -54,7 +54,7 @@ export const logger = {
       console.log(
         chalk.magenta(`
 ╔══════════════════════════════════════╗
-║         ⚡ MAGNETO FRAMEWORK ⚡      ║
+║           ⚡ MAGNETO AI ⚡           ║
 ║   AI Reasoning & Agent Control Plane ║
 ╚══════════════════════════════════════╝
 `)

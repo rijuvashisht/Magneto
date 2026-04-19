@@ -1,5 +1,5 @@
 {
-  "name": "magneto-framework",
+  "name": "magneto-ai",
   "version": "0.1.0",
   "description": "Repo-local AI reasoning framework and agent control plane for enterprise environments",
   "main": "dist/index.js",
@@ -33,11 +33,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rijuvashisht/magneto-framework.git"
+    "url": "https://github.com/rijuvashisht/Magneto.git"
   },
-  "homepage": "https://github.com/rijuvashisht/magneto-framework#readme",
+  "homepage": "https://github.com/rijuvashisht/Magneto#readme",
   "bugs": {
-    "url": "https://github.com/rijuvashisht/magneto-framework/issues"
+    "url": "https://github.com/rijuvashisht/Magneto/issues"
   },
   "dependencies": {
     "chalk": "^4.1.2",

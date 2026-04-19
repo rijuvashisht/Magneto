@@ -2,7 +2,7 @@
   "servers": {
     "magneto": {
       "command": "node",
-      "args": ["node_modules/magneto-framework/dist/mcp/server.js"],
+      "args": ["node_modules/magneto-ai/dist/mcp/server.js"],
       "env": {}
     }
   }
