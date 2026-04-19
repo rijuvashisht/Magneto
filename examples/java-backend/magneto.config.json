@@ -1,0 +1,79 @@
+{
+  "version": "0.1.0",
+  "projectName": "spring-boot-api",
+  "executionMode": "assist",
+  "security": {
+    "protectedPaths": [
+      "*.properties",
+      "*.yml",
+      "application*.yml",
+      "application*.properties",
+      "*.pem",
+      "*.key",
+      "*.jks",
+      "*.p12",
+      "**/security/**",
+      "**/config/SecurityConfig.java",
+      "Dockerfile",
+      "docker-compose*.yml"
+    ],
+    "blockedActions": [
+      "delete-database",
+      "drop-table",
+      "truncate-table",
+      "rm -rf",
+      "deploy-production",
+      "modify-flyway-migration"
+    ],
+    "approvalRequired": [
+      "deploy",
+      "migrate",
+      "auth-change",
+      "modify-security-config",
+      "modify-database-schema",
+      "add-public-endpoint"
+    ],
+    "maxTelepathyLevel": 2
+  },
+  "powerPacks": [],
+  "adapters": [],
+  "runners": {
+    "default": "openai",
+    "available": ["openai", "copilot-local", "copilot-cloud"]
+  },
+  "memoryMode": "internal-first",
+  "roles": ["orchestrator", "backend", "tester", "requirements"],
+  "contextOptimization": {
+    "maxFilesPerAgent": 12,
+    "maxTokensPerAgent": 25000,
+    "scopeStrategy": "task-classified",
+    "excludePatterns": [
+      "target/**",
+      ".mvn/**",
+      ".gradle/**",
+      "build/**",
+      "**/generated/**",
+      "*.class",
+      "*.jar",
+      "*.war"
+    ]
+  },
+  "javaSpecific": {
+    "packageRoot": "com.example.api",
+    "layerMapping": {
+      "controller": "web/controller",
+      "service": "service",
+      "repository": "repository",
+      "entity": "domain/entity",
+      "dto": "web/dto",
+      "config": "config",
+      "security": "security"
+    },
+    "conventions": {
+      "naming": "All services must end in 'Service', repositories in 'Repository'",
+      "transactions": "All write operations must be annotated with @Transactional",
+      "validation": "All DTOs must use Bean Validation annotations",
+      "security": "All non-public endpoints must have @PreAuthorize"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "magneto": {
+      "command": "node",
+      "args": [
+        "node_modules/magneto-ai/dist/mcp/server.js"
+      ],
+      "env": {}
+    }
+  }
+}

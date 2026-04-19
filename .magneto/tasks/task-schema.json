@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Magneto AI Task",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "description",
+    "type"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique task identifier"
+    },
+    "title": {
+      "type": "string",
+      "description": "Short task title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed task description"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "architecture-review",
+        "bug-fix",
+        "feature-implementation",
+        "security-audit",
+        "performance-review",
+        "testing",
+        "requirements-analysis",
+        "code-review",
+        "general"
+      ]
+    },
+    "scope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Files or directories in scope"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Task tags for classification"
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Execution constraints"
+    }
+  }
+}

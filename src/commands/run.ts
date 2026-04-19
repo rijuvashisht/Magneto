@@ -1,10 +1,11 @@
 import * as path from 'path';
 import { logger } from '../utils/logger';
 import { resolveProjectRoot, isMagnetoProject } from '../utils/paths';
-import { readJson, writeJson, fileExists } from '../utils/fs';
+import { writeJson, fileExists } from '../utils/fs';
 import { buildContext } from '../core/context';
 import { evaluateSecurity, ExecutionMode } from '../core/security-engine';
 import { RunnerType, createRunner } from '../runners/types';
+import { parseTaskFile } from '../utils/task-parser';
 
 export interface RunOptions {
   runner: string;
@@ -24,7 +25,7 @@ export async function runCommand(taskFile: string, options: RunOptions): Promise
 
   let task: any;
   try {
-    task = readJson(taskPath);
+    task = parseTaskFile(taskPath);
   } catch {
     logger.error(`Failed to read task file: ${taskPath}`);
     process.exit(1);

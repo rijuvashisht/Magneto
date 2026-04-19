@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { MCPToolResult } from '../server';
-import { readJson } from '../../utils/fs';
+import { parseTaskFile } from '../../utils/task-parser';
 import { buildContext } from '../../core/context';
 import { evaluateSecurity } from '../../core/security-engine';
 import { logger } from '../../utils/logger';
@@ -17,7 +17,7 @@ export async function handleSecurityCheck(
 
   try {
     const taskPath = path.resolve(projectRoot, taskFile);
-    const task = readJson<any>(taskPath);
+    const task = parseTaskFile(taskPath);
 
     const context = await buildContext(projectRoot, task);
     const security = evaluateSecurity(task, context);

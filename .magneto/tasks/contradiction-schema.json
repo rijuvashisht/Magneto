@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Magneto AI Contradiction",
+  "type": "object",
+  "required": [
+    "id",
+    "type",
+    "sides",
+    "resolution"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Contradiction identifier"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "code-vs-requirement",
+        "code-vs-test",
+        "requirement-vs-test",
+        "agent-vs-agent"
+      ],
+      "description": "Type of contradiction"
+    },
+    "sides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "Which agent or artifact"
+          },
+          "claim": {
+            "type": "string",
+            "description": "What this side asserts"
+          },
+          "evidence": {
+            "type": "string",
+            "description": "Supporting evidence"
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "source",
+          "claim"
+        ]
+      },
+      "minItems": 2
+    },
+    "resolution": {
+      "type": "object",
+      "properties": {
+        "decision": {
+          "type": "string",
+          "description": "Resolution decision"
+        },
+        "action": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Recommended actions"
+        },
+        "staleArtifact": {
+          "type": "string",
+          "description": "Which artifact is stale"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "requiresHumanReview": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "decision"
+      ]
+    }
+  }
+}

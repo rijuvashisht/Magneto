@@ -8,6 +8,11 @@ import { doctorCommand } from './commands/doctor';
 import { planCommand } from './commands/plan';
 import { runCommand } from './commands/run';
 import { mergeCommand } from './commands/merge';
+import { generateCommand } from './commands/generate';
+import { analyzeCommand } from './commands/analyze';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const pkg = require('../package.json') as { version: string };
 
 const program = new Command();
 
@@ -18,7 +23,7 @@ program
     'Orchestrate multi-agent AI tasks with security guardrails,\n' +
     'power packs, and Copilot/OpenAI integration.'
   )
-  .version('0.1.0')
+  .version(pkg.version)
   .hook('preAction', () => {
     logger.banner();
   })
@@ -28,9 +33,12 @@ Examples:
   $ magneto init --with typescript nextjs     Init with power packs
   $ magneto init --adapter graphify           Init with Graphify adapter
   $ magneto doctor                            Validate setup
-  $ magneto plan task.json                    Generate execution plan
-  $ magneto run task.json --runner openai     Execute task via OpenAI
+  $ magneto plan task.md                      Generate execution plan
+  $ magneto plan task.json                    (also supports .json and .yaml)
+  $ magneto run task.md --runner openai       Execute task via OpenAI
   $ magneto merge .magneto/cache --format md  Merge results as Markdown
+  $ magneto generate task.md                 Generate scoped prompt for Windsurf/Copilot
+  $ magneto analyze                           Analyze codebase and build memory
 
 Environment variables:
   OPENAI_API_KEY                  Required for the OpenAI runner
@@ -82,11 +90,11 @@ Example:
 
 program
   .command('plan <taskFile>')
-  .description('Generate an execution plan for a task JSON file. Classifies the task, assigns roles, and evaluates security.')
+  .description('Generate an execution plan for a task file (.md, .yaml, or .json). Classifies the task, assigns roles, and evaluates security.')
   .option('--dry-run', 'Preview plan without saving to disk', false)
   .addHelpText('after', `
 Examples:
-  $ magneto plan examples/tasks/checkout-mismatch.json
+  $ magneto plan tasks/checkout-mismatch.md
   $ magneto plan task.json --dry-run
 `)
   .action(async (taskFile, options) => {
@@ -130,6 +138,44 @@ Examples:
 `)
   .action(async (outputDir, options) => {
     await mergeCommand(outputDir, options);
+  });
+
+program
+  .command('generate <taskFile>')
+  .description('Generate a scoped, role-focused prompt from a task file. Paste into Windsurf or Copilot Chat for faster, cheaper AI-assisted development.')
+  .option('--output <file>', 'Save prompt to a file instead of printing to console')
+  .option('--role <role>', 'Generate prompt for a specific role (orchestrator, backend, tester, requirements)', 'all')
+  .addHelpText('after', `
+Examples:
+  $ magneto generate tasks/implement-auth-flow.md
+  $ magneto generate tasks/bug-fix.md --role backend
+  $ magneto generate tasks/security-audit.md --output prompt.md
+`)
+  .action(async (taskFile, options) => {
+    await generateCommand(taskFile, options);
+  });
+
+program
+  .command('analyze')
+  .description('Analyze the codebase and build structured memory. Extracts exports, imports, classes, functions, and dependencies into .magneto/memory/ for faster, cheaper AI prompts.')
+  .option('--depth <n>', 'Max directory depth to scan', '5')
+  .option('--include <dirs...>', 'Only analyze these directories')
+  .option('--exclude <dirs...>', 'Exclude additional directories')
+  .addHelpText('after', `
+Examples:
+  $ magneto analyze
+  $ magneto analyze --depth 3
+  $ magneto analyze --include src lib
+  $ magneto analyze --exclude tests fixtures
+
+Outputs:
+  .magneto/memory/root-summary.md       Project overview + token savings
+  .magneto/memory/file-index.md         All files with signatures
+  .magneto/memory/dependencies.md       Import/dependency map
+  .magneto/memory/modules/*.md          Per-directory summaries
+`)
+  .action(async (options) => {
+    await analyzeCommand(options);
   });
 
 program.parse(process.argv);

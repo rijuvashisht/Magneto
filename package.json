@@ -1,6 +1,6 @@
 {
   "name": "magneto-ai",
-  "version": "0.1.0",
+  "version": "0.1.8",
   "description": "Repo-local AI reasoning framework and agent control plane for enterprise environments",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,7 +15,10 @@
     "test": "jest --config jest.config.js",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "release:patch": "npm run build && npm test && npm version patch && git push origin HEAD --tags",
+    "release:minor": "npm run build && npm test && npm version minor && git push origin HEAD --tags",
+    "release:major": "npm run build && npm test && npm version major && git push origin HEAD --tags"
   },
   "keywords": [
     "ai",
@@ -44,6 +47,7 @@
     "commander": "^12.1.0",
     "glob": "^10.3.10",
     "jsonschema": "^1.4.1",
+    "magneto-ai": "^0.1.4",
     "openai": "^4.52.0",
     "uuid": "^9.0.0",
     "winston": "^3.13.0"

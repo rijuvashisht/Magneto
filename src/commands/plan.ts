@@ -1,9 +1,10 @@
 import * as path from 'path';
 import { logger } from '../utils/logger';
 import { resolveProjectRoot, isMagnetoProject } from '../utils/paths';
-import { readJson, writeJson } from '../utils/fs';
+import { writeJson } from '../utils/fs';
 import { buildContext } from '../core/context';
 import { evaluateSecurity } from '../core/security-engine';
+import { parseTaskFile } from '../utils/task-parser';
 
 export interface PlanOptions {
   dryRun?: boolean;
@@ -50,7 +51,7 @@ export async function planCommand(taskFile: string, options: PlanOptions): Promi
 
   let task: Task;
   try {
-    task = readJson<Task>(taskPath);
+    task = parseTaskFile(taskPath) as Task;
   } catch {
     logger.error(`Failed to read task file: ${taskPath}`);
     process.exit(1);

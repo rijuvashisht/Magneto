@@ -1,0 +1,110 @@
+name: Release
+
+# Triggered by pushing a version tag: git tag v0.1.8 && git push origin v0.1.8
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Build, Publish & Release
+    runs-on: ubuntu-latest
+    # Skip if this tag was created by the auto-release job in ci.yml
+    if: github.actor != 'github-actions[bot]'
+    permissions:
+      contents: write  # needed to create GitHub releases
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # full history for changelog generation
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Run tests
+        run: npm test
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Verify package.json version matches tag
+        run: |
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          TAG_VERSION=${{ steps.version.outputs.VERSION }}
+          if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
+            echo "❌ package.json version ($PKG_VERSION) does not match tag ($TAG_VERSION)"
+            echo "Run: npm version $TAG_VERSION --no-git-tag-version, commit, then re-tag"
+            exit 1
+          fi
+          echo "✓ Version match: $PKG_VERSION"
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          PREV_TAG=$(git tag --sort=-version:refname | grep -E '^v[0-9]' | sed -n '2p')
+          if [ -z "$PREV_TAG" ]; then
+            COMMITS=$(git log --oneline --pretty=format:"- %s" | head -20)
+          else
+            COMMITS=$(git log ${PREV_TAG}..HEAD --oneline --pretty=format:"- %s")
+          fi
+          echo "COMMITS<<EOF" >> $GITHUB_OUTPUT
+          echo "$COMMITS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          echo "PREV_TAG=$PREV_TAG" >> $GITHUB_OUTPUT
+
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const version = '${{ steps.version.outputs.VERSION }}';
+            const prevTag = '${{ steps.changelog.outputs.PREV_TAG }}';
+            const commits = `${{ steps.changelog.outputs.COMMITS }}`;
+
+            const compareUrl = prevTag
+              ? `https://github.com/${context.repo.owner}/${context.repo.repo}/compare/${prevTag}...v${version}`
+              : '';
+
+            const body = [
+              `## magneto-ai v${version}`,
+              '',
+              '### Install',
+              '```bash',
+              `npm install -g magneto-ai@${version}`,
+              '```',
+              '',
+              '### Changes',
+              commits,
+              '',
+              compareUrl ? `**Full diff:** ${compareUrl}` : '',
+            ].filter(Boolean).join('\n');
+
+            await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: `v${version}`,
+              name: `magneto-ai v${version}`,
+              body,
+              draft: false,
+              prerelease: version.includes('-'),
+            });
+
+            core.info(`✓ GitHub Release created for v${version}`);

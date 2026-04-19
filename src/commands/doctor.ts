@@ -32,8 +32,11 @@ export async function doctorCommand(): Promise<void> {
   // Check VSCode integration
   results.push(checkPath(projectRoot, path.join(VSCODE_DIR, 'mcp.json'), 'MCP config'));
 
-  // Check for package.json
-  results.push(checkPath(projectRoot, 'package.json', 'package.json'));
+  // Check for task template (optional — created by magneto init)
+  results.push(checkPathOptional(projectRoot, path.join(MAGNETO_DIR, 'tasks', 'TASK_TEMPLATE.md'), 'Task template (TASK_TEMPLATE.md)'));
+
+  // Check for package.json (optional — Magneto AI works with any language)
+  results.push(checkPathOptional(projectRoot, 'package.json', 'package.json'));
 
   // Check for Node.js
   results.push({
@@ -70,4 +73,12 @@ function checkPath(projectRoot: string, relativePath: string, label: string): Di
     return { check: label, status: 'pass', message: 'Found' };
   }
   return { check: label, status: 'fail', message: 'Missing' };
+}
+
+function checkPathOptional(projectRoot: string, relativePath: string, label: string): DiagnosticResult {
+  const fullPath = path.join(projectRoot, relativePath);
+  if (fileExists(fullPath)) {
+    return { check: label, status: 'pass', message: 'Found' };
+  }
+  return { check: label, status: 'warn', message: 'Not found (optional)' };
 }
