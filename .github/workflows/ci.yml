@@ -49,8 +49,10 @@ jobs:
     name: Auto Release
     needs: build-and-test
     runs-on: ubuntu-latest
-    # Only run on push to main, not on PRs or develop
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    # Run on: (1) direct push to main, or (2) PR merged to main
+    if: |
+      (github.ref == 'refs/heads/main' && github.event_name == 'push') ||
+      (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main')
     permissions:
       contents: write
 
