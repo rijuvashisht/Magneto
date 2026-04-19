@@ -1,0 +1,7240 @@
+{
+  "nodes": [
+    {
+      "id": "mod:src",
+      "label": "src",
+      "type": "module",
+      "metadata": {
+        "files": 1,
+        "lines": 219,
+        "size": 8498
+      },
+      "community": 0,
+      "degree": 1
+    },
+    {
+      "id": "mod:src/commands",
+      "label": "src/commands",
+      "type": "module",
+      "metadata": {
+        "files": 9,
+        "lines": 1921,
+        "size": 63601
+      },
+      "community": 1,
+      "degree": 9,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:src/core",
+      "label": "src/core",
+      "type": "module",
+      "metadata": {
+        "files": 8,
+        "lines": 2606,
+        "size": 78125
+      },
+      "community": 2,
+      "degree": 8,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:src/mcp",
+      "label": "src/mcp",
+      "type": "module",
+      "metadata": {
+        "files": 1,
+        "lines": 148,
+        "size": 4547
+      },
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "mod:src/mcp/tools",
+      "label": "src/mcp/tools",
+      "type": "module",
+      "metadata": {
+        "files": 4,
+        "lines": 178,
+        "size": 5581
+      },
+      "community": 3,
+      "degree": 4
+    },
+    {
+      "id": "mod:src/runners",
+      "label": "src/runners",
+      "type": "module",
+      "metadata": {
+        "files": 4,
+        "lines": 442,
+        "size": 12653
+      },
+      "community": 4,
+      "degree": 4
+    },
+    {
+      "id": "mod:src/templates",
+      "label": "src/templates",
+      "type": "module",
+      "metadata": {
+        "files": 1,
+        "lines": 153,
+        "size": 8207
+      },
+      "community": 5,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:src/templates/base/.github",
+      "label": "src/templates/base/.github",
+      "type": "module",
+      "metadata": {
+        "files": 1,
+        "lines": 28,
+        "size": 930
+      },
+      "community": 6,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:src/templates/base/.github/agents",
+      "label": "src/templates/base/.github/agents",
+      "type": "module",
+      "metadata": {
+        "files": 4,
+        "lines": 120,
+        "size": 2947
+      },
+      "community": 7,
+      "degree": 4,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:src/templates/power-packs/adapters/graphify",
+      "label": "src/templates/power-packs/adapters/graphify",
+      "type": "module",
+      "metadata": {
+        "files": 2,
+        "lines": 48,
+        "size": 1688
+      },
+      "community": 8,
+      "degree": 2,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:src/templates/power-packs/adapters/openclaw",
+      "label": "src/templates/power-packs/adapters/openclaw",
+      "type": "module",
+      "metadata": {
+        "files": 2,
+        "lines": 124,
+        "size": 4092
+      },
+      "community": 9,
+      "degree": 2,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:src/templates/power-packs/clouds/azure",
+      "label": "src/templates/power-packs/clouds/azure",
+      "type": "module",
+      "metadata": {
+        "files": 2,
+        "lines": 82,
+        "size": 3001
+      },
+      "community": 10,
+      "degree": 2,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:src/templates/power-packs/frameworks/nextjs",
+      "label": "src/templates/power-packs/frameworks/nextjs",
+      "type": "module",
+      "metadata": {
+        "files": 2,
+        "lines": 89,
+        "size": 3543
+      },
+      "community": 11,
+      "degree": 2,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:src/templates/power-packs/integrations/openclaw",
+      "label": "src/templates/power-packs/integrations/openclaw",
+      "type": "module",
+      "metadata": {
+        "files": 2,
+        "lines": 68,
+        "size": 2773
+      },
+      "community": 12,
+      "degree": 2,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:src/templates/power-packs/languages/typescript",
+      "label": "src/templates/power-packs/languages/typescript",
+      "type": "module",
+      "metadata": {
+        "files": 2,
+        "lines": 78,
+        "size": 2685
+      },
+      "community": 13,
+      "degree": 2,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:src/templates/power-packs/project-types/ai-platform",
+      "label": "src/templates/power-packs/project-types/ai-platform",
+      "type": "module",
+      "metadata": {
+        "files": 2,
+        "lines": 84,
+        "size": 3333
+      },
+      "community": 14,
+      "degree": 2,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:src/utils",
+      "label": "src/utils",
+      "type": "module",
+      "metadata": {
+        "files": 4,
+        "lines": 386,
+        "size": 10731
+      },
+      "community": 3,
+      "degree": 4
+    },
+    {
+      "id": "file:src/cli.ts",
+      "label": "src/cli.ts",
+      "type": "file",
+      "module": "src",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 219,
+        "size": 8498
+      },
+      "community": 0,
+      "degree": 12,
+      "isGodNode": true
+    },
+    {
+      "id": "pkg:commander",
+      "label": "commander",
+      "type": "package",
+      "community": 0,
+      "degree": 1
+    },
+    {
+      "id": "file:src/commands/analyze.ts",
+      "label": "src/commands/analyze.ts",
+      "type": "file",
+      "module": "src/commands",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 792,
+        "size": 26698
+      },
+      "community": 15,
+      "degree": 28,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/commands/analyze.ts:analyzeCommand",
+      "label": "analyzeCommand",
+      "type": "function",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/commands/analyze.ts:scanFiles",
+      "label": "scanFiles",
+      "type": "function",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/commands/analyze.ts:parseFile",
+      "label": "parseFile",
+      "type": "function",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/analyze.ts:parseJavaScriptLike",
+      "label": "parseJavaScriptLike",
+      "type": "function",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/analyze.ts:parseJavaLike",
+      "label": "parseJavaLike",
+      "type": "function",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/analyze.ts:parsePython",
+      "label": "parsePython",
+      "type": "function",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/analyze.ts:parseGo",
+      "label": "parseGo",
+      "type": "function",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/analyze.ts:groupByModule",
+      "label": "groupByModule",
+      "type": "function",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/analyze.ts:renderModuleSummary",
+      "label": "renderModuleSummary",
+      "type": "function",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/analyze.ts:buildDependencyMap",
+      "label": "buildDependencyMap",
+      "type": "function",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/analyze.ts:buildFileIndex",
+      "label": "buildFileIndex",
+      "type": "function",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/analyze.ts:buildRootSummary",
+      "label": "buildRootSummary",
+      "type": "function",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/analyze.ts:formatBytes",
+      "label": "formatBytes",
+      "type": "function",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/analyze.ts:writeGraphHtml",
+      "label": "writeGraphHtml",
+      "type": "function",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/analyze.ts:runGraphifyDeep",
+      "label": "runGraphifyDeep",
+      "type": "function",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/commands/analyze.ts:AnalyzeOptions",
+      "label": "AnalyzeOptions",
+      "type": "interface",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/commands/analyze.ts:FileInfo",
+      "label": "FileInfo",
+      "type": "interface",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/commands/analyze.ts:ModuleSummary",
+      "label": "ModuleSummary",
+      "type": "interface",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/analyze.ts:AnalyzeOptions",
+      "label": "AnalyzeOptions",
+      "type": "export",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/analyze.ts:analyzeCommand",
+      "label": "analyzeCommand",
+      "type": "export",
+      "file": "src/commands/analyze.ts",
+      "module": "src/commands",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "pkg:path",
+      "label": "path",
+      "type": "package",
+      "community": 16,
+      "degree": 24,
+      "isGodNode": true
+    },
+    {
+      "id": "pkg:fs",
+      "label": "fs",
+      "type": "package",
+      "community": 16,
+      "degree": 11,
+      "isGodNode": true
+    },
+    {
+      "id": "pkg:child_process",
+      "label": "child_process",
+      "type": "package",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "file:src/commands/doctor.ts",
+      "label": "src/commands/doctor.ts",
+      "type": "file",
+      "module": "src/commands",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 85,
+        "size": 3197
+      },
+      "community": 17,
+      "degree": 11,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/commands/doctor.ts:doctorCommand",
+      "label": "doctorCommand",
+      "type": "function",
+      "file": "src/commands/doctor.ts",
+      "module": "src/commands",
+      "community": 17,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/doctor.ts:checkPath",
+      "label": "checkPath",
+      "type": "function",
+      "file": "src/commands/doctor.ts",
+      "module": "src/commands",
+      "community": 17,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/doctor.ts:checkPathOptional",
+      "label": "checkPathOptional",
+      "type": "function",
+      "file": "src/commands/doctor.ts",
+      "module": "src/commands",
+      "community": 17,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/commands/doctor.ts:DiagnosticResult",
+      "label": "DiagnosticResult",
+      "type": "interface",
+      "file": "src/commands/doctor.ts",
+      "module": "src/commands",
+      "community": 17,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/doctor.ts:doctorCommand",
+      "label": "doctorCommand",
+      "type": "export",
+      "file": "src/commands/doctor.ts",
+      "module": "src/commands",
+      "community": 17,
+      "degree": 1
+    },
+    {
+      "id": "file:src/commands/generate.ts",
+      "label": "src/commands/generate.ts",
+      "type": "file",
+      "module": "src/commands",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 374,
+        "size": 13139
+      },
+      "community": 18,
+      "degree": 21,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/commands/generate.ts:generateCommand",
+      "label": "generateCommand",
+      "type": "function",
+      "file": "src/commands/generate.ts",
+      "module": "src/commands",
+      "community": 18,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/commands/generate.ts:buildPrompt",
+      "label": "buildPrompt",
+      "type": "function",
+      "file": "src/commands/generate.ts",
+      "module": "src/commands",
+      "community": 18,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/generate.ts:loadRolePacks",
+      "label": "loadRolePacks",
+      "type": "function",
+      "file": "src/commands/generate.ts",
+      "module": "src/commands",
+      "community": 18,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/generate.ts:loadScopedFiles",
+      "label": "loadScopedFiles",
+      "type": "function",
+      "file": "src/commands/generate.ts",
+      "module": "src/commands",
+      "community": 18,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/generate.ts:loadMemoryContext",
+      "label": "loadMemoryContext",
+      "type": "function",
+      "file": "src/commands/generate.ts",
+      "module": "src/commands",
+      "community": 18,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/generate.ts:getRoleDescription",
+      "label": "getRoleDescription",
+      "type": "function",
+      "file": "src/commands/generate.ts",
+      "module": "src/commands",
+      "community": 18,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/generate.ts:getTaskInstructions",
+      "label": "getTaskInstructions",
+      "type": "function",
+      "file": "src/commands/generate.ts",
+      "module": "src/commands",
+      "community": 18,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/generate.ts:estimateTokens",
+      "label": "estimateTokens",
+      "type": "function",
+      "file": "src/commands/generate.ts",
+      "module": "src/commands",
+      "community": 18,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/commands/generate.ts:GenerateOptions",
+      "label": "GenerateOptions",
+      "type": "interface",
+      "file": "src/commands/generate.ts",
+      "module": "src/commands",
+      "community": 18,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/generate.ts:GenerateOptions",
+      "label": "GenerateOptions",
+      "type": "export",
+      "file": "src/commands/generate.ts",
+      "module": "src/commands",
+      "community": 18,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/generate.ts:generateCommand",
+      "label": "generateCommand",
+      "type": "export",
+      "file": "src/commands/generate.ts",
+      "module": "src/commands",
+      "community": 18,
+      "degree": 1
+    },
+    {
+      "id": "file:src/commands/init.ts",
+      "label": "src/commands/init.ts",
+      "type": "file",
+      "module": "src/commands",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 52,
+        "size": 1556
+      },
+      "community": 16,
+      "degree": 12,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/commands/init.ts:initCommand",
+      "label": "initCommand",
+      "type": "function",
+      "file": "src/commands/init.ts",
+      "module": "src/commands",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/commands/init.ts:InitOptions",
+      "label": "InitOptions",
+      "type": "interface",
+      "file": "src/commands/init.ts",
+      "module": "src/commands",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/init.ts:InitOptions",
+      "label": "InitOptions",
+      "type": "export",
+      "file": "src/commands/init.ts",
+      "module": "src/commands",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/init.ts:initCommand",
+      "label": "initCommand",
+      "type": "export",
+      "file": "src/commands/init.ts",
+      "module": "src/commands",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "file:src/commands/merge.ts",
+      "label": "src/commands/merge.ts",
+      "type": "file",
+      "module": "src/commands",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 81,
+        "size": 2443
+      },
+      "community": 19,
+      "degree": 13,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/commands/merge.ts:mergeCommand",
+      "label": "mergeCommand",
+      "type": "function",
+      "file": "src/commands/merge.ts",
+      "module": "src/commands",
+      "community": 19,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/merge.ts:renderMarkdown",
+      "label": "renderMarkdown",
+      "type": "function",
+      "file": "src/commands/merge.ts",
+      "module": "src/commands",
+      "community": 19,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/commands/merge.ts:MergeOptions",
+      "label": "MergeOptions",
+      "type": "interface",
+      "file": "src/commands/merge.ts",
+      "module": "src/commands",
+      "community": 19,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/merge.ts:MergeOptions",
+      "label": "MergeOptions",
+      "type": "export",
+      "file": "src/commands/merge.ts",
+      "module": "src/commands",
+      "community": 19,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/merge.ts:mergeCommand",
+      "label": "mergeCommand",
+      "type": "export",
+      "file": "src/commands/merge.ts",
+      "module": "src/commands",
+      "community": 19,
+      "degree": 1
+    },
+    {
+      "id": "file:src/commands/plan.ts",
+      "label": "src/commands/plan.ts",
+      "type": "file",
+      "module": "src/commands",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 143,
+        "size": 3690
+      },
+      "community": 20,
+      "degree": 20,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/commands/plan.ts:planCommand",
+      "label": "planCommand",
+      "type": "function",
+      "file": "src/commands/plan.ts",
+      "module": "src/commands",
+      "community": 20,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/commands/plan.ts:generateSteps",
+      "label": "generateSteps",
+      "type": "function",
+      "file": "src/commands/plan.ts",
+      "module": "src/commands",
+      "community": 20,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/commands/plan.ts:PlanOptions",
+      "label": "PlanOptions",
+      "type": "interface",
+      "file": "src/commands/plan.ts",
+      "module": "src/commands",
+      "community": 20,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/commands/plan.ts:Task",
+      "label": "Task",
+      "type": "interface",
+      "file": "src/commands/plan.ts",
+      "module": "src/commands",
+      "community": 20,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/commands/plan.ts:ExecutionPlan",
+      "label": "ExecutionPlan",
+      "type": "interface",
+      "file": "src/commands/plan.ts",
+      "module": "src/commands",
+      "community": 20,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/commands/plan.ts:PlanStep",
+      "label": "PlanStep",
+      "type": "interface",
+      "file": "src/commands/plan.ts",
+      "module": "src/commands",
+      "community": 20,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/plan.ts:PlanOptions",
+      "label": "PlanOptions",
+      "type": "export",
+      "file": "src/commands/plan.ts",
+      "module": "src/commands",
+      "community": 20,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/plan.ts:Task",
+      "label": "Task",
+      "type": "export",
+      "file": "src/commands/plan.ts",
+      "module": "src/commands",
+      "community": 20,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/plan.ts:ExecutionPlan",
+      "label": "ExecutionPlan",
+      "type": "export",
+      "file": "src/commands/plan.ts",
+      "module": "src/commands",
+      "community": 20,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/plan.ts:PlanStep",
+      "label": "PlanStep",
+      "type": "export",
+      "file": "src/commands/plan.ts",
+      "module": "src/commands",
+      "community": 20,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/plan.ts:planCommand",
+      "label": "planCommand",
+      "type": "export",
+      "file": "src/commands/plan.ts",
+      "module": "src/commands",
+      "community": 20,
+      "degree": 1
+    },
+    {
+      "id": "file:src/commands/query.ts",
+      "label": "src/commands/query.ts",
+      "type": "file",
+      "module": "src/commands",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 276,
+        "size": 9210
+      },
+      "community": 21,
+      "degree": 18,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/commands/query.ts:queryCommand",
+      "label": "queryCommand",
+      "type": "function",
+      "file": "src/commands/query.ts",
+      "module": "src/commands",
+      "community": 21,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/commands/query.ts:pathCommand",
+      "label": "pathCommand",
+      "type": "function",
+      "file": "src/commands/query.ts",
+      "module": "src/commands",
+      "community": 21,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/query.ts:findNode",
+      "label": "findNode",
+      "type": "function",
+      "file": "src/commands/query.ts",
+      "module": "src/commands",
+      "community": 21,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/query.ts:traverseBFS",
+      "label": "traverseBFS",
+      "type": "function",
+      "file": "src/commands/query.ts",
+      "module": "src/commands",
+      "community": 21,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/query.ts:traverseDFS",
+      "label": "traverseDFS",
+      "type": "function",
+      "file": "src/commands/query.ts",
+      "module": "src/commands",
+      "community": 21,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/query.ts:dfs",
+      "label": "dfs",
+      "type": "function",
+      "file": "src/commands/query.ts",
+      "module": "src/commands",
+      "community": 21,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/commands/query.ts:estimateEdgeTokens",
+      "label": "estimateEdgeTokens",
+      "type": "function",
+      "file": "src/commands/query.ts",
+      "module": "src/commands",
+      "community": 21,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/commands/query.ts:QueryOptions",
+      "label": "QueryOptions",
+      "type": "interface",
+      "file": "src/commands/query.ts",
+      "module": "src/commands",
+      "community": 21,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/query.ts:QueryOptions",
+      "label": "QueryOptions",
+      "type": "export",
+      "file": "src/commands/query.ts",
+      "module": "src/commands",
+      "community": 21,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/query.ts:queryCommand",
+      "label": "queryCommand",
+      "type": "export",
+      "file": "src/commands/query.ts",
+      "module": "src/commands",
+      "community": 21,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/query.ts:pathCommand",
+      "label": "pathCommand",
+      "type": "export",
+      "file": "src/commands/query.ts",
+      "module": "src/commands",
+      "community": 21,
+      "degree": 1
+    },
+    {
+      "id": "file:src/commands/refresh.ts",
+      "label": "src/commands/refresh.ts",
+      "type": "file",
+      "module": "src/commands",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 31,
+        "size": 1034
+      },
+      "community": 1,
+      "degree": 9
+    },
+    {
+      "id": "fn:src/commands/refresh.ts:refreshCommand",
+      "label": "refreshCommand",
+      "type": "function",
+      "file": "src/commands/refresh.ts",
+      "module": "src/commands",
+      "community": 1,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/refresh.ts:refreshCommand",
+      "label": "refreshCommand",
+      "type": "export",
+      "file": "src/commands/refresh.ts",
+      "module": "src/commands",
+      "community": 1,
+      "degree": 1
+    },
+    {
+      "id": "file:src/commands/run.ts",
+      "label": "src/commands/run.ts",
+      "type": "file",
+      "module": "src/commands",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 87,
+        "size": 2634
+      },
+      "community": 22,
+      "degree": 14,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/commands/run.ts:runCommand",
+      "label": "runCommand",
+      "type": "function",
+      "file": "src/commands/run.ts",
+      "module": "src/commands",
+      "community": 22,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/commands/run.ts:RunOptions",
+      "label": "RunOptions",
+      "type": "interface",
+      "file": "src/commands/run.ts",
+      "module": "src/commands",
+      "community": 22,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/run.ts:RunOptions",
+      "label": "RunOptions",
+      "type": "export",
+      "file": "src/commands/run.ts",
+      "module": "src/commands",
+      "community": 22,
+      "degree": 1
+    },
+    {
+      "id": "export:src/commands/run.ts:runCommand",
+      "label": "runCommand",
+      "type": "export",
+      "file": "src/commands/run.ts",
+      "module": "src/commands",
+      "community": 22,
+      "degree": 1
+    },
+    {
+      "id": "file:src/core/adapter-loader.ts",
+      "label": "src/core/adapter-loader.ts",
+      "type": "file",
+      "module": "src/core",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 114,
+        "size": 3807
+      },
+      "community": 16,
+      "degree": 19,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/core/adapter-loader.ts:loadAdapters",
+      "label": "loadAdapters",
+      "type": "function",
+      "file": "src/core/adapter-loader.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/adapter-loader.ts:wireOpenClawAdapter",
+      "label": "wireOpenClawAdapter",
+      "type": "function",
+      "file": "src/core/adapter-loader.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/adapter-loader.ts:loadGraphifyData",
+      "label": "loadGraphifyData",
+      "type": "function",
+      "file": "src/core/adapter-loader.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/adapter-loader.ts:mapGraphToMemory",
+      "label": "mapGraphToMemory",
+      "type": "function",
+      "file": "src/core/adapter-loader.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/adapter-loader.ts:updateConfigWithAdapter",
+      "label": "updateConfigWithAdapter",
+      "type": "function",
+      "file": "src/core/adapter-loader.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/adapter-loader.ts:adapters",
+      "label": "adapters",
+      "type": "function",
+      "file": "src/core/adapter-loader.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/adapter-loader.ts:Adapter",
+      "label": "Adapter",
+      "type": "interface",
+      "file": "src/core/adapter-loader.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/adapter-loader.ts:GraphifyAdapter",
+      "label": "GraphifyAdapter",
+      "type": "interface",
+      "file": "src/core/adapter-loader.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/adapter-loader.ts:Adapter",
+      "label": "Adapter",
+      "type": "export",
+      "file": "src/core/adapter-loader.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/adapter-loader.ts:GraphifyAdapter",
+      "label": "GraphifyAdapter",
+      "type": "export",
+      "file": "src/core/adapter-loader.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/adapter-loader.ts:loadAdapters",
+      "label": "loadAdapters",
+      "type": "export",
+      "file": "src/core/adapter-loader.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/adapter-loader.ts:loadGraphifyData",
+      "label": "loadGraphifyData",
+      "type": "export",
+      "file": "src/core/adapter-loader.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "file:src/core/context.ts",
+      "label": "src/core/context.ts",
+      "type": "file",
+      "module": "src/core",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 195,
+        "size": 5680
+      },
+      "community": 23,
+      "degree": 31,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/core/context.ts:buildContext",
+      "label": "buildContext",
+      "type": "function",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/core/context.ts:classifyTask",
+      "label": "classifyTask",
+      "type": "function",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/context.ts:chooseRoles",
+      "label": "chooseRoles",
+      "type": "function",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/context.ts:createSubAgents",
+      "label": "createSubAgents",
+      "type": "function",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/context.ts:getToolsForRole",
+      "label": "getToolsForRole",
+      "type": "function",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/context.ts:getScopeForRole",
+      "label": "getScopeForRole",
+      "type": "function",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/context.ts:resolveRelevantFiles",
+      "label": "resolveRelevantFiles",
+      "type": "function",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/context.ts:loadMemory",
+      "label": "loadMemory",
+      "type": "function",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/context.ts:loadConfig",
+      "label": "loadConfig",
+      "type": "function",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/context.ts:TaskInput",
+      "label": "TaskInput",
+      "type": "interface",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/context.ts:ExecutionContext",
+      "label": "ExecutionContext",
+      "type": "interface",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/context.ts:SubAgent",
+      "label": "SubAgent",
+      "type": "interface",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "type:src/core/context.ts:TaskClassification",
+      "label": "TaskClassification",
+      "type": "type",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/context.ts:TaskInput",
+      "label": "TaskInput",
+      "type": "export",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/context.ts:TaskClassification",
+      "label": "TaskClassification",
+      "type": "export",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/context.ts:ExecutionContext",
+      "label": "ExecutionContext",
+      "type": "export",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/context.ts:SubAgent",
+      "label": "SubAgent",
+      "type": "export",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/context.ts:buildContext",
+      "label": "buildContext",
+      "type": "export",
+      "file": "src/core/context.ts",
+      "module": "src/core",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "file:src/core/detect-packs.ts",
+      "label": "src/core/detect-packs.ts",
+      "type": "file",
+      "module": "src/core",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 69,
+        "size": 1985
+      },
+      "community": 2,
+      "degree": 8
+    },
+    {
+      "id": "fn:src/core/detect-packs.ts:detectPacks",
+      "label": "detectPacks",
+      "type": "function",
+      "file": "src/core/detect-packs.ts",
+      "module": "src/core",
+      "community": 2,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/detect-packs.ts:PackageJson",
+      "label": "PackageJson",
+      "type": "interface",
+      "file": "src/core/detect-packs.ts",
+      "module": "src/core",
+      "community": 2,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/detect-packs.ts:detectPacks",
+      "label": "detectPacks",
+      "type": "export",
+      "file": "src/core/detect-packs.ts",
+      "module": "src/core",
+      "community": 2,
+      "degree": 1
+    },
+    {
+      "id": "file:src/core/graph-engine.ts",
+      "label": "src/core/graph-engine.ts",
+      "type": "file",
+      "module": "src/core",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 629,
+        "size": 18314
+      },
+      "community": 24,
+      "degree": 25,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/core/graph-engine.ts:buildKnowledgeGraph",
+      "label": "buildKnowledgeGraph",
+      "type": "function",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/core/graph-engine.ts:addNode",
+      "label": "addNode",
+      "type": "function",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/core/graph-engine.ts:addEdge",
+      "label": "addEdge",
+      "type": "function",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/graph-engine.ts:louvainCommunities",
+      "label": "louvainCommunities",
+      "type": "function",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/graph-engine.ts:resolveImportTarget",
+      "label": "resolveImportTarget",
+      "type": "function",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/graph-engine.ts:segments",
+      "label": "segments",
+      "type": "function",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/graph-engine.ts:baseName",
+      "label": "baseName",
+      "type": "function",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/graph-engine.ts:nameSimilarity",
+      "label": "nameSimilarity",
+      "type": "function",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/graph-engine.ts:generateGraphReport",
+      "label": "generateGraphReport",
+      "type": "function",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/graph-engine.ts:GraphNode",
+      "label": "GraphNode",
+      "type": "interface",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/graph-engine.ts:GraphEdge",
+      "label": "GraphEdge",
+      "type": "interface",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/graph-engine.ts:GraphCommunity",
+      "label": "GraphCommunity",
+      "type": "interface",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/graph-engine.ts:KnowledgeGraph",
+      "label": "KnowledgeGraph",
+      "type": "interface",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/graph-engine.ts:FileInfo",
+      "label": "FileInfo",
+      "type": "interface",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/graph-engine.ts:ModuleSummary",
+      "label": "ModuleSummary",
+      "type": "interface",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/graph-engine.ts:GraphNode",
+      "label": "GraphNode",
+      "type": "export",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/graph-engine.ts:GraphEdge",
+      "label": "GraphEdge",
+      "type": "export",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/graph-engine.ts:GraphCommunity",
+      "label": "GraphCommunity",
+      "type": "export",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/graph-engine.ts:KnowledgeGraph",
+      "label": "KnowledgeGraph",
+      "type": "export",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/graph-engine.ts:FileInfo",
+      "label": "FileInfo",
+      "type": "export",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/graph-engine.ts:ModuleSummary",
+      "label": "ModuleSummary",
+      "type": "export",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/graph-engine.ts:buildKnowledgeGraph",
+      "label": "buildKnowledgeGraph",
+      "type": "export",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/graph-engine.ts:generateGraphReport",
+      "label": "generateGraphReport",
+      "type": "export",
+      "file": "src/core/graph-engine.ts",
+      "module": "src/core",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "file:src/core/merge-results.ts",
+      "label": "src/core/merge-results.ts",
+      "type": "file",
+      "module": "src/core",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 285,
+        "size": 8496
+      },
+      "community": 25,
+      "degree": 22,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/core/merge-results.ts:mergeResults",
+      "label": "mergeResults",
+      "type": "function",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/core/merge-results.ts:deduplicateFindings",
+      "label": "deduplicateFindings",
+      "type": "function",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/merge-results.ts:deduplicateRisks",
+      "label": "deduplicateRisks",
+      "type": "function",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/merge-results.ts:calculateCombinedConfidence",
+      "label": "calculateCombinedConfidence",
+      "type": "function",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/merge-results.ts:detectContradictions",
+      "label": "detectContradictions",
+      "type": "function",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/merge-results.ts:getSharedKeywords",
+      "label": "getSharedKeywords",
+      "type": "function",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/merge-results.ts:determineOverallRisk",
+      "label": "determineOverallRisk",
+      "type": "function",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/merge-results.ts:Finding",
+      "label": "Finding",
+      "type": "interface",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/merge-results.ts:Risk",
+      "label": "Risk",
+      "type": "interface",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/merge-results.ts:AgentOutput",
+      "label": "AgentOutput",
+      "type": "interface",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/merge-results.ts:Contradiction",
+      "label": "Contradiction",
+      "type": "interface",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/merge-results.ts:MergedOutput",
+      "label": "MergedOutput",
+      "type": "interface",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/merge-results.ts:Finding",
+      "label": "Finding",
+      "type": "export",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/merge-results.ts:Risk",
+      "label": "Risk",
+      "type": "export",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/merge-results.ts:AgentOutput",
+      "label": "AgentOutput",
+      "type": "export",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/merge-results.ts:Contradiction",
+      "label": "Contradiction",
+      "type": "export",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/merge-results.ts:MergedOutput",
+      "label": "MergedOutput",
+      "type": "export",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/merge-results.ts:mergeResults",
+      "label": "mergeResults",
+      "type": "export",
+      "file": "src/core/merge-results.ts",
+      "module": "src/core",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "file:src/core/power-pack-loader.ts",
+      "label": "src/core/power-pack-loader.ts",
+      "type": "file",
+      "module": "src/core",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 72,
+        "size": 2095
+      },
+      "community": 26,
+      "degree": 15,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/core/power-pack-loader.ts:loadPowerPacks",
+      "label": "loadPowerPacks",
+      "type": "function",
+      "file": "src/core/power-pack-loader.ts",
+      "module": "src/core",
+      "community": 26,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/power-pack-loader.ts:updateConfigWithPack",
+      "label": "updateConfigWithPack",
+      "type": "function",
+      "file": "src/core/power-pack-loader.ts",
+      "module": "src/core",
+      "community": 26,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/power-pack-loader.ts:packs",
+      "label": "packs",
+      "type": "function",
+      "file": "src/core/power-pack-loader.ts",
+      "module": "src/core",
+      "community": 26,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/power-pack-loader.ts:PowerPack",
+      "label": "PowerPack",
+      "type": "interface",
+      "file": "src/core/power-pack-loader.ts",
+      "module": "src/core",
+      "community": 26,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/power-pack-loader.ts:PackCheck",
+      "label": "PackCheck",
+      "type": "interface",
+      "file": "src/core/power-pack-loader.ts",
+      "module": "src/core",
+      "community": 26,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/power-pack-loader.ts:PowerPack",
+      "label": "PowerPack",
+      "type": "export",
+      "file": "src/core/power-pack-loader.ts",
+      "module": "src/core",
+      "community": 26,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/power-pack-loader.ts:PackCheck",
+      "label": "PackCheck",
+      "type": "export",
+      "file": "src/core/power-pack-loader.ts",
+      "module": "src/core",
+      "community": 26,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/power-pack-loader.ts:loadPowerPacks",
+      "label": "loadPowerPacks",
+      "type": "export",
+      "file": "src/core/power-pack-loader.ts",
+      "module": "src/core",
+      "community": 26,
+      "degree": 1
+    },
+    {
+      "id": "file:src/core/scaffold.ts",
+      "label": "src/core/scaffold.ts",
+      "type": "file",
+      "module": "src/core",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 1066,
+        "size": 32610
+      },
+      "community": 16,
+      "degree": 34,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/core/scaffold.ts:scaffold",
+      "label": "scaffold",
+      "type": "function",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/scaffold.ts:getDefaultConfig",
+      "label": "getDefaultConfig",
+      "type": "function",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/scaffold.ts:getMinConfig",
+      "label": "getMinConfig",
+      "type": "function",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/scaffold.ts:getStartMd",
+      "label": "getStartMd",
+      "type": "function",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/scaffold.ts:getCopilotInstructions",
+      "label": "getCopilotInstructions",
+      "type": "function",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/scaffold.ts:getMcpConfig",
+      "label": "getMcpConfig",
+      "type": "function",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/scaffold.ts:writeAgentFiles",
+      "label": "writeAgentFiles",
+      "type": "function",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/scaffold.ts:writeRolePacks",
+      "label": "writeRolePacks",
+      "type": "function",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/scaffold.ts:writeSkillFiles",
+      "label": "writeSkillFiles",
+      "type": "function",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/scaffold.ts:writeMemoryFiles",
+      "label": "writeMemoryFiles",
+      "type": "function",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/scaffold.ts:writeTaskSchemas",
+      "label": "writeTaskSchemas",
+      "type": "function",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/scaffold.ts:writeScripts",
+      "label": "writeScripts",
+      "type": "function",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/scaffold.ts:scanDirectory",
+      "label": "scanDirectory",
+      "type": "function",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/scaffold.ts:ScaffoldOptions",
+      "label": "ScaffoldOptions",
+      "type": "interface",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/scaffold.ts:FileEntry",
+      "label": "FileEntry",
+      "type": "interface",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/scaffold.ts:Finding",
+      "label": "Finding",
+      "type": "interface",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/scaffold.ts:Risk",
+      "label": "Risk",
+      "type": "interface",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/scaffold.ts:Contradiction",
+      "label": "Contradiction",
+      "type": "interface",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/scaffold.ts:ScaffoldOptions",
+      "label": "ScaffoldOptions",
+      "type": "export",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/scaffold.ts:scaffold",
+      "label": "scaffold",
+      "type": "export",
+      "file": "src/core/scaffold.ts",
+      "module": "src/core",
+      "community": 16,
+      "degree": 1
+    },
+    {
+      "id": "file:src/core/security-engine.ts",
+      "label": "src/core/security-engine.ts",
+      "type": "file",
+      "module": "src/core",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 176,
+        "size": 5138
+      },
+      "community": 27,
+      "degree": 25,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/core/security-engine.ts:evaluateSecurity",
+      "label": "evaluateSecurity",
+      "type": "function",
+      "file": "src/core/security-engine.ts",
+      "module": "src/core",
+      "community": 27,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/core/security-engine.ts:maxTelepathy",
+      "label": "maxTelepathy",
+      "type": "function",
+      "file": "src/core/security-engine.ts",
+      "module": "src/core",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/security-engine.ts:extractSecurityConfig",
+      "label": "extractSecurityConfig",
+      "type": "function",
+      "file": "src/core/security-engine.ts",
+      "module": "src/core",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/core/security-engine.ts:matchesProtectedPath",
+      "label": "matchesProtectedPath",
+      "type": "function",
+      "file": "src/core/security-engine.ts",
+      "module": "src/core",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/security-engine.ts:SecurityEvaluation",
+      "label": "SecurityEvaluation",
+      "type": "interface",
+      "file": "src/core/security-engine.ts",
+      "module": "src/core",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/security-engine.ts:SecurityConfig",
+      "label": "SecurityConfig",
+      "type": "interface",
+      "file": "src/core/security-engine.ts",
+      "module": "src/core",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/security-engine.ts:TaskLike",
+      "label": "TaskLike",
+      "type": "interface",
+      "file": "src/core/security-engine.ts",
+      "module": "src/core",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/core/security-engine.ts:ContextLike",
+      "label": "ContextLike",
+      "type": "interface",
+      "file": "src/core/security-engine.ts",
+      "module": "src/core",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "type:src/core/security-engine.ts:SecurityRisk",
+      "label": "SecurityRisk",
+      "type": "type",
+      "file": "src/core/security-engine.ts",
+      "module": "src/core",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "type:src/core/security-engine.ts:TelepathyLevel",
+      "label": "TelepathyLevel",
+      "type": "type",
+      "file": "src/core/security-engine.ts",
+      "module": "src/core",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "type:src/core/security-engine.ts:ExecutionMode",
+      "label": "ExecutionMode",
+      "type": "type",
+      "file": "src/core/security-engine.ts",
+      "module": "src/core",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/security-engine.ts:SecurityRisk",
+      "label": "SecurityRisk",
+      "type": "export",
+      "file": "src/core/security-engine.ts",
+      "module": "src/core",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/security-engine.ts:TelepathyLevel",
+      "label": "TelepathyLevel",
+      "type": "export",
+      "file": "src/core/security-engine.ts",
+      "module": "src/core",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/security-engine.ts:ExecutionMode",
+      "label": "ExecutionMode",
+      "type": "export",
+      "file": "src/core/security-engine.ts",
+      "module": "src/core",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/security-engine.ts:SecurityEvaluation",
+      "label": "SecurityEvaluation",
+      "type": "export",
+      "file": "src/core/security-engine.ts",
+      "module": "src/core",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/security-engine.ts:SecurityConfig",
+      "label": "SecurityConfig",
+      "type": "export",
+      "file": "src/core/security-engine.ts",
+      "module": "src/core",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "export:src/core/security-engine.ts:evaluateSecurity",
+      "label": "evaluateSecurity",
+      "type": "export",
+      "file": "src/core/security-engine.ts",
+      "module": "src/core",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "file:src/mcp/server.ts",
+      "label": "src/mcp/server.ts",
+      "type": "file",
+      "module": "src/mcp",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 148,
+        "size": 4547
+      },
+      "community": 3,
+      "degree": 18,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/mcp/server.ts:handleToolCall",
+      "label": "handleToolCall",
+      "type": "function",
+      "file": "src/mcp/server.ts",
+      "module": "src/mcp",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/mcp/server.ts:startMCPServer",
+      "label": "startMCPServer",
+      "type": "function",
+      "file": "src/mcp/server.ts",
+      "module": "src/mcp",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/mcp/server.ts:MCPToolCall",
+      "label": "MCPToolCall",
+      "type": "interface",
+      "file": "src/mcp/server.ts",
+      "module": "src/mcp",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/mcp/server.ts:MCPToolResult",
+      "label": "MCPToolResult",
+      "type": "interface",
+      "file": "src/mcp/server.ts",
+      "module": "src/mcp",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "export:src/mcp/server.ts:MCPToolCall",
+      "label": "MCPToolCall",
+      "type": "export",
+      "file": "src/mcp/server.ts",
+      "module": "src/mcp",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "export:src/mcp/server.ts:MCPToolResult",
+      "label": "MCPToolResult",
+      "type": "export",
+      "file": "src/mcp/server.ts",
+      "module": "src/mcp",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "export:src/mcp/server.ts:startMCPServer",
+      "label": "startMCPServer",
+      "type": "export",
+      "file": "src/mcp/server.ts",
+      "module": "src/mcp",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "pkg:http",
+      "label": "http",
+      "type": "package",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "file:src/mcp/tools/load-context.ts",
+      "label": "src/mcp/tools/load-context.ts",
+      "type": "file",
+      "module": "src/mcp/tools",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 38,
+        "size": 1116
+      },
+      "community": 3,
+      "degree": 10
+    },
+    {
+      "id": "fn:src/mcp/tools/load-context.ts:handleLoadContext",
+      "label": "handleLoadContext",
+      "type": "function",
+      "file": "src/mcp/tools/load-context.ts",
+      "module": "src/mcp/tools",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/mcp/tools/load-context.ts:projectRoot",
+      "label": "projectRoot",
+      "type": "function",
+      "file": "src/mcp/tools/load-context.ts",
+      "module": "src/mcp/tools",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "export:src/mcp/tools/load-context.ts:handleLoadContext",
+      "label": "handleLoadContext",
+      "type": "export",
+      "file": "src/mcp/tools/load-context.ts",
+      "module": "src/mcp/tools",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "file:src/mcp/tools/merge-results.ts",
+      "label": "src/mcp/tools/merge-results.ts",
+      "type": "file",
+      "module": "src/mcp/tools",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 42,
+        "size": 1198
+      },
+      "community": 3,
+      "degree": 9
+    },
+    {
+      "id": "fn:src/mcp/tools/merge-results.ts:handleMergeResults",
+      "label": "handleMergeResults",
+      "type": "function",
+      "file": "src/mcp/tools/merge-results.ts",
+      "module": "src/mcp/tools",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "export:src/mcp/tools/merge-results.ts:handleMergeResults",
+      "label": "handleMergeResults",
+      "type": "export",
+      "file": "src/mcp/tools/merge-results.ts",
+      "module": "src/mcp/tools",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "file:src/mcp/tools/plan-task.ts",
+      "label": "src/mcp/tools/plan-task.ts",
+      "type": "file",
+      "module": "src/mcp/tools",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 51,
+        "size": 1597
+      },
+      "community": 3,
+      "degree": 11,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/mcp/tools/plan-task.ts:handlePlanTask",
+      "label": "handlePlanTask",
+      "type": "function",
+      "file": "src/mcp/tools/plan-task.ts",
+      "module": "src/mcp/tools",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/mcp/tools/plan-task.ts:projectRoot",
+      "label": "projectRoot",
+      "type": "function",
+      "file": "src/mcp/tools/plan-task.ts",
+      "module": "src/mcp/tools",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "export:src/mcp/tools/plan-task.ts:handlePlanTask",
+      "label": "handlePlanTask",
+      "type": "export",
+      "file": "src/mcp/tools/plan-task.ts",
+      "module": "src/mcp/tools",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "file:src/mcp/tools/security-check.ts",
+      "label": "src/mcp/tools/security-check.ts",
+      "type": "file",
+      "module": "src/mcp/tools",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 47,
+        "size": 1670
+      },
+      "community": 3,
+      "degree": 11,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/mcp/tools/security-check.ts:handleSecurityCheck",
+      "label": "handleSecurityCheck",
+      "type": "function",
+      "file": "src/mcp/tools/security-check.ts",
+      "module": "src/mcp/tools",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/mcp/tools/security-check.ts:projectRoot",
+      "label": "projectRoot",
+      "type": "function",
+      "file": "src/mcp/tools/security-check.ts",
+      "module": "src/mcp/tools",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "export:src/mcp/tools/security-check.ts:handleSecurityCheck",
+      "label": "handleSecurityCheck",
+      "type": "export",
+      "file": "src/mcp/tools/security-check.ts",
+      "module": "src/mcp/tools",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "file:src/runners/copilot-cloud.ts",
+      "label": "src/runners/copilot-cloud.ts",
+      "type": "file",
+      "module": "src/runners",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 96,
+        "size": 2663
+      },
+      "community": 4,
+      "degree": 7,
+      "isGodNode": true
+    },
+    {
+      "id": "class:src/runners/copilot-cloud.ts:CopilotCloudRunner",
+      "label": "CopilotCloudRunner",
+      "type": "class",
+      "file": "src/runners/copilot-cloud.ts",
+      "module": "src/runners",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/runners/copilot-cloud.ts:data",
+      "label": "data",
+      "type": "function",
+      "file": "src/runners/copilot-cloud.ts",
+      "module": "src/runners",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "export:src/runners/copilot-cloud.ts:CopilotCloudRunner",
+      "label": "CopilotCloudRunner",
+      "type": "export",
+      "file": "src/runners/copilot-cloud.ts",
+      "module": "src/runners",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "file:src/runners/copilot-local.ts",
+      "label": "src/runners/copilot-local.ts",
+      "type": "file",
+      "module": "src/runners",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 73,
+        "size": 2325
+      },
+      "community": 4,
+      "degree": 6
+    },
+    {
+      "id": "class:src/runners/copilot-local.ts:CopilotLocalRunner",
+      "label": "CopilotLocalRunner",
+      "type": "class",
+      "file": "src/runners/copilot-local.ts",
+      "module": "src/runners",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "export:src/runners/copilot-local.ts:CopilotLocalRunner",
+      "label": "CopilotLocalRunner",
+      "type": "export",
+      "file": "src/runners/copilot-local.ts",
+      "module": "src/runners",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "file:src/runners/openai.ts",
+      "label": "src/runners/openai.ts",
+      "type": "file",
+      "module": "src/runners",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 219,
+        "size": 6345
+      },
+      "community": 4,
+      "degree": 7,
+      "isGodNode": true
+    },
+    {
+      "id": "class:src/runners/openai.ts:OpenAIRunner",
+      "label": "OpenAIRunner",
+      "type": "class",
+      "file": "src/runners/openai.ts",
+      "module": "src/runners",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "export:src/runners/openai.ts:OpenAIRunner",
+      "label": "OpenAIRunner",
+      "type": "export",
+      "file": "src/runners/openai.ts",
+      "module": "src/runners",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "pkg:openai",
+      "label": "openai",
+      "type": "package",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "file:src/runners/types.ts",
+      "label": "src/runners/types.ts",
+      "type": "file",
+      "module": "src/runners",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 54,
+        "size": 1320
+      },
+      "community": 4,
+      "degree": 20,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/runners/types.ts:createRunner",
+      "label": "createRunner",
+      "type": "function",
+      "file": "src/runners/types.ts",
+      "module": "src/runners",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/runners/types.ts:RunnerInput",
+      "label": "RunnerInput",
+      "type": "interface",
+      "file": "src/runners/types.ts",
+      "module": "src/runners",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/runners/types.ts:RunnerOutput",
+      "label": "RunnerOutput",
+      "type": "interface",
+      "file": "src/runners/types.ts",
+      "module": "src/runners",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "iface:src/runners/types.ts:Runner",
+      "label": "Runner",
+      "type": "interface",
+      "file": "src/runners/types.ts",
+      "module": "src/runners",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "type:src/runners/types.ts:RunnerType",
+      "label": "RunnerType",
+      "type": "type",
+      "file": "src/runners/types.ts",
+      "module": "src/runners",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "export:src/runners/types.ts:RunnerType",
+      "label": "RunnerType",
+      "type": "export",
+      "file": "src/runners/types.ts",
+      "module": "src/runners",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "export:src/runners/types.ts:RunnerInput",
+      "label": "RunnerInput",
+      "type": "export",
+      "file": "src/runners/types.ts",
+      "module": "src/runners",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "export:src/runners/types.ts:RunnerOutput",
+      "label": "RunnerOutput",
+      "type": "export",
+      "file": "src/runners/types.ts",
+      "module": "src/runners",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "export:src/runners/types.ts:Runner",
+      "label": "Runner",
+      "type": "export",
+      "file": "src/runners/types.ts",
+      "module": "src/runners",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "export:src/runners/types.ts:createRunner",
+      "label": "createRunner",
+      "type": "export",
+      "file": "src/runners/types.ts",
+      "module": "src/runners",
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/base/.github/agents/magneto-backend.agent.md",
+      "label": "src/templates/base/.github/agents/magneto-backend.agent.md",
+      "type": "file",
+      "module": "src/templates/base/.github/agents",
+      "metadata": {
+        "extension": ".md",
+        "lines": 29,
+        "size": 717
+      },
+      "community": 7,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/base/.github/agents/magneto-orchestrator.agent.md",
+      "label": "src/templates/base/.github/agents/magneto-orchestrator.agent.md",
+      "type": "file",
+      "module": "src/templates/base/.github/agents",
+      "metadata": {
+        "extension": ".md",
+        "lines": 33,
+        "size": 897
+      },
+      "community": 7,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/base/.github/agents/magneto-requirements.agent.md",
+      "label": "src/templates/base/.github/agents/magneto-requirements.agent.md",
+      "type": "file",
+      "module": "src/templates/base/.github/agents",
+      "metadata": {
+        "extension": ".md",
+        "lines": 29,
+        "size": 675
+      },
+      "community": 7,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/base/.github/agents/magneto-tester.agent.md",
+      "label": "src/templates/base/.github/agents/magneto-tester.agent.md",
+      "type": "file",
+      "module": "src/templates/base/.github/agents",
+      "metadata": {
+        "extension": ".md",
+        "lines": 29,
+        "size": 658
+      },
+      "community": 7,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/base/.github/copilot-instructions.md",
+      "label": "src/templates/base/.github/copilot-instructions.md",
+      "type": "file",
+      "module": "src/templates/base/.github",
+      "metadata": {
+        "extension": ".md",
+        "lines": 28,
+        "size": 930
+      },
+      "community": 6,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/graph-viewer.html",
+      "label": "src/templates/graph-viewer.html",
+      "type": "file",
+      "module": "src/templates",
+      "metadata": {
+        "extension": ".html",
+        "lines": 153,
+        "size": 8207
+      },
+      "community": 5,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/power-packs/adapters/graphify/adapter.json",
+      "label": "src/templates/power-packs/adapters/graphify/adapter.json",
+      "type": "file",
+      "module": "src/templates/power-packs/adapters/graphify",
+      "metadata": {
+        "extension": ".json",
+        "lines": 20,
+        "size": 523
+      },
+      "community": 8,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/power-packs/adapters/graphify/rules.md",
+      "label": "src/templates/power-packs/adapters/graphify/rules.md",
+      "type": "file",
+      "module": "src/templates/power-packs/adapters/graphify",
+      "metadata": {
+        "extension": ".md",
+        "lines": 28,
+        "size": 1165
+      },
+      "community": 8,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/power-packs/adapters/openclaw/adapter.json",
+      "label": "src/templates/power-packs/adapters/openclaw/adapter.json",
+      "type": "file",
+      "module": "src/templates/power-packs/adapters/openclaw",
+      "metadata": {
+        "extension": ".json",
+        "lines": 19,
+        "size": 672
+      },
+      "community": 9,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/power-packs/adapters/openclaw/magneto.SKILL.md",
+      "label": "src/templates/power-packs/adapters/openclaw/magneto.SKILL.md",
+      "type": "file",
+      "module": "src/templates/power-packs/adapters/openclaw",
+      "metadata": {
+        "extension": ".md",
+        "lines": 105,
+        "size": 3420
+      },
+      "community": 9,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/power-packs/clouds/azure/pack.json",
+      "label": "src/templates/power-packs/clouds/azure/pack.json",
+      "type": "file",
+      "module": "src/templates/power-packs/clouds/azure",
+      "metadata": {
+        "extension": ".json",
+        "lines": 53,
+        "size": 1970
+      },
+      "community": 10,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/power-packs/clouds/azure/rules.md",
+      "label": "src/templates/power-packs/clouds/azure/rules.md",
+      "type": "file",
+      "module": "src/templates/power-packs/clouds/azure",
+      "metadata": {
+        "extension": ".md",
+        "lines": 29,
+        "size": 1031
+      },
+      "community": 10,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/power-packs/frameworks/nextjs/pack.json",
+      "label": "src/templates/power-packs/frameworks/nextjs/pack.json",
+      "type": "file",
+      "module": "src/templates/power-packs/frameworks/nextjs",
+      "metadata": {
+        "extension": ".json",
+        "lines": 54,
+        "size": 1999
+      },
+      "community": 11,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/power-packs/frameworks/nextjs/rules.md",
+      "label": "src/templates/power-packs/frameworks/nextjs/rules.md",
+      "type": "file",
+      "module": "src/templates/power-packs/frameworks/nextjs",
+      "metadata": {
+        "extension": ".md",
+        "lines": 35,
+        "size": 1544
+      },
+      "community": 11,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/power-packs/integrations/openclaw/pack.json",
+      "label": "src/templates/power-packs/integrations/openclaw/pack.json",
+      "type": "file",
+      "module": "src/templates/power-packs/integrations/openclaw",
+      "metadata": {
+        "extension": ".json",
+        "lines": 13,
+        "size": 552
+      },
+      "community": 12,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/power-packs/integrations/openclaw/rules.md",
+      "label": "src/templates/power-packs/integrations/openclaw/rules.md",
+      "type": "file",
+      "module": "src/templates/power-packs/integrations/openclaw",
+      "metadata": {
+        "extension": ".md",
+        "lines": 55,
+        "size": 2221
+      },
+      "community": 12,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/power-packs/languages/typescript/pack.json",
+      "label": "src/templates/power-packs/languages/typescript/pack.json",
+      "type": "file",
+      "module": "src/templates/power-packs/languages/typescript",
+      "metadata": {
+        "extension": ".json",
+        "lines": 52,
+        "size": 1706
+      },
+      "community": 13,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/power-packs/languages/typescript/rules.md",
+      "label": "src/templates/power-packs/languages/typescript/rules.md",
+      "type": "file",
+      "module": "src/templates/power-packs/languages/typescript",
+      "metadata": {
+        "extension": ".md",
+        "lines": 26,
+        "size": 979
+      },
+      "community": 13,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/power-packs/project-types/ai-platform/pack.json",
+      "label": "src/templates/power-packs/project-types/ai-platform/pack.json",
+      "type": "file",
+      "module": "src/templates/power-packs/project-types/ai-platform",
+      "metadata": {
+        "extension": ".json",
+        "lines": 53,
+        "size": 2094
+      },
+      "community": 14,
+      "degree": 1
+    },
+    {
+      "id": "file:src/templates/power-packs/project-types/ai-platform/rules.md",
+      "label": "src/templates/power-packs/project-types/ai-platform/rules.md",
+      "type": "file",
+      "module": "src/templates/power-packs/project-types/ai-platform",
+      "metadata": {
+        "extension": ".md",
+        "lines": 31,
+        "size": 1239
+      },
+      "community": 14,
+      "degree": 1
+    },
+    {
+      "id": "file:src/utils/fs.ts",
+      "label": "src/utils/fs.ts",
+      "type": "file",
+      "module": "src/utils",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 67,
+        "size": 1858
+      },
+      "community": 28,
+      "degree": 33,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/utils/fs.ts:ensureDir",
+      "label": "ensureDir",
+      "type": "function",
+      "file": "src/utils/fs.ts",
+      "module": "src/utils",
+      "community": 28,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/utils/fs.ts:writeJson",
+      "label": "writeJson",
+      "type": "function",
+      "file": "src/utils/fs.ts",
+      "module": "src/utils",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/utils/fs.ts:readJson",
+      "label": "readJson",
+      "type": "function",
+      "file": "src/utils/fs.ts",
+      "module": "src/utils",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/utils/fs.ts:writeText",
+      "label": "writeText",
+      "type": "function",
+      "file": "src/utils/fs.ts",
+      "module": "src/utils",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/utils/fs.ts:readText",
+      "label": "readText",
+      "type": "function",
+      "file": "src/utils/fs.ts",
+      "module": "src/utils",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/utils/fs.ts:fileExists",
+      "label": "fileExists",
+      "type": "function",
+      "file": "src/utils/fs.ts",
+      "module": "src/utils",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/utils/fs.ts:copyDir",
+      "label": "copyDir",
+      "type": "function",
+      "file": "src/utils/fs.ts",
+      "module": "src/utils",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/utils/fs.ts:listFiles",
+      "label": "listFiles",
+      "type": "function",
+      "file": "src/utils/fs.ts",
+      "module": "src/utils",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/utils/fs.ts:walk",
+      "label": "walk",
+      "type": "function",
+      "file": "src/utils/fs.ts",
+      "module": "src/utils",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/fs.ts:ensureDir",
+      "label": "ensureDir",
+      "type": "export",
+      "file": "src/utils/fs.ts",
+      "module": "src/utils",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/fs.ts:writeJson",
+      "label": "writeJson",
+      "type": "export",
+      "file": "src/utils/fs.ts",
+      "module": "src/utils",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/fs.ts:readJson",
+      "label": "readJson",
+      "type": "export",
+      "file": "src/utils/fs.ts",
+      "module": "src/utils",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/fs.ts:writeText",
+      "label": "writeText",
+      "type": "export",
+      "file": "src/utils/fs.ts",
+      "module": "src/utils",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/fs.ts:readText",
+      "label": "readText",
+      "type": "export",
+      "file": "src/utils/fs.ts",
+      "module": "src/utils",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/fs.ts:fileExists",
+      "label": "fileExists",
+      "type": "export",
+      "file": "src/utils/fs.ts",
+      "module": "src/utils",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/fs.ts:copyDir",
+      "label": "copyDir",
+      "type": "export",
+      "file": "src/utils/fs.ts",
+      "module": "src/utils",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/fs.ts:listFiles",
+      "label": "listFiles",
+      "type": "export",
+      "file": "src/utils/fs.ts",
+      "module": "src/utils",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "file:src/utils/logger.ts",
+      "label": "src/utils/logger.ts",
+      "type": "file",
+      "module": "src/utils",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 65,
+        "size": 1676
+      },
+      "community": 3,
+      "degree": 34,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/utils/logger.ts:setLogLevel",
+      "label": "setLogLevel",
+      "type": "function",
+      "file": "src/utils/logger.ts",
+      "module": "src/utils",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/utils/logger.ts:getLogLevel",
+      "label": "getLogLevel",
+      "type": "function",
+      "file": "src/utils/logger.ts",
+      "module": "src/utils",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/logger.ts:LogLevel",
+      "label": "LogLevel",
+      "type": "export",
+      "file": "src/utils/logger.ts",
+      "module": "src/utils",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/logger.ts:setLogLevel",
+      "label": "setLogLevel",
+      "type": "export",
+      "file": "src/utils/logger.ts",
+      "module": "src/utils",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/logger.ts:getLogLevel",
+      "label": "getLogLevel",
+      "type": "export",
+      "file": "src/utils/logger.ts",
+      "module": "src/utils",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/logger.ts:logger",
+      "label": "logger",
+      "type": "export",
+      "file": "src/utils/logger.ts",
+      "module": "src/utils",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "pkg:chalk",
+      "label": "chalk",
+      "type": "package",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "file:src/utils/paths.ts",
+      "label": "src/utils/paths.ts",
+      "type": "file",
+      "module": "src/utils",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 58,
+        "size": 1826
+      },
+      "community": 29,
+      "degree": 36,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/utils/paths.ts:resolveProjectRoot",
+      "label": "resolveProjectRoot",
+      "type": "function",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/utils/paths.ts:magnetoPath",
+      "label": "magnetoPath",
+      "type": "function",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/utils/paths.ts:githubPath",
+      "label": "githubPath",
+      "type": "function",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/utils/paths.ts:vscodePath",
+      "label": "vscodePath",
+      "type": "function",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/utils/paths.ts:getTemplatesDir",
+      "label": "getTemplatesDir",
+      "type": "function",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/utils/paths.ts:isMagnetoProject",
+      "label": "isMagnetoProject",
+      "type": "function",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/paths.ts:MAGNETO_DIR",
+      "label": "MAGNETO_DIR",
+      "type": "export",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/paths.ts:GITHUB_DIR",
+      "label": "GITHUB_DIR",
+      "type": "export",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/paths.ts:VSCODE_DIR",
+      "label": "VSCODE_DIR",
+      "type": "export",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/paths.ts:AGENTS_DIR",
+      "label": "AGENTS_DIR",
+      "type": "export",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/paths.ts:COPILOT_INSTRUCTIONS",
+      "label": "COPILOT_INSTRUCTIONS",
+      "type": "export",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/paths.ts:MAGNETO_CONFIG",
+      "label": "MAGNETO_CONFIG",
+      "type": "export",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/paths.ts:MAGNETO_MIN_CONFIG",
+      "label": "MAGNETO_MIN_CONFIG",
+      "type": "export",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/paths.ts:MAGNETO_START",
+      "label": "MAGNETO_START",
+      "type": "export",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/paths.ts:MAGNETO_SUBDIRS",
+      "label": "MAGNETO_SUBDIRS",
+      "type": "export",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/paths.ts:resolveProjectRoot",
+      "label": "resolveProjectRoot",
+      "type": "export",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/paths.ts:magnetoPath",
+      "label": "magnetoPath",
+      "type": "export",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/paths.ts:githubPath",
+      "label": "githubPath",
+      "type": "export",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/paths.ts:vscodePath",
+      "label": "vscodePath",
+      "type": "export",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/paths.ts:getTemplatesDir",
+      "label": "getTemplatesDir",
+      "type": "export",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/paths.ts:isMagnetoProject",
+      "label": "isMagnetoProject",
+      "type": "export",
+      "file": "src/utils/paths.ts",
+      "module": "src/utils",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "file:src/utils/task-parser.ts",
+      "label": "src/utils/task-parser.ts",
+      "type": "file",
+      "module": "src/utils",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 196,
+        "size": 5371
+      },
+      "community": 3,
+      "degree": 16,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:src/utils/task-parser.ts:parseTaskFile",
+      "label": "parseTaskFile",
+      "type": "function",
+      "file": "src/utils/task-parser.ts",
+      "module": "src/utils",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/utils/task-parser.ts:parseMarkdownTask",
+      "label": "parseMarkdownTask",
+      "type": "function",
+      "file": "src/utils/task-parser.ts",
+      "module": "src/utils",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/utils/task-parser.ts:parseYaml",
+      "label": "parseYaml",
+      "type": "function",
+      "file": "src/utils/task-parser.ts",
+      "module": "src/utils",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "fn:src/utils/task-parser.ts:extractFirstHeading",
+      "label": "extractFirstHeading",
+      "type": "function",
+      "file": "src/utils/task-parser.ts",
+      "module": "src/utils",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "export:src/utils/task-parser.ts:parseTaskFile",
+      "label": "parseTaskFile",
+      "type": "export",
+      "file": "src/utils/task-parser.ts",
+      "module": "src/utils",
+      "community": 3,
+      "degree": 1
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/cli.ts",
+      "target": "mod:src",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/cli.ts",
+      "target": "pkg:commander",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/cli.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/cli.ts",
+      "target": "file:src/commands/init.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/cli.ts",
+      "target": "file:src/commands/refresh.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/cli.ts",
+      "target": "file:src/commands/doctor.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/cli.ts",
+      "target": "file:src/commands/plan.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/cli.ts",
+      "target": "file:src/commands/run.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/cli.ts",
+      "target": "file:src/commands/merge.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/cli.ts",
+      "target": "file:src/commands/generate.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/cli.ts",
+      "target": "file:src/commands/analyze.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/cli.ts",
+      "target": "file:src/commands/query.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "mod:src/commands",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "fn:src/commands/analyze.ts:analyzeCommand",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "fn:src/commands/analyze.ts:scanFiles",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "fn:src/commands/analyze.ts:parseFile",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "fn:src/commands/analyze.ts:parseJavaScriptLike",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "fn:src/commands/analyze.ts:parseJavaLike",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "fn:src/commands/analyze.ts:parsePython",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "fn:src/commands/analyze.ts:parseGo",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "fn:src/commands/analyze.ts:groupByModule",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "fn:src/commands/analyze.ts:renderModuleSummary",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "fn:src/commands/analyze.ts:buildDependencyMap",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "fn:src/commands/analyze.ts:buildFileIndex",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "fn:src/commands/analyze.ts:buildRootSummary",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "fn:src/commands/analyze.ts:formatBytes",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "fn:src/commands/analyze.ts:writeGraphHtml",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "fn:src/commands/analyze.ts:runGraphifyDeep",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "iface:src/commands/analyze.ts:AnalyzeOptions",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "iface:src/commands/analyze.ts:FileInfo",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "iface:src/commands/analyze.ts:ModuleSummary",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "export:src/commands/analyze.ts:AnalyzeOptions",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "export:src/commands/analyze.ts:analyzeCommand",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "pkg:fs",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "pkg:child_process",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "file:src/utils/paths.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/analyze.ts",
+      "target": "file:src/utils/fs.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/doctor.ts",
+      "target": "mod:src/commands",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/doctor.ts",
+      "target": "fn:src/commands/doctor.ts:doctorCommand",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/doctor.ts",
+      "target": "fn:src/commands/doctor.ts:checkPath",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/doctor.ts",
+      "target": "fn:src/commands/doctor.ts:checkPathOptional",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/doctor.ts",
+      "target": "iface:src/commands/doctor.ts:DiagnosticResult",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/doctor.ts",
+      "target": "export:src/commands/doctor.ts:doctorCommand",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/doctor.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/doctor.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/doctor.ts",
+      "target": "file:src/utils/paths.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/doctor.ts",
+      "target": "file:src/utils/fs.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "mod:src/commands",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "fn:src/commands/generate.ts:generateCommand",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "fn:src/commands/generate.ts:buildPrompt",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "fn:src/commands/generate.ts:loadRolePacks",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "fn:src/commands/generate.ts:loadScopedFiles",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "fn:src/commands/generate.ts:loadMemoryContext",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "fn:src/commands/generate.ts:getRoleDescription",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "fn:src/commands/generate.ts:getTaskInstructions",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "fn:src/commands/generate.ts:estimateTokens",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "iface:src/commands/generate.ts:GenerateOptions",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "export:src/commands/generate.ts:GenerateOptions",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "export:src/commands/generate.ts:generateCommand",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "pkg:fs",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "file:src/utils/paths.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "file:src/utils/fs.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "file:src/core/context.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "file:src/core/security-engine.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/generate.ts",
+      "target": "file:src/utils/task-parser.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/init.ts",
+      "target": "mod:src/commands",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/init.ts",
+      "target": "fn:src/commands/init.ts:initCommand",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/init.ts",
+      "target": "iface:src/commands/init.ts:InitOptions",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/init.ts",
+      "target": "export:src/commands/init.ts:InitOptions",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/init.ts",
+      "target": "export:src/commands/init.ts:initCommand",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/init.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/init.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/init.ts",
+      "target": "file:src/utils/paths.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/init.ts",
+      "target": "file:src/core/scaffold.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/init.ts",
+      "target": "file:src/core/power-pack-loader.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/init.ts",
+      "target": "file:src/core/adapter-loader.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/merge.ts",
+      "target": "mod:src/commands",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/merge.ts",
+      "target": "fn:src/commands/merge.ts:mergeCommand",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/merge.ts",
+      "target": "fn:src/commands/merge.ts:renderMarkdown",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/merge.ts",
+      "target": "iface:src/commands/merge.ts:MergeOptions",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/merge.ts",
+      "target": "export:src/commands/merge.ts:MergeOptions",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/merge.ts",
+      "target": "export:src/commands/merge.ts:mergeCommand",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/merge.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/merge.ts",
+      "target": "pkg:fs",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/merge.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/merge.ts",
+      "target": "file:src/utils/paths.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/merge.ts",
+      "target": "file:src/utils/fs.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/merge.ts",
+      "target": "file:src/core/merge-results.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "mod:src/commands",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "fn:src/commands/plan.ts:planCommand",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "fn:src/commands/plan.ts:generateSteps",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "iface:src/commands/plan.ts:PlanOptions",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "iface:src/commands/plan.ts:Task",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "iface:src/commands/plan.ts:ExecutionPlan",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "iface:src/commands/plan.ts:PlanStep",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "export:src/commands/plan.ts:PlanOptions",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "export:src/commands/plan.ts:Task",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "export:src/commands/plan.ts:ExecutionPlan",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "export:src/commands/plan.ts:PlanStep",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "export:src/commands/plan.ts:planCommand",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "file:src/utils/paths.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "file:src/utils/fs.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "file:src/core/context.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "file:src/core/security-engine.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/plan.ts",
+      "target": "file:src/utils/task-parser.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/query.ts",
+      "target": "mod:src/commands",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/query.ts",
+      "target": "fn:src/commands/query.ts:queryCommand",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/query.ts",
+      "target": "fn:src/commands/query.ts:pathCommand",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/query.ts",
+      "target": "fn:src/commands/query.ts:findNode",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/query.ts",
+      "target": "fn:src/commands/query.ts:traverseBFS",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/query.ts",
+      "target": "fn:src/commands/query.ts:traverseDFS",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/query.ts",
+      "target": "fn:src/commands/query.ts:dfs",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/query.ts",
+      "target": "fn:src/commands/query.ts:estimateEdgeTokens",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/query.ts",
+      "target": "iface:src/commands/query.ts:QueryOptions",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/query.ts",
+      "target": "export:src/commands/query.ts:QueryOptions",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/query.ts",
+      "target": "export:src/commands/query.ts:queryCommand",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/query.ts",
+      "target": "export:src/commands/query.ts:pathCommand",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/query.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/query.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/query.ts",
+      "target": "file:src/utils/paths.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/query.ts",
+      "target": "file:src/utils/fs.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/query.ts",
+      "target": "file:src/core/graph-engine.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/refresh.ts",
+      "target": "mod:src/commands",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/refresh.ts",
+      "target": "fn:src/commands/refresh.ts:refreshCommand",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/refresh.ts",
+      "target": "export:src/commands/refresh.ts:refreshCommand",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/refresh.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/refresh.ts",
+      "target": "file:src/utils/paths.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/refresh.ts",
+      "target": "file:src/core/scaffold.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/refresh.ts",
+      "target": "file:src/core/detect-packs.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/refresh.ts",
+      "target": "file:src/core/power-pack-loader.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/run.ts",
+      "target": "mod:src/commands",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/run.ts",
+      "target": "fn:src/commands/run.ts:runCommand",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/run.ts",
+      "target": "iface:src/commands/run.ts:RunOptions",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/run.ts",
+      "target": "export:src/commands/run.ts:RunOptions",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/run.ts",
+      "target": "export:src/commands/run.ts:runCommand",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/run.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/run.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/run.ts",
+      "target": "file:src/utils/paths.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/run.ts",
+      "target": "file:src/utils/fs.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/run.ts",
+      "target": "file:src/core/context.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/run.ts",
+      "target": "file:src/core/security-engine.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/run.ts",
+      "target": "file:src/runners/types.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/commands/run.ts",
+      "target": "file:src/utils/task-parser.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "mod:src/core",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "fn:src/core/adapter-loader.ts:loadAdapters",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "fn:src/core/adapter-loader.ts:wireOpenClawAdapter",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "fn:src/core/adapter-loader.ts:loadGraphifyData",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "fn:src/core/adapter-loader.ts:mapGraphToMemory",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "fn:src/core/adapter-loader.ts:updateConfigWithAdapter",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "fn:src/core/adapter-loader.ts:adapters",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "iface:src/core/adapter-loader.ts:Adapter",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "iface:src/core/adapter-loader.ts:GraphifyAdapter",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "export:src/core/adapter-loader.ts:Adapter",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "export:src/core/adapter-loader.ts:GraphifyAdapter",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "export:src/core/adapter-loader.ts:loadAdapters",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "export:src/core/adapter-loader.ts:loadGraphifyData",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "pkg:fs",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "file:src/utils/paths.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/adapter-loader.ts",
+      "target": "file:src/utils/fs.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "mod:src/core",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "fn:src/core/context.ts:buildContext",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "fn:src/core/context.ts:classifyTask",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "fn:src/core/context.ts:chooseRoles",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "fn:src/core/context.ts:createSubAgents",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "fn:src/core/context.ts:getToolsForRole",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "fn:src/core/context.ts:getScopeForRole",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "fn:src/core/context.ts:resolveRelevantFiles",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "fn:src/core/context.ts:loadMemory",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "fn:src/core/context.ts:loadConfig",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "iface:src/core/context.ts:TaskInput",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "iface:src/core/context.ts:ExecutionContext",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "iface:src/core/context.ts:SubAgent",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "type:src/core/context.ts:TaskClassification",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "export:src/core/context.ts:TaskInput",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "export:src/core/context.ts:TaskClassification",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "export:src/core/context.ts:ExecutionContext",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "export:src/core/context.ts:SubAgent",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "export:src/core/context.ts:buildContext",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "file:src/utils/paths.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/context.ts",
+      "target": "file:src/utils/fs.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/detect-packs.ts",
+      "target": "mod:src/core",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/detect-packs.ts",
+      "target": "fn:src/core/detect-packs.ts:detectPacks",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/detect-packs.ts",
+      "target": "iface:src/core/detect-packs.ts:PackageJson",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/detect-packs.ts",
+      "target": "export:src/core/detect-packs.ts:detectPacks",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/detect-packs.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/detect-packs.ts",
+      "target": "file:src/utils/fs.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/detect-packs.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "mod:src/core",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "fn:src/core/graph-engine.ts:buildKnowledgeGraph",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "fn:src/core/graph-engine.ts:addNode",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "fn:src/core/graph-engine.ts:addEdge",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "fn:src/core/graph-engine.ts:louvainCommunities",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "fn:src/core/graph-engine.ts:resolveImportTarget",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "fn:src/core/graph-engine.ts:segments",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "fn:src/core/graph-engine.ts:baseName",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "fn:src/core/graph-engine.ts:nameSimilarity",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "fn:src/core/graph-engine.ts:generateGraphReport",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "iface:src/core/graph-engine.ts:GraphNode",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "iface:src/core/graph-engine.ts:GraphEdge",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "iface:src/core/graph-engine.ts:GraphCommunity",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "iface:src/core/graph-engine.ts:KnowledgeGraph",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "iface:src/core/graph-engine.ts:FileInfo",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "iface:src/core/graph-engine.ts:ModuleSummary",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "export:src/core/graph-engine.ts:GraphNode",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "export:src/core/graph-engine.ts:GraphEdge",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "export:src/core/graph-engine.ts:GraphCommunity",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "export:src/core/graph-engine.ts:KnowledgeGraph",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "export:src/core/graph-engine.ts:FileInfo",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "export:src/core/graph-engine.ts:ModuleSummary",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "export:src/core/graph-engine.ts:buildKnowledgeGraph",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/graph-engine.ts",
+      "target": "export:src/core/graph-engine.ts:generateGraphReport",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "mod:src/core",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "fn:src/core/merge-results.ts:mergeResults",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "fn:src/core/merge-results.ts:deduplicateFindings",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "fn:src/core/merge-results.ts:deduplicateRisks",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "fn:src/core/merge-results.ts:calculateCombinedConfidence",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "fn:src/core/merge-results.ts:detectContradictions",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "fn:src/core/merge-results.ts:getSharedKeywords",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "fn:src/core/merge-results.ts:determineOverallRisk",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "iface:src/core/merge-results.ts:Finding",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "iface:src/core/merge-results.ts:Risk",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "iface:src/core/merge-results.ts:AgentOutput",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "iface:src/core/merge-results.ts:Contradiction",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "iface:src/core/merge-results.ts:MergedOutput",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "export:src/core/merge-results.ts:Finding",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "export:src/core/merge-results.ts:Risk",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "export:src/core/merge-results.ts:AgentOutput",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "export:src/core/merge-results.ts:Contradiction",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "export:src/core/merge-results.ts:MergedOutput",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "export:src/core/merge-results.ts:mergeResults",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/merge-results.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/power-pack-loader.ts",
+      "target": "mod:src/core",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/power-pack-loader.ts",
+      "target": "fn:src/core/power-pack-loader.ts:loadPowerPacks",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/power-pack-loader.ts",
+      "target": "fn:src/core/power-pack-loader.ts:updateConfigWithPack",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/power-pack-loader.ts",
+      "target": "fn:src/core/power-pack-loader.ts:packs",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/power-pack-loader.ts",
+      "target": "iface:src/core/power-pack-loader.ts:PowerPack",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/power-pack-loader.ts",
+      "target": "iface:src/core/power-pack-loader.ts:PackCheck",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/power-pack-loader.ts",
+      "target": "export:src/core/power-pack-loader.ts:PowerPack",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/power-pack-loader.ts",
+      "target": "export:src/core/power-pack-loader.ts:PackCheck",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/power-pack-loader.ts",
+      "target": "export:src/core/power-pack-loader.ts:loadPowerPacks",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/power-pack-loader.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/power-pack-loader.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/power-pack-loader.ts",
+      "target": "file:src/utils/paths.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/power-pack-loader.ts",
+      "target": "file:src/utils/fs.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "mod:src/core",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "fn:src/core/scaffold.ts:scaffold",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "fn:src/core/scaffold.ts:getDefaultConfig",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "fn:src/core/scaffold.ts:getMinConfig",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "fn:src/core/scaffold.ts:getStartMd",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "fn:src/core/scaffold.ts:getCopilotInstructions",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "fn:src/core/scaffold.ts:getMcpConfig",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "fn:src/core/scaffold.ts:writeAgentFiles",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "fn:src/core/scaffold.ts:writeRolePacks",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "fn:src/core/scaffold.ts:writeSkillFiles",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "fn:src/core/scaffold.ts:writeMemoryFiles",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "fn:src/core/scaffold.ts:writeTaskSchemas",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "fn:src/core/scaffold.ts:writeScripts",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "fn:src/core/scaffold.ts:scanDirectory",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "iface:src/core/scaffold.ts:ScaffoldOptions",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "iface:src/core/scaffold.ts:FileEntry",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "iface:src/core/scaffold.ts:Finding",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "iface:src/core/scaffold.ts:Risk",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "iface:src/core/scaffold.ts:Contradiction",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "export:src/core/scaffold.ts:ScaffoldOptions",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "export:src/core/scaffold.ts:scaffold",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "file:src/utils/fs.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "pkg:fs",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "pkg:fs",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "pkg:fs",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "pkg:fs",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/scaffold.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "mod:src/core",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "fn:src/core/security-engine.ts:evaluateSecurity",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "fn:src/core/security-engine.ts:maxTelepathy",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "fn:src/core/security-engine.ts:extractSecurityConfig",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "fn:src/core/security-engine.ts:matchesProtectedPath",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "iface:src/core/security-engine.ts:SecurityEvaluation",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "iface:src/core/security-engine.ts:SecurityConfig",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "iface:src/core/security-engine.ts:TaskLike",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "iface:src/core/security-engine.ts:ContextLike",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "type:src/core/security-engine.ts:SecurityRisk",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "type:src/core/security-engine.ts:TelepathyLevel",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "type:src/core/security-engine.ts:ExecutionMode",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "export:src/core/security-engine.ts:SecurityRisk",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "export:src/core/security-engine.ts:TelepathyLevel",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "export:src/core/security-engine.ts:ExecutionMode",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "export:src/core/security-engine.ts:SecurityEvaluation",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "export:src/core/security-engine.ts:SecurityConfig",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "export:src/core/security-engine.ts:evaluateSecurity",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/core/security-engine.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/server.ts",
+      "target": "mod:src/mcp",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/server.ts",
+      "target": "fn:src/mcp/server.ts:handleToolCall",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/server.ts",
+      "target": "fn:src/mcp/server.ts:startMCPServer",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/server.ts",
+      "target": "iface:src/mcp/server.ts:MCPToolCall",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/server.ts",
+      "target": "iface:src/mcp/server.ts:MCPToolResult",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/server.ts",
+      "target": "export:src/mcp/server.ts:MCPToolCall",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/server.ts",
+      "target": "export:src/mcp/server.ts:MCPToolResult",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/server.ts",
+      "target": "export:src/mcp/server.ts:startMCPServer",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/server.ts",
+      "target": "pkg:http",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/server.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/server.ts",
+      "target": "file:src/mcp/tools/plan-task.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/server.ts",
+      "target": "file:src/mcp/tools/load-context.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/server.ts",
+      "target": "file:src/mcp/tools/merge-results.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/server.ts",
+      "target": "file:src/mcp/tools/security-check.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/load-context.ts",
+      "target": "mod:src/mcp/tools",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/load-context.ts",
+      "target": "fn:src/mcp/tools/load-context.ts:handleLoadContext",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/load-context.ts",
+      "target": "fn:src/mcp/tools/load-context.ts:projectRoot",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/load-context.ts",
+      "target": "export:src/mcp/tools/load-context.ts:handleLoadContext",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/load-context.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/load-context.ts",
+      "target": "file:src/mcp/server.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/load-context.ts",
+      "target": "file:src/utils/task-parser.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/load-context.ts",
+      "target": "file:src/core/context.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/load-context.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/merge-results.ts",
+      "target": "mod:src/mcp/tools",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/merge-results.ts",
+      "target": "fn:src/mcp/tools/merge-results.ts:handleMergeResults",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/merge-results.ts",
+      "target": "export:src/mcp/tools/merge-results.ts:handleMergeResults",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/merge-results.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/merge-results.ts",
+      "target": "file:src/mcp/server.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/merge-results.ts",
+      "target": "file:src/utils/fs.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/merge-results.ts",
+      "target": "file:src/core/merge-results.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/merge-results.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/plan-task.ts",
+      "target": "mod:src/mcp/tools",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/plan-task.ts",
+      "target": "fn:src/mcp/tools/plan-task.ts:handlePlanTask",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/plan-task.ts",
+      "target": "fn:src/mcp/tools/plan-task.ts:projectRoot",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/plan-task.ts",
+      "target": "export:src/mcp/tools/plan-task.ts:handlePlanTask",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/plan-task.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/plan-task.ts",
+      "target": "file:src/mcp/server.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/plan-task.ts",
+      "target": "file:src/utils/task-parser.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/plan-task.ts",
+      "target": "file:src/core/context.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/plan-task.ts",
+      "target": "file:src/core/security-engine.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/plan-task.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/security-check.ts",
+      "target": "mod:src/mcp/tools",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/security-check.ts",
+      "target": "fn:src/mcp/tools/security-check.ts:handleSecurityCheck",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/security-check.ts",
+      "target": "fn:src/mcp/tools/security-check.ts:projectRoot",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/security-check.ts",
+      "target": "export:src/mcp/tools/security-check.ts:handleSecurityCheck",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/security-check.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/security-check.ts",
+      "target": "file:src/mcp/server.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/security-check.ts",
+      "target": "file:src/utils/task-parser.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/security-check.ts",
+      "target": "file:src/core/context.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/security-check.ts",
+      "target": "file:src/core/security-engine.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/mcp/tools/security-check.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/copilot-cloud.ts",
+      "target": "mod:src/runners",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/copilot-cloud.ts",
+      "target": "class:src/runners/copilot-cloud.ts:CopilotCloudRunner",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/copilot-cloud.ts",
+      "target": "fn:src/runners/copilot-cloud.ts:data",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/copilot-cloud.ts",
+      "target": "export:src/runners/copilot-cloud.ts:CopilotCloudRunner",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/copilot-cloud.ts",
+      "target": "file:src/runners/types.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/copilot-cloud.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/copilot-local.ts",
+      "target": "mod:src/runners",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/copilot-local.ts",
+      "target": "class:src/runners/copilot-local.ts:CopilotLocalRunner",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/copilot-local.ts",
+      "target": "export:src/runners/copilot-local.ts:CopilotLocalRunner",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/copilot-local.ts",
+      "target": "file:src/runners/types.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/copilot-local.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/openai.ts",
+      "target": "mod:src/runners",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/openai.ts",
+      "target": "class:src/runners/openai.ts:OpenAIRunner",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/openai.ts",
+      "target": "export:src/runners/openai.ts:OpenAIRunner",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/openai.ts",
+      "target": "pkg:openai",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/openai.ts",
+      "target": "file:src/runners/types.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/openai.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/types.ts",
+      "target": "mod:src/runners",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/types.ts",
+      "target": "fn:src/runners/types.ts:createRunner",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/types.ts",
+      "target": "iface:src/runners/types.ts:RunnerInput",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/types.ts",
+      "target": "iface:src/runners/types.ts:RunnerOutput",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/types.ts",
+      "target": "iface:src/runners/types.ts:Runner",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/types.ts",
+      "target": "type:src/runners/types.ts:RunnerType",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/types.ts",
+      "target": "export:src/runners/types.ts:RunnerType",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/types.ts",
+      "target": "export:src/runners/types.ts:RunnerInput",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/types.ts",
+      "target": "export:src/runners/types.ts:RunnerOutput",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/types.ts",
+      "target": "export:src/runners/types.ts:Runner",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/types.ts",
+      "target": "export:src/runners/types.ts:createRunner",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/types.ts",
+      "target": "file:src/core/context.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/types.ts",
+      "target": "file:src/core/security-engine.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/types.ts",
+      "target": "file:src/runners/openai.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/types.ts",
+      "target": "file:src/runners/copilot-local.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/runners/types.ts",
+      "target": "file:src/runners/copilot-cloud.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/base/.github/agents/magneto-backend.agent.md",
+      "target": "mod:src/templates/base/.github/agents",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/base/.github/agents/magneto-orchestrator.agent.md",
+      "target": "mod:src/templates/base/.github/agents",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/base/.github/agents/magneto-requirements.agent.md",
+      "target": "mod:src/templates/base/.github/agents",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/base/.github/agents/magneto-tester.agent.md",
+      "target": "mod:src/templates/base/.github/agents",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/base/.github/copilot-instructions.md",
+      "target": "mod:src/templates/base/.github",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/graph-viewer.html",
+      "target": "mod:src/templates",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/power-packs/adapters/graphify/adapter.json",
+      "target": "mod:src/templates/power-packs/adapters/graphify",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/power-packs/adapters/graphify/rules.md",
+      "target": "mod:src/templates/power-packs/adapters/graphify",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/power-packs/adapters/openclaw/adapter.json",
+      "target": "mod:src/templates/power-packs/adapters/openclaw",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/power-packs/adapters/openclaw/magneto.SKILL.md",
+      "target": "mod:src/templates/power-packs/adapters/openclaw",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/power-packs/clouds/azure/pack.json",
+      "target": "mod:src/templates/power-packs/clouds/azure",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/power-packs/clouds/azure/rules.md",
+      "target": "mod:src/templates/power-packs/clouds/azure",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/power-packs/frameworks/nextjs/pack.json",
+      "target": "mod:src/templates/power-packs/frameworks/nextjs",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/power-packs/frameworks/nextjs/rules.md",
+      "target": "mod:src/templates/power-packs/frameworks/nextjs",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/power-packs/integrations/openclaw/pack.json",
+      "target": "mod:src/templates/power-packs/integrations/openclaw",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/power-packs/integrations/openclaw/rules.md",
+      "target": "mod:src/templates/power-packs/integrations/openclaw",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/power-packs/languages/typescript/pack.json",
+      "target": "mod:src/templates/power-packs/languages/typescript",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/power-packs/languages/typescript/rules.md",
+      "target": "mod:src/templates/power-packs/languages/typescript",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/power-packs/project-types/ai-platform/pack.json",
+      "target": "mod:src/templates/power-packs/project-types/ai-platform",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/templates/power-packs/project-types/ai-platform/rules.md",
+      "target": "mod:src/templates/power-packs/project-types/ai-platform",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "mod:src/utils",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "fn:src/utils/fs.ts:ensureDir",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "fn:src/utils/fs.ts:writeJson",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "fn:src/utils/fs.ts:readJson",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "fn:src/utils/fs.ts:writeText",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "fn:src/utils/fs.ts:readText",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "fn:src/utils/fs.ts:fileExists",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "fn:src/utils/fs.ts:copyDir",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "fn:src/utils/fs.ts:listFiles",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "fn:src/utils/fs.ts:walk",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "export:src/utils/fs.ts:ensureDir",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "export:src/utils/fs.ts:writeJson",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "export:src/utils/fs.ts:readJson",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "export:src/utils/fs.ts:writeText",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "export:src/utils/fs.ts:readText",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "export:src/utils/fs.ts:fileExists",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "export:src/utils/fs.ts:copyDir",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "export:src/utils/fs.ts:listFiles",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "pkg:fs",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/fs.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/logger.ts",
+      "target": "mod:src/utils",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/logger.ts",
+      "target": "fn:src/utils/logger.ts:setLogLevel",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/logger.ts",
+      "target": "fn:src/utils/logger.ts:getLogLevel",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/logger.ts",
+      "target": "export:src/utils/logger.ts:LogLevel",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/logger.ts",
+      "target": "export:src/utils/logger.ts:setLogLevel",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/logger.ts",
+      "target": "export:src/utils/logger.ts:getLogLevel",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/logger.ts",
+      "target": "export:src/utils/logger.ts:logger",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/logger.ts",
+      "target": "pkg:chalk",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "mod:src/utils",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "fn:src/utils/paths.ts:resolveProjectRoot",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "fn:src/utils/paths.ts:magnetoPath",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "fn:src/utils/paths.ts:githubPath",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "fn:src/utils/paths.ts:vscodePath",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "fn:src/utils/paths.ts:getTemplatesDir",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "fn:src/utils/paths.ts:isMagnetoProject",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "export:src/utils/paths.ts:MAGNETO_DIR",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "export:src/utils/paths.ts:GITHUB_DIR",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "export:src/utils/paths.ts:VSCODE_DIR",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "export:src/utils/paths.ts:AGENTS_DIR",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "export:src/utils/paths.ts:COPILOT_INSTRUCTIONS",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "export:src/utils/paths.ts:MAGNETO_CONFIG",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "export:src/utils/paths.ts:MAGNETO_MIN_CONFIG",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "export:src/utils/paths.ts:MAGNETO_START",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "export:src/utils/paths.ts:MAGNETO_SUBDIRS",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "export:src/utils/paths.ts:resolveProjectRoot",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "export:src/utils/paths.ts:magnetoPath",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "export:src/utils/paths.ts:githubPath",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "export:src/utils/paths.ts:vscodePath",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "export:src/utils/paths.ts:getTemplatesDir",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "export:src/utils/paths.ts:isMagnetoProject",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/paths.ts",
+      "target": "pkg:fs",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/task-parser.ts",
+      "target": "mod:src/utils",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/task-parser.ts",
+      "target": "fn:src/utils/task-parser.ts:parseTaskFile",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/task-parser.ts",
+      "target": "fn:src/utils/task-parser.ts:parseMarkdownTask",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/task-parser.ts",
+      "target": "fn:src/utils/task-parser.ts:parseYaml",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/task-parser.ts",
+      "target": "fn:src/utils/task-parser.ts:extractFirstHeading",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/task-parser.ts",
+      "target": "export:src/utils/task-parser.ts:parseTaskFile",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/task-parser.ts",
+      "target": "pkg:fs",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/task-parser.ts",
+      "target": "pkg:path",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/task-parser.ts",
+      "target": "file:src/core/context.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:src/utils/task-parser.ts",
+      "target": "file:src/utils/logger.ts",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    }
+  ],
+  "communities": [
+    {
+      "id": 0,
+      "nodeCount": 3,
+      "godNodes": [
+        "src/cli.ts"
+      ],
+      "topNodes": [
+        "src/cli.ts",
+        "src",
+        "commander"
+      ]
+    },
+    {
+      "id": 1,
+      "nodeCount": 4,
+      "godNodes": [
+        "src/commands"
+      ],
+      "topNodes": [
+        "src/commands",
+        "src/commands/refresh.ts",
+        "refreshCommand",
+        "refreshCommand"
+      ]
+    },
+    {
+      "id": 2,
+      "nodeCount": 5,
+      "godNodes": [
+        "src/core"
+      ],
+      "topNodes": [
+        "src/core",
+        "src/core/detect-packs.ts",
+        "detectPacks",
+        "PackageJson",
+        "detectPacks"
+      ]
+    },
+    {
+      "id": 3,
+      "nodeCount": 41,
+      "godNodes": [
+        "src/utils/logger.ts",
+        "src/mcp/server.ts",
+        "src/utils/task-parser.ts",
+        "src/mcp/tools/plan-task.ts",
+        "src/mcp/tools/security-check.ts"
+      ],
+      "topNodes": [
+        "src/utils/logger.ts",
+        "src/mcp/server.ts",
+        "src/utils/task-parser.ts",
+        "src/mcp/tools/plan-task.ts",
+        "src/mcp/tools/security-check.ts"
+      ]
+    },
+    {
+      "id": 4,
+      "nodeCount": 23,
+      "godNodes": [
+        "src/runners/types.ts",
+        "src/runners/copilot-cloud.ts",
+        "src/runners/openai.ts"
+      ],
+      "topNodes": [
+        "src/runners/types.ts",
+        "src/runners/copilot-cloud.ts",
+        "src/runners/openai.ts",
+        "src/runners/copilot-local.ts",
+        "src/runners"
+      ]
+    },
+    {
+      "id": 5,
+      "nodeCount": 2,
+      "godNodes": [
+        "src/templates"
+      ],
+      "topNodes": [
+        "src/templates",
+        "src/templates/graph-viewer.html"
+      ]
+    },
+    {
+      "id": 6,
+      "nodeCount": 2,
+      "godNodes": [
+        "src/templates/base/.github"
+      ],
+      "topNodes": [
+        "src/templates/base/.github",
+        "src/templates/base/.github/copilot-instructions.md"
+      ]
+    },
+    {
+      "id": 7,
+      "nodeCount": 5,
+      "godNodes": [
+        "src/templates/base/.github/agents"
+      ],
+      "topNodes": [
+        "src/templates/base/.github/agents",
+        "src/templates/base/.github/agents/magneto-backend.agent.md",
+        "src/templates/base/.github/agents/magneto-orchestrator.agent.md",
+        "src/templates/base/.github/agents/magneto-requirements.agent.md",
+        "src/templates/base/.github/agents/magneto-tester.agent.md"
+      ]
+    },
+    {
+      "id": 8,
+      "nodeCount": 3,
+      "godNodes": [
+        "src/templates/power-packs/adapters/graphify"
+      ],
+      "topNodes": [
+        "src/templates/power-packs/adapters/graphify",
+        "src/templates/power-packs/adapters/graphify/adapter.json",
+        "src/templates/power-packs/adapters/graphify/rules.md"
+      ]
+    },
+    {
+      "id": 9,
+      "nodeCount": 3,
+      "godNodes": [
+        "src/templates/power-packs/adapters/openclaw"
+      ],
+      "topNodes": [
+        "src/templates/power-packs/adapters/openclaw",
+        "src/templates/power-packs/adapters/openclaw/adapter.json",
+        "src/templates/power-packs/adapters/openclaw/magneto.SKILL.md"
+      ]
+    },
+    {
+      "id": 10,
+      "nodeCount": 3,
+      "godNodes": [
+        "src/templates/power-packs/clouds/azure"
+      ],
+      "topNodes": [
+        "src/templates/power-packs/clouds/azure",
+        "src/templates/power-packs/clouds/azure/pack.json",
+        "src/templates/power-packs/clouds/azure/rules.md"
+      ]
+    },
+    {
+      "id": 11,
+      "nodeCount": 3,
+      "godNodes": [
+        "src/templates/power-packs/frameworks/nextjs"
+      ],
+      "topNodes": [
+        "src/templates/power-packs/frameworks/nextjs",
+        "src/templates/power-packs/frameworks/nextjs/pack.json",
+        "src/templates/power-packs/frameworks/nextjs/rules.md"
+      ]
+    },
+    {
+      "id": 12,
+      "nodeCount": 3,
+      "godNodes": [
+        "src/templates/power-packs/integrations/openclaw"
+      ],
+      "topNodes": [
+        "src/templates/power-packs/integrations/openclaw",
+        "src/templates/power-packs/integrations/openclaw/pack.json",
+        "src/templates/power-packs/integrations/openclaw/rules.md"
+      ]
+    },
+    {
+      "id": 13,
+      "nodeCount": 3,
+      "godNodes": [
+        "src/templates/power-packs/languages/typescript"
+      ],
+      "topNodes": [
+        "src/templates/power-packs/languages/typescript",
+        "src/templates/power-packs/languages/typescript/pack.json",
+        "src/templates/power-packs/languages/typescript/rules.md"
+      ]
+    },
+    {
+      "id": 14,
+      "nodeCount": 3,
+      "godNodes": [
+        "src/templates/power-packs/project-types/ai-platform"
+      ],
+      "topNodes": [
+        "src/templates/power-packs/project-types/ai-platform",
+        "src/templates/power-packs/project-types/ai-platform/pack.json",
+        "src/templates/power-packs/project-types/ai-platform/rules.md"
+      ]
+    },
+    {
+      "id": 15,
+      "nodeCount": 22,
+      "godNodes": [
+        "src/commands/analyze.ts",
+        "analyzeCommand",
+        "scanFiles"
+      ],
+      "topNodes": [
+        "src/commands/analyze.ts",
+        "analyzeCommand",
+        "scanFiles",
+        "parseFile",
+        "parseJavaScriptLike"
+      ]
+    },
+    {
+      "id": 16,
+      "nodeCount": 41,
+      "godNodes": [
+        "src/core/scaffold.ts",
+        "path",
+        "src/core/adapter-loader.ts",
+        "src/commands/init.ts",
+        "fs"
+      ],
+      "topNodes": [
+        "src/core/scaffold.ts",
+        "path",
+        "src/core/adapter-loader.ts",
+        "src/commands/init.ts",
+        "fs"
+      ]
+    },
+    {
+      "id": 17,
+      "nodeCount": 6,
+      "godNodes": [
+        "src/commands/doctor.ts"
+      ],
+      "topNodes": [
+        "src/commands/doctor.ts",
+        "doctorCommand",
+        "checkPath",
+        "checkPathOptional",
+        "DiagnosticResult"
+      ]
+    },
+    {
+      "id": 18,
+      "nodeCount": 12,
+      "godNodes": [
+        "src/commands/generate.ts",
+        "generateCommand"
+      ],
+      "topNodes": [
+        "src/commands/generate.ts",
+        "generateCommand",
+        "buildPrompt",
+        "loadRolePacks",
+        "loadScopedFiles"
+      ]
+    },
+    {
+      "id": 19,
+      "nodeCount": 6,
+      "godNodes": [
+        "src/commands/merge.ts"
+      ],
+      "topNodes": [
+        "src/commands/merge.ts",
+        "mergeCommand",
+        "renderMarkdown",
+        "MergeOptions",
+        "MergeOptions"
+      ]
+    },
+    {
+      "id": 20,
+      "nodeCount": 12,
+      "godNodes": [
+        "src/commands/plan.ts",
+        "planCommand"
+      ],
+      "topNodes": [
+        "src/commands/plan.ts",
+        "planCommand",
+        "generateSteps",
+        "PlanOptions",
+        "Task"
+      ]
+    },
+    {
+      "id": 21,
+      "nodeCount": 12,
+      "godNodes": [
+        "src/commands/query.ts",
+        "queryCommand"
+      ],
+      "topNodes": [
+        "src/commands/query.ts",
+        "queryCommand",
+        "pathCommand",
+        "findNode",
+        "traverseBFS"
+      ]
+    },
+    {
+      "id": 22,
+      "nodeCount": 5,
+      "godNodes": [
+        "src/commands/run.ts"
+      ],
+      "topNodes": [
+        "src/commands/run.ts",
+        "runCommand",
+        "RunOptions",
+        "RunOptions",
+        "runCommand"
+      ]
+    },
+    {
+      "id": 23,
+      "nodeCount": 19,
+      "godNodes": [
+        "src/core/context.ts",
+        "buildContext"
+      ],
+      "topNodes": [
+        "src/core/context.ts",
+        "buildContext",
+        "classifyTask",
+        "chooseRoles",
+        "createSubAgents"
+      ]
+    },
+    {
+      "id": 24,
+      "nodeCount": 24,
+      "godNodes": [
+        "src/core/graph-engine.ts",
+        "buildKnowledgeGraph",
+        "addNode"
+      ],
+      "topNodes": [
+        "src/core/graph-engine.ts",
+        "buildKnowledgeGraph",
+        "addNode",
+        "addEdge",
+        "louvainCommunities"
+      ]
+    },
+    {
+      "id": 25,
+      "nodeCount": 19,
+      "godNodes": [
+        "src/core/merge-results.ts",
+        "mergeResults"
+      ],
+      "topNodes": [
+        "src/core/merge-results.ts",
+        "mergeResults",
+        "deduplicateFindings",
+        "deduplicateRisks",
+        "calculateCombinedConfidence"
+      ]
+    },
+    {
+      "id": 26,
+      "nodeCount": 9,
+      "godNodes": [
+        "src/core/power-pack-loader.ts"
+      ],
+      "topNodes": [
+        "src/core/power-pack-loader.ts",
+        "loadPowerPacks",
+        "updateConfigWithPack",
+        "packs",
+        "PowerPack"
+      ]
+    },
+    {
+      "id": 27,
+      "nodeCount": 18,
+      "godNodes": [
+        "src/core/security-engine.ts",
+        "evaluateSecurity"
+      ],
+      "topNodes": [
+        "src/core/security-engine.ts",
+        "evaluateSecurity",
+        "maxTelepathy",
+        "extractSecurityConfig",
+        "matchesProtectedPath"
+      ]
+    },
+    {
+      "id": 28,
+      "nodeCount": 18,
+      "godNodes": [
+        "src/utils/fs.ts",
+        "ensureDir"
+      ],
+      "topNodes": [
+        "src/utils/fs.ts",
+        "ensureDir",
+        "writeJson",
+        "readJson",
+        "writeText"
+      ]
+    },
+    {
+      "id": 29,
+      "nodeCount": 22,
+      "godNodes": [
+        "src/utils/paths.ts",
+        "resolveProjectRoot",
+        "magnetoPath"
+      ],
+      "topNodes": [
+        "src/utils/paths.ts",
+        "resolveProjectRoot",
+        "magnetoPath",
+        "githubPath",
+        "vscodePath"
+      ]
+    }
+  ],
+  "metadata": {
+    "generatedAt": "2026-04-19T04:11:37.906Z",
+    "generator": "magneto-ai",
+    "totalNodes": 351,
+    "totalEdges": 471,
+    "totalCommunities": 30,
+    "godNodes": [
+      "src/cli.ts",
+      "src/commands",
+      "src/core",
+      "src/utils/logger.ts",
+      "src/mcp/server.ts",
+      "src/utils/task-parser.ts",
+      "src/mcp/tools/plan-task.ts",
+      "src/mcp/tools/security-check.ts",
+      "src/runners/types.ts",
+      "src/runners/copilot-cloud.ts",
+      "src/runners/openai.ts",
+      "src/templates",
+      "src/templates/base/.github",
+      "src/templates/base/.github/agents",
+      "src/templates/power-packs/adapters/graphify",
+      "src/templates/power-packs/adapters/openclaw",
+      "src/templates/power-packs/clouds/azure",
+      "src/templates/power-packs/frameworks/nextjs",
+      "src/templates/power-packs/integrations/openclaw",
+      "src/templates/power-packs/languages/typescript",
+      "src/templates/power-packs/project-types/ai-platform",
+      "src/commands/analyze.ts",
+      "analyzeCommand",
+      "scanFiles",
+      "src/core/scaffold.ts",
+      "path",
+      "src/core/adapter-loader.ts",
+      "src/commands/init.ts",
+      "fs",
+      "src/commands/doctor.ts",
+      "src/commands/generate.ts",
+      "generateCommand",
+      "src/commands/merge.ts",
+      "src/commands/plan.ts",
+      "planCommand",
+      "src/commands/query.ts",
+      "queryCommand",
+      "src/commands/run.ts",
+      "src/core/context.ts",
+      "buildContext",
+      "src/core/graph-engine.ts",
+      "buildKnowledgeGraph",
+      "addNode",
+      "src/core/merge-results.ts",
+      "mergeResults",
+      "src/core/power-pack-loader.ts",
+      "src/core/security-engine.ts",
+      "evaluateSecurity",
+      "src/utils/fs.ts",
+      "ensureDir",
+      "src/utils/paths.ts",
+      "resolveProjectRoot",
+      "magnetoPath"
+    ]
+  }
+}

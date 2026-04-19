@@ -1,8 +1,8 @@
 # Module: src/commands
 
-- **Files:** 8
-- **Total lines:** 1,502
-- **Total size:** 47.5 KB
+- **Files:** 9
+- **Total lines:** 1,921
+- **Total size:** 62.1 KB
 
 ## Exports
 
@@ -20,6 +20,9 @@
 - `ExecutionPlan`
 - `PlanStep`
 - `planCommand`
+- `QueryOptions`
+- `queryCommand`
+- `pathCommand`
 - `refreshCommand`
 - `RunOptions`
 - `runCommand`
@@ -29,6 +32,7 @@
 ### External
 - `path`
 - `fs`
+- `child_process`
 
 ### Internal
 - `../utils/logger`
@@ -36,10 +40,12 @@
 - `../utils/fs`
 - `../core/context`
 - `../core/security-engine`
+- `../utils/task-parser`
 - `../core/scaffold`
 - `../core/power-pack-loader`
 - `../core/adapter-loader`
 - `../core/merge-results`
+- `../core/graph-engine`
 - `../core/detect-packs`
 - `../runners/types`
 
@@ -48,15 +54,15 @@
 ### `analyze.ts`
 
 - **Path:** `src/commands/analyze.ts`
-- **Lines:** 671 | **Size:** 21.2 KB
+- **Lines:** 792 | **Size:** 26.1 KB
 - **Interfaces:** `AnalyzeOptions`, `FileInfo`, `ModuleSummary`
-- **Functions:** `analyzeCommand`, `scanFiles`, `parseFile`, `parseJavaScriptLike`, `parseJavaLike`, `parsePython`, `parseGo`, `groupByModule`, `renderModuleSummary`, `buildDependencyMap`, `buildFileIndex`, `buildRootSummary`, `formatBytes`
+- **Functions:** `analyzeCommand`, `scanFiles`, `parseFile`, `parseJavaScriptLike`, `parseJavaLike`, `parsePython`, `parseGo`, `groupByModule`, `renderModuleSummary`, `buildDependencyMap`, `buildFileIndex`, `buildRootSummary`, `formatBytes`, `writeGraphHtml`, `runGraphifyDeep`
 - **Exports:** `AnalyzeOptions`, `analyzeCommand`
 
 ### `doctor.ts`
 
 - **Path:** `src/commands/doctor.ts`
-- **Lines:** 82 | **Size:** 2.9 KB
+- **Lines:** 85 | **Size:** 3.1 KB
 - **Interfaces:** `DiagnosticResult`
 - **Functions:** `doctorCommand`, `checkPath`, `checkPathOptional`
 - **Exports:** `doctorCommand`
@@ -64,7 +70,7 @@
 ### `generate.ts`
 
 - **Path:** `src/commands/generate.ts`
-- **Lines:** 357 | **Size:** 12.4 KB
+- **Lines:** 374 | **Size:** 12.8 KB
 - **Interfaces:** `GenerateOptions`
 - **Functions:** `generateCommand`, `buildPrompt`, `loadRolePacks`, `loadScopedFiles`, `loadMemoryContext`, `getRoleDescription`, `getTaskInstructions`, `estimateTokens`
 - **Exports:** `GenerateOptions`, `generateCommand`
@@ -88,10 +94,18 @@
 ### `plan.ts`
 
 - **Path:** `src/commands/plan.ts`
-- **Lines:** 142 | **Size:** 3.6 KB
+- **Lines:** 143 | **Size:** 3.6 KB
 - **Interfaces:** `PlanOptions`, `Task`, `ExecutionPlan`, `PlanStep`
 - **Functions:** `planCommand`, `generateSteps`
 - **Exports:** `PlanOptions`, `Task`, `ExecutionPlan`, `PlanStep`, `planCommand`
+
+### `query.ts`
+
+- **Path:** `src/commands/query.ts`
+- **Lines:** 276 | **Size:** 9.0 KB
+- **Interfaces:** `QueryOptions`
+- **Functions:** `queryCommand`, `pathCommand`, `findNode`, `traverseBFS`, `traverseDFS`, `dfs`, `estimateEdgeTokens`
+- **Exports:** `QueryOptions`, `queryCommand`, `pathCommand`
 
 ### `refresh.ts`
 
@@ -103,7 +117,7 @@
 ### `run.ts`
 
 - **Path:** `src/commands/run.ts`
-- **Lines:** 86 | **Size:** 2.5 KB
+- **Lines:** 87 | **Size:** 2.6 KB
 - **Interfaces:** `RunOptions`
 - **Functions:** `runCommand`
 - **Exports:** `RunOptions`, `runCommand`

@@ -1,8 +1,8 @@
 # Module: src/core
 
-- **Files:** 7
-- **Total lines:** 1,860
-- **Total size:** 54.4 KB
+- **Files:** 8
+- **Total lines:** 2,606
+- **Total size:** 76.3 KB
 
 ## Exports
 
@@ -16,6 +16,14 @@
 - `SubAgent`
 - `buildContext`
 - `detectPacks`
+- `GraphNode`
+- `GraphEdge`
+- `GraphCommunity`
+- `KnowledgeGraph`
+- `FileInfo`
+- `ModuleSummary`
+- `buildKnowledgeGraph`
+- `generateGraphReport`
 - `Finding`
 - `Risk`
 - `AgentOutput`
@@ -37,8 +45,8 @@
 ## Dependencies
 
 ### External
-- `path`
 - `fs`
+- `path`
 
 ### Internal
 - `../utils/logger`
@@ -50,9 +58,9 @@
 ### `adapter-loader.ts`
 
 - **Path:** `src/core/adapter-loader.ts`
-- **Lines:** 81 | **Size:** 2.4 KB
+- **Lines:** 114 | **Size:** 3.7 KB
 - **Interfaces:** `Adapter`, `GraphifyAdapter`
-- **Functions:** `loadAdapters`, `loadGraphifyData`, `mapGraphToMemory`, `updateConfigWithAdapter`, `adapters`
+- **Functions:** `loadAdapters`, `wireOpenClawAdapter`, `loadGraphifyData`, `mapGraphToMemory`, `updateConfigWithAdapter`, `adapters`
 - **Exports:** `Adapter`, `GraphifyAdapter`, `loadAdapters`, `loadGraphifyData`
 
 ### `context.ts`
@@ -67,10 +75,18 @@
 ### `detect-packs.ts`
 
 - **Path:** `src/core/detect-packs.ts`
-- **Lines:** 64 | **Size:** 1.7 KB
+- **Lines:** 69 | **Size:** 1.9 KB
 - **Interfaces:** `PackageJson`
 - **Functions:** `detectPacks`
 - **Exports:** `detectPacks`
+
+### `graph-engine.ts`
+
+- **Path:** `src/core/graph-engine.ts`
+- **Lines:** 629 | **Size:** 17.9 KB
+- **Interfaces:** `GraphNode`, `GraphEdge`, `GraphCommunity`, `KnowledgeGraph`, `FileInfo`, `ModuleSummary`
+- **Functions:** `buildKnowledgeGraph`, `addNode`, `addEdge`, `louvainCommunities`, `resolveImportTarget`, `segments`, `baseName`, `nameSimilarity`, `generateGraphReport`
+- **Exports:** `GraphNode`, `GraphEdge`, `GraphCommunity`, `KnowledgeGraph`, `FileInfo`, `ModuleSummary`, `buildKnowledgeGraph`, `generateGraphReport`
 
 ### `merge-results.ts`
 
@@ -91,7 +107,7 @@
 ### `scaffold.ts`
 
 - **Path:** `src/core/scaffold.ts`
-- **Lines:** 987 | **Size:** 29.3 KB
+- **Lines:** 1066 | **Size:** 31.8 KB
 - **Interfaces:** `ScaffoldOptions`, `FileEntry`, `Finding`, `Risk`, `Contradiction`
 - **Functions:** `scaffold`, `getDefaultConfig`, `getMinConfig`, `getStartMd`, `getCopilotInstructions`, `getMcpConfig`, `writeAgentFiles`, `writeRolePacks`, `writeSkillFiles`, `writeMemoryFiles`, `writeTaskSchemas`, `writeScripts`, `scanDirectory`
 - **Exports:** `ScaffoldOptions`, `scaffold`

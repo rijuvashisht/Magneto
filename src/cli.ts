@@ -10,6 +10,7 @@ import { runCommand } from './commands/run';
 import { mergeCommand } from './commands/merge';
 import { generateCommand } from './commands/generate';
 import { analyzeCommand } from './commands/analyze';
+import { queryCommand, pathCommand } from './commands/query';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../package.json') as { version: string };
@@ -157,25 +158,61 @@ Examples:
 
 program
   .command('analyze')
-  .description('Analyze the codebase and build structured memory. Extracts exports, imports, classes, functions, and dependencies into .magneto/memory/ for faster, cheaper AI prompts.')
+  .description('Analyze the codebase, build structured memory, and generate a knowledge graph with community detection and interactive visualization.')
   .option('--depth <n>', 'Max directory depth to scan', '5')
   .option('--include <dirs...>', 'Only analyze these directories')
   .option('--exclude <dirs...>', 'Exclude additional directories')
+  .option('--deep', 'Shell to graphify for multimodal extraction (PDFs, images, video). Requires: pip install graphifyy')
+  .option('--no-viz', 'Skip interactive HTML visualization')
   .addHelpText('after', `
 Examples:
   $ magneto analyze
   $ magneto analyze --depth 3
   $ magneto analyze --include src lib
   $ magneto analyze --exclude tests fixtures
+  $ magneto analyze --deep             # multimodal via graphify
+  $ magneto analyze --no-viz           # skip HTML, just JSON + report
 
 Outputs:
   .magneto/memory/root-summary.md       Project overview + token savings
   .magneto/memory/file-index.md         All files with signatures
   .magneto/memory/dependencies.md       Import/dependency map
   .magneto/memory/modules/*.md          Per-directory summaries
+  .magneto/memory/graph.json            Knowledge graph (queryable)
+  .magneto/memory/graph-report.md       God nodes, communities, suggested questions
+  .magneto/memory/graph.html            Interactive visualization (open in browser)
 `)
   .action(async (options) => {
     await analyzeCommand(options);
+  });
+
+program
+  .command('query <text>')
+  .description('Search the knowledge graph. Returns a focused subgraph matching the query with node details and connections.')
+  .option('--graph <path>', 'Path to graph.json (default: .magneto/memory/graph.json)')
+  .option('--budget <n>', 'Max token budget for results (default: 2000)')
+  .option('--dfs', 'Use depth-first search instead of breadth-first')
+  .addHelpText('after', `
+Examples:
+  $ magneto query "auth flow"
+  $ magneto query "what connects auth to payments" --dfs
+  $ magneto query "SecurityEngine" --budget 500
+`)
+  .action(async (text, options) => {
+    await queryCommand(text, options);
+  });
+
+program
+  .command('path <nodeA> <nodeB>')
+  .description('Find the shortest path between two nodes in the knowledge graph.')
+  .option('--graph <path>', 'Path to graph.json (default: .magneto/memory/graph.json)')
+  .addHelpText('after', `
+Examples:
+  $ magneto path "SecurityEngine" "initCommand"
+  $ magneto path "context.ts" "merge-results.ts"
+`)
+  .action(async (nodeA, nodeB, options) => {
+    await pathCommand(nodeA, nodeB, options);
   });
 
 program.parse(process.argv);

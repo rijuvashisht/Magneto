@@ -1,13 +1,22 @@
 import * as path from 'path';
 import * as fs from 'fs';
+import { spawnSync } from 'child_process';
 import { logger } from '../utils/logger';
-import { resolveProjectRoot, isMagnetoProject, magnetoPath } from '../utils/paths';
-import { ensureDir, writeText, fileExists } from '../utils/fs';
+import { resolveProjectRoot, isMagnetoProject, magnetoPath, getTemplatesDir } from '../utils/paths';
+import { ensureDir, writeText, writeJson, fileExists } from '../utils/fs';
+import {
+  buildKnowledgeGraph,
+  generateGraphReport,
+  type FileInfo as GraphFileInfo,
+  type ModuleSummary as GraphModuleSummary,
+} from '../core/graph-engine';
 
 export interface AnalyzeOptions {
   depth?: string;
   include?: string[];
   exclude?: string[];
+  deep?: boolean;
+  viz?: boolean;
 }
 
 interface FileInfo {
@@ -114,6 +123,31 @@ export async function analyzeCommand(options: AnalyzeOptions): Promise<void> {
   const rootSummary = buildRootSummary(projectRoot, modules, parsedFiles);
   writeText(path.join(memoryDir, 'root-summary.md'), rootSummary);
 
+  // ── Knowledge Graph ─────────────────────────────────────────────────────────
+  logger.info('Building knowledge graph...');
+
+  const graph = buildKnowledgeGraph(
+    parsedFiles as unknown as GraphFileInfo[],
+    modules as unknown as GraphModuleSummary[]
+  );
+
+  // Write graph.json
+  writeJson(path.join(memoryDir, 'graph.json'), graph);
+
+  // Write graph report
+  const report = generateGraphReport(graph);
+  writeText(path.join(memoryDir, 'graph-report.md'), report);
+
+  // Write interactive HTML visualization
+  if (options.viz !== false) {
+    writeGraphHtml(memoryDir, graph);
+  }
+
+  // ── Deep mode: shell to graphify ────────────────────────────────────────────
+  if (options.deep) {
+    runGraphifyDeep(projectRoot, memoryDir);
+  }
+
   // Stats
   console.log('');
   logger.success('Analysis complete!\n');
@@ -121,6 +155,10 @@ export async function analyzeCommand(options: AnalyzeOptions): Promise<void> {
   logger.info(`  Total lines:       ${totalLines.toLocaleString()}`);
   logger.info(`  Modules:           ${modules.length}`);
   logger.info(`  Exports found:     ${totalExports}`);
+  logger.info(`  Graph nodes:       ${graph.metadata.totalNodes}`);
+  logger.info(`  Graph edges:       ${graph.metadata.totalEdges}`);
+  logger.info(`  Communities:       ${graph.metadata.totalCommunities}`);
+  logger.info(`  God nodes:         ${graph.metadata.godNodes.join(', ') || 'none'}`);
   logger.info(`  Memory written to: .magneto/memory/`);
   console.log('');
   logger.info('Generated files:');
@@ -128,9 +166,13 @@ export async function analyzeCommand(options: AnalyzeOptions): Promise<void> {
   logger.info('  .magneto/memory/file-index.md         — All files with signatures');
   logger.info('  .magneto/memory/dependencies.md       — Import/dependency map');
   logger.info(`  .magneto/memory/modules/*.md          — ${modules.length} module summaries`);
+  logger.info('  .magneto/memory/graph.json            — Knowledge graph (queryable)');
+  logger.info('  .magneto/memory/graph-report.md       — God nodes, communities, suggested questions');
+  logger.info('  .magneto/memory/graph.html            — Interactive visualization (open in browser)');
   console.log('');
-  logger.info('Use "magneto generate <task.json>" to create prompts that include this context.');
-  logger.info('This reduces context window size by ~60-80% vs loading raw files.');
+  logger.info('Use "magneto query <text>" to search the knowledge graph.');
+  logger.info('Use "magneto path <A> <B>" to find the shortest path between nodes.');
+  logger.info('Use "magneto generate <task.md>" to create prompts that include this context.');
 }
 
 // ── File scanning ──────────────────────────────────────────────
@@ -667,4 +709,83 @@ function formatBytes(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+// ── Interactive HTML Visualization ────────────────────────────────
+
+function writeGraphHtml(memoryDir: string, graph: import('../core/graph-engine').KnowledgeGraph): void {
+  const templatePath = path.join(getTemplatesDir(), 'graph-viewer.html');
+  if (!fileExists(templatePath)) {
+    logger.warn('graph-viewer.html template not found — skipping visualization');
+    return;
+  }
+
+  const template = fs.readFileSync(templatePath, 'utf-8');
+  const graphJson = JSON.stringify(graph);
+  const html = template.replace('__GRAPH_JSON__', graphJson);
+  const outputPath = path.join(memoryDir, 'graph.html');
+  ensureDir(path.dirname(outputPath));
+  fs.writeFileSync(outputPath, html, 'utf-8');
+  logger.debug('Interactive graph written to graph.html');
+}
+
+// ── Deep mode: shell to graphify CLI ──────────────────────────────
+
+function runGraphifyDeep(projectRoot: string, memoryDir: string): void {
+  logger.info('\n── Deep mode: invoking graphify for multimodal extraction ──');
+
+  // Check if graphify is installed
+  const which = spawnSync('which', ['graphify'], { encoding: 'utf-8' });
+  if (which.status !== 0) {
+    logger.warn('graphify not found. Install it for deep analysis:');
+    logger.warn('  pip install graphifyy && graphify install');
+    logger.warn('Falling back to native graph (code-only).\n');
+    return;
+  }
+
+  logger.info('Running graphify on project root...');
+  const result = spawnSync('graphify', ['.', '--mode', 'deep'], {
+    cwd: projectRoot,
+    encoding: 'utf-8',
+    timeout: 300_000,
+    stdio: ['inherit', 'pipe', 'pipe'],
+  });
+
+  if (result.status !== 0) {
+    logger.warn(`graphify exited with code ${result.status}`);
+    if (result.stderr) logger.warn(result.stderr.trim());
+    return;
+  }
+
+  if (result.stdout) logger.info(result.stdout.trim());
+
+  // Import graphify outputs into Magneto memory
+  const graphifyDir = path.join(projectRoot, 'graphify-out');
+  if (!fileExists(graphifyDir)) {
+    logger.warn('graphify-out/ not found after graphify run');
+    return;
+  }
+
+  // Copy graph.json (overwrite native with richer graphify version)
+  const gfGraphJson = path.join(graphifyDir, 'graph.json');
+  if (fileExists(gfGraphJson)) {
+    fs.copyFileSync(gfGraphJson, path.join(memoryDir, 'graph.json'));
+    logger.info('  Imported graphify graph.json → .magneto/memory/graph.json');
+  }
+
+  // Copy graph.html
+  const gfGraphHtml = path.join(graphifyDir, 'graph.html');
+  if (fileExists(gfGraphHtml)) {
+    fs.copyFileSync(gfGraphHtml, path.join(memoryDir, 'graph.html'));
+    logger.info('  Imported graphify graph.html → .magneto/memory/graph.html');
+  }
+
+  // Copy GRAPH_REPORT.md
+  const gfReport = path.join(graphifyDir, 'GRAPH_REPORT.md');
+  if (fileExists(gfReport)) {
+    fs.copyFileSync(gfReport, path.join(memoryDir, 'graph-report.md'));
+    logger.info('  Imported graphify GRAPH_REPORT.md → .magneto/memory/graph-report.md');
+  }
+
+  logger.success('Deep analysis complete — multimodal graph imported from graphify.\n');
 }

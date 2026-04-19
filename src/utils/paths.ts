@@ -44,7 +44,12 @@ export function vscodePath(projectRoot: string, ...segments: string[]): string {
 }
 
 export function getTemplatesDir(): string {
-  return path.resolve(__dirname, '..', 'templates');
+  // When running from dist/, check dist/../src/templates (dev) and dist/../templates (npm)
+  const fromDist = path.resolve(__dirname, '..', 'templates');
+  if (fs.existsSync(fromDist)) return fromDist;
+  const fromSrc = path.resolve(__dirname, '..', '..', 'src', 'templates');
+  if (fs.existsSync(fromSrc)) return fromSrc;
+  return fromDist;
 }
 
 export function isMagnetoProject(projectRoot: string): boolean {
