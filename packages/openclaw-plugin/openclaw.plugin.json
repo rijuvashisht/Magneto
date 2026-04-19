@@ -1,16 +1,23 @@
 {
   "id": "openclaw-magneto",
   "name": "Magneto AI",
-  "description": "Governance, security guardrails, and task planning for engineering agents. Intercepts destructive exec/write actions and requires approval. Powered by Magneto AI.",
-  "version": "1.0.0",
+  "description": "Governance, security guardrails, and task planning for engineering agents. Requires the magneto-ai CLI installed globally on the gateway host (npm install -g magneto-ai). Intercepts destructive exec/write/edit actions and requires approval before they run.",
+  "version": "1.0.1",
   "configSchema": {
     "type": "object",
     "additionalProperties": false,
     "properties": {
       "magnetoCommand": {
         "type": "string",
-        "description": "Path or command name for the magneto CLI. Default: magneto"
+        "description": "Path or name of the magneto CLI binary. Set this if magneto is not on PATH (e.g. /usr/local/bin/magneto). Can also be set via the MAGNETO_COMMAND environment variable. Default: magneto"
       }
+    }
+  },
+  "uiHints": {
+    "magnetoCommand": {
+      "label": "Magneto CLI path",
+      "help": "Required: install magneto-ai first — npm install -g magneto-ai. Then set this if the magneto binary is not on your PATH.",
+      "placeholder": "magneto"
     }
   }
 }

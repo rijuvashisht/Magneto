@@ -50,11 +50,18 @@ declare module 'openclaw/plugin-sdk/plugin-entry' {
     content: string;
   }
 
+  export interface PluginConfig {
+    magnetoCommand?: string;
+    [key: string]: unknown;
+  }
+
   export interface PluginApi {
     registerTool<P extends TSchema>(tool: ToolDef<P>, options?: ToolOptions): void;
     registerHook(event: 'before_tool_call', handler: (ctx: BeforeToolCallContext) => Promise<HookDecision>): void;
     registerHook(event: 'message_sending', handler: (ctx: Record<string, unknown>) => Promise<HookDecision>): void;
     registerSkill(skill: SkillDef): void;
+    getPluginConfig?(): PluginConfig;
+    config?: PluginConfig;
   }
 
   export interface PluginEntry {

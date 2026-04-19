@@ -19,7 +19,7 @@ import { definePluginEntry } from 'openclaw/plugin-sdk/plugin-entry';
 import { Type } from '@sinclair/typebox';
 import { spawnSync } from 'node:child_process';
 import { readFileSync, existsSync } from 'node:fs';
-import { resolve, join } from 'node:path';
+import { join } from 'node:path';
 
 // ─── Security patterns (mirrors Magneto's security engine) ────────────────────
 
@@ -76,8 +76,21 @@ function riskLevel(blocked: string[], paths: string[]): 'low' | 'medium' | 'high
 
 // ─── Magneto CLI runner ────────────────────────────────────────────────────────
 
-function runMagneto(args: string[], cwd?: string): { stdout: string; stderr: string; ok: boolean } {
-  const result = spawnSync('magneto', args, {
+/**
+ * Resolve the magneto CLI command.
+ * Priority: plugin config > env var MAGNETO_COMMAND > 'magneto' (PATH lookup)
+ */
+function resolveMagnetoCmd(api: { config?: { magnetoCommand?: string }; getPluginConfig?: () => { magnetoCommand?: string } }): string {
+  return (
+    api.config?.magnetoCommand ||
+    api.getPluginConfig?.()?.magnetoCommand ||
+    process.env.MAGNETO_COMMAND ||
+    'magneto'
+  );
+}
+
+function runMagneto(magnetoCmd: string, args: string[], cwd?: string): { stdout: string; stderr: string; ok: boolean } {
+  const result = spawnSync(magnetoCmd, args, {
     cwd: cwd ?? process.cwd(),
     encoding: 'utf-8',
     timeout: 60_000,
@@ -121,6 +134,8 @@ export default definePluginEntry({
     'Governance, security guardrails, and task planning for engineering agents. Intercepts destructive actions and requires approval. Powered by Magneto AI.',
 
   register(api) {
+    const magnetoCmd = resolveMagnetoCmd(api);
+
     // ── Register agent skill ──────────────────────────────────────────────────
     api.registerSkill({
       name: 'magneto',
@@ -139,7 +154,7 @@ export default definePluginEntry({
       }),
       async execute(_id, params) {
         const cwd = (params.projectRoot as string | undefined) ?? process.cwd();
-        const result = runMagneto(['analyze'], cwd);
+        const result = runMagneto(magnetoCmd, ['analyze'], cwd);
         if (!result.ok) {
           return textResult(`❌ magneto analyze failed:\n${result.stderr || result.stdout}`, true);
         }
@@ -167,7 +182,7 @@ export default definePluginEntry({
         const args = ['plan', taskFile];
         if (params.dryRun) args.push('--dry-run');
 
-        const result = runMagneto(args, cwd);
+        const result = runMagneto(magnetoCmd, args, cwd);
         if (!result.ok) {
           return textResult(`❌ magneto plan failed:\n${result.stderr || result.stdout}`, true);
         }
@@ -199,7 +214,7 @@ export default definePluginEntry({
           if (params.role) args.push('--role', params.role as string);
           if (params.output) args.push('--output', params.output as string);
 
-          const result = runMagneto(args, cwd);
+          const result = runMagneto(magnetoCmd, args, cwd);
           if (!result.ok) {
             return textResult(`❌ magneto generate failed:\n${result.stderr || result.stdout}`, true);
           }

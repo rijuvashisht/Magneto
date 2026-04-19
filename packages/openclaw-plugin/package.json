@@ -1,6 +1,6 @@
 {
   "name": "openclaw-magneto",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "Magneto AI governance and security guardrails for OpenClaw agents — task planning, compliance hooks, and security checks across all channels.",
   "author": "rijuvashisht",
