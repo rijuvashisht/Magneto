@@ -34,6 +34,9 @@ export async function loadAdapters(projectRoot: string, adapterName: string): Pr
   if (adapterName === 'openclaw') {
     await wireOpenClawAdapter(projectRoot, adapterSourceDir);
   }
+  if (adapterName === 'claude') {
+    await wireClaudeAdapter(projectRoot, adapterSourceDir);
+  }
 
   // Update config
   await updateConfigWithAdapter(projectRoot, adapterName);
@@ -66,6 +69,45 @@ async function wireOpenClawAdapter(projectRoot: string, adapterSourceDir: string
 
   logger.info('OpenClaw adapter wired. Restart your OpenClaw gateway to load the Magneto skill.');
   logger.info('Docs: https://docs.openclaw.ai/tools/skills');
+}
+
+async function wireClaudeAdapter(projectRoot: string, adapterSourceDir: string): Promise<void> {
+  // Claude Code reads from .claude/ directory
+  const claudeDir = path.join(projectRoot, '.claude');
+  const claudeSkillsDir = path.join(claudeDir, 'skills', 'magneto');
+
+  // Copy CLAUDE.md to .claude/CLAUDE.md
+  const claudeMdSrc = path.join(adapterSourceDir, 'CLAUDE.md');
+  const claudeMdDest = path.join(claudeDir, 'CLAUDE.md');
+
+  if (fileExists(claudeMdSrc)) {
+    ensureDir(claudeDir);
+    fs.copyFileSync(claudeMdSrc, claudeMdDest);
+    logger.info(`Claude instructions written → .claude/CLAUDE.md`);
+  }
+
+  // Copy SKILL.md to .claude/skills/magneto/SKILL.md
+  const skillSrc = path.join(adapterSourceDir, 'skills', 'magneto', 'SKILL.md');
+  const skillDest = path.join(claudeSkillsDir, 'SKILL.md');
+
+  if (fileExists(skillSrc)) {
+    ensureDir(claudeSkillsDir);
+    fs.copyFileSync(skillSrc, skillDest);
+    logger.info(`Claude skill written → .claude/skills/magneto/SKILL.md`);
+  }
+
+  // Write adapter config
+  writeJson(path.join(claudeDir, 'magneto-adapter.json'), {
+    magnetoCommand: 'magneto',
+    taskDir: 'tasks/',
+    skillFile: '.claude/skills/magneto/SKILL.md',
+    installedAt: new Date().toISOString(),
+    docs: 'https://github.com/rijuvashisht/Magneto',
+  });
+
+  logger.info('Claude Code adapter wired.');
+  logger.info('Claude will now recognize /magneto commands.');
+  logger.info('Try: /magneto analyze');
 }
 
 export function loadGraphifyData(projectRoot: string): Record<string, unknown> | null {

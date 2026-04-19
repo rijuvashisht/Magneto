@@ -1,0 +1,23 @@
+{
+  "name": "claude",
+  "version": "1.0.0",
+  "description": "Claude Code integration for Magneto AI",
+  "type": "claude-code",
+  "files": {
+    "CLAUDE.md": ".claude/CLAUDE.md",
+    "skill": ".claude/skills/magneto/SKILL.md"
+  },
+  "config": {
+    "commands": {
+      "magneto": "magneto",
+      "analyze": "magneto analyze",
+      "query": "magneto query",
+      "plan": "magneto plan",
+      "telepathy": "magneto telepathy"
+    },
+    "hooks": {
+      "postInstall": "echo 'Claude Code adapter installed. Run /magneto to use Magneto skills.'"
+    }
+  },
+  "docs": "https://github.com/rijuvashisht/Magneto/blob/main/docs/CLAUDE-ADAPTER.md"
+}
