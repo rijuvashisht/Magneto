@@ -1,0 +1,12 @@
+{
+  "name": "openclaw",
+  "version": "1.0.0",
+  "description": "Power pack for projects built on OpenClaw — the self-hosted AI agent messaging gateway. Adds roles, skills, and memory patterns for OpenClaw channel plugin development, gateway configuration, and agent routing.",
+  "website": "https://docs.openclaw.ai",
+  "tags": ["openclaw", "messaging", "gateway", "channels", "agents"],
+  "roles": ["orchestrator", "backend", "tester"],
+  "autoDetect": {
+    "files": [".openclaw/openclaw.json", "openclaw.json"],
+    "packages": ["openclaw"]
+  }
+}

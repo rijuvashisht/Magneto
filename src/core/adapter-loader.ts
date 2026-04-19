@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import * as path from 'path';
 import { logger } from '../utils/logger';
 import { getTemplatesDir, magnetoPath } from '../utils/paths';
@@ -29,10 +30,42 @@ export async function loadAdapters(projectRoot: string, adapterName: string): Pr
   ensureDir(destDir);
   copyDir(adapterSourceDir, destDir);
 
+  // Adapter-specific post-install wiring
+  if (adapterName === 'openclaw') {
+    await wireOpenClawAdapter(projectRoot, adapterSourceDir);
+  }
+
   // Update config
   await updateConfigWithAdapter(projectRoot, adapterName);
 
   logger.debug(`Loaded adapter: ${adapterName}`);
+}
+
+async function wireOpenClawAdapter(projectRoot: string, adapterSourceDir: string): Promise<void> {
+  // Write SKILL.md into .openclaw/skills/ — this is where OpenClaw reads agent skills from
+  const skillSrc = path.join(adapterSourceDir, 'magneto.SKILL.md');
+  const skillDestDir = path.join(projectRoot, '.openclaw', 'skills');
+  const skillDest = path.join(skillDestDir, 'magneto.SKILL.md');
+
+  if (fileExists(skillSrc)) {
+    ensureDir(skillDestDir);
+    fs.copyFileSync(skillSrc, skillDest);
+    logger.info(`OpenClaw skill written → .openclaw/skills/magneto.SKILL.md`);
+  }
+
+  // Write minimal openclaw adapter config into .openclaw/
+  const openclawConfigDir = path.join(projectRoot, '.openclaw');
+  ensureDir(openclawConfigDir);
+  writeJson(path.join(openclawConfigDir, 'magneto-adapter.json'), {
+    magnetoCommand: 'magneto',
+    taskDir: 'tasks/',
+    skillFile: '.openclaw/skills/magneto.SKILL.md',
+    installedAt: new Date().toISOString(),
+    docs: 'https://github.com/rijuvashisht/Magneto',
+  });
+
+  logger.info('OpenClaw adapter wired. Restart your OpenClaw gateway to load the Magneto skill.');
+  logger.info('Docs: https://docs.openclaw.ai/tools/skills');
 }
 
 export function loadGraphifyData(projectRoot: string): Record<string, unknown> | null {

@@ -154,6 +154,7 @@ With power packs:
 
 ```bash
 magneto init --with typescript nextjs ai-platform --adapter graphify
+magneto init --adapter openclaw   # wire Magneto as OpenClaw governance layer
 ```
 
 ### Validate Setup
@@ -348,6 +349,47 @@ Reads from `.graphify-out/graph.json` and maps into Magneto AI memory.
 |---|---|
 | `internal-first` | Magneto AI's own analysis takes priority; Graphify supplements |
 | `external-first` | Graphify data takes priority; Magneto AI enriches it |
+
+### OpenClaw Adapter
+
+Integrates Magneto AI as the **governance and reasoning layer for OpenClaw agents**. [OpenClaw](https://docs.openclaw.ai) is a self-hosted AI agent gateway that routes messages from Telegram, Slack, WhatsApp, Discord, and more to AI agents.
+
+```bash
+magneto init --adapter openclaw
+```
+
+This installs a **Magneto skill** into your OpenClaw project that teaches agents to use Magneto for all software engineering tasks:
+
+```
+.openclaw/
+  skills/
+    magneto.SKILL.md     ← teaches OpenClaw agents when/how to use Magneto
+  magneto-adapter.json   ← adapter config (minimal JSON)
+```
+
+**How it works:**
+
+```
+User → Telegram/Slack/WhatsApp
+          ↓
+     OpenClaw Gateway
+          ↓
+     AI Agent (reads magneto.SKILL.md)
+          ↓
+     magneto analyze         ← understands the codebase
+     magneto plan task.md    ← structured plan + security check
+     magneto generate task.md ← scoped implementation prompt
+          ↓
+     Governed, secure AI response back to user
+```
+
+After running `magneto init --adapter openclaw`, restart your OpenClaw gateway:
+
+```bash
+openclaw gateway restart
+```
+
+OpenClaw agents will now automatically use Magneto for task planning, security checks, and context loading on every engineering request.
 
 ---
 

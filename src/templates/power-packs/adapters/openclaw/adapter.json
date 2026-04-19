@@ -1,0 +1,18 @@
+{
+  "name": "openclaw",
+  "version": "1.0.0",
+  "description": "Integrates Magneto AI as the governance and reasoning layer for OpenClaw agents. OpenClaw routes messages from Telegram, Slack, WhatsApp, Discord etc. to AI agents — Magneto governs how those agents plan, analyze, and execute tasks.",
+  "integration": "openclaw",
+  "website": "https://docs.openclaw.ai",
+  "mode": "skill-injection",
+  "outputFiles": {
+    "skill": ".openclaw/skills/magneto.SKILL.md",
+    "config": ".openclaw/magneto-adapter.json"
+  },
+  "configuration": {
+    "magnetoCommand": "magneto",
+    "autoAnalyzeOnInit": true,
+    "requireTaskFile": true,
+    "defaultTaskDir": "tasks/"
+  }
+}

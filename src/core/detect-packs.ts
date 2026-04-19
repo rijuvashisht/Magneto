@@ -33,6 +33,11 @@ const DETECTION_RULES: Record<string, (pkg: PackageJson, projectRoot: string) =>
 
   graphify: (_pkg, root) =>
     fileExists(path.join(root, '.graphify-out', 'graph.json')),
+
+  openclaw: (pkg, root) =>
+    fileExists(path.join(root, '.openclaw', 'openclaw.json')) ||
+    fileExists(path.join(root, 'openclaw.json')) ||
+    !!(pkg.dependencies?.openclaw || pkg.devDependencies?.openclaw),
 };
 
 export async function detectPacks(projectRoot: string): Promise<string[]> {
