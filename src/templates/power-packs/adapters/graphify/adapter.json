@@ -1,0 +1,19 @@
+{
+  "name": "graphify",
+  "version": "1.0.0",
+  "description": "Graphify adapter — imports dependency graph data from .graphify-out/graph.json into Magneto memory",
+  "inputPath": ".graphify-out/graph.json",
+  "outputMapping": {
+    "nodes": "memory.graph.nodes",
+    "edges": "memory.graph.edges",
+    "metadata": "memory.graph.metadata"
+  },
+  "memoryMode": "internal-first",
+  "supportedModes": ["internal-first", "external-first"],
+  "configuration": {
+    "autoImport": false,
+    "refreshOnInit": true,
+    "maxNodes": 10000,
+    "maxEdges": 50000
+  }
+}

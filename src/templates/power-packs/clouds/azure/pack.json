@@ -1,0 +1,52 @@
+{
+  "name": "azure",
+  "category": "clouds",
+  "version": "1.0.0",
+  "description": "Azure cloud power pack — infrastructure reasoning, resource validation, and deployment safety",
+  "rules": [
+    "Validate Azure resource naming conventions",
+    "Check Bicep/ARM template correctness",
+    "Verify RBAC and managed identity configuration",
+    "Detect over-permissioned service principals",
+    "Validate network security group rules",
+    "Check for proper Key Vault usage for secrets",
+    "Verify Azure Monitor and Application Insights configuration",
+    "Validate deployment slot and blue-green deployment patterns"
+  ],
+  "checks": [
+    {
+      "id": "azure-naming",
+      "description": "Validate Azure resource naming conventions",
+      "severity": "warning",
+      "scope": ["infra/**", "bicep/**", "*.bicep"]
+    },
+    {
+      "id": "azure-rbac",
+      "description": "Check for over-permissioned RBAC role assignments",
+      "severity": "error",
+      "pattern": "roleDefinitionId|roleAssignment|Owner|Contributor",
+      "scope": ["infra/**", "bicep/**", "*.bicep", "*.json"]
+    },
+    {
+      "id": "azure-secrets",
+      "description": "Verify secrets are stored in Key Vault, not in config files",
+      "severity": "error",
+      "pattern": "(connectionString|password|secret|apiKey)\\s*[:=]\\s*['\"][^'\"]{8,}['\"]",
+      "scope": ["**/*.ts", "**/*.json", "**/*.yaml", "**/*.yml"]
+    },
+    {
+      "id": "azure-networking",
+      "description": "Validate network security group rules for open ports",
+      "severity": "warning",
+      "pattern": "(0\\.0\\.0\\.0/0|\\*.*Allow.*Inbound)",
+      "scope": ["infra/**", "bicep/**"]
+    },
+    {
+      "id": "azure-monitoring",
+      "description": "Check for Application Insights and monitoring configuration",
+      "severity": "info",
+      "pattern": "(applicationInsights|appInsights|APPLICATIONINSIGHTS_CONNECTION_STRING)",
+      "scope": ["**/*.ts", "**/*.bicep", "**/*.json"]
+    }
+  ]
+}

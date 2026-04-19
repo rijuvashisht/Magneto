@@ -1,0 +1,53 @@
+{
+  "name": "nextjs",
+  "category": "frameworks",
+  "version": "1.0.0",
+  "description": "Next.js framework power pack — routing, hydration, server/client boundary analysis",
+  "rules": [
+    "Validate App Router vs Pages Router patterns",
+    "Check server/client component boundaries ('use client' / 'use server')",
+    "Detect hydration mismatch risks",
+    "Validate route segment configuration",
+    "Check for proper data fetching patterns (Server Components, Route Handlers)",
+    "Verify middleware configuration",
+    "Analyze dynamic vs static rendering decisions",
+    "Check for proper error boundary placement"
+  ],
+  "checks": [
+    {
+      "id": "next-client-boundary",
+      "description": "Validate 'use client' directive placement and necessity",
+      "severity": "warning",
+      "pattern": "'use client'|\"use client\"",
+      "scope": ["app/**/*.tsx", "app/**/*.ts"]
+    },
+    {
+      "id": "next-server-boundary",
+      "description": "Validate 'use server' directive placement for Server Actions",
+      "severity": "warning",
+      "pattern": "'use server'|\"use server\"",
+      "scope": ["app/**/*.tsx", "app/**/*.ts"]
+    },
+    {
+      "id": "next-hydration-risk",
+      "description": "Detect potential hydration mismatch patterns (window/document usage in SSR)",
+      "severity": "error",
+      "pattern": "(window\\.|document\\.)",
+      "scope": ["app/**/*.tsx", "components/**/*.tsx"]
+    },
+    {
+      "id": "next-route-config",
+      "description": "Validate route segment configuration exports",
+      "severity": "info",
+      "pattern": "export\\s+const\\s+(dynamic|revalidate|runtime|fetchCache)",
+      "scope": ["app/**/page.tsx", "app/**/layout.tsx"]
+    },
+    {
+      "id": "next-metadata",
+      "description": "Check for proper metadata exports in route segments",
+      "severity": "info",
+      "pattern": "export\\s+(const\\s+metadata|async\\s+function\\s+generateMetadata)",
+      "scope": ["app/**/page.tsx", "app/**/layout.tsx"]
+    }
+  ]
+}

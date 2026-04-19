@@ -1,0 +1,68 @@
+{
+  "name": "magneto-framework",
+  "version": "0.1.0",
+  "description": "Repo-local AI reasoning framework and agent control plane for enterprise environments",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "magneto": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/cli.js",
+    "lint": "eslint src/",
+    "test": "jest --config jest.config.js",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "ai",
+    "reasoning",
+    "agent",
+    "orchestrator",
+    "copilot",
+    "openai",
+    "mcp",
+    "enterprise",
+    "security",
+    "multi-agent"
+  ],
+  "author": "Riju Vashisht",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rijuvashisht/magneto-framework.git"
+  },
+  "homepage": "https://github.com/rijuvashisht/magneto-framework#readme",
+  "bugs": {
+    "url": "https://github.com/rijuvashisht/magneto-framework/issues"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^12.1.0",
+    "glob": "^10.3.10",
+    "jsonschema": "^1.4.1",
+    "openai": "^4.52.0",
+    "uuid": "^9.0.0",
+    "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.0",
+    "@types/uuid": "^9.0.8",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.4",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist/",
+    "src/templates/",
+    "README.md",
+    "LICENSE"
+  ]
+}

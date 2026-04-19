@@ -1,0 +1,21 @@
+{
+  "id": "ai-rag-audit-001",
+  "title": "RAG Pipeline Security and Quality Audit",
+  "description": "Perform a comprehensive audit of the RAG (Retrieval-Augmented Generation) pipeline. Check for prompt injection vulnerabilities, validate retrieval relevance scoring, verify embedding model consistency, and ensure proper guardrails on generated outputs. The system uses OpenAI embeddings with Pinecone vector store and GPT-4o for generation.",
+  "type": "security-audit",
+  "scope": [
+    "src/rag/pipeline.ts",
+    "src/rag/embeddings.ts",
+    "src/rag/retrieval.ts",
+    "src/rag/generation.ts",
+    "src/rag/guardrails.ts",
+    "src/api/chat.ts"
+  ],
+  "tags": ["security", "ai", "rag", "audit", "prompt-injection", "retrieval"],
+  "constraints": [
+    "Must not modify the production embedding index",
+    "Must validate all user-facing prompt templates",
+    "Must check for PII leakage in logs",
+    "Report must include confidence scores for each finding"
+  ]
+}

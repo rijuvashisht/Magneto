@@ -1,0 +1,21 @@
+{
+  "id": "checkout-mismatch-001",
+  "title": "Checkout Price Mismatch Investigation",
+  "description": "Users are reporting that the final checkout price does not match the cart total displayed on the cart page. The discrepancy appears to be related to tax calculation and coupon application order. Investigate the checkout pipeline, identify the root cause, and propose a fix.",
+  "type": "bug-fix",
+  "scope": [
+    "src/services/checkout.ts",
+    "src/services/cart.ts",
+    "src/services/pricing.ts",
+    "src/services/coupon.ts",
+    "src/services/tax.ts",
+    "tests/checkout.test.ts"
+  ],
+  "tags": ["bug", "checkout", "pricing", "critical", "production"],
+  "constraints": [
+    "Must not change the tax calculation API contract",
+    "Must maintain backward compatibility with existing coupons",
+    "Fix must include regression tests",
+    "No changes to database schema"
+  ]
+}

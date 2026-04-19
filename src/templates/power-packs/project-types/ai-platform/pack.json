@@ -1,0 +1,52 @@
+{
+  "name": "ai-platform",
+  "category": "project-types",
+  "version": "1.0.0",
+  "description": "AI Platform power pack — prompt validation, retrieval checks, model safety, and RAG pipeline analysis",
+  "rules": [
+    "Validate prompt templates for injection risks",
+    "Check retrieval pipeline for completeness (embedding → search → rerank → context)",
+    "Verify model configuration safety (temperature, max_tokens, stop sequences)",
+    "Detect hardcoded API keys or model endpoints",
+    "Validate error handling around LLM API calls",
+    "Check for proper token counting and context window management",
+    "Review guardrail implementation for model outputs",
+    "Verify RAG context relevance scoring"
+  ],
+  "checks": [
+    {
+      "id": "ai-prompt-injection",
+      "description": "Detect potential prompt injection vulnerabilities in prompt templates",
+      "severity": "error",
+      "pattern": "(user_input|userInput|user\\.input).*prompt",
+      "scope": ["**/*.ts", "**/*.py", "**/*.js"]
+    },
+    {
+      "id": "ai-hardcoded-key",
+      "description": "Detect hardcoded API keys for AI services",
+      "severity": "error",
+      "pattern": "(sk-[a-zA-Z0-9]{20,}|OPENAI_API_KEY\\s*=\\s*['\"][^'\"]+['\"])",
+      "scope": ["**/*.ts", "**/*.js", "**/*.py", "**/*.env.example"]
+    },
+    {
+      "id": "ai-missing-error-handling",
+      "description": "Check for LLM API calls without proper error handling",
+      "severity": "warning",
+      "pattern": "(openai|anthropic|completions\\.create|chat\\.completions)",
+      "scope": ["**/*.ts", "**/*.js", "**/*.py"]
+    },
+    {
+      "id": "ai-token-limit",
+      "description": "Verify token counting before API calls to prevent context overflow",
+      "severity": "warning",
+      "pattern": "max_tokens|maxTokens|token_count|tokenCount",
+      "scope": ["**/*.ts", "**/*.js", "**/*.py"]
+    },
+    {
+      "id": "ai-rag-pipeline",
+      "description": "Validate RAG pipeline completeness (embed, search, rerank, generate)",
+      "severity": "info",
+      "scope": ["**/*.ts", "**/*.js", "**/*.py"]
+    }
+  ]
+}

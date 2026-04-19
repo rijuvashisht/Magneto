@@ -1,0 +1,19 @@
+{
+  "version": "0.1.0",
+  "projectName": "",
+  "executionMode": "assist",
+  "security": {
+    "protectedPaths": ["*.env", "*.pem", "*.key", "secrets/**"],
+    "blockedActions": ["delete-database", "drop-table", "rm -rf"],
+    "approvalRequired": ["deploy", "migrate", "auth-change"],
+    "maxTelepathyLevel": 2
+  },
+  "powerPacks": [],
+  "adapters": [],
+  "runners": {
+    "default": "openai",
+    "available": ["openai", "copilot-local", "copilot-cloud"]
+  },
+  "memoryMode": "internal-first",
+  "roles": ["orchestrator", "backend", "tester", "requirements"]
+}

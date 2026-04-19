@@ -1,0 +1,51 @@
+{
+  "name": "typescript",
+  "category": "languages",
+  "version": "1.0.0",
+  "description": "TypeScript language power pack — import graph analysis, type safety checks, and TS-specific reasoning",
+  "rules": [
+    "Analyze import graphs for circular dependencies",
+    "Check for proper type narrowing and type guards",
+    "Validate generic type constraints",
+    "Detect any/unknown type overuse",
+    "Enforce strict null checks in critical paths",
+    "Review module boundary types (exports)",
+    "Flag unsafe type assertions (as any)"
+  ],
+  "checks": [
+    {
+      "id": "ts-circular-imports",
+      "description": "Detect circular import dependencies in the TypeScript module graph",
+      "severity": "warning",
+      "pattern": "import.*from\\s+['\"]\\.",
+      "scope": ["**/*.ts", "**/*.tsx"]
+    },
+    {
+      "id": "ts-any-overuse",
+      "description": "Flag excessive use of 'any' type which weakens type safety",
+      "severity": "warning",
+      "pattern": ":\\s*any[\\s;,\\)]",
+      "scope": ["**/*.ts", "**/*.tsx"]
+    },
+    {
+      "id": "ts-unsafe-assertion",
+      "description": "Detect unsafe type assertions using 'as any'",
+      "severity": "error",
+      "pattern": "as\\s+any",
+      "scope": ["**/*.ts", "**/*.tsx"]
+    },
+    {
+      "id": "ts-missing-return-type",
+      "description": "Check for exported functions missing explicit return types",
+      "severity": "info",
+      "pattern": "export\\s+(async\\s+)?function\\s+\\w+\\([^)]*\\)\\s*{",
+      "scope": ["**/*.ts"]
+    },
+    {
+      "id": "ts-strict-null",
+      "description": "Verify strict null check handling in critical paths",
+      "severity": "warning",
+      "scope": ["src/**/*.ts"]
+    }
+  ]
+}
