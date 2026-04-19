@@ -1,0 +1,13 @@
+{
+  "apiKey": "YOUR_MANUS_API_KEY",
+  "baseUrl": "https://api.manus.ai",
+  "version": "v2",
+  "projectId": null,
+  "sync": {
+    "autoPushTasks": false,
+    "autoPullResults": false,
+    "includeGraph": true,
+    "includeMemory": true
+  },
+  "installedAt": ""
+}

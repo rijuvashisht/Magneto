@@ -1,0 +1,19 @@
+{
+  "name": "manus",
+  "version": "1.0.0",
+  "description": "Manus AI API integration for Magneto",
+  "type": "manus-api",
+  "api": {
+    "baseUrl": "https://api.manus.ai",
+    "version": "v2"
+  },
+  "files": {
+    "MANUS.md": ".magneto/adapters/manus/MANUS.md",
+    "config": ".magneto/adapters/manus/config.json"
+  },
+  "config": {
+    "requiresApiKey": true,
+    "envVar": "MANUS_API_KEY"
+  },
+  "docs": "https://github.com/rijuvashisht/Magneto/blob/main/docs/MANUS-ADAPTER.md"
+}

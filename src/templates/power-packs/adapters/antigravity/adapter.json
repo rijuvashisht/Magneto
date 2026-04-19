@@ -1,0 +1,19 @@
+{
+  "name": "antigravity",
+  "version": "1.0.0",
+  "description": "Google Antigravity IDE integration for Magneto AI",
+  "type": "antigravity",
+  "files": {
+    "ANTIGRAVITY.md": ".agents/magneto/ANTIGRAVITY.md",
+    "skill": ".agents/skills/magneto/SKILL.md"
+  },
+  "config": {
+    "commands": {
+      "magneto-analyze": "magneto analyze",
+      "magneto-query": "magneto query",
+      "magneto-plan": "magneto plan",
+      "magneto-telepathy": "magneto telepathy"
+    }
+  },
+  "docs": "https://github.com/rijuvashisht/Magneto/blob/main/docs/ANTIGRAVITY-ADAPTER.md"
+}

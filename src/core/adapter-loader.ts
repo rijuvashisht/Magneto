@@ -37,6 +37,12 @@ export async function loadAdapters(projectRoot: string, adapterName: string): Pr
   if (adapterName === 'claude') {
     await wireClaudeAdapter(projectRoot, adapterSourceDir);
   }
+  if (adapterName === 'antigravity') {
+    await wireAntigravityAdapter(projectRoot, adapterSourceDir);
+  }
+  if (adapterName === 'manus') {
+    await wireManusAdapter(projectRoot, adapterSourceDir);
+  }
 
   // Update config
   await updateConfigWithAdapter(projectRoot, adapterName);
@@ -108,6 +114,75 @@ async function wireClaudeAdapter(projectRoot: string, adapterSourceDir: string):
   logger.info('Claude Code adapter wired.');
   logger.info('Claude will now recognize /magneto commands.');
   logger.info('Try: /magneto analyze');
+}
+
+async function wireAntigravityAdapter(projectRoot: string, adapterSourceDir: string): Promise<void> {
+  // Google Antigravity reads from .agents/ directory
+  const agentsDir = path.join(projectRoot, '.agents');
+  const agentsMagnetoDir = path.join(agentsDir, 'magneto');
+  const agentsSkillsDir = path.join(agentsDir, 'skills', 'magneto');
+
+  // Copy ANTIGRAVITY.md to .agents/magneto/ANTIGRAVITY.md
+  const antigravityMdSrc = path.join(adapterSourceDir, 'ANTIGRAVITY.md');
+  const antigravityMdDest = path.join(agentsMagnetoDir, 'ANTIGRAVITY.md');
+
+  if (fileExists(antigravityMdSrc)) {
+    ensureDir(agentsMagnetoDir);
+    fs.copyFileSync(antigravityMdSrc, antigravityMdDest);
+    logger.info(`Antigravity instructions written → .agents/magneto/ANTIGRAVITY.md`);
+  }
+
+  // Copy SKILL.md to .agents/skills/magneto/SKILL.md
+  const skillSrc = path.join(adapterSourceDir, 'skills', 'magneto', 'SKILL.md');
+  const skillDest = path.join(agentsSkillsDir, 'SKILL.md');
+
+  if (fileExists(skillSrc)) {
+    ensureDir(agentsSkillsDir);
+    fs.copyFileSync(skillSrc, skillDest);
+    logger.info(`Antigravity skill written → .agents/skills/magneto/SKILL.md`);
+  }
+
+  // Write adapter config
+  writeJson(path.join(agentsDir, 'magneto-adapter.json'), {
+    magnetoCommand: 'magneto',
+    taskDir: 'tasks/',
+    skillFile: '.agents/skills/magneto/SKILL.md',
+    installedAt: new Date().toISOString(),
+    docs: 'https://github.com/rijuvashisht/Magneto',
+  });
+
+  logger.info('Antigravity adapter wired.');
+  logger.info('Try: /magneto-analyze');
+}
+
+async function wireManusAdapter(projectRoot: string, adapterSourceDir: string): Promise<void> {
+  // Manus uses API-based integration
+  const manusAdapterDir = magnetoPath(projectRoot, 'adapters', 'manus');
+  ensureDir(manusAdapterDir);
+
+  // Copy MANUS.md to .magneto/adapters/manus/MANUS.md
+  const manusMdSrc = path.join(adapterSourceDir, 'MANUS.md');
+  const manusMdDest = path.join(manusAdapterDir, 'MANUS.md');
+
+  if (fileExists(manusMdSrc)) {
+    fs.copyFileSync(manusMdSrc, manusMdDest);
+    logger.info(`Manus instructions written → .magneto/adapters/manus/MANUS.md`);
+  }
+
+  // Copy template config if no config exists
+  const configSrc = path.join(adapterSourceDir, 'config.template.json');
+  const configDest = path.join(manusAdapterDir, 'config.json');
+
+  if (fileExists(configSrc) && !fileExists(configDest)) {
+    const configTemplate = readJson<Record<string, unknown>>(configSrc);
+    configTemplate.installedAt = new Date().toISOString();
+    writeJson(configDest, configTemplate);
+    logger.info(`Manus config template → .magneto/adapters/manus/config.json`);
+    logger.warn('IMPORTANT: Edit config.json and add your MANUS_API_KEY');
+  }
+
+  logger.info('Manus adapter wired.');
+  logger.info('Configure API key in .magneto/adapters/manus/config.json');
 }
 
 export function loadGraphifyData(projectRoot: string): Record<string, unknown> | null {
