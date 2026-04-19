@@ -22,6 +22,14 @@
   <a href="#-cli-reference">CLI Reference</a>
 </p>
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/magneto-ai"><img src="https://img.shields.io/npm/v/magneto-ai?color=brightgreen&label=npm" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/magneto-ai"><img src="https://img.shields.io/npm/dm/magneto-ai?color=blue&label=downloads" alt="npm downloads" /></a>
+  <a href="https://github.com/rijuvashisht/Magneto/actions"><img src="https://github.com/rijuvashisht/Magneto/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://buymeacoffee.com/rijuvashisht"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-☕-yellow" alt="Buy Me a Coffee" /></a>
+  <a href="https://github.com/sponsors/rijuvashisht"><img src="https://img.shields.io/badge/Sponsor-%E2%9D%A4-pink?logo=github" alt="GitHub Sponsors" /></a>
+</p>
+
 ---
 
 <p align="center">
@@ -146,6 +154,7 @@ With power packs:
 
 ```bash
 magneto init --with typescript nextjs ai-platform --adapter graphify
+magneto init --adapter openclaw   # wire Magneto as OpenClaw governance layer
 ```
 
 ### Validate Setup
@@ -341,6 +350,47 @@ Reads from `.graphify-out/graph.json` and maps into Magneto AI memory.
 | `internal-first` | Magneto AI's own analysis takes priority; Graphify supplements |
 | `external-first` | Graphify data takes priority; Magneto AI enriches it |
 
+### OpenClaw Adapter
+
+Integrates Magneto AI as the **governance and reasoning layer for OpenClaw agents**. [OpenClaw](https://docs.openclaw.ai) is a self-hosted AI agent gateway that routes messages from Telegram, Slack, WhatsApp, Discord, and more to AI agents.
+
+```bash
+magneto init --adapter openclaw
+```
+
+This installs a **Magneto skill** into your OpenClaw project that teaches agents to use Magneto for all software engineering tasks:
+
+```
+.openclaw/
+  skills/
+    magneto.SKILL.md     ← teaches OpenClaw agents when/how to use Magneto
+  magneto-adapter.json   ← adapter config (minimal JSON)
+```
+
+**How it works:**
+
+```
+User → Telegram/Slack/WhatsApp
+          ↓
+     OpenClaw Gateway
+          ↓
+     AI Agent (reads magneto.SKILL.md)
+          ↓
+     magneto analyze         ← understands the codebase
+     magneto plan task.md    ← structured plan + security check
+     magneto generate task.md ← scoped implementation prompt
+          ↓
+     Governed, secure AI response back to user
+```
+
+After running `magneto init --adapter openclaw`, restart your OpenClaw gateway:
+
+```bash
+openclaw gateway restart
+```
+
+OpenClaw agents will now automatically use Magneto for task planning, security checks, and context loading on every engineering request.
+
 ---
 
 ## 🤖 Copilot Integration
@@ -497,6 +547,27 @@ magneto-ai/
 ## 📄 License
 
 MIT — see [LICENSE](./LICENSE)
+
+---
+
+## ☕ Support This Project
+
+Magneto AI is free and open source. If it saves you time, consider supporting continued development:
+
+<p align="center">
+  <a href="https://buymeacoffee.com/rijuvashisht">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://github.com/sponsors/rijuvashisht">
+    <img src="https://img.shields.io/badge/Sponsor%20on%20GitHub-%E2%9D%A4-pink?style=for-the-badge&logo=github" alt="GitHub Sponsors" height="50" />
+  </a>
+</p>
+
+Your support helps fund:
+- New integrations and power packs
+- Better documentation and examples
+- Long-term maintenance and security updates
 
 ---
 
