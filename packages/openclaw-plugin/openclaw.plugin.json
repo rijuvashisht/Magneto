@@ -1,0 +1,16 @@
+{
+  "id": "openclaw-magneto",
+  "name": "Magneto AI",
+  "description": "Governance, security guardrails, and task planning for engineering agents. Intercepts destructive exec/write actions and requires approval. Powered by Magneto AI.",
+  "version": "1.0.0",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "magnetoCommand": {
+        "type": "string",
+        "description": "Path or command name for the magneto CLI. Default: magneto"
+      }
+    }
+  }
+}
