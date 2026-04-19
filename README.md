@@ -1,6 +1,33 @@
-# ⚡ Magneto Framework
+<p align="center">
+  <img src="docs/images/magneto-helmet.svg" alt="Magneto Logo" width="120" />
+</p>
 
-**Repo-local AI reasoning framework & agent control plane for enterprise environments.**
+<h1 align="center">⚡ Magneto Framework</h1>
+
+<p align="center">
+  <strong>Repo-local AI reasoning framework & agent control plane for enterprise environments.</strong>
+</p>
+
+<p align="center">
+  <em>All AI Engineering Tasks. Any Language or Stack. Enterprise Security and Guardrails.<br/>
+  One Magneto To Pull Them All.</em>
+</p>
+
+<p align="center">
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-architecture">Architecture</a> •
+  <a href="#-power-pack-system">Power Packs</a> •
+  <a href="#-copilot-integration">Copilot</a> •
+  <a href="#-cli-reference">CLI Reference</a>
+</p>
+
+---
+
+<p align="center">
+  <img src="docs/images/magneto-vision.png" alt="Magneto — The Starting Point for AI Developers" width="600" />
+</p>
+
+---
 
 Magneto is a multi-agent AI orchestration system that brings structured reasoning, security guardrails, and pluggable intelligence to your codebase. It integrates natively with GitHub Copilot, OpenAI APIs, and optional tools like Graphify.
 
@@ -18,6 +45,66 @@ Magneto is **not** another AI wrapper. It is a **reasoning engine** and **contro
 - **Extends via Power Packs** — language, framework, cloud, and project-type intelligence
 
 Think of it as the nervous system connecting your AI tools to your codebase — with the safety controls an enterprise demands.
+
+---
+
+## ⚙️ Core Capabilities
+
+Magneto unifies task classification, multi-agent orchestration, security evaluation, and result merging into a single framework that any AI coding assistant can plug into.
+
+### Task Classification & Planning
+Every task is automatically classified into one of 9 categories — `architecture-review`, `bug-fix`, `feature-implementation`, `security-audit`, `performance-review`, `testing`, `requirements-analysis`, `code-review`, or `general` — using keyword analysis against the task title, description, and tags. Based on the classification, Magneto assigns the right roles (orchestrator, backend, tester, requirements) and generates a structured execution plan before any AI agent runs.
+
+### Multi-Agent Orchestration
+Magneto creates dedicated sub-agents for each assigned role, each with its own model configuration (`gpt-4o`), tool access (`plan_task`, `load_context`, `merge_results`, `security_check`), and scoped file visibility. The orchestrator coordinates the agents; each agent works within its defined scope and constraints.
+
+### Security Guardrail Engine
+**Every task is evaluated before execution.** The security engine scans for:
+- **Protected paths** — `.env`, `.pem`, `.key`, `.cert`, `secrets/`, `.ssh/`, `credentials/`
+- **Blocked actions** — `delete-database`, `drop-table`, `rm -rf`, `format`, `truncate`
+- **Auth changes** — permission modifications, token operations, authentication logic
+- **Infrastructure risk** — deploy, migrate, infra-as-code changes
+- **Dependency risk** — package installs, lockfile modifications
+
+The engine returns a risk level (`low` / `medium` / `high`), whether human approval is required, a list of blocked actions detected, and a **telepathy level** (0–3) that controls how much autonomy the AI agents receive.
+
+### Confidence-Weighted Result Merging
+After agents complete their analysis, Magneto merges all findings and risks with **content-based deduplication** — identical findings keep the higher confidence score, identical risks keep the higher severity. The overall confidence is calculated using a weighted average that favors high-confidence agents. The final merged output includes an `overallRisk` assessment (`low` → `critical`).
+
+### Auto-Detection Power Packs
+Magneto scans your project to automatically detect which Power Packs to activate:
+- **TypeScript** — detects `tsconfig.json` or `typescript` in dependencies
+- **Next.js** — detects `next` in dependencies
+- **AI Platform** — detects `openai`, `@azure/openai`, `langchain`, or `@langchain/core`
+- **Azure** — detects `azure.yaml`, `bicep/`, or `infra/` directories
+- **Graphify** — detects `.graphify-out/graph.json`
+
+Each pack adds domain-specific rules and checks that are injected into agent prompts and execution plans.
+
+### MCP-Compatible Tool Layer
+Magneto exposes its core engine as 4 MCP tools via an HTTP server, allowing any MCP-compatible client (GitHub Copilot, VS Code, custom agents) to invoke Magneto directly:
+- `plan_task` — classify a task and generate an execution plan
+- `load_context` — build full project context with role assignments and file resolution
+- `merge_results` — merge multiple agent output files with deduplication
+- `security_check` — evaluate security constraints and get approval requirements
+
+### Copilot-Native Integration
+Magneto generates full GitHub Copilot integration out of the box:
+- **4 agent definitions** (`magneto-orchestrator`, `magneto-backend`, `magneto-tester`, `magneto-requirements`) in `.github/agents/`
+- **Copilot instructions** in `.github/copilot-instructions.md` teaching Copilot how to use Magneto tools
+- **MCP config** in `.vscode/mcp.json` connecting VS Code to the local MCP server
+
+### Multiple Execution Runners
+Three built-in runners execute tasks through different AI backends:
+- **OpenAI Runner** — calls the Chat Completions API with structured JSON output, supports streaming via `executeStreaming()`, validates API key format (`sk-*`, 20+ chars)
+- **Copilot Local Runner** — prepares structured prompts for GitHub Copilot's local agent mode, expects Copilot to use MCP tools
+- **Copilot Cloud Runner** — sends payloads to a remote Copilot Cloud API endpoint with bearer token auth
+
+### Adapter System
+Adapters import external tool data into Magneto's memory. The **Graphify adapter** reads `.graphify-out/graph.json` and maps dependency graph nodes/edges into Magneto's context, with configurable priority modes (`internal-first` or `external-first`).
+
+### Secure by Design
+Input validation on all task files. Protected path patterns block access to secrets and credentials. Blocked action detection prevents destructive operations. Execution modes (`observe`, `assist`, `execute`, `restricted`) enforce escalating levels of control. High-risk tasks automatically set telepathy to 0 and require human approval.
 
 ---
 
@@ -47,7 +134,7 @@ npm install magneto-framework
 Or clone and build:
 
 ```bash
-git clone https://github.com/your-org/magneto-framework.git
+git clone https://github.com/rijuvashisht/Magneto.git
 cd magneto-framework
 npm install
 npm run build
@@ -88,6 +175,13 @@ npx magneto merge .magneto/cache --format markdown
 
 ## 📦 Architecture
 
+<p align="center">
+  <img src="docs/images/magneto-architecture.png" alt="Magneto Architecture Diagram" width="800" />
+</p>
+
+<details>
+<summary>Text-based architecture diagram</summary>
+
 ```
 ┌─────────────────────────────────────────────────────┐
 │                   CLI (commander)                     │
@@ -108,6 +202,7 @@ npx magneto merge .magneto/cache --format markdown
 │            Graphify │ (extensible)                     │
 └─────────────────────────────────────────────────────┘
 ```
+</details>
 
 ---
 
@@ -253,38 +348,7 @@ The runner:
 
 ---
 
-## 💰 Monetization Strategy
-
-### Open Core (MIT License)
-
-The core framework is **free and open source**:
-- CLI tool
-- Core reasoning engine
-- Security engine
-- Power pack system
-- Copilot integration
-- MCP server
-- All built-in packs
-
-### Paid Offerings
-
-| Tier | What's Included |
-|---|---|
-| **Control Plane SaaS** | Hosted dashboard, team management, audit logs, analytics |
-| **Enterprise Packs** | Compliance packs (SOC2, HIPAA, PCI), advanced security rules |
-| **Premium Adapters** | Jira, Linear, Datadog, PagerDuty integrations |
-| **Agent Runtime** | Managed multi-agent execution with GPU-backed inference |
-| **Enterprise Dashboard** | Real-time agent monitoring, cost tracking, approval workflows |
-
-### Pricing Model
-
-- **Free** — MIT core, unlimited local usage
-- **Team** — $29/user/month — SaaS dashboard, team features, 5 premium packs
-- **Enterprise** — Custom pricing — dedicated runtime, custom adapters, SLA, SSO
-
----
-
-## 🗂 Project Structure
+##  Project Structure
 
 ```
 magneto-framework/
@@ -373,4 +437,7 @@ MIT — see [LICENSE](./LICENSE)
 
 ---
 
-Built with ⚡ by the Magneto team.
+<p align="center">
+  <img src="docs/images/magneto-helmet.svg" alt="Magneto" width="40" /><br/>
+  Built with ⚡ by the Magneto team.
+</p>
