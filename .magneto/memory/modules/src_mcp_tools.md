@@ -2,7 +2,7 @@
 
 - **Files:** 4
 - **Total lines:** 178
-- **Total size:** 5.4 KB
+- **Total size:** 5.5 KB
 
 ## Exports
 
@@ -18,9 +18,10 @@
 
 ### Internal
 - `../server`
-- `../../utils/fs`
+- `../../utils/task-parser`
 - `../../core/context`
 - `../../utils/logger`
+- `../../utils/fs`
 - `../../core/merge-results`
 - `../../core/security-engine`
 
@@ -43,7 +44,7 @@
 ### `plan-task.ts`
 
 - **Path:** `src/mcp/tools/plan-task.ts`
-- **Lines:** 51 | **Size:** 1.5 KB
+- **Lines:** 51 | **Size:** 1.6 KB
 - **Functions:** `handlePlanTask`, `projectRoot`
 - **Exports:** `handlePlanTask`
 

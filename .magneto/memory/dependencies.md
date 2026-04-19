@@ -9,6 +9,7 @@
 | `path` | 20 files |
 | `fs` | 8 files |
 | `commander` | 1 files |
+| `child_process` | 1 files |
 | `http` | 1 files |
 | `openai` | 1 files |
 | `chalk` | 1 files |
@@ -17,15 +18,16 @@
 
 | File | Imports From |
 |---|---|
-| `src/cli.ts` | `./utils/logger`, `./commands/init`, `./commands/refresh`, `./commands/doctor`, `./commands/plan`, `./commands/run`, `./commands/merge`, `./commands/generate`, `./commands/analyze` |
+| `src/cli.ts` | `./utils/logger`, `./commands/init`, `./commands/refresh`, `./commands/doctor`, `./commands/plan`, `./commands/run`, `./commands/merge`, `./commands/generate`, `./commands/analyze`, `./commands/query`, `../package.json` |
 | `src/commands/analyze.ts` | `../utils/logger`, `../utils/paths`, `../utils/fs` |
 | `src/commands/doctor.ts` | `../utils/logger`, `../utils/paths`, `../utils/fs` |
-| `src/commands/generate.ts` | `../utils/logger`, `../utils/paths`, `../utils/fs`, `../core/context`, `../core/security-engine` |
+| `src/commands/generate.ts` | `../utils/logger`, `../utils/paths`, `../utils/fs`, `../core/context`, `../core/security-engine`, `../utils/task-parser` |
 | `src/commands/init.ts` | `../utils/logger`, `../utils/paths`, `../core/scaffold`, `../core/power-pack-loader`, `../core/adapter-loader` |
 | `src/commands/merge.ts` | `../utils/logger`, `../utils/paths`, `../utils/fs`, `../core/merge-results` |
-| `src/commands/plan.ts` | `../utils/logger`, `../utils/paths`, `../utils/fs`, `../core/context`, `../core/security-engine` |
+| `src/commands/plan.ts` | `../utils/logger`, `../utils/paths`, `../utils/fs`, `../core/context`, `../core/security-engine`, `../utils/task-parser` |
+| `src/commands/query.ts` | `../utils/logger`, `../utils/paths`, `../utils/fs`, `../core/graph-engine` |
 | `src/commands/refresh.ts` | `../utils/logger`, `../utils/paths`, `../core/scaffold`, `../core/detect-packs`, `../core/power-pack-loader` |
-| `src/commands/run.ts` | `../utils/logger`, `../utils/paths`, `../utils/fs`, `../core/context`, `../core/security-engine`, `../runners/types` |
+| `src/commands/run.ts` | `../utils/logger`, `../utils/paths`, `../utils/fs`, `../core/context`, `../core/security-engine`, `../runners/types`, `../utils/task-parser` |
 | `src/core/adapter-loader.ts` | `../utils/logger`, `../utils/paths`, `../utils/fs` |
 | `src/core/context.ts` | `../utils/logger`, `../utils/paths`, `../utils/fs` |
 | `src/core/detect-packs.ts` | `../utils/fs`, `../utils/logger` |
@@ -34,15 +36,12 @@
 | `src/core/scaffold.ts` | `../utils/logger`, `../utils/fs` |
 | `src/core/security-engine.ts` | `../utils/logger` |
 | `src/mcp/server.ts` | `../utils/logger`, `./tools/plan-task`, `./tools/load-context`, `./tools/merge-results`, `./tools/security-check` |
-| `src/mcp/tools/load-context.ts` | `../server`, `../../utils/fs`, `../../core/context`, `../../utils/logger` |
+| `src/mcp/tools/load-context.ts` | `../server`, `../../utils/task-parser`, `../../core/context`, `../../utils/logger` |
 | `src/mcp/tools/merge-results.ts` | `../server`, `../../utils/fs`, `../../core/merge-results`, `../../utils/logger` |
-| `src/mcp/tools/plan-task.ts` | `../server`, `../../utils/fs`, `../../core/context`, `../../core/security-engine`, `../../utils/logger` |
-| `src/mcp/tools/security-check.ts` | `../server`, `../../utils/fs`, `../../core/context`, `../../core/security-engine`, `../../utils/logger` |
+| `src/mcp/tools/plan-task.ts` | `../server`, `../../utils/task-parser`, `../../core/context`, `../../core/security-engine`, `../../utils/logger` |
+| `src/mcp/tools/security-check.ts` | `../server`, `../../utils/task-parser`, `../../core/context`, `../../core/security-engine`, `../../utils/logger` |
 | `src/runners/copilot-cloud.ts` | `./types`, `../utils/logger` |
 | `src/runners/copilot-local.ts` | `./types`, `../utils/logger` |
 | `src/runners/openai.ts` | `./types`, `../utils/logger` |
 | `src/runners/types.ts` | `../core/context`, `../core/security-engine`, `./openai`, `./copilot-local`, `./copilot-cloud` |
-| `tests/core/context.test.ts` | `../../src/core/context`, `../../src/utils/fs` |
-| `tests/core/detect-packs.test.ts` | `../../src/core/detect-packs`, `../../src/utils/fs` |
-| `tests/core/merge-results.test.ts` | `../../src/core/merge-results` |
-| `tests/core/security-engine.test.ts` | `../../src/core/security-engine` |
+| `src/utils/task-parser.ts` | `../core/context`, `./logger` |

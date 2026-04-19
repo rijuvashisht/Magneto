@@ -1,8 +1,8 @@
 # Module: src/utils
 
-- **Files:** 3
-- **Total lines:** 185
-- **Total size:** 5.0 KB
+- **Files:** 4
+- **Total lines:** 386
+- **Total size:** 10.5 KB
 
 ## Exports
 
@@ -33,6 +33,7 @@
 - `vscodePath`
 - `getTemplatesDir`
 - `isMagnetoProject`
+- `parseTaskFile`
 
 ## Dependencies
 
@@ -40,6 +41,10 @@
 - `fs`
 - `path`
 - `chalk`
+
+### Internal
+- `../core/context`
+- `./logger`
 
 ## Files
 
@@ -60,6 +65,13 @@
 ### `paths.ts`
 
 - **Path:** `src/utils/paths.ts`
-- **Lines:** 53 | **Size:** 1.5 KB
+- **Lines:** 58 | **Size:** 1.8 KB
 - **Functions:** `resolveProjectRoot`, `magnetoPath`, `githubPath`, `vscodePath`, `getTemplatesDir`, `isMagnetoProject`
 - **Exports:** `MAGNETO_DIR`, `GITHUB_DIR`, `VSCODE_DIR`, `AGENTS_DIR`, `COPILOT_INSTRUCTIONS`, `MAGNETO_CONFIG`, `MAGNETO_MIN_CONFIG`, `MAGNETO_START`, `MAGNETO_SUBDIRS`, `resolveProjectRoot`, `magnetoPath`, `githubPath`, `vscodePath`, `getTemplatesDir`, `isMagnetoProject`
+
+### `task-parser.ts`
+
+- **Path:** `src/utils/task-parser.ts`
+- **Lines:** 196 | **Size:** 5.2 KB
+- **Functions:** `parseTaskFile`, `parseMarkdownTask`, `parseYaml`, `extractFirstHeading`
+- **Exports:** `parseTaskFile`

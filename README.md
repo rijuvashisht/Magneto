@@ -38,13 +38,13 @@
 
 ---
 
-Magneto AI is a multi-agent AI orchestration system that brings structured reasoning, security guardrails, and pluggable intelligence to your codebase. It integrates natively with GitHub Copilot, OpenAI APIs, and optional tools like Graphify.
+Magneto AI is a multi-agent AI orchestration system that brings structured reasoning, security guardrails, and pluggable intelligence to your codebase — designed to work alongside every major AI coding assistant and agent gateway.
 
 ---
 
-## 🧠 What Is Magneto AI?
+## 🧠 About Magneto AI
 
-Magneto AI is **not** another AI wrapper. It is a **reasoning engine** and **control plane** that:
+Magneto AI is **not** another AI wrapper. It is a **reasoning engine**, **governance layer**, and **agent control plane** that sits between your team and any AI coding assistant — enforcing security, planning tasks, and building deep project understanding before a single line is written or deleted.
 
 - **Orchestrates multiple AI agents** with role-based task delegation
 - **Enforces security guardrails** — protected paths, blocked actions, approval workflows
@@ -54,6 +54,90 @@ Magneto AI is **not** another AI wrapper. It is a **reasoning engine** and **con
 - **Extends via Power Packs** — language, framework, cloud, and project-type intelligence
 
 Think of it as the nervous system connecting your AI tools to your codebase — with the safety controls an enterprise demands.
+
+### Works With Every AI Coding Assistant
+
+Magneto AI acts as the **skill and governance layer** for the full ecosystem of AI coding assistants and agent gateways — so your rules, security checks, and task plans travel with you regardless of which tool you use:
+
+| Assistant / Gateway | Integration |
+|---|---|
+| **Claude Code** | MCP tools via `mcp.json`, skill files injected into context |
+| **Codex / OpenAI** | Direct API runner with structured JSON task execution |
+| **OpenCode** | Prompt generation via `magneto generate` scoped to relevant files only |
+| **Cursor** | Skill files + `.cursor/rules/` auto-generated on `magneto init` |
+| **Gemini CLI** | MCP-compatible tool layer (`plan_task`, `security_check`, etc.) |
+| **GitHub Copilot CLI** | MCP server + `.github/agents/` + `copilot-instructions.md` |
+| **VS Code Copilot Chat** | `.github/copilot-instructions.md` + MCP config in `.vscode/mcp.json` |
+| **Aider** | Skill injection via adapter system + `AGENTS.md` |
+| **OpenClaw** | Native plugin on ClawHub — `openclaw plugins install clawhub:openclaw-magneto` |
+| **Factory Droid** | Governance adapter via MCP tool hooks |
+| **Trae** | Skill injection via adapter system + `AGENTS.md` |
+| **Hermes** | Skill injection via adapter system |
+| **Kiro** | Skill files in `.kiro/skills/` + steering rules |
+| **Google Antigravity** | MCP-compatible `security_check` and `plan_task` tools |
+
+One `magneto init`. All assistants governed.
+
+### Turn Any Folder Into a Queryable Knowledge Graph
+
+Magneto AI's `analyze` command ingests your entire project and builds a **knowledge graph** with community detection, confidence-scored edges, and interactive visualization:
+
+```
+magneto analyze
+```
+
+- **Source code** → exports, imports, classes, functions, dependency maps, EXTRACTED edges (confidence 1.0)
+- **Module structure** → directory-level nodes with INFERRED co-location edges (confidence 0.5–0.9)
+- **Community detection** → Louvain algorithm identifies clusters of related code
+- **God nodes** → highest-degree concepts that everything connects through
+- **Config & docs** → environment shapes, schema definitions, feature flags
+
+**Outputs:**
+
+```
+.magneto/memory/
+├── graph.json            queryable knowledge graph (nodes, edges, communities)
+├── graph.html            interactive vis.js visualization — open in any browser
+├── graph-report.md       god nodes, communities, edge distribution, suggested questions
+├── root-summary.md       project overview + token savings
+├── file-index.md         all files with signatures
+├── dependencies.md       import/dependency map
+└── modules/*.md          per-directory summaries
+```
+
+**Query the graph from the terminal:**
+
+```bash
+magneto query "auth flow"                        # BFS subgraph extraction
+magneto query "security" --dfs --budget 500      # DFS with token budget
+magneto path "evaluateSecurity" "initCommand"    # shortest path between nodes
+```
+
+The result: every AI prompt is pre-scoped to only the files that matter — **fewer tokens**, faster responses, no hallucinated file paths.
+
+### Magneto + Graphify: Deep Multimodal Analysis
+
+For full multimodal support — PDFs, images, screenshots, video, audio, and 25-language tree-sitter AST — pair Magneto with [Graphify](https://github.com/safishamsi/graphify):
+
+```bash
+pip install graphifyy
+magneto analyze --deep       # shells to graphify for multimodal extraction
+```
+
+When `--deep` is passed, Magneto invokes Graphify under the hood and imports its richer graph (Leiden clustering, Claude vision extraction, Whisper transcription) into `.magneto/memory/`. If Graphify isn't installed, Magneto falls back to its native code-only graph.
+
+| Capability | `magneto analyze` | `magneto analyze --deep` |
+|---|---|---|
+| Code parsing | Regex (JS/TS, Java, Python, Go, + more) | tree-sitter AST (25 languages) |
+| Knowledge graph | Louvain communities + god nodes | Leiden communities + hyperedges |
+| Confidence scores | EXTRACTED / INFERRED | + AMBIGUOUS with confidence 0.0–1.0 |
+| Interactive visualization | vis.js graph.html | vis.js graph.html (richer) |
+| PDFs, images, video | — | Claude vision + Whisper transcription |
+| Graph querying | `magneto query` / `magneto path` | Same + `graphify query` / `graphify explain` |
+
+### What It Is Not
+
+Magneto AI is **not** an AI model, a chat interface, or a replacement for your coding assistant. It is the **layer of intelligence underneath** — planning, securing, and contextualizing every task before your assistant runs it.
 
 ---
 

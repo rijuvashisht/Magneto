@@ -1,8 +1,8 @@
 # Module: src
 
 - **Files:** 1
-- **Total lines:** 178
-- **Total size:** 6.5 KB
+- **Total lines:** 219
+- **Total size:** 8.3 KB
 
 ## Dependencies
 
@@ -19,10 +19,12 @@
 - `./commands/merge`
 - `./commands/generate`
 - `./commands/analyze`
+- `./commands/query`
+- `../package.json`
 
 ## Files
 
 ### `cli.ts`
 
 - **Path:** `src/cli.ts`
-- **Lines:** 178 | **Size:** 6.5 KB
+- **Lines:** 219 | **Size:** 8.3 KB
