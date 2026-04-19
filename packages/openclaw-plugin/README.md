@@ -51,6 +51,21 @@ npm install -g magneto-ai
 Install the plugin:
 
 ```bash
+# 1. Install clawhub CLI
+npm install -g clawhub
+
+# 2. Authenticate (one-time)
+clawhub auth login
+
+# 3. Publish — path is the plugin folder, not org/name
+clawhub package publish ./packages/openclaw-plugin \
+  --family code-plugin \
+  --name openclaw-magneto \
+  --display-name "Magneto AI" \
+  --source-repo rijuvashisht/Magneto \
+  --source-path packages/openclaw-plugin
+
+# 4. Users install it from their own gateway
 openclaw plugins install clawhub:magneto-ai/openclaw-magneto
 openclaw gateway restart
 ```
