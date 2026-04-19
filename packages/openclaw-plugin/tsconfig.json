@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": false,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "paths": {
+      "openclaw/plugin-sdk/plugin-entry": ["./types/openclaw-plugin-sdk.d.ts"],
+      "@sinclair/typebox": ["./types/typebox-stub.d.ts"]
+    }
+  },
+  "include": ["index.ts", "types/**/*.d.ts"]
+}
