@@ -1,6 +1,33 @@
-# ⚡ Magneto Framework
+<p align="center">
+  <img src="docs/images/magneto-helmet.svg" alt="Magneto Logo" width="120" />
+</p>
 
-**Repo-local AI reasoning framework & agent control plane for enterprise environments.**
+<h1 align="center">⚡ Magneto Framework</h1>
+
+<p align="center">
+  <strong>Repo-local AI reasoning framework & agent control plane for enterprise environments.</strong>
+</p>
+
+<p align="center">
+  <em>All AI Engineering Tasks. Any Language or Stack. Enterprise Security and Guardrails.<br/>
+  One Magneto To Pull Them All.</em>
+</p>
+
+<p align="center">
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-architecture">Architecture</a> •
+  <a href="#-power-pack-system">Power Packs</a> •
+  <a href="#-copilot-integration">Copilot</a> •
+  <a href="#-cli-reference">CLI Reference</a>
+</p>
+
+---
+
+<p align="center">
+  <img src="docs/images/magneto-vision.png" alt="Magneto — The Starting Point for AI Developers" width="600" />
+</p>
+
+---
 
 Magneto is a multi-agent AI orchestration system that brings structured reasoning, security guardrails, and pluggable intelligence to your codebase. It integrates natively with GitHub Copilot, OpenAI APIs, and optional tools like Graphify.
 
@@ -47,7 +74,7 @@ npm install magneto-framework
 Or clone and build:
 
 ```bash
-git clone https://github.com/your-org/magneto-framework.git
+git clone https://github.com/rijuvashisht/Magneto.git
 cd magneto-framework
 npm install
 npm run build
@@ -88,6 +115,13 @@ npx magneto merge .magneto/cache --format markdown
 
 ## 📦 Architecture
 
+<p align="center">
+  <img src="docs/images/magneto-architecture.png" alt="Magneto Architecture Diagram" width="800" />
+</p>
+
+<details>
+<summary>Text-based architecture diagram</summary>
+
 ```
 ┌─────────────────────────────────────────────────────┐
 │                   CLI (commander)                     │
@@ -108,6 +142,7 @@ npx magneto merge .magneto/cache --format markdown
 │            Graphify │ (extensible)                     │
 └─────────────────────────────────────────────────────┘
 ```
+</details>
 
 ---
 
@@ -373,4 +408,7 @@ MIT — see [LICENSE](./LICENSE)
 
 ---
 
-Built with ⚡ by the Magneto team.
+<p align="center">
+  <img src="docs/images/magneto-helmet.svg" alt="Magneto" width="40" /><br/>
+  Built with ⚡ by the Magneto team.
+</p>

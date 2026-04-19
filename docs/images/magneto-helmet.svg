@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="helmet-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c0392b;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8e1b1b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5a0f0f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="visor-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a1a3e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2c3e6b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a3e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="60" cy="60" r="56" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+  <!-- Helmet dome -->
+  <path d="M30 65 Q30 25 60 18 Q90 25 90 65 L85 65 Q85 30 60 24 Q35 30 35 65 Z" fill="url(#helmet-gradient)" filter="url(#shadow)"/>
+  <!-- Helmet side panels -->
+  <path d="M30 65 L25 78 Q25 88 35 90 L45 88 L40 65 Z" fill="url(#helmet-gradient)"/>
+  <path d="M90 65 L95 78 Q95 88 85 90 L75 88 L80 65 Z" fill="url(#helmet-gradient)"/>
+  <!-- Central crest -->
+  <path d="M56 18 L56 65 L64 65 L64 18 Q60 16 56 18 Z" fill="#e74c3c"/>
+  <!-- Visor -->
+  <path d="M35 55 Q38 45 60 42 Q82 45 85 55 L85 70 Q82 75 60 78 Q38 75 35 70 Z" fill="url(#visor-gradient)" stroke="#4a5568" stroke-width="1"/>
+  <!-- Visor eye slits -->
+  <path d="M40 60 Q48 55 56 58" stroke="#7eb8ff" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.9"/>
+  <path d="M80 60 Q72 55 64 58" stroke="#7eb8ff" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.9"/>
+  <!-- Visor glow -->
+  <path d="M40 60 Q48 55 56 58" stroke="#a8d4ff" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.4"/>
+  <path d="M80 60 Q72 55 64 58" stroke="#a8d4ff" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.4"/>
+  <!-- Chin guard -->
+  <path d="M40 78 Q50 85 60 86 Q70 85 80 78 L78 82 Q68 90 60 91 Q52 90 42 82 Z" fill="#6b1515"/>
+  <!-- Helmet shine -->
+  <path d="M38 30 Q50 22 60 20 Q42 28 38 45 Z" fill="url(#shine)"/>
+</svg>
