@@ -1,11 +1,11 @@
 // This should match the version in the main magneto package.json
 // Update this when releasing new versions
-export const MAGNETO_VERSION = "0.12.1";
+export const MAGNETO_VERSION = "0.12.0";
 
 export const VERSION_HIGHLIGHTS = [
-  "Redesigned Landing Page",
-  "Magnetic Field Animation",
-  "Light/Dark Mode Support",
+  "Telepathy Auto-Handoff",
+  "Task Completion Tracking",
+  "Cascade/Gemini Runners",
 ];
 
 export const getVersionBadgeText = () => {
