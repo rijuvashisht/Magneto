@@ -1,0 +1,282 @@
+# Commands Reference
+
+Complete reference for all Magneto AI CLI commands.
+
+## Core Commands
+
+### `magneto init`
+
+Initialize Magneto AI in the current project.
+
+```bash
+magneto init [options]
+```
+
+**Options:**
+- `--with <packs...>` — Initialize with power packs (typescript, nextjs, react)
+- `--adapter <name>` — Configure adapter (claude, graphify, manus)
+- `--force` — Overwrite existing configuration
+
+**Examples:**
+```bash
+magneto init
+magneto init --with typescript nextjs
+magneto init --adapter graphify
+```
+
+---
+
+### `magneto plan`
+
+Generate an execution plan for a task file.
+
+```bash
+magneto plan <taskFile> [options]
+```
+
+**Arguments:**
+- `taskFile` — Path to task file (.md, .yaml, or .json)
+
+**Options:**
+- `--dry-run` — Preview plan without saving
+
+**Examples:**
+```bash
+magneto plan tasks/add-auth.md
+magneto plan task.json --dry-run
+```
+
+---
+
+### `magneto run`
+
+Execute a task through the Magneto AI pipeline.
+
+```bash
+magneto run <taskFile> [options]
+```
+
+**Options:**
+- `--runner <runner>` — Runner: openai, copilot-local, copilot-cloud (default: openai)
+- `--mode <mode>` — Mode: observe, assist, execute, restricted (default: assist)
+- `--interactive` — Execute with interactive approval for each step
+- `--stream` — Stream output in real-time
+- `--decompose` — Force task decomposition
+- `--max-sub-agents <n>` — Maximum sub-agents to spawn
+
+**Examples:**
+```bash
+magneto run tasks/add-auth.md
+magneto run task.json --runner openai --mode execute
+magneto run task.json --interactive --stream
+```
+
+---
+
+### `magneto task`
+
+Manage Magneto AI task files.
+
+```bash
+magneto task [description] [options]
+magneto task create <type> <title> [options]
+magneto task list [options]
+magneto task show <taskFile>
+magneto task validate <taskFile>
+magneto task delete <taskFile>
+```
+
+**Quick Create:**
+```bash
+magneto task "Add user dashboard"           # Creates feature task
+magneto task "Fix login bug" --type bug     # Creates bug task
+```
+
+**Create Command:**
+```bash
+magneto task create feature "Add OAuth"
+magneto task create bug "Fix checkout" --priority high
+magneto task create security "Audit API" --roles orchestrator backend
+```
+
+**List Command:**
+```bash
+magneto task list
+magneto task list --type feature
+magneto task list --priority high
+```
+
+---
+
+### `magneto generate`
+
+Generate a scoped, role-focused prompt from a task file.
+
+```bash
+magneto generate <taskFile> [options]
+```
+
+**Options:**
+- `--output <file>` — Save prompt to file instead of stdout
+- `--role <role>` — Generate for specific role (orchestrator, backend, tester)
+
+**Examples:**
+```bash
+magneto generate tasks/add-auth.md
+magneto generate tasks/add-auth.md --role backend
+magneto generate tasks/add-auth.md --output prompt.md
+```
+
+---
+
+### `magneto merge`
+
+Merge results from multiple agent output files.
+
+```bash
+magneto merge <outputDir> [options]
+```
+
+**Options:**
+- `--format <format>` — Output format: md, json (default: md)
+
+**Examples:**
+```bash
+magneto merge .magneto/cache --format md
+magneto merge .magneto/cache --format json
+```
+
+---
+
+### `magneto analyze`
+
+Analyze the codebase and build structured memory.
+
+```bash
+magneto analyze [options]
+```
+
+**Options:**
+- `--output <file>` — Save analysis to file
+- `--detailed` — Include detailed metrics
+
+---
+
+## Knowledge Graph Commands
+
+### `magneto graph build`
+
+Build the knowledge graph from the codebase.
+
+```bash
+magneto graph build [options]
+```
+
+**Options:**
+- `--force` — Rebuild from scratch
+- `--output <file>` — Custom output path
+
+---
+
+### `magneto graph view`
+
+View the knowledge graph in a browser.
+
+```bash
+magneto graph view
+```
+
+---
+
+### `magneto graph query`
+
+Query the knowledge graph.
+
+```bash
+magneto graph query <text>
+```
+
+**Example:**
+```bash
+magneto graph query "authentication"
+```
+
+---
+
+## Utility Commands
+
+### `magneto doctor`
+
+Validate Magneto AI setup and diagnose issues.
+
+```bash
+magneto doctor
+```
+
+---
+
+### `magneto refresh`
+
+Refresh configuration, re-detect power packs, regenerate scaffolding.
+
+```bash
+magneto refresh
+```
+
+---
+
+### `magneto telepathy`
+
+Automatic task discovery and execution.
+
+```bash
+magneto telepathy [options]
+```
+
+**Options:**
+- `--dry-run` — Show what would be done without executing
+- `--auto` — Auto-approve and execute compatible tasks
+- `--source <type>` — Filter by source (jira, github, requirements)
+
+**Examples:**
+```bash
+magneto telepathy              # Discover and classify
+magneto telepathy --dry-run    # Preview only
+magneto telepathy --auto       # Auto-execute
+```
+
+---
+
+## Global Options
+
+These options work with any command:
+
+```bash
+magneto [command] [options]
+
+Options:
+  -V, --version   Show version number
+  -h, --help      Show help
+```
+
+## Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `OPENAI_API_KEY` | OpenAI API key | For OpenAI runner |
+| `MAGNETO_COPILOT_CLOUD_ENDPOINT` | Copilot Cloud endpoint | For Copilot Cloud runner |
+| `MAGNETO_COPILOT_CLOUD_TOKEN` | Copilot Cloud token | For Copilot Cloud runner |
+| `MAGNETO_MCP_PORT` | MCP server port (default: 3100) | Optional |
+
+---
+
+## Getting Help
+
+```bash
+# Help for any command
+magneto [command] --help
+
+# Examples
+magneto run --help
+magneto task create --help
+```

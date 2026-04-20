@@ -269,20 +269,26 @@ program
   .description('Automatic task discovery and execution. Discovers tasks from Jira, GitHub, requirements folder; auto-classifies and executes with appropriate telepathy level.')
   .option('--dry-run', 'Show what would be done without executing')
   .option('--auto', 'Auto-approve and execute all compatible tasks')
+  .option('--force', 'Re-run all tasks even if already completed')
+  .option('--reset', 'Clear completed task history')
   .option('--source <type>', 'Task source filter (all|jira|github|requirements|tasks)', 'all')
   .addHelpText('after', `
 Examples:
   $ magneto telepathy              # Discover and classify tasks
   $ magneto telepathy --dry-run    # Preview without executing
   $ magneto telepathy --auto       # Auto-execute compatible tasks
+  $ magneto telepathy --force      # Re-run all including completed
+  $ magneto telepathy --reset      # Clear completion history
   $ magneto telepathy --source jira # Only Jira tasks
 
 How it works:
   1. Discovers tasks from configured sources
-  2. Auto-classifies (feature/bug/security/performance)
-  3. Assigns roles based on task type
-  4. Determines telepathy level (0-3) based on risk
-  5. Auto-executes (Level 2-3) or generates plan (Level 0-1)
+  2. Skips templates and already-completed tasks
+  3. Auto-classifies (feature/bug/security/performance)
+  4. Assigns roles based on task type
+  5. Determines telepathy level (0-3) based on risk
+  6. Auto-executes (Level 2-3) or generates plan (Level 0-1)
+  7. Marks tasks as completed after processing
 
 Telepathy Levels:
   Level 0: Manual — Generate prompts only

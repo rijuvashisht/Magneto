@@ -1,0 +1,171 @@
+# Security
+
+Magneto AI prioritizes safety with multiple layers of security guardrails.
+
+## Security Architecture
+
+<Mermaid chart={`
+flowchart TD
+    A[👤 User Input] --> B{🔒 Security Engine}
+    
+    B -->|Evaluates Risk| C[Risk Assessment]
+    B -->|Checks Policies| D[Policy Check]
+    
+    C --> E{Risk Level?}
+    
+    E -->|Low Risk| F[✅ Auto Execute]
+    E -->|Medium Risk| G[⚠️ Single Approval]
+    E -->|High Risk| H[🚫 Multi Approval]
+    
+    F --> I[🚀 Execute Task]
+    G --> J[👤 Await Approval]
+    H --> K[👥 Required Reviews]
+    
+    J -->|Approved| I
+    K -->|Approved| I
+    
+    style F fill:#238636,stroke:#3fb950,color:#fff
+    style G fill:#9e6a03,stroke:#e3b341,color:#fff
+    style H fill:#da3633,stroke:#f85149,color:#fff
+    style B fill:#1f6feb,stroke:#58a6ff,color:#fff
+`} />
+
+## Risk Levels
+
+| Level | Description | Auto-Execute | Approval |
+|-------|-------------|--------------|----------|
+| **Low** | Documentation, tests, styling | ✓ | Not required |
+| **Medium** | Feature work, refactoring | — | Single approval |
+| **High** | Auth, security, deployment | — | Multi approval |
+
+## Security Policies
+
+### Protected Paths
+
+Prevent AI from accessing sensitive files:
+
+```json
+{
+  "security": {
+    "protectedPaths": [
+      ".env",
+      "src/config/secrets.ts",
+      "credentials.json",
+      "**/*.key"
+    ]
+  }
+}
+```
+
+### Blocked Actions
+
+Prohibit dangerous operations:
+
+```json
+{
+  "security": {
+    "blockedActions": [
+      "rm -rf /",
+      "drop database",
+      "delete production"
+    ]
+  }
+}
+```
+
+### Approval Gates
+
+Require explicit approval for critical operations:
+
+```json
+{
+  "security": {
+    "approvalRequired": [
+      "production-deploy",
+      "database-migration",
+      "auth-changes"
+    ]
+  }
+}
+```
+
+## Execution Modes
+
+### Observe Mode
+
+Read-only analysis, no modifications:
+
+```bash
+magneto run task.md --mode observe
+```
+
+Safe for:
+- Code review
+- Architecture analysis
+- Documentation generation
+
+### Assist Mode (Default)
+
+Suggests changes, requires approval:
+
+```bash
+magneto run task.md --mode assist
+```
+
+Recommended for:
+- Daily development
+- New feature work
+- Code refactoring
+
+### Execute Mode
+
+Auto-executes low-risk tasks:
+
+```bash
+magneto run task.md --mode execute
+```
+
+Use with caution:
+- Tests only in CI
+- Automated formatting
+- Documentation updates
+
+### Restricted Mode
+
+Maximum oversight:
+
+```bash
+magneto run task.md --mode restricted
+```
+
+Required for:
+- Production systems
+- Security-critical code
+- Compliance environments
+
+## Interactive Approval
+
+Review each AI action before execution:
+
+```bash
+magneto run task.md --interactive
+```
+
+Approval workflow:
+1. AI proposes change
+2. Diff displayed
+3. You approve/reject/modify
+4. Only then executed
+
+## Security Checklist
+
+- [ ] Protected paths configured
+- [ ] Blocked actions defined
+- [ ] Approval gates set for critical ops
+- [ ] Mode appropriate for environment
+- [ ] Secrets not in AI context
+- [ ] Audit logging enabled
+
+---
+
+**Next:** Learn about the [Knowledge Graph](/docs/knowledge-graph) for codebase visualization.

@@ -1,0 +1,119 @@
+# Knowledge Graph
+
+Visualize and explore your codebase architecture with an interactive knowledge graph.
+
+## Overview
+
+The Knowledge Graph captures:
+- File relationships and imports
+- Function/class hierarchies
+- Module dependencies
+- Community clusters
+- "God nodes" (highly connected files)
+
+## Building the Graph
+
+```bash
+# Build from current codebase
+magneto graph build
+
+# Force rebuild
+magneto graph build --force
+
+# Custom output
+magneto graph build --output ./my-graph.json
+```
+
+## Interactive Viewer
+
+Launch the browser-based viewer:
+
+```bash
+magneto graph view
+```
+
+Features:
+- Pan and zoom
+- Node selection
+- Path finding
+- Community filtering
+- Search
+
+## Querying the Graph
+
+Find relevant code from natural language:
+
+```bash
+magneto graph query "authentication"
+magneto graph query "database models"
+magneto graph query "API routes"
+```
+
+## Graph Metrics
+
+### Communities
+
+Detect modular clusters in your codebase:
+
+```bash
+magneto graph communities
+```
+
+Example output:
+```
+Community 1: 12 files (Auth)
+  - src/auth/login.ts
+  - src/auth/logout.ts
+  - src/middleware/auth.ts
+
+Community 2: 8 files (Database)
+  - src/db/connection.ts
+  - src/models/user.ts
+```
+
+### God Nodes
+
+Find highly connected files (architectural hotspots):
+
+```bash
+magneto graph god-nodes
+```
+
+These files are:
+- Frequently imported
+- High impact if changed
+- Candidates for refactoring
+
+### Path Finding
+
+Find connections between files:
+
+```bash
+magneto graph path src/app/page.tsx src/lib/auth.ts
+```
+
+## Stats and Analytics
+
+```bash
+magneto graph stats
+```
+
+Output includes:
+- Total files
+- Total relationships
+- Average connectivity
+- Community count
+- God node list
+
+## Exporting
+
+Export graph data for external tools:
+
+```bash
+magneto graph export --format json
+magneto graph export --format graphml
+```
+
+---
+
+**Next:** Discover [Power Packs](/docs/power-packs) for framework-specific intelligence.

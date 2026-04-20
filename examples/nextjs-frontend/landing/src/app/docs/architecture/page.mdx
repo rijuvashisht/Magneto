@@ -1,0 +1,217 @@
+# Architecture
+
+Magneto AI is built on a five-layer architecture that separates concerns while enabling powerful multi-agent orchestration.
+
+## System Overview
+
+<Mermaid chart={`
+flowchart TB
+    subgraph CLI["📱 CLI Layer"]
+        A1[init]
+        A2[plan]
+        A3[run]
+        A4[graph]
+        A5[telepathy]
+    end
+
+    subgraph ORCH["⚙️ Orchestration Layer"]
+        B1[Task Classifier]
+        B2[Agent Spawner]
+        B3[Result Merger]
+        B4[Security Engine]
+    end
+
+    subgraph AGENTS["🤖 Agent Layer"]
+        C1[Orchestrator]
+        C2[Backend]
+        C3[Tester]
+        C4[Requirements]
+        C5[Frontend]
+        C6[DevOps]
+    end
+
+    subgraph INTEL["🧠 Intelligence Layer"]
+        D1[Knowledge Graph]
+        D2[Memory Store]
+        D3[Checkpoints]
+        D4[Telepathy Engine]
+    end
+
+    subgraph RUNNERS["🏃 Runner Layer"]
+        E1[OpenAI]
+        E2[Copilot Local]
+        E3[Copilot Cloud]
+        E4[Custom]
+    end
+
+    CLI --> ORCH
+    ORCH --> AGENTS
+    AGENTS --> INTEL
+    INTEL --> RUNNERS
+`} />
+
+## Layer Details
+
+### 1. CLI Layer
+
+The user interface to Magneto AI. Commands are declarative — you describe what you want, not how to do it.
+
+**Key Commands:**
+- `init` — Project scaffolding
+- `plan` — Task analysis and classification
+- `run` — Multi-agent execution
+- `graph` — Knowledge graph operations
+- `telepathy` — Auto-discovery
+
+### 2. Orchestration Layer
+
+The control plane that coordinates all AI operations.
+
+**Components:**
+
+| Component | Purpose |
+|-----------|---------|
+| Task Classifier | Determines task type, complexity, and required roles |
+| Agent Spawner | Creates specialized agent instances |
+| Result Merger | Consolidates multi-agent outputs |
+| Security Engine | Evaluates risks and enforces guardrails |
+
+### 3. Agent Layer
+
+Specialized AI agents with distinct responsibilities:
+
+- **Orchestrator** — Coordinates task decomposition and execution order
+- **Backend** — Handles APIs, data models, and server logic
+- **Tester** — Generates tests and validates coverage
+- **Requirements** — Traces specs to implementation
+- **Frontend** — UI components and styling
+- **DevOps** — Infrastructure and deployment
+
+### 4. Intelligence Layer
+
+Persistent systems that retain knowledge:
+
+**Knowledge Graph**
+- File relationships and dependencies
+- Function/class hierarchies
+- Import/export mapping
+- Community detection for modular architecture
+
+**Memory Store**
+- Project decisions and rationale
+- Architecture patterns
+- Security policies
+- Agent learnings
+
+**Checkpoints**
+- Execution state persistence
+- Resume capability
+- Rollback support
+
+**Telepathy Engine**
+- Jira/GitHub integration
+- Requirements parsing
+- Auto-classification
+- Continuous discovery
+
+### 5. Runner Layer
+
+AI model interfaces:
+
+- **OpenAI** — GPT-4, GPT-3.5 via API
+- **Copilot Local** — GitHub Copilot in IDE
+- **Copilot Cloud** — Copilot API endpoint
+- **Custom** — Bring your own model
+
+## Data Flow
+
+<Mermaid chart={`
+sequenceDiagram
+    actor User
+    participant CLI as CLI Parser
+    participant Planner as Planner
+    participant KG as Knowledge Graph
+    participant Memory as Memory Store
+    participant Security as Security Engine
+    participant Spawner as Agent Spawner
+    participant Backend as Backend Agent
+    participant Tester as Tester Agent
+    participant Runner as Runner
+    participant OpenAI as OpenAI API
+    participant Merger as Result Merger
+    participant Files as File System
+
+    User->>CLI: Command
+    CLI->>Planner: Parse & Route
+    
+    Planner->>KG: Query Context
+    KG-->>Planner: Dependencies
+    Planner->>Memory: Load History
+    Memory-->>Planner: Decisions
+    
+    Planner->>Security: Evaluate Risk
+    Security-->>Planner: Risk Level
+    
+    Planner->>Spawner: Spawn Agents
+    Spawner->>Backend: Delegate
+    Spawner->>Tester: Delegate
+    
+    Backend->>Runner: Execute
+    Tester->>Runner: Execute
+    Runner->>OpenAI: API Call
+    OpenAI-->>Runner: Response
+    
+    Runner-->>Backend: Result
+    Runner-->>Tester: Result
+    
+    Backend-->>Merger: Output
+    Tester-->>Merger: Output
+    
+    Merger->>Files: Write Changes
+    Merger->>Memory: Save Decisions
+`} />
+
+## Extension Points
+
+Magneto AI is designed for extensibility:
+
+**Power Packs**
+```bash
+.magneto/packs/
+├── typescript/
+│   ├── rules.md
+│   └── pack.json
+├── nextjs/
+│   ├── rules.md
+│   └── pack.json
+```
+
+**Adapters**
+```typescript
+// Custom runner adapter
+export class MyAdapter implements RunnerAdapter {
+  async execute(input: RunnerInput): Promise<RunnerOutput> {
+    // Implementation
+  }
+}
+```
+
+**Hooks**
+- Pre-plan
+- Pre-execute
+- Post-execute
+- On-checkpoint
+
+## Performance Characteristics
+
+| Metric | Value |
+|--------|-------|
+| Task Planning | < 2s |
+| Agent Spawning | < 500ms |
+| Graph Build (10k files) | ~30s |
+| Memory Query | < 100ms |
+| Streaming Latency | < 100ms |
+
+---
+
+**Next:** Learn about [Security](/docs/security) guardrails and policies.

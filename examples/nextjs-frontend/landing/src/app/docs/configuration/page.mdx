@@ -1,0 +1,107 @@
+# Configuration
+
+Configure Magneto AI to match your workflow and security requirements.
+
+## Global Configuration
+
+Global settings are stored in `~/.magneto/config.json`:
+
+```json
+{
+  "defaultRunner": "openai",
+  "openai": {
+    "model": "gpt-4",
+    "temperature": 0.7
+  },
+  "security": {
+    "defaultMode": "assist",
+    "autoApproveLowRisk": false
+  }
+}
+```
+
+## Project Configuration
+
+Project-specific settings in `.magneto/config.json`:
+
+```json
+{
+  "name": "my-project",
+  "version": "1.0.0",
+  "mode": "assist",
+  "runner": "openai",
+  "powerPacks": ["typescript", "nextjs"],
+  "adapters": ["graphify"],
+  "security": {
+    "protectedPaths": ["src/config/secrets.ts"],
+    "blockedActions": ["rm -rf", "drop database"],
+    "approvalRequired": ["production-deploy"]
+  },
+  "agents": {
+    "maxConcurrent": 4,
+    "timeout": 300000
+  }
+}
+```
+
+## Security Modes
+
+| Mode | Description | Use Case |
+|------|-------------|----------|
+| `observe` | Read-only, no modifications | Audit, learning |
+| `assist` | Suggests changes, requires approval | Daily development |
+| `execute` | Auto-executes low-risk tasks | Trusted workflows |
+| `restricted` | High oversight, max approvals | Sensitive projects |
+
+## Runner Configuration
+
+### OpenAI Runner
+
+```json
+{
+  "runner": "openai",
+  "openai": {
+    "model": "gpt-4",
+    "temperature": 0.7,
+    "maxTokens": 4000
+  }
+}
+```
+
+Environment variable:
+```bash
+export OPENAI_API_KEY="sk-..."
+```
+
+### Copilot Cloud Runner
+
+```json
+{
+  "runner": "copilot-cloud",
+  "copilotCloud": {
+    "endpoint": "https://api.github.com/copilot",
+    "model": "gpt-4"
+  }
+}
+```
+
+Environment variables:
+```bash
+export MAGNETO_COPILOT_CLOUD_ENDPOINT="..."
+export MAGNETO_COPILOT_CLOUD_TOKEN="..."
+```
+
+## Environment Variables
+
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `OPENAI_API_KEY` | OpenAI API authentication | — |
+| `MAGNETO_COPILOT_CLOUD_ENDPOINT` | Copilot Cloud API URL | — |
+| `MAGNETO_COPILOT_CLOUD_TOKEN` | Copilot Cloud token | — |
+| `MAGNETO_MCP_PORT` | MCP server port | 3100 |
+| `MAGNETO_LOG_LEVEL` | Logging verbosity | info |
+| `EDITOR` | Default editor for task files | code |
+
+---
+
+**Next:** Explore [Power Packs](/docs/power-packs) for framework-specific configurations.

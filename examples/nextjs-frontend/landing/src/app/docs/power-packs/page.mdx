@@ -1,0 +1,162 @@
+# Power Packs
+
+Pre-configured intelligence packs for specific languages, frameworks, and project types.
+
+## What are Power Packs?
+
+Power Packs bundle:
+- Framework-specific rules
+- Best practices
+- Common patterns
+- Security guidelines
+- Testing conventions
+
+## Available Packs
+
+### Language Packs
+
+**TypeScript**
+```bash
+magneto init --with typescript
+```
+- Strict type checking rules
+- Interface vs type preferences
+- Generic patterns
+- Decorator conventions
+
+**Python**
+```bash
+magneto init --with python
+```
+- PEP 8 compliance
+- Type hint conventions
+- Async/await patterns
+- Import organization
+
+### Framework Packs
+
+**Next.js**
+```bash
+magneto init --with nextjs
+```
+- App Router conventions
+- Server/Client component rules
+- API route patterns
+- Caching strategies
+
+**React**
+```bash
+magneto init --with react
+```
+- Hook conventions
+- Component patterns
+- State management
+- Performance optimization
+
+**Node.js**
+```bash
+magneto init --with node
+```
+- Express/Fastify patterns
+- Middleware conventions
+- Error handling
+- Logging standards
+
+### Project Type Packs
+
+**AI Platform**
+```bash
+magneto init --with ai-platform
+```
+- LLM integration patterns
+- Prompt engineering
+- Vector database usage
+- AI safety guidelines
+
+**SaaS**
+```bash
+magneto init --with saas
+```
+- Multi-tenancy patterns
+- Subscription handling
+- User management
+- Billing integration
+
+## Combining Packs
+
+Multiple packs can be combined:
+
+```bash
+magneto init --with typescript nextjs react
+```
+
+Order matters — later packs override earlier ones.
+
+## Custom Packs
+
+Create your own power pack:
+
+```
+.magneto/packs/
+└── my-company/
+    ├── pack.json
+    └── rules.md
+```
+
+**pack.json:**
+```json
+{
+  "name": "my-company",
+  "version": "1.0.0",
+  "description": "Internal standards",
+  "extends": ["typescript", "nextjs"],
+  "rules": {
+    "naming": {
+      "components": "PascalCase",
+      "hooks": "camelCase"
+    }
+  }
+}
+```
+
+**rules.md:**
+```markdown
+# My Company Standards
+
+## Component Structure
+
+All components must:
+- Use TypeScript
+- Have corresponding tests
+- Include JSDoc comments
+- Follow accessibility guidelines
+```
+
+## Pack Structure
+
+```
+pack-name/
+├── pack.json          # Metadata and configuration
+├── rules.md           # Human-readable rules
+├── patterns/          # Code patterns
+│   ├── component.tsx
+│   └── test.ts
+└── security.md        # Security guidelines
+```
+
+## Community Packs
+
+Contributed by the community:
+
+| Pack | Description | Author |
+|------|-------------|--------|
+| `vue` | Vue.js 3 + Composition API | @vue-community |
+| `svelte` | SvelteKit patterns | @svelte-team |
+| `django` | Django + DRF | @django-ai |
+| `rails` | Ruby on Rails | @rails-devs |
+
+Submit your pack: [GitHub Discussions](https://github.com/rijuvashisht/Magneto/discussions)
+
+---
+
+**Next:** Read about [Architecture](/docs/architecture) to understand how packs integrate into the system.
