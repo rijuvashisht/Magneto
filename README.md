@@ -23,7 +23,7 @@
 </p>
 
 <p align="center">
-  <a href="https://magnetoai.vercel.app/"><img src="https://img.shields.io/badge/📚%20Documentation-58a6ff?style=for-the-badge" alt="Documentation" /></a>
+  <a href="https://landing-fsmpg96k6-rijuvashisht-1233s-projects.vercel.app/"><img src="https://img.shields.io/badge/📚%20Documentation-58a6ff?style=for-the-badge" alt="Documentation" /></a>
   <a href="https://www.npmjs.com/package/magneto-ai"><img src="https://img.shields.io/npm/v/magneto-ai?color=brightgreen&label=npm" alt="npm version" /></a>
   <a href="https://www.npmjs.com/package/magneto-ai"><img src="https://img.shields.io/npm/dm/magneto-ai?color=blue&label=downloads" alt="npm downloads" /></a>
   <a href="https://github.com/rijuvashisht/Magneto/actions"><img src="https://github.com/rijuvashisht/Magneto/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
@@ -33,11 +33,6 @@
 
 ---
 
-<p align="center">
-  <img src="docs/images/magneto-vision.png" alt="Magneto — The Starting Point for AI Developers" width="600" />
-</p>
-
----
 
 Magneto AI is a multi-agent AI orchestration system that brings structured reasoning, security guardrails, and pluggable intelligence to your codebase — designed to work alongside every major AI coding assistant and agent gateway.
 
