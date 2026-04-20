@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/logo.svg" alt="Magneto AI Logo" width="560" />
+  <img src="docs/logo.png" alt="Magneto AI Logo" width="560" />
 </p>
 
 <p align="center">
