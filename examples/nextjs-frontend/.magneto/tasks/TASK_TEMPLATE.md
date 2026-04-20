@@ -26,19 +26,3 @@ goal, and any relevant background the AI agent needs to understand.
 ## Notes
 
 Any extra context: ticket links, design decisions, known edge cases.
-
----
-
-## Task types (set `type` above)
-
-| type | Use when |
-|---|---|
-| `feature-implementation` | Building new functionality |
-| `bug-fix` | Investigating and fixing a defect |
-| `security-audit` | Reviewing code for vulnerabilities |
-| `performance-review` | Analyzing and optimizing performance |
-| `architecture-review` | Reviewing design and structure |
-| `code-review` | General code quality review |
-| `testing` | Writing or improving tests |
-| `requirements-analysis` | Tracing specs to implementation |
-| `general` | Anything else |

@@ -1,9 +1,9 @@
 /**
- * run-parallel.ts — Executes multiple Magneto agents in parallel.
+ * run-parallel.ts — Executes multiple Magneto AI agents in parallel.
  *
- * Usage: npx tsx .magneto/scripts/run-parallel.ts <task.json>
+ * Usage: npx tsx .magneto/scripts/run-parallel.ts <task.md>
  *
- * Reads: task JSON file + .magneto/magneto.config.json
+ * Reads: task file (.md with YAML frontmatter, .yaml, or .json) + magneto.config.json
  * Outputs: .magneto/output/<agentId>.json per agent
  */
 
@@ -14,11 +14,38 @@ const PROJECT_ROOT = path.resolve(__dirname, '../..');
 const taskFile = process.argv[2];
 
 if (!taskFile) {
-  console.error('Usage: npx tsx run-parallel.ts <task.json>');
+  console.error('Usage: npx tsx run-parallel.ts <task.md>');
   process.exit(1);
 }
 
-const task = JSON.parse(fs.readFileSync(taskFile, 'utf-8'));
+// Parse task from .md (YAML frontmatter), .yaml, or .json
+const rawContent = fs.readFileSync(taskFile, 'utf-8');
+let task: any;
+try {
+  if (taskFile.endsWith('.json')) {
+    task = JSON.parse(rawContent);
+  } else {
+    // Parse YAML frontmatter from .md or .yaml
+    const fmMatch = rawContent.match(/^---
+([sS]*?)
+---/);
+    const yamlLines = fmMatch ? fmMatch[1] : rawContent;
+    const obj: Record<string, any> = {};
+    let currentKey = '';
+    for (const line of yamlLines.split('
+')) {
+      const kv = line.match(/^(w[w-]*):s*(.*)/);
+      if (kv) { currentKey = kv[1]; obj[currentKey] = kv[2].trim() || []; }
+      else if (line.trim().startsWith('- ') && Array.isArray(obj[currentKey])) {
+        obj[currentKey].push(line.trim().slice(2));
+      }
+    }
+    task = obj;
+  }
+} catch (e) {
+  console.error('Failed to parse task file:', e);
+  process.exit(1);
+}
 const configPath = path.join(PROJECT_ROOT, '.magneto', 'magneto.config.json');
 const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
 
@@ -45,7 +72,7 @@ const agentPromises = roles.map(async (role) => {
     confidence: 0,
     executedAt: new Date().toISOString(),
     status: 'pending-implementation',
-    note: `Replace this with actual ${role} agent execution via Magneto runner`,
+    note: `Replace this with actual ${role} agent execution via Magneto AI runner`,
   };
 
   const outPath = path.join(outputDir, `agent-${role}.json`);
