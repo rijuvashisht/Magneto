@@ -24,11 +24,14 @@
   "powerPacks": [],
   "adapters": [],
   "runners": {
-    "default": "openai",
+    "default": "cascade",
     "available": [
       "openai",
       "copilot-local",
-      "copilot-cloud"
+      "copilot-cloud",
+      "cascade",
+      "antigravity",
+      "gemini"
     ]
   },
   "memoryMode": "internal-first",

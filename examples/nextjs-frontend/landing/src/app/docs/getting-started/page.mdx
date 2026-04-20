@@ -1,0 +1,150 @@
+# Getting Started
+
+Welcome to **Magneto AI** — the AI Reasoning & Agent Control Plane that helps you ship features 3-5× faster.
+
+## Quick Start
+
+Get up and running in under 60 seconds:
+
+```bash
+# Install Magneto AI globally
+npm install -g magneto-ai
+
+# Initialize in your project
+cd your-project
+magneto init
+
+# Create your first task
+magneto task "Add user authentication"
+
+# Execute with AI agents
+magneto run tasks/add-user-authentication.md --stream
+```
+
+## What is Magneto AI?
+
+Magneto AI sits inside your repo as a `.magneto/` directory and brings **structure, memory, and multi-agent reasoning** to your AI workflow.
+
+### Key Features
+
+- **Multi-Agent Orchestration** — Decompose tasks into subtasks, spawn specialized agents, and merge results
+- **Knowledge Graph** — Visualize codebase architecture and find dependencies
+- **Security Guardrails** — Every task evaluated for risk with approval gates
+- **Memory Persistence** — Agents retain context across sessions
+- **Streaming Output** — Real-time progress with progress bars and spinners
+- **Power Packs** — Plug-and-play configurations for TypeScript, Next.js, and more
+
+## Installation
+
+### Global Installation (Recommended)
+
+```bash
+npm install -g magneto-ai
+```
+
+### Local Installation
+
+```bash
+npm install --save-dev magneto-ai
+npx magneto init
+```
+
+## Initializing a Project
+
+Run the init command in any project:
+
+```bash
+magneto init
+```
+
+This creates the `.magneto/` directory with:
+- `tasks/` — Task files (.md format)
+- `memory/` — Project context and decisions
+- `cache/` — Generated prompts and results
+- `config.json` — Project settings
+
+### With Power Packs
+
+Initialize with pre-configured power packs:
+
+```bash
+magneto init --with typescript nextjs
+```
+
+Available packs:
+- `typescript` — TypeScript rules and patterns
+- `nextjs` — Next.js App Router conventions
+- `react` — React component patterns
+- `node` — Node.js backend patterns
+
+## Your First Task
+
+Create a task file:
+
+```bash
+magneto task create feature "Add dark mode toggle"
+```
+
+This generates `.magneto/tasks/add-dark-mode-toggle.md` with:
+- YAML frontmatter (type, priority, roles)
+- Structured template
+- Acceptance criteria
+
+View the task:
+
+```bash
+magneto task show add-dark-mode-toggle
+```
+
+## Generating a Plan
+
+Before executing, generate an execution plan:
+
+```bash
+magneto plan tasks/add-dark-mode-toggle.md
+```
+
+This analyzes:
+- Task classification (feature/bug/security)
+- Required roles (orchestrator, backend, tester)
+- Security risk level
+- Scoped files
+
+## Running a Task
+
+Execute with your preferred runner:
+
+```bash
+# With OpenAI
+magneto run tasks/add-dark-mode-toggle.md --runner openai
+
+# Interactive mode (approve each step)
+magneto run tasks/add-dark-mode-toggle.md --interactive
+
+# Stream output in real-time
+magneto run tasks/add-dark-mode-toggle.md --stream
+```
+
+## Next Steps
+
+- Learn about [Commands](/docs/commands) — Complete CLI reference
+- Explore [Power Packs](/docs/power-packs) — Framework-specific configurations
+- Understand [Security](/docs/security) — Guardrails and policies
+- Visualize with [Knowledge Graph](/docs/knowledge-graph) — Codebase architecture
+
+## Getting Help
+
+```bash
+# Show all commands
+magneto --help
+
+# Help for specific command
+magneto run --help
+
+# Validate your setup
+magneto doctor
+```
+
+---
+
+**Ready to dive deeper?** Check out the [Architecture](/docs/architecture) overview to understand how Magneto AI works under the hood.

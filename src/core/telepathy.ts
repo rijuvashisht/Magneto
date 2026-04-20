@@ -47,6 +47,68 @@ export interface AutoTaskConfig {
   requirements: RequirementDoc[];
 }
 
+// === Task Completion Tracking ===
+
+interface CompletedTaskEntry {
+  id: string;
+  title: string;
+  completedAt: string;
+  runner?: string;
+}
+
+function getCompletedTasksPath(projectRoot: string): string {
+  return path.join(projectRoot, '.magneto', 'cache', 'completed-tasks.json');
+}
+
+/**
+ * Load list of previously completed task IDs
+ */
+export function loadCompletedTasks(projectRoot: string): CompletedTaskEntry[] {
+  const filePath = getCompletedTasksPath(projectRoot);
+  if (!fileExists(filePath)) return [];
+  try {
+    return readJson<CompletedTaskEntry[]>(filePath) || [];
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Mark a task as completed so it won't be re-executed
+ */
+export function markTaskCompleted(projectRoot: string, taskId: string, title: string, runner?: string): void {
+  const completed = loadCompletedTasks(projectRoot);
+  // Don't duplicate
+  if (completed.some(t => t.id === taskId)) return;
+  completed.push({ id: taskId, title, completedAt: new Date().toISOString(), runner });
+  const filePath = getCompletedTasksPath(projectRoot);
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  fs.writeFileSync(filePath, JSON.stringify(completed, null, 2), 'utf-8');
+}
+
+/**
+ * Check if a task has already been completed
+ */
+export function isTaskCompleted(projectRoot: string, taskId: string): boolean {
+  const completed = loadCompletedTasks(projectRoot);
+  return completed.some(t => t.id === taskId);
+}
+
+/**
+ * Reset a single task or all completed tasks
+ */
+export function resetCompletedTasks(projectRoot: string, taskId?: string): void {
+  if (!taskId) {
+    // Reset all
+    const filePath = getCompletedTasksPath(projectRoot);
+    if (fileExists(filePath)) fs.unlinkSync(filePath);
+    return;
+  }
+  const completed = loadCompletedTasks(projectRoot).filter(t => t.id !== taskId);
+  const filePath = getCompletedTasksPath(projectRoot);
+  fs.writeFileSync(filePath, JSON.stringify(completed, null, 2), 'utf-8');
+}
+
 /**
  * Auto-discover tasks from requirements folder and external sources
  */
@@ -523,17 +585,208 @@ async function queryGraph(
 
 async function generatePromptsOnly(projectRoot: string, config: AutoTaskConfig): Promise<void> {
   logger.info(`Generating prompts for: ${config.title}`);
-  // Implementation would generate role-specific prompts
+
+  // Build a scoped prompt from the task config
+  const prompt = buildScopedPrompt(config);
+  const safeTitle = config.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').substring(0, 50);
+  const promptPath = path.join(projectRoot, '.magneto', 'cache', `prompt-${safeTitle}.md`);
+
+  fs.mkdirSync(path.dirname(promptPath), { recursive: true });
+  fs.writeFileSync(promptPath, prompt, 'utf-8');
+
+  logger.success(`Prompt written: ${promptPath}`);
+
+  // Auto-detect agent environment and hand off
+  const { detectAgentEnvironment } = require('../runners/types');
+  const detectedRunner = detectAgentEnvironment(projectRoot);
+
+  if (detectedRunner) {
+    logger.info(`Detected agent environment: ${detectedRunner}`);
+    await handoffToRunner(projectRoot, config, detectedRunner, prompt, promptPath);
+  } else {
+    logger.info('No agent environment detected. Prompt saved to:');
+    logger.info(`  ${promptPath}`);
+    logger.info('');
+    logger.info('To hand off manually:');
+    logger.info('  - Open the prompt file in your IDE (Cascade/Copilot will auto-read)');
+    logger.info('  - Or run: magneto run --runner cascade');
+  }
 }
 
 async function generatePlan(projectRoot: string, config: AutoTaskConfig): Promise<void> {
   logger.info(`Generating execution plan for: ${config.title}`);
-  // Implementation would create detailed plan requiring approval
+
+  const plan = {
+    id: `plan-${Date.now()}`,
+    title: config.title,
+    type: config.type,
+    roles: config.roles,
+    scope: config.scope,
+    telepathyLevel: config.telepathyLevel,
+    steps: buildPlanSteps(config),
+    generatedAt: new Date().toISOString(),
+  };
+
+  const safeTitle = config.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').substring(0, 50);
+  const planPath = path.join(projectRoot, '.magneto', 'cache', `plan-${safeTitle}.json`);
+  fs.mkdirSync(path.dirname(planPath), { recursive: true });
+  fs.writeFileSync(planPath, JSON.stringify(plan, null, 2), 'utf-8');
+
+  logger.success(`Plan written: ${planPath}`);
+
+  // Also generate a prompt from the plan
+  await generatePromptsOnly(projectRoot, config);
 }
 
 async function executeAutonomous(projectRoot: string, config: AutoTaskConfig): Promise<void> {
   logger.info(`Executing autonomously: ${config.title}`);
-  // Implementation would run full execution pipeline
+
+  // 1. Generate the prompt
+  const prompt = buildScopedPrompt(config);
+  const safeTitle = config.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').substring(0, 50);
+  const promptPath = path.join(projectRoot, '.magneto', 'cache', `prompt-${safeTitle}.md`);
+
+  fs.mkdirSync(path.dirname(promptPath), { recursive: true });
+  fs.writeFileSync(promptPath, prompt, 'utf-8');
+
+  // 2. Detect runner and hand off
+  const { detectAgentEnvironment } = require('../runners/types');
+  const detectedRunner = detectAgentEnvironment(projectRoot);
+  const runnerType = detectedRunner || 'cascade'; // Default to cascade
+
+  logger.info(`Auto-executing via: ${runnerType}`);
+  await handoffToRunner(projectRoot, config, runnerType, prompt, promptPath);
+}
+
+/**
+ * Build a scoped prompt from task config with all context
+ */
+function buildScopedPrompt(config: AutoTaskConfig): string {
+  const sections: string[] = [];
+
+  sections.push(`# Magneto AI Task: ${config.title}\n`);
+  sections.push(`> Auto-generated by Magneto Telepathy (Level ${config.telepathyLevel}). Execute this task.\n`);
+
+  // Task
+  sections.push(`## Task\n`);
+  sections.push(`- **Title:** ${config.title}`);
+  sections.push(`- **Type:** ${config.type}`);
+  sections.push(`- **Description:** ${config.description}`);
+  sections.push(`- **Complexity:** ${config.estimatedComplexity}`);
+  sections.push('');
+
+  // Roles
+  sections.push(`## Assigned Roles\n`);
+  for (const role of config.roles) {
+    sections.push(`- **${role}**`);
+  }
+  sections.push('');
+
+  // Scope
+  if (config.scope.length > 0) {
+    sections.push(`## Scoped Files\n`);
+    sections.push('```');
+    for (const file of config.scope) {
+      sections.push(file);
+    }
+    sections.push('```');
+    sections.push('');
+  }
+
+  // Requirements context
+  if (config.requirements.length > 0) {
+    sections.push(`## Related Requirements\n`);
+    for (const req of config.requirements) {
+      sections.push(`### ${req.title}\n`);
+      sections.push(req.content.substring(0, 500));
+      sections.push('');
+    }
+  }
+
+  // Instructions
+  sections.push(`## Instructions\n`);
+  sections.push(`1. Read the task description carefully`);
+  sections.push(`2. Act in roles: ${config.roles.join(', ')}`);
+  if (config.scope.length > 0) {
+    sections.push(`3. Focus on scoped files listed above`);
+  }
+  sections.push(`4. Follow .magneto/memory/decisions.md for project conventions`);
+  sections.push(`5. Write tests if tester role is assigned`);
+  sections.push(`6. Provide a summary of changes when complete`);
+  sections.push('');
+
+  return sections.join('\n');
+}
+
+/**
+ * Build plan steps from task config
+ */
+function buildPlanSteps(config: AutoTaskConfig): Array<{ step: number; action: string; role: string }> {
+  const steps: Array<{ step: number; action: string; role: string }> = [];
+  let stepNum = 1;
+
+  if (config.roles.includes('requirements')) {
+    steps.push({ step: stepNum++, action: 'Analyze requirements and acceptance criteria', role: 'requirements' });
+  }
+  if (config.roles.includes('orchestrator')) {
+    steps.push({ step: stepNum++, action: 'Decompose task and plan execution order', role: 'orchestrator' });
+  }
+  if (config.roles.includes('backend')) {
+    steps.push({ step: stepNum++, action: 'Implement code changes', role: 'backend' });
+  }
+  if (config.roles.includes('frontend')) {
+    steps.push({ step: stepNum++, action: 'Implement UI changes', role: 'frontend' });
+  }
+  if (config.roles.includes('tester')) {
+    steps.push({ step: stepNum++, action: 'Write and run tests', role: 'tester' });
+  }
+
+  return steps;
+}
+
+/**
+ * Hand off to the appropriate runner (Cascade, Copilot, Gemini, etc.)
+ */
+async function handoffToRunner(
+  projectRoot: string,
+  config: AutoTaskConfig,
+  runnerType: string,
+  prompt: string,
+  promptPath: string
+): Promise<void> {
+  // For Cascade/Windsurf: write to .windsurf/workflows/
+  if (runnerType === 'cascade') {
+    const windsurfDir = path.join(projectRoot, '.windsurf', 'workflows');
+    const safeTitle = config.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').substring(0, 50);
+    const workflowPath = path.join(windsurfDir, `magneto-${safeTitle}.md`);
+
+    if (fs.existsSync(path.join(projectRoot, '.windsurf'))) {
+      fs.mkdirSync(windsurfDir, { recursive: true });
+      fs.writeFileSync(workflowPath, `---\ndescription: ${config.title}\n---\n\n${prompt}`, 'utf-8');
+      logger.success(`Windsurf workflow: ${workflowPath}`);
+    }
+  }
+
+  // For Copilot: write to .github/copilot-instructions.md
+  if (runnerType === 'copilot-local') {
+    const copilotPath = path.join(projectRoot, '.github', 'copilot-instructions.md');
+    if (fs.existsSync(path.join(projectRoot, '.github'))) {
+      fs.writeFileSync(copilotPath, prompt, 'utf-8');
+      logger.success(`Copilot instructions: ${copilotPath}`);
+    }
+  }
+
+  logger.info('');
+  logger.info('═══════════════════════════════════════════════════');
+  logger.info(`  MAGNETO → ${runnerType.toUpperCase()} HANDOFF`);
+  logger.info('═══════════════════════════════════════════════════');
+  logger.info(`  Task:   ${config.title}`);
+  logger.info(`  Type:   ${config.type}`);
+  logger.info(`  Roles:  ${config.roles.join(', ')}`);
+  logger.info(`  Prompt: ${promptPath}`);
+  logger.info(`  Agent:  ${runnerType}`);
+  logger.info('═══════════════════════════════════════════════════');
+  logger.info('');
 }
 
 function extractSearchTerms(task: ExternalTask): string[] {
