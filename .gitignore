@@ -31,3 +31,4 @@ coverage/
 
 # TypeScript incremental
 *.tsbuildinfo
+examples/nextjs-frontend/.magneto/cache/
