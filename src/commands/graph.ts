@@ -201,23 +201,23 @@ export async function graphPathCommand(from: string, to: string): Promise<void> 
   }
 
   // Try to find path
-  let path: GraphEdge[] | null = null;
+  let foundPath: GraphEdge[] | null = null;
   let startNode: GraphNode | null = null;
   let endNode: GraphNode | null = null;
 
   for (const start of fromNodes) {
     for (const end of toNodes) {
-      path = findPath(graph, start.id, end.id);
-      if (path) {
+      foundPath = findPath(graph, start.id, end.id);
+      if (foundPath) {
         startNode = start;
         endNode = end;
         break;
       }
     }
-    if (path) break;
+    if (foundPath) break;
   }
 
-  if (!path || path.length === 0) {
+  if (!foundPath || foundPath.length === 0) {
     logger.info(`No path found from "${from}" to "${to}"`);
     return;
   }
@@ -225,7 +225,7 @@ export async function graphPathCommand(from: string, to: string): Promise<void> 
   logger.info(`Path from ${startNode!.label} to ${endNode!.label}:\n`);
 
   console.log(`Start: ${startNode!.label} (${startNode!.type})`);
-  for (const edge of path) {
+  for (const edge of foundPath) {
     const target = graph.nodes.find(n => n.id === edge.target);
     if (target) {
       console.log(`  ${edge.type} → ${target.label} (${target.type})`);
