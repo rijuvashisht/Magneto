@@ -17,50 +17,58 @@ const features = [
   {
     icon: Brain,
     title: "Multi-Agent Orchestration",
-    description: "Decompose tasks into subtasks, spawn specialized agents (backend, tester, requirements), and merge results automatically.",
-    color: "#d2a8ff",
+    description: "Decompose tasks into subtasks, spawn specialized agents, and merge results automatically.",
+    color: "#a855f7",
+    lightColor: "#9333ea",
   },
   {
     icon: Network,
     title: "Knowledge Graph",
-    description: "Visualize codebase architecture — files, classes, imports, clusters. Find god nodes, detect cycles, explore dependencies interactively.",
-    color: "#58a6ff",
+    description: "Visualize codebase architecture — files, classes, imports. Find god nodes and detect cycles.",
+    color: "#3b82f6",
+    lightColor: "#2563eb",
   },
   {
     icon: Shield,
     title: "Security Guardrails",
-    description: "Every task is evaluated for risk. Protected paths, blocked actions, and approval gates keep your codebase safe.",
-    color: "#f85149",
+    description: "Every task is evaluated for risk. Protected paths and approval gates keep your codebase safe.",
+    color: "#ef4444",
+    lightColor: "#dc2626",
   },
   {
     icon: Database,
     title: "Memory Persistence",
-    description: "Agents retain context across sessions. Decisions, learnings, and architecture insights survive restarts and checkpoints.",
-    color: "#3fb950",
+    description: "Agents retain context across sessions. Decisions and insights survive restarts.",
+    color: "#22c55e",
+    lightColor: "#16a34a",
   },
   {
     icon: Radio,
     title: "Streaming Output",
-    description: "Real-time streaming with progress bars, spinners, and multiple output formats (text, JSON, SSE). Zero lag feedback.",
-    color: "#f0883e",
+    description: "Real-time streaming with progress bars and multiple output formats. Zero lag feedback.",
+    color: "#f97316",
+    lightColor: "#ea580c",
   },
   {
     icon: Puzzle,
     title: "Power Packs & Adapters",
-    description: "Plug in TypeScript, Next.js, or custom packs. Adapters for Claude, Graphify, OpenClaw, and more.",
-    color: "#79c0ff",
+    description: "Plug in TypeScript, Next.js, or custom packs. Adapters for Claude, Gemini, and more.",
+    color: "#06b6d4",
+    lightColor: "#0891b2",
   },
   {
     icon: Eye,
     title: "Telepathy",
-    description: "Auto-discover tasks from Jira, GitHub, or your requirements folder. Classify, prioritize, and execute — hands-free.",
-    color: "#e3b341",
+    description: "Auto-discover tasks from Jira, GitHub, or requirements. Classify and execute hands-free.",
+    color: "#eab308",
+    lightColor: "#ca8a04",
   },
   {
     icon: MessageSquareMore,
     title: "Interactive Approval",
-    description: "Review each AI action before it runs. Approve, reject, or modify with inline diffs. Trust but verify.",
-    color: "#bc8cff",
+    description: "Review each AI action before it runs. Approve, reject, or modify with inline diffs.",
+    color: "#ec4899",
+    lightColor: "#db2777",
   },
 ];
 
@@ -69,55 +77,59 @@ export default function Features() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="features" className="py-32 px-6 bg-[#0d1117]" ref={ref}>
+    <section 
+      id="features" 
+      className="py-24 md:py-32 px-6 bg-transparent" 
+      ref={ref}
+    >
       <div className="max-w-6xl mx-auto">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="relative rounded-3xl bg-white/50 dark:bg-black/30 backdrop-blur-md border border-gray-200/50 dark:border-gray-800/50 px-6 py-10 mb-16 text-center"
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
             Everything You Need
           </h2>
-          <p className="text-[#8b949e] text-lg max-w-xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
             A complete AI reasoning framework that lives inside your repo.
           </p>
         </motion.div>
 
         {/* Features grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           {features.map((feature, i) => (
             <motion.div
               key={feature.title}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.08, duration: 0.5 }}
-              className="group relative p-6 rounded-xl border border-[#30363d] bg-[#161b22]/50 hover:bg-[#161b22] hover:border-[#58a6ff]/30 transition-all duration-300 cursor-default"
+              className="group relative p-6 rounded-2xl border border-gray-300/50 dark:border-gray-700/50 bg-white/40 dark:bg-black/30 backdrop-blur-md hover:border-gray-400 dark:hover:border-gray-500 hover:bg-white/60 dark:hover:bg-black/40 transition-all duration-300"
             >
-              {/* Hover glow */}
+              {/* Icon */}
               <div
-                className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{
-                  background: `radial-gradient(200px at 50% 0%, ${feature.color}08, transparent)`,
+                className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 shadow-sm"
+                style={{ 
+                  backgroundColor: `${feature.color}15`,
                 }}
-              />
-
-              <div className="relative z-10">
-                <div
-                  className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
-                  style={{ background: feature.color + "15" }}
-                >
-                  <feature.icon className="w-5 h-5" style={{ color: feature.color }} />
-                </div>
-                <h3 className="text-base font-semibold text-white mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-[#8b949e] leading-relaxed">
-                  {feature.description}
-                </p>
+              >
+                <feature.icon 
+                  className="w-6 h-6" 
+                  style={{ color: feature.color }} 
+                />
               </div>
+              
+              {/* Title */}
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 tracking-tight">
+                {feature.title}
+              </h3>
+              
+              {/* Description */}
+              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                {feature.description}
+              </p>
             </motion.div>
           ))}
         </div>

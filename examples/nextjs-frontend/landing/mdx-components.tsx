@@ -1,6 +1,7 @@
 import type { MDXComponents } from 'mdx/types';
 import * as React from 'react';
 import { Mermaid } from '@/components/docs/Mermaid';
+import { CopyButton } from '@/components/docs/CopyButton';
 
 // Escape HTML special characters
 function escapeHtml(text: string): string {
@@ -16,44 +17,44 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     // Override headings with custom styling
     h1: ({ children }) => (
-      <h1 className="text-3xl font-bold text-white mt-8 mb-4 pb-2 border-b border-[#30363d]">
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white mt-8 mb-4 pb-2 border-b border-gray-200 dark:border-gray-800 tracking-tight">
         {children}
       </h1>
     ),
     h2: ({ children }) => (
-      <h2 className="text-2xl font-semibold text-white mt-8 mb-4">
+      <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mt-8 mb-4 tracking-tight">
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="text-xl font-semibold text-white mt-6 mb-3">
+      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mt-6 mb-3 tracking-tight">
         {children}
       </h3>
     ),
     h4: ({ children }) => (
-      <h4 className="text-lg font-semibold text-white mt-4 mb-2">
+      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mt-4 mb-2">
         {children}
       </h4>
     ),
     // Paragraphs
     p: ({ children }) => (
-      <p className="text-[#c9d1d9] leading-relaxed mb-4">
+      <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
         {children}
       </p>
     ),
     // Lists
     ul: ({ children }) => (
-      <ul className="list-disc list-inside text-[#c9d1d9] mb-4 space-y-1">
+      <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4 space-y-1">
         {children}
       </ul>
     ),
     ol: ({ children }) => (
-      <ol className="list-decimal list-inside text-[#c9d1d9] mb-4 space-y-1">
+      <ol className="list-decimal list-inside text-gray-700 dark:text-gray-300 mb-4 space-y-1">
         {children}
       </ol>
     ),
     li: ({ children }) => (
-      <li className="text-[#c9d1d9]">
+      <li className="text-gray-700 dark:text-gray-300">
         {children}
       </li>
     ),
@@ -82,13 +83,14 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       const rawCode = getRawText(codeElement?.props?.children);
       
       return (
-        <div className="relative my-6 rounded-lg overflow-hidden border border-[#30363d] bg-[#0d1117]">
-          <div className="flex items-center justify-between px-4 py-2.5 bg-[#161b22] border-b border-[#30363d]">
-            <span className="text-xs font-medium text-[#8b949e] uppercase">{language}</span>
+        <div className="relative my-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0d1117]">
+          <div className="flex items-center justify-between px-4 py-2.5 bg-gray-100 dark:bg-[#161b22] border-b border-gray-200 dark:border-gray-800">
+            <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">{language}</span>
+            <CopyButton text={rawCode} />
           </div>
           <div className="overflow-x-auto">
             <pre 
-              className="p-4 text-sm font-mono whitespace-pre text-[#c9d1d9] leading-snug"
+              className="p-4 text-sm font-mono whitespace-pre text-gray-800 dark:text-gray-200 leading-snug"
               dangerouslySetInnerHTML={{ __html: escapeHtml(rawCode) }}
             />
           </div>
@@ -99,7 +101,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       // If it's inline code (no className), style it differently
       if (!className) {
         return (
-          <code className="px-1.5 py-0.5 rounded bg-[#161b22] border border-[#30363d] text-[#79c0ff] text-sm font-mono">
+          <code className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-[#161b22] border border-gray-200 dark:border-gray-800 text-purple-700 dark:text-purple-400 text-sm font-mono">
             {children}
           </code>
         );
@@ -111,7 +113,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     a: ({ children, href }) => (
       <a 
         href={href} 
-        className="text-[#58a6ff] hover:text-[#79b8ff] hover:underline transition-colors"
+        className="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 hover:underline transition-colors"
         target={href?.startsWith('http') ? '_blank' : undefined}
         rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
       >
@@ -120,8 +122,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     // Blockquotes
     blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-[#58a6ff] pl-4 py-2 my-4 bg-[#161b22]/50 rounded-r-lg">
-        <div className="text-[#8b949e] italic">
+      <blockquote className="border-l-4 border-purple-500 pl-4 py-2 my-4 bg-gray-50 dark:bg-gray-900/50 rounded-r-lg">
+        <div className="text-gray-600 dark:text-gray-400 italic">
           {children}
         </div>
       </blockquote>
@@ -129,48 +131,48 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     // Tables
     table: ({ children }) => (
       <div className="overflow-x-auto my-4">
-        <table className="w-full border-collapse border border-[#30363d] rounded-lg">
+        <table className="w-full border-collapse border border-gray-200 dark:border-gray-800 rounded-lg">
           {children}
         </table>
       </div>
     ),
     thead: ({ children }) => (
-      <thead className="bg-[#161b22]">
+      <thead className="bg-gray-100 dark:bg-gray-900">
         {children}
       </thead>
     ),
     tbody: ({ children }) => (
-      <tbody className="divide-y divide-[#30363d]">
+      <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
         {children}
       </tbody>
     ),
     tr: ({ children }) => (
-      <tr className="border-b border-[#30363d]">
+      <tr className="border-b border-gray-200 dark:border-gray-800">
         {children}
       </tr>
     ),
     th: ({ children }) => (
-      <th className="px-4 py-3 text-left text-sm font-semibold text-white border-b border-[#30363d]">
+      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-800">
         {children}
       </th>
     ),
     td: ({ children }) => (
-      <td className="px-4 py-3 text-sm text-[#c9d1d9]">
+      <td className="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
         {children}
       </td>
     ),
     // Horizontal rule
     hr: () => (
-      <hr className="my-8 border-[#30363d]" />
+      <hr className="my-8 border-gray-200 dark:border-gray-800" />
     ),
     // Strong and em
     strong: ({ children }) => (
-      <strong className="font-semibold text-white">
+      <strong className="font-semibold text-gray-900 dark:text-white">
         {children}
       </strong>
     ),
     em: ({ children }) => (
-      <em className="italic text-[#c9d1d9]">
+      <em className="italic text-gray-700 dark:text-gray-300">
         {children}
       </em>
     ),

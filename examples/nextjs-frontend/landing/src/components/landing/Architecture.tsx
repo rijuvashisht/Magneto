@@ -41,18 +41,18 @@ export default function Architecture() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-32 px-6 bg-[#0d1117]" ref={ref}>
+    <section className="py-32 px-6 bg-transparent" ref={ref}>
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="relative rounded-3xl bg-white/50 dark:bg-black/30 backdrop-blur-md border border-gray-200/50 dark:border-gray-800/50 px-6 py-10 mb-20 text-center"
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
             Architecture
           </h2>
-          <p className="text-[#8b949e] text-lg max-w-xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-400 text-lg max-w-xl mx-auto">
             Five layers, one command. Every piece works together.
           </p>
         </motion.div>
@@ -67,8 +67,8 @@ export default function Architecture() {
               className="relative"
             >
               <div
-                className="rounded-xl border p-5 bg-[#161b22]/60 backdrop-blur-sm"
-                style={{ borderColor: layer.color + "30" }}
+                className="rounded-xl border p-5 bg-white/60 dark:bg-black/40 backdrop-blur-md"
+                style={{ borderColor: layer.color + "60" }}
               >
                 <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
                   {/* Layer label */}
@@ -93,7 +93,7 @@ export default function Architecture() {
                           delay: layerIdx * 0.15 + i * 0.05 + 0.2,
                           duration: 0.3,
                         }}
-                        className="px-3 py-1.5 rounded-md text-sm border border-[#30363d] bg-[#0d1117] text-[#c9d1d9] hover:border-[#58a6ff]/40 transition-colors"
+                        className="px-3 py-1.5 rounded-md text-sm border border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-black/60 text-gray-800 dark:text-gray-200 hover:border-gray-400 dark:hover:border-gray-500 transition-colors"
                       >
                         {item}
                       </motion.div>
@@ -105,7 +105,7 @@ export default function Architecture() {
               {/* Connector arrow */}
               {layerIdx < layers.length - 1 && (
                 <div className="flex justify-center py-1">
-                  <div className="w-0.5 h-4 bg-[#30363d]" />
+                  <div className="w-0.5 h-4 bg-gray-300 dark:bg-gray-700" />
                 </div>
               )}
             </motion.div>

@@ -14,7 +14,7 @@ export default function DocsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[#0d1117]">
+    <div className="min-h-screen bg-white dark:bg-[#0d1117]">
       <DocsHeader />
       <div className="flex">
         <DocsSidebar />

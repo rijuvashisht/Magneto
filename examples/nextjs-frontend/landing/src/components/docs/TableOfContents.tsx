@@ -102,8 +102,8 @@ export function TableOfContents({ headings: propHeadings }: TableOfContentsProps
 
   return (
     <nav className="sticky top-20 w-64 shrink-0 hidden xl:block">
-      <div className="border-l border-[#30363d] pl-4">
-        <p className="text-xs font-semibold text-[#8b949e] uppercase tracking-wider mb-3">
+      <div className="border-l border-gray-200 dark:border-gray-800 pl-4">
+        <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider mb-3">
           On this page
         </p>
         <ul className="space-y-1">
@@ -112,13 +112,13 @@ export function TableOfContents({ headings: propHeadings }: TableOfContentsProps
               <Link
                 href={`${pathname}#${heading.id}`}
                 className={cn(
-                  "text-left text-sm transition-colors hover:text-[#c9d1d9] block",
+                  "text-left text-sm transition-colors hover:text-gray-900 dark:hover:text-gray-200 block",
                   heading.level === 1 && "font-medium",
                   heading.level === 2 && "pl-2",
                   heading.level === 3 && "pl-4",
                   activeId === heading.id
-                    ? "text-[#58a6ff] font-medium"
-                    : "text-[#8b949e]"
+                    ? "text-purple-600 dark:text-purple-400 font-medium"
+                    : "text-gray-600 dark:text-gray-400"
                 )}
                 onClick={(e) => {
                   e.preventDefault();

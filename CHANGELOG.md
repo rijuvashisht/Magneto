@@ -27,6 +27,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.12.1] - 2026-04-20
+
+### Added
+- Interactive magnetic field background animation with particle effects
+- Two-zone magnetic interaction (strong close-range, subtle far-range up to 500px)
+- Light/dark mode theme switcher with full support across landing page
+- Documentation pages now fully support light/dark modes
+- Zap icon as consistent logo throughout the site (hero, header, sidebar, footer)
+- Backdrop-blur backgrounds on section headers for improved readability
+
+### Changed
+- Landing page redesigned with modern transparent cards and purple gradient theme
+- All components use consistent semi-transparent backgrounds with backdrop blur
+- Footer now has solid background for better content visibility
+- Documentation sidebar simplified (removed duplicate logo)
+- Hero section features unified Zap icon + "Magneto" text logo
+
+### Fixed
+- Documentation text visibility in both light and dark modes
+- Magnetic field now properly visible through all component backgrounds
+- Code block headers readable in dark mode with copy button
+- Section text contrast improved with subtle backdrop cards
+
+---
+
 ## [0.12.0] - 2024-04-20
 
 ### Added

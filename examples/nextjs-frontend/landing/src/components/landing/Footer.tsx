@@ -4,16 +4,16 @@ import { Zap } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[#30363d] bg-[#0d1117]">
+    <footer className="relative z-20 border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0a0a0c]">
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-3">
-              <Zap className="w-5 h-5 text-[#58a6ff]" />
-              <span className="text-lg font-bold text-white">Magneto AI</span>
+              <Zap className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+              <span className="text-lg font-bold text-gray-900 dark:text-white">Magneto AI</span>
             </div>
-            <p className="text-sm text-[#8b949e] leading-relaxed max-w-md">
+            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed max-w-md">
               AI Reasoning & Agent Control Plane. Orchestrate multi-agent AI tasks
               with security guardrails, knowledge graphs, and memory persistence.
             </p>
@@ -21,20 +21,20 @@ export default function Footer() {
 
           {/* Links */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-3">Resources</h4>
-            <ul className="space-y-2 text-sm text-[#8b949e]">
+            <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Resources</h4>
+            <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
               <li>
-                <a href="https://github.com/rijuvashisht/Magneto#readme" target="_blank" rel="noopener noreferrer" className="hover:text-[#58a6ff] transition-colors">
+                <a href="https://github.com/rijuvashisht/Magneto#readme" target="_blank" rel="noopener noreferrer" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
                   Documentation
                 </a>
               </li>
               <li>
-                <a href="https://github.com/rijuvashisht/Magneto/issues" target="_blank" rel="noopener noreferrer" className="hover:text-[#58a6ff] transition-colors">
+                <a href="https://github.com/rijuvashisht/Magneto/issues" target="_blank" rel="noopener noreferrer" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
                   Issues
                 </a>
               </li>
               <li>
-                <a href="https://www.npmjs.com/package/magneto-ai" target="_blank" rel="noopener noreferrer" className="hover:text-[#58a6ff] transition-colors">
+                <a href="https://www.npmjs.com/package/magneto-ai" target="_blank" rel="noopener noreferrer" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
                   npm Package
                 </a>
               </li>
@@ -42,20 +42,20 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-white mb-3">Community</h4>
-            <ul className="space-y-2 text-sm text-[#8b949e]">
+            <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Community</h4>
+            <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
               <li>
-                <a href="https://github.com/rijuvashisht/Magneto" target="_blank" rel="noopener noreferrer" className="hover:text-[#58a6ff] transition-colors">
+                <a href="https://github.com/rijuvashisht/Magneto" target="_blank" rel="noopener noreferrer" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
                   GitHub
                 </a>
               </li>
               <li>
-                <a href="https://github.com/rijuvashisht/Magneto/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" className="hover:text-[#58a6ff] transition-colors">
+                <a href="https://github.com/rijuvashisht/Magneto/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
                   Contributing
                 </a>
               </li>
               <li>
-                <a href="https://github.com/rijuvashisht/Magneto/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" className="hover:text-[#58a6ff] transition-colors">
+                <a href="https://github.com/rijuvashisht/Magneto/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
                   Changelog
                 </a>
               </li>
@@ -64,8 +64,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-[#30363d] flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[#8b949e]">
+        <div className="pt-8 border-t border-gray-200 dark:border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-gray-600 dark:text-gray-400">
             MIT License — Copyright (c) 2024 Riju Vashisht
           </p>
           <div className="flex items-center gap-4">

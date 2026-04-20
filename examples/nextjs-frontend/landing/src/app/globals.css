@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
-:root {
+/* Enable dark mode via class */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root,
+.dark {
   --background: #0d1117;
   --foreground: #c9d1d9;
   --accent: #58a6ff;
@@ -8,6 +12,54 @@
   --surface: #161b22;
   --border: #30363d;
   --muted: #8b949e;
+  --text-primary: #ffffff;
+  --text-secondary: #8b949e;
+}
+
+.light {
+  --background: #ffffff;
+  --foreground: #24292f;
+  --accent: #0969da;
+  --accent-glow: #218bff;
+  --surface: #f6f8fa;
+  --border: #d0d7de;
+  --muted: #57606a;
+  --text-primary: #24292f;
+  --text-secondary: #57606a;
+}
+
+/* Light mode - only set body background, let components handle their own styling via Tailwind dark: prefix */
+html.light {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+/* Only apply dark color fixes for legacy hardcoded colors */
+html.light [class*="text-[#c9d1d9]"] {
+  color: #24292f;
+}
+
+html.light [class*="text-[#8b949e]"] {
+  color: #57606a;
+}
+
+html.light [class*="text-[#58a6ff]"] {
+  color: #0969da;
+}
+
+html.light [class*="text-[#79c0ff]"] {
+  color: #0969da;
+}
+
+/* Gradient text fix for light mode */
+html.light .bg-clip-text {
+  background: linear-gradient(to right, #0969da, #8250df);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 @theme inline {
@@ -29,10 +81,11 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--background);
 }
 
 body {
-  background: var(--background);
+  background: transparent;
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
 }

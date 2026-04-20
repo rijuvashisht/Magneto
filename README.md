@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/images/magneto-helmet.svg" alt="Magneto Logo" width="120" />
+  <img src="docs/logo.svg" alt="Magneto Logo" width="560" />
 </p>
 
 <h1 align="center">⚡ Magneto AI</h1>

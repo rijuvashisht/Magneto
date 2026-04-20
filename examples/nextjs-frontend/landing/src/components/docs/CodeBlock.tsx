@@ -24,30 +24,30 @@ export function CodeBlock({ code, language = "text", filename, children }: CodeB
   };
 
   return (
-    <div className="relative my-6 rounded-lg overflow-hidden border border-[#30363d] bg-[#0d1117]">
+    <div className="relative my-6 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0d1117]">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-2.5 bg-[#161b22] border-b border-[#30363d]">
+      <div className="flex items-center justify-between px-4 py-2.5 bg-gray-100 dark:bg-[#161b22] border-b border-gray-200 dark:border-gray-800">
         <div className="flex items-center gap-3">
           {/* Language indicator */}
-          <span className="text-xs font-medium text-[#8b949e] uppercase">
+          <span className="text-xs font-medium text-gray-600 dark:text-gray-400 uppercase">
             {language}
           </span>
           {filename && (
             <>
-              <span className="text-[#484f58]">|</span>
-              <span className="text-xs text-[#c9d1d9]">{filename}</span>
+              <span className="text-gray-400 dark:text-gray-600">|</span>
+              <span className="text-xs text-gray-700 dark:text-gray-300">{filename}</span>
             </>
           )}
         </div>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 px-2 py-1 rounded-md text-xs text-[#8b949e] hover:text-[#c9d1d9] hover:bg-[#30363d] transition-colors"
+          className="flex items-center gap-1.5 px-2 py-1 rounded-md text-xs text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
           aria-label="Copy code"
         >
           {copied ? (
             <>
-              <Check className="w-3.5 h-3.5 text-[#3fb950]" />
-              <span className="text-[#3fb950]">Copied!</span>
+              <Check className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />
+              <span className="text-green-600 dark:text-green-400">Copied!</span>
             </>
           ) : (
             <>
@@ -60,7 +60,7 @@ export function CodeBlock({ code, language = "text", filename, children }: CodeB
 
       {/* Code content */}
       <div className="overflow-x-auto">
-        <pre className="p-4 text-sm font-mono whitespace-pre text-[#c9d1d9] leading-snug">
+        <pre className="p-4 text-sm font-mono whitespace-pre text-gray-800 dark:text-gray-200 leading-snug">
           {content}
         </pre>
       </div>

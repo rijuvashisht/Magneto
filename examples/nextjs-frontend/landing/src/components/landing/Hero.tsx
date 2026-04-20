@@ -1,118 +1,116 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Zap, ArrowRight, GitFork, BookOpen } from "lucide-react";
+import { ArrowRight, BookOpen, GitFork, Sparkles, Zap } from "lucide-react";
+import { getVersionBadgeText } from "@/lib/version";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0d1117] via-[#161b22] to-[#0d1117] animate-gradient" />
-
-      {/* Floating orbs */}
-      <motion.div
-        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-[#58a6ff]/5 blur-3xl"
-        animate={{ x: [0, 50, 0], y: [0, -30, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-[#1f6feb]/8 blur-3xl"
-        animate={{ x: [0, -40, 0], y: [0, 40, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-        {/* Badge */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-transparent">
+      {/* Content - higher z-index than magnetic field */}
+      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center pt-20">
+        {/* Logo */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 rounded-full border border-[#30363d] bg-[#161b22]/80 backdrop-blur-sm text-sm text-[#8b949e]"
+          transition={{ duration: 0.5 }}
+          className="mb-8"
         >
-          <Zap className="w-4 h-4 text-[#58a6ff]" />
-          <span>v0.8 — Knowledge Graph, Memory, Sub-Agents</span>
+          <div className="mx-auto w-fit flex items-center gap-6 px-10 py-6 rounded-3xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 dark:from-purple-500/20 dark:to-purple-400/5 border border-purple-500/30 dark:border-purple-400/20 backdrop-blur-sm">
+            <Zap 
+              className="w-20 h-20 md:w-24 md:h-24 text-purple-600 dark:text-purple-400" 
+              strokeWidth={1.5}
+            />
+            <span className="text-5xl md:text-6xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Magneto
+            </span>
+          </div>
         </motion.div>
 
-        {/* Main headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+        {/* Version Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="text-5xl md:text-7xl font-bold leading-tight tracking-tight mb-6"
+          transition={{ delay: 0.1 }}
+          className="inline-flex items-center gap-2 px-4 py-2 mb-10 rounded-full border border-gray-300/50 dark:border-gray-700/50 bg-white/50 dark:bg-black/30 backdrop-blur-md text-sm"
         >
-          <span className="text-white">AI Reasoning &</span>
-          <br />
-          <span className="bg-gradient-to-r from-[#58a6ff] to-[#bc8cff] bg-clip-text text-transparent">
-            Agent Control Plane
-          </span>
-        </motion.h1>
+          <Sparkles className="w-4 h-4 text-purple-500" />
+          <span className="text-gray-600 dark:text-gray-400">{getVersionBadgeText()}</span>
+        </motion.div>
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="text-lg md:text-xl text-[#8b949e] max-w-2xl mx-auto mb-10 leading-relaxed"
-        >
-          Orchestrate multi-agent AI tasks with security guardrails,
-          knowledge graphs, and memory persistence.
-          Ship features <span className="text-white font-semibold">3–5× faster</span>.
-        </motion.p>
-
-        {/* CTA buttons */}
+        {/* Headline + Subtitle - with subtle backdrop for readability */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="relative rounded-3xl bg-white/50 dark:bg-black/30 backdrop-blur-md border border-gray-200/50 dark:border-gray-800/50 px-6 py-10 mb-12"
+        >
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+            <span className="text-gray-900 dark:text-white">AI Reasoning &</span>
+            <br />
+            <span className="text-gray-900 dark:text-white">Agent Control Plane</span>
+          </h1>
+
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            Orchestrate multi-agent AI tasks with security guardrails,
+            knowledge graphs, and memory persistence.
+            Ship features <strong className="text-gray-900 dark:text-white">3–5× faster</strong>.
+          </p>
+        </motion.div>
+
+        {/* CTA buttons - Clean Angular style */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
         >
           <a
-            href="#getting-started"
-            className="group flex items-center gap-2 px-8 py-3.5 bg-[#58a6ff] hover:bg-[#79b8ff] text-[#0d1117] font-semibold rounded-lg transition-all duration-200 animate-glow"
+            href="/docs/getting-started"
+            className="group flex items-center gap-2 px-8 py-3.5 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-full transition-all duration-200 shadow-lg"
           >
             Get Started
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </a>
           <a
             href="/docs"
-            className="flex items-center gap-2 px-8 py-3.5 border border-[#30363d] hover:border-[#58a6ff] text-[#c9d1d9] rounded-lg transition-all duration-200"
+            className="flex items-center gap-2 px-8 py-3.5 border-2 border-gray-400/50 dark:border-gray-600/50 hover:border-gray-900 dark:hover:border-white bg-white/40 dark:bg-black/30 backdrop-blur-sm text-gray-900 dark:text-white font-medium rounded-full transition-all duration-200"
           >
-            <BookOpen className="w-5 h-5" />
+            <BookOpen className="w-4 h-4" />
             Documentation
           </a>
           <a
             href="https://github.com/rijuvashisht/Magneto"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-8 py-3.5 border border-[#30363d] hover:border-[#58a6ff] text-[#c9d1d9] rounded-lg transition-all duration-200"
+            className="flex items-center gap-2 px-8 py-3.5 border-2 border-gray-400/50 dark:border-gray-600/50 hover:border-gray-900 dark:hover:border-white bg-white/40 dark:bg-black/30 backdrop-blur-sm text-gray-900 dark:text-white font-medium rounded-full transition-all duration-200"
           >
-            <GitFork className="w-5 h-5" />
+            <GitFork className="w-4 h-4" />
             GitHub
           </a>
         </motion.div>
 
-        {/* Install command */}
+        {/* Install command - Clean style */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="mt-12 inline-flex items-center gap-3 px-5 py-2.5 rounded-lg bg-[#161b22] border border-[#30363d] font-mono text-sm"
+          transition={{ delay: 0.5 }}
+          className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-white/50 dark:bg-black/30 backdrop-blur-md border border-gray-300/50 dark:border-gray-700/50 font-mono text-sm"
         >
-          <span className="text-[#8b949e]">$</span>
-          <span className="text-[#79c0ff]">npm install -g magneto-ai</span>
+          <span className="text-gray-400">$</span>
+          <span className="text-purple-600 dark:text-purple-400 font-medium">npm install -g magneto-ai</span>
         </motion.div>
       </div>
 
       {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 8, 0] }}
+        animate={{ y: [0, 6, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
-        <div className="w-6 h-10 rounded-full border-2 border-[#30363d] flex items-start justify-center p-1.5">
+        <div className="w-6 h-10 rounded-full border-2 border-gray-300 dark:border-gray-700 flex items-start justify-center p-1.5">
           <motion.div
-            className="w-1.5 h-1.5 rounded-full bg-[#58a6ff]"
+            className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-500"
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
