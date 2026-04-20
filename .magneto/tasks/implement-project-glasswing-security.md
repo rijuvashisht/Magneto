@@ -38,6 +38,42 @@ Build a comprehensive security auditing system for Magneto AI that:
 
 Inspired by [Anthropic's Project Glasswing](https://www.anthropic.com/glasswing), which provides security auditing for AI systems that represent shared cyberattack surfaces. This feature extends that concept to ALL AI coding assistants integrated with Magneto.
 
+## Open-Source Security Tools Reference
+
+Magneto's security engine will integrate with and/or be inspired by these top open-source security tools:
+
+### Top Open-Source Alternatives (Recommended Integration)
+
+| Tool | Primary Focus | Best For | Integration Approach |
+|------|--------------|----------|---------------------|
+| **Trivy** (Aqua Security) | Comprehensive scanning (SCA, containers, K8s, IaC, secrets) | Unified scanning in CI/CD | Primary engine for container/IaC scanning |
+| **Semgrep** | SAST - Fast static analysis | Custom rule writing for AI-generated code patterns | Core pattern matching engine for code analysis |
+| **OWASP Dependency-Check** | SCA - Dependency vulnerabilities | Identifying known CVEs in dependencies | Dependency vulnerability database integration |
+| **Grype** (Anchore) | Container/SBOM scanning | Container image security | Container security module |
+| **OSV-Scanner** (Google) | SCA - Library dependencies | Open-source library risks | OSV database integration for dependency checks |
+
+### Specialized & Niche Tools
+
+| Tool | Primary Focus | Best For | Integration Approach |
+|------|--------------|----------|---------------------|
+| **Bandit** | Python security | Python-specific security issues | Python adapter security profile |
+| **OWASP ZAP** | DAST - Dynamic testing | Runtime web application testing | Optional DAST module for web apps |
+| **SonarQube** (Community) | Code quality + SAST | General code quality and security | Secondary quality gate integration |
+
+### Implementation Strategy
+
+**Core Engine**: Build on Semgrep's fast pattern matching with custom rules for AI-generated code vulnerabilities.
+
+**Dependency Scanning**: Integrate OSV-Scanner's database + Trivy's vulnerability feeds for comprehensive SCA.
+
+**Container/IaC Security**: Leverage Trivy as the primary engine for Kubernetes, Terraform, and Docker security.
+
+**Language-Specific**: Use Bandit for Python, ESLint Security for JavaScript, and similar specialized tools for each language power pack.
+
+**Zero-Trust Model**: All tools run in isolated sandbox with results aggregated into unified security report.
+
+---
+
 ## Requirements
 
 ### 1. Core Security Audit Engine

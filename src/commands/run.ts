@@ -6,10 +6,40 @@ import { buildContext } from '../core/context';
 import { evaluateSecurity, ExecutionMode } from '../core/security-engine';
 import { RunnerType, createRunner } from '../runners/types';
 import { parseTaskFile } from '../utils/task-parser';
+import { InteractiveWorkflow, ExecutionPlan, PlanStep } from '../core/interactive-workflow';
+import { StreamingRunner, StreamingConfig } from '../core/streaming-runner';
+import { ProgressRenderer } from '../utils/progress-renderer';
+import { 
+  DecompositionEngine, 
+  getGlobalDecompositionEngine,
+  DecompositionResult 
+} from '../core/decomposition-engine';
+import { 
+  SubAgentOrchestrator, 
+  getGlobalSubAgentOrchestrator,
+  SubAgent 
+} from '../core/sub-agent-orchestrator';
 
 export interface RunOptions {
   runner: string;
   mode: string;
+  interactive?: boolean;
+  approveEach?: boolean;
+  diff?: boolean;
+  rollbackOnFail?: boolean;
+  autoApproveLowRisk?: boolean;
+  stream?: boolean;
+  watch?: boolean;
+  streamFormat?: 'text' | 'json' | 'sse';
+  withMemory?: boolean;
+  saveMemory?: boolean;
+  checkpointAuto?: boolean;
+  resume?: string;
+  decompose?: boolean;
+  noDecompose?: boolean;
+  maxSubAgents?: number;
+  coordination?: 'sequential' | 'parallel' | 'hybrid';
+  watchSubAgents?: boolean;
 }
 
 export async function runCommand(taskFile: string, options: RunOptions): Promise<void> {
@@ -46,6 +76,100 @@ export async function runCommand(taskFile: string, options: RunOptions): Promise
     logger.warn('High security risk detected. Switching to restricted mode.');
   }
 
+  // Decomposition check
+  let decomposition: DecompositionResult | null = null;
+  let subAgents: SubAgent[] = [];
+  
+  if (!options.noDecompose) {
+    const engine = getGlobalDecompositionEngine();
+    decomposition = await engine.analyze(task);
+    
+    if (decomposition && (decomposition.shouldDecompose || options.decompose)) {
+      logger.info(`Task complexity: ${decomposition.complexityScore.toFixed(2)}`);
+      logger.info(`Decomposition strategy: ${decomposition.strategy}`);
+      logger.info(`Coordination: ${decomposition.coordinationStrategy}`);
+      
+      const components = await engine.decompose(task, decomposition);
+      
+      if (components.length > 0) {
+        logger.info(`Spawning ${components.length} sub-agents...\n`);
+        
+        const orchestrator = getGlobalSubAgentOrchestrator();
+        
+        // Limit sub-agents if specified
+        const limitedComponents = options.maxSubAgents 
+          ? components.slice(0, options.maxSubAgents)
+          : components;
+        
+        // Spawn agents
+        for (const component of limitedComponents) {
+          const agent = await orchestrator.spawn(component, { 
+            id: task.id, 
+            depth: 0 
+          });
+          subAgents.push(agent);
+        }
+        
+        // Execute sub-agents
+        logger.info('Executing sub-agents...');
+        const results = await orchestrator.coordinate(subAgents);
+        
+        // Merge results
+        const merged = await orchestrator.mergeResults(results);
+        
+        // Report status
+        const status = orchestrator.getStatus();
+        logger.info(`\nSub-agent execution complete:`);
+        logger.info(`  Completed: ${status.completed}/${status.total}`);
+        logger.info(`  Failed: ${status.failed}`);
+        logger.info(`  Progress: ${status.progress.toFixed(1)}%`);
+        
+        if (merged.success) {
+          logger.success('All sub-agents completed successfully');
+        } else {
+          logger.error(`${status.failed} sub-agent(s) failed`);
+        }
+        
+        // Save to memory if requested
+        if (options.saveMemory) {
+          // ... save sub-agent results to memory
+        }
+        
+        // Return early if we handled via decomposition
+        if (merged.success) {
+          return;
+        }
+      }
+    }
+  }
+
+  // Interactive mode
+  if (options.interactive || options.approveEach) {
+    logger.info('Starting interactive execution mode...');
+    
+    const plan = generatePlanFromTask(task);
+    const workflow = new InteractiveWorkflow({
+      autoApproveLowRisk: options.autoApproveLowRisk,
+      requireDiffView: options.diff,
+    });
+
+    await workflow.startInteractiveSession(plan, {
+      autoApproveLowRisk: options.autoApproveLowRisk,
+      requireDiffView: options.diff,
+    });
+
+    const success = await workflow.runInteractiveSession();
+    
+    if (success) {
+      logger.success(workflow.generateReport());
+    } else {
+      logger.error('Interactive session ended with rejections');
+      process.exit(1);
+    }
+    
+    return;
+  }
+
   // Check for existing plan
   const planPath = path.join(projectRoot, '.magneto', 'tasks', `${task.id}-plan.json`);
   if (!fileExists(planPath)) {
@@ -59,6 +183,78 @@ export async function runCommand(taskFile: string, options: RunOptions): Promise
   logger.info(`Using runner: ${runnerType}`);
   logger.info(`Execution mode: ${mode}`);
 
+  // Streaming mode
+  if (options.stream || options.watch) {
+    const streamConfig: StreamingConfig = {
+      enabled: true,
+      format: options.streamFormat || 'text',
+      transport: 'stdio',
+      bufferSize: 1024,
+      flushInterval: 100,
+      compression: false,
+    };
+    
+    const streamer = new StreamingRunner(streamConfig);
+    await streamer.startStream(task.id);
+    
+    const renderer = new ProgressRenderer({
+      showSpinner: true,
+      showProgressBar: true,
+      showStepIndicator: true,
+      showTokenCount: true,
+      showEstimatedTime: true,
+    });
+
+    // Listen to stream events
+    streamer.on('event', (event) => {
+      renderer.renderEvent(event);
+    });
+
+    try {
+      // Hook streaming into runner
+      const result = await runner.execute({
+        task,
+        context,
+        security,
+        mode,
+        projectRoot,
+        onProgress: (progress) => {
+          streamer.emitProgress(progress.percentComplete, {
+            currentOperation: progress.currentStep,
+            tokensUsed: progress.tokensUsed,
+            estimatedTimeRemaining: progress.estimatedTimeRemaining,
+          });
+        },
+        onOutput: (data) => {
+          streamer.emitOutput(data);
+        },
+      });
+
+      await streamer.emitComplete('Task completed successfully');
+      await streamer.end();
+
+      // Save results
+      const outputPath = path.join(projectRoot, '.magneto', 'cache', `${task.id}-result.json`);
+      writeJson(outputPath, {
+        taskId: task.id,
+        runner: runnerType,
+        mode,
+        result,
+        streamed: true,
+        completedAt: new Date().toISOString(),
+      });
+
+      logger.success(`Task completed with streaming. Results saved: ${outputPath}`);
+      return;
+    } catch (err: any) {
+      await streamer.emitError(err.message);
+      await streamer.end();
+      logger.error(`Task execution failed: ${err.message}`);
+      process.exit(1);
+    }
+  }
+
+  // Non-streaming execution (original)
   try {
     const result = await runner.execute({
       task,
@@ -83,4 +279,28 @@ export async function runCommand(taskFile: string, options: RunOptions): Promise
     logger.error(`Task execution failed: ${err.message}`);
     process.exit(1);
   }
+}
+
+// Helper function to generate execution plan from task for interactive mode
+function generatePlanFromTask(task: { id: string; filePath?: string; title?: string; requirements?: string[] }): ExecutionPlan {
+  // Generate mock steps based on task requirements
+  const steps: PlanStep[] = [];
+  const requirements = task.requirements || ['Analyze codebase', 'Implement changes', 'Add tests', 'Update documentation'];
+  
+  requirements.forEach((req, index) => {
+    steps.push({
+      index,
+      action: req,
+      description: req,
+      files: [],
+      riskLevel: index === 0 ? 'low' : index === requirements.length - 1 ? 'medium' : 'medium',
+      requiresBackup: index > 0,
+    });
+  });
+
+  return {
+    steps,
+    taskFile: task.filePath || `${task.id}.md`,
+    totalSteps: steps.length,
+  };
 }
