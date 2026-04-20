@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Magneto Contradiction",
+  "title": "Magneto AI Contradiction",
   "type": "object",
   "required": [
     "id",

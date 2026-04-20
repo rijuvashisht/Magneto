@@ -220,16 +220,30 @@ async function discoverRequirementTasks(projectRoot: string): Promise<ExternalTa
   const files = listFiles(requirementsDir, /\.md$/);
 
   for (const file of files) {
-    const content = readText(file);
-    const title = extractTitle(content) || path.basename(file, '.md');
-    
-    tasks.push({
-      id: `req-${path.basename(file, '.md')}`,
-      title,
-      description: content.substring(0, 500),
-      source: 'file',
-      metadata: { filePath: file },
-    });
+    try {
+      // Use full path by joining with requirements directory
+      const fullPath = path.join(requirementsDir, file);
+      
+      // Check if file exists before reading
+      if (!fs.existsSync(fullPath)) {
+        logger.debug(`Skipping missing file: ${fullPath}`);
+        continue;
+      }
+      
+      const content = readText(fullPath);
+      const title = extractTitle(content) || path.basename(file, '.md');
+      
+      tasks.push({
+        id: `req-${path.basename(file, '.md')}`,
+        title,
+        description: content.substring(0, 500),
+        source: 'file',
+        metadata: { filePath: fullPath },
+      });
+    } catch (err: any) {
+      // Log warning for files that can't be parsed
+      logger.warn(`Failed to parse requirement file "${file}": ${err.message}`);
+    }
   }
 
   logger.debug(`Found ${tasks.length} requirement documents`);
@@ -246,16 +260,30 @@ async function discoverFileTasks(projectRoot: string): Promise<ExternalTask[]> {
   const files = listFiles(tasksDir, /\.md$/);
 
   for (const file of files) {
-    const content = readText(file);
-    const title = extractTitle(content) || path.basename(file, '.md');
-    
-    tasks.push({
-      id: `task-${path.basename(file, '.md')}`,
-      title,
-      description: content.substring(0, 500),
-      source: 'file',
-      metadata: { filePath: file },
-    });
+    try {
+      // Use full path by joining with tasks directory
+      const fullPath = path.join(tasksDir, file);
+      
+      // Check if file exists before reading
+      if (!fs.existsSync(fullPath)) {
+        logger.debug(`Skipping missing file: ${fullPath}`);
+        continue;
+      }
+      
+      const content = readText(fullPath);
+      const title = extractTitle(content) || path.basename(file, '.md');
+      
+      tasks.push({
+        id: `task-${path.basename(file, '.md')}`,
+        title,
+        description: content.substring(0, 500),
+        source: 'file',
+        metadata: { filePath: fullPath },
+      });
+    } catch (err: any) {
+      // Log warning for files that can't be parsed
+      logger.warn(`Failed to parse task file "${file}": ${err.message}`);
+    }
   }
 
   return tasks;

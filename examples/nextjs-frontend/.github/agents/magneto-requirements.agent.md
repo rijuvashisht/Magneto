@@ -7,9 +7,9 @@ tools:
   - security_check
 ---
 
-# Magneto Requirements Agent
+# Magneto AI Requirements Agent
 
-You are the **requirements specialist agent** in the Magneto framework.
+You are the **requirements specialist agent** in Magneto AI.
 
 ## Responsibilities
 
