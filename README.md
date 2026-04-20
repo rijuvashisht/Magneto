@@ -1,8 +1,6 @@
 <p align="center">
-  <img src="docs/logo.svg" alt="Magneto Logo" width="560" />
+  <img src="docs/logo.svg" alt="Magneto AI Logo" width="560" />
 </p>
-
-<h1 align="center">⚡ Magneto AI</h1>
 
 <p align="center">
   <strong>Repo-local AI reasoning framework & agent control plane for enterprise environments.</strong>
