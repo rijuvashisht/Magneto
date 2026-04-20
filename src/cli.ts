@@ -122,6 +122,23 @@ program
   .description('Execute a task through the Magneto AI pipeline using a specified runner and execution mode.')
   .option('--runner <runner>', 'Runner: openai, copilot-local, copilot-cloud', 'openai')
   .option('--mode <mode>', 'Mode: observe, assist, execute, restricted', 'assist')
+  .option('--interactive', 'Execute with interactive approval for each step', false)
+  .option('--approve-each', 'Pause for approval at each execution stage', false)
+  .option('--diff', 'Show diff view before each step', false)
+  .option('--rollback-on-fail', 'Auto-rollback on step failure', false)
+  .option('--auto-approve-low-risk', 'Auto-approve steps with low risk level', false)
+  .option('--stream', 'Enable real-time streaming output', false)
+  .option('--watch', 'Watch mode with live updates', false)
+  .option('--stream-format <format>', 'Stream format: text, json, sse', 'text')
+  .option('--with-memory', 'Load relevant memories for context', false)
+  .option('--save-memory', 'Save execution results to memory', false)
+  .option('--checkpoint-auto', 'Enable automatic checkpoints', false)
+  .option('--resume <checkpointId>', 'Resume from checkpoint', '')
+  .option('--decompose', 'Force task decomposition', false)
+  .option('--no-decompose', 'Disable automatic decomposition', false)
+  .option('--max-sub-agents <n>', 'Maximum sub-agents to spawn', parseInt)
+  .option('--coordination <mode>', 'Coordination mode: sequential, parallel, hybrid', 'hybrid')
+  .option('--watch-sub-agents', 'Monitor sub-agent progress', false)
   .addHelpText('after', `
 Runners:
   openai          Use OpenAI API (requires OPENAI_API_KEY)
@@ -134,10 +151,27 @@ Modes:
   execute         Automated execution with guardrails
   restricted      Locked — requires approval for everything
 
+Interactive Options:
+  --interactive           Execute with step-by-step approval
+  --approve-each          Pause at each stage for approval
+  --diff                  Show diff before each step
+  --rollback-on-fail      Auto-rollback failed steps
+  --auto-approve-low-risk Auto-approve low risk steps
+
+Streaming Options:
+  --stream                Enable real-time streaming output
+  --watch                 Watch mode with live updates
+  --stream-format         Stream output format (text/json/sse)
+
 Examples:
   $ magneto run task.json
   $ magneto run task.json --runner openai --mode execute
   $ magneto run task.json --runner copilot-local --mode observe
+  $ magneto run task.json --interactive
+  $ magneto run task.json --approve-each --diff
+  $ magneto run task.json --interactive --auto-approve-low-risk
+  $ magneto run task.json --stream
+  $ magneto run task.json --stream --stream-format json
 `)
   .action(async (taskFile, options) => {
     await runCommand(taskFile, options);
@@ -377,6 +411,239 @@ task
   .description('Display task details')
   .action(async (taskFile) => {
     await taskShowCommand(taskFile);
+  });
+
+// Memory commands
+import {
+  memoryListCommand,
+  memoryShowCommand,
+  memorySearchCommand,
+  memoryDeleteCommand,
+  memoryPruneCommand,
+  memoryExportCommand,
+  memoryImportCommand,
+  memoryStatsCommand,
+} from './commands/memory';
+
+const memory = program
+  .command('memory')
+  .description('Manage agent memories');
+
+memory
+  .command('list')
+  .description('List all memories')
+  .option('--task <taskId>', 'Filter by task ID')
+  .option('--type <type>', 'Filter by memory type')
+  .option('--limit <n>', 'Limit number of results', parseInt)
+  .action(async (options) => {
+    await memoryListCommand(options);
+  });
+
+memory
+  .command('show <id>')
+  .description('Show memory details')
+  .action(async (id) => {
+    await memoryShowCommand(id);
+  });
+
+memory
+  .command('search <query>')
+  .description('Search memories')
+  .option('--limit <n>', 'Limit number of results', parseInt)
+  .action(async (query, options) => {
+    await memorySearchCommand(query, options);
+  });
+
+memory
+  .command('delete <id>')
+  .description('Delete a memory')
+  .option('--force', 'Confirm deletion', false)
+  .action(async (id, options) => {
+    await memoryDeleteCommand(id, options);
+  });
+
+memory
+  .command('prune')
+  .description('Prune old memories')
+  .option('--strategy <strategy>', 'Pruning strategy: lru, importance, age, hybrid', 'hybrid')
+  .option('--max-age <days>', 'Delete memories older than N days', parseInt)
+  .option('--min-importance <score>', 'Delete memories with importance below score', parseFloat)
+  .option('--keep-checkpoints', 'Keep checkpoint memories', true)
+  .option('--dry-run', 'Show what would be deleted without deleting', false)
+  .action(async (options) => {
+    await memoryPruneCommand(options);
+  });
+
+memory
+  .command('export')
+  .description('Export memories to JSON')
+  .option('--output <file>', 'Output file (default: stdout)')
+  .option('--project <id>', 'Filter by project ID')
+  .action(async (options) => {
+    await memoryExportCommand(options);
+  });
+
+memory
+  .command('import <file>')
+  .description('Import memories from JSON file (use - for stdin)')
+  .option('--dry-run', 'Validate without importing', false)
+  .action(async (file, options) => {
+    await memoryImportCommand(file, options);
+  });
+
+memory
+  .command('stats')
+  .description('Show memory statistics')
+  .action(async () => {
+    await memoryStatsCommand();
+  });
+
+// Checkpoint commands
+import {
+  checkpointListCommand,
+  checkpointShowCommand,
+  checkpointDeleteCommand,
+  checkpointClearCommand,
+  checkpointStatsCommand,
+} from './commands/checkpoint';
+
+const checkpoint = program
+  .command('checkpoint')
+  .description('Manage execution checkpoints');
+
+checkpoint
+  .command('list')
+  .description('List all checkpoints')
+  .option('--task <taskId>', 'Filter by task ID')
+  .action(async (options) => {
+    await checkpointListCommand(options);
+  });
+
+checkpoint
+  .command('show <id>')
+  .description('Show checkpoint details')
+  .action(async (id) => {
+    await checkpointShowCommand(id);
+  });
+
+checkpoint
+  .command('delete <id>')
+  .description('Delete a checkpoint')
+  .option('--force', 'Confirm deletion', false)
+  .action(async (id, options) => {
+    await checkpointDeleteCommand(id, options);
+  });
+
+checkpoint
+  .command('clear')
+  .description('Clear all checkpoints (or for a specific task)')
+  .option('--task <taskId>', 'Only clear checkpoints for this task')
+  .option('--force', 'Confirm deletion', false)
+  .action(async (options) => {
+    await checkpointClearCommand(options);
+  });
+
+checkpoint
+  .command('stats')
+  .description('Show checkpoint statistics')
+  .action(async () => {
+    await checkpointStatsCommand();
+  });
+
+// Graph commands
+import {
+  graphBuildCommand,
+  graphQueryCommand,
+  graphShowCommand,
+  graphPathCommand,
+  graphNeighborsCommand,
+  graphStatsCommand,
+  graphCommunitiesCommand,
+  graphGodNodesCommand,
+  graphExportCommand,
+  graphViewCommand,
+} from './commands/graph';
+
+const graph = program
+  .command('graph')
+  .description('Knowledge graph operations');
+
+graph
+  .command('build')
+  .description('Build knowledge graph from codebase')
+  .option('--watch', 'Watch mode, auto-rebuild on changes', false)
+  .option('--incremental', 'Incremental update', false)
+  .action(async (options) => {
+    await graphBuildCommand(options);
+  });
+
+graph
+  .command('query <search>')
+  .description('Search the knowledge graph')
+  .option('--type <types>', 'Filter by node types (comma-separated)')
+  .option('--file <path>', 'Filter by file path')
+  .option('--limit <n>', 'Limit results', parseInt)
+  .action(async (search, options) => {
+    await graphQueryCommand(search, options);
+  });
+
+graph
+  .command('show <file>')
+  .description('Show graph nodes for a file')
+  .action(async (file) => {
+    await graphShowCommand(file);
+  });
+
+graph
+  .command('path <from> <to>')
+  .description('Find path between two nodes')
+  .action(async (from, to) => {
+    await graphPathCommand(from, to);
+  });
+
+graph
+  .command('neighbors <node>')
+  .description('Show neighborhood of a node')
+  .option('--depth <n>', 'Neighborhood depth', parseInt, 1)
+  .action(async (node, options) => {
+    await graphNeighborsCommand(node, options);
+  });
+
+graph
+  .command('stats')
+  .description('Show graph statistics')
+  .action(async () => {
+    await graphStatsCommand();
+  });
+
+graph
+  .command('communities')
+  .description('Show detected communities')
+  .action(async () => {
+    await graphCommunitiesCommand();
+  });
+
+graph
+  .command('god-nodes')
+  .description('Show highly connected nodes')
+  .action(async () => {
+    await graphGodNodesCommand();
+  });
+
+graph
+  .command('export')
+  .description('Export graph to various formats')
+  .option('--format <format>', 'Export format: json, dot', 'json')
+  .option('--output <file>', 'Output file path')
+  .action(async (options) => {
+    await graphExportCommand(options);
+  });
+
+graph
+  .command('view')
+  .description('Open interactive graph viewer')
+  .action(async () => {
+    await graphViewCommand();
   });
 
 program.parse(process.argv);

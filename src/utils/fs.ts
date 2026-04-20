@@ -70,3 +70,33 @@ export function deleteDir(dirPath: string): void {
     fs.rmSync(dirPath, { recursive: true, force: true });
   }
 }
+
+export function writeFile(filePath: string, content: string): void {
+  ensureDir(path.dirname(filePath));
+  fs.writeFileSync(filePath, content, 'utf-8');
+}
+
+export function readStdin(): Promise<string> {
+  return new Promise((resolve, reject) => {
+    let data = '';
+    
+    if (process.stdin.isTTY) {
+      resolve(data);
+      return;
+    }
+    
+    process.stdin.setEncoding('utf-8');
+    
+    process.stdin.on('data', (chunk) => {
+      data += chunk;
+    });
+    
+    process.stdin.on('end', () => {
+      resolve(data);
+    });
+    
+    process.stdin.on('error', (err) => {
+      reject(err);
+    });
+  });
+}

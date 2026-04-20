@@ -1,0 +1,109 @@
+# NPM Ignore - Development files that should not be published
+# This acts as a safety net. The primary control is package.json "files" array.
+
+# =============================================================================
+# DEVELOPMENT-ONLY FOLDERS (not for end users)
+# =============================================================================
+
+# Magneto's own development files (tasks, plans, etc.)
+.magneto/
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Git and GitHub
+.github/
+.git/
+.gitattributes
+
+# Local packages (monorepo development)
+packages/
+
+# Build scripts (only dist/ needed)
+scripts/
+
+# Test files (not needed for runtime)
+tests/
+*.test.ts
+*.test.js
+*.spec.ts
+*.spec.js
+__tests__/
+coverage/
+
+# =============================================================================
+# SOURCE FILES (compiled to dist/)
+# =============================================================================
+
+# TypeScript source (only dist/ published)
+src/**/*.ts
+!src/templates/
+
+# Configuration files for build
+jest.config.js
+tsconfig.json
+.eslintrc
+.eslintrc.js
+.eslintrc.json
+.prettierrc
+.prettierrc.js
+.prettierrc.json
+
+# =============================================================================
+# DEVELOPMENT DOCUMENTATION (not for end users)
+# =============================================================================
+
+# Internal development docs
+CONTRIBUTING.md
+PUBLISHING.md
+ROADMAP.md
+SECURITY.md
+
+# CI/CD workflows
+.github/workflows/
+
+# =============================================================================
+# LOGS AND TEMPORARY FILES
+# =============================================================================
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+.tmp/
+tmp/
+temp/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# =============================================================================
+# DEPENDENCIES (installed by npm install)
+# =============================================================================
+
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# =============================================================================
+# LOCAL DEVELOPMENT FILES
+# =============================================================================
+
+.env
+.env.local
+.env.*.local
+
+# Backup files
+*.backup
+*.bak
+.magneto.backup/

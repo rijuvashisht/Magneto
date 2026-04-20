@@ -71,6 +71,22 @@ magneto security fix --auto               # Auto-fix detected vulnerabilities
 5. **Access Control**: Authentication, authorization flaws
 6. **Cryptography**: Weak algorithms, improper key management
 
+**Open-Source Security Tools Integration:**
+
+Magneto will leverage these battle-tested open-source security tools:
+
+| Tool | Primary Focus | Best For | Integration |
+|------|--------------|----------|-------------|
+| **Trivy** (Aqua Security) | SCA, containers, K8s, IaC, secrets | Unified CI/CD scanning | Primary engine |
+| **Semgrep** | SAST - Fast static analysis | Custom AI code pattern rules | Core engine |
+| **OWASP Dependency-Check** | Dependency vulnerabilities | CVE detection | Database integration |
+| **Grype** (Anchore) | Container/SBOM scanning | Container security | Security module |
+| **OSV-Scanner** (Google) | Library dependencies | Open-source library risks | OSV database |
+| **Bandit** | Python security | Python-specific issues | Python profile |
+| **OWASP ZAP** | DAST | Web app runtime testing | Optional module |
+
+**Implementation Strategy**: Core engine built on Semgrep with custom rules, dependency scanning via OSV + Trivy, container/IaC via Trivy, language-specific via specialized tools.
+
 ---
 
 ### 1.1 Interactive Plan Approval Workflow ⭐ HIGH PRIORITY

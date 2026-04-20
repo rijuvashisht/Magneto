@@ -9,6 +9,13 @@ export interface RunnerInput {
   security: SecurityEvaluation;
   mode: string;
   projectRoot: string;
+  onProgress?: (progress: {
+    percentComplete: number;
+    currentStep: string;
+    tokensUsed?: number;
+    estimatedTimeRemaining?: number;
+  }) => void;
+  onOutput?: (data: string) => void;
 }
 
 export interface RunnerOutput {
