@@ -8,11 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- `magneto task` command family for task management (create, list, validate, delete, show)
-- Task templates for 7 types: feature, bug, security, performance, test, refactor, docs
-- `magneto adapter` command family for adapter management
-- Support for Claude Code, Google Antigravity, and Manus AI adapters
-- Interactive configuration prompts for API-based adapters
+- N/A
 
 ### Changed
 - N/A
@@ -28,6 +24,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 - N/A
+
+---
+
+## [0.12.0] - 2024-04-20
+
+### Added
+- **Telepathy Auto-Handoff Pipeline** — Tasks now auto-handoff to detected agents (Cascade, Copilot, Antigravity, Gemini)
+- **New Runners** — `cascade`, `antigravity`, `gemini` runners with auto-environment detection
+- **Task Completion Tracking** — `magneto telepathy` skips already-completed tasks (stored in `.magneto/cache/completed-tasks.json`)
+- **Template Auto-Skip** — TASK_TEMPLATE and similar files are automatically ignored during discovery
+- **New CLI Flags** — `--force` to re-run completed tasks, `--reset` to clear completion history
+- **Landing Page Wiki** — Full documentation site with token savings, architecture, getting started guides
+- **Documentation Badge** — README now links to https://magnetoai.vercel.app/
+- `magneto task` command family for task management (create, list, validate, delete, show)
+- Task templates for 7 types: feature, bug, security, performance, test, refactor, docs
+- `magneto adapter` command family for adapter management
+- Support for Claude Code, Google Antigravity, and Manus AI adapters
+- Interactive configuration prompts for API-based adapters
+
+### Changed
+- Default runner changed from `openai` to `cascade` in config
+
+---
+
+## [0.9.0] - 2024-04-20
+
+### Added
+- Telepathy auto-handoff to Windsurf/Cascade IDE
+- Task completion tracking and persistence
+- Template file filtering
 
 ---
 

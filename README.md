@@ -23,6 +23,7 @@
 </p>
 
 <p align="center">
+  <a href="https://magnetoai.vercel.app/"><img src="https://img.shields.io/badge/📚%20Documentation-58a6ff?style=for-the-badge" alt="Documentation" /></a>
   <a href="https://www.npmjs.com/package/magneto-ai"><img src="https://img.shields.io/npm/v/magneto-ai?color=brightgreen&label=npm" alt="npm version" /></a>
   <a href="https://www.npmjs.com/package/magneto-ai"><img src="https://img.shields.io/npm/dm/magneto-ai?color=blue&label=downloads" alt="npm downloads" /></a>
   <a href="https://github.com/rijuvashisht/Magneto/actions"><img src="https://github.com/rijuvashisht/Magneto/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
