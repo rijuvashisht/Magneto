@@ -46,6 +46,7 @@ Magneto AI is a multi-agent AI orchestration system that brings structured reaso
 
 Magneto AI is **not** another AI wrapper. It is a **reasoning engine**, **governance layer**, and **agent control plane** that sits between your team and any AI coding assistant — enforcing security, planning tasks, and building deep project understanding before a single line is written or deleted.
 
+- **🚨 AI Security Auditing (Project Glasswing)** — Pre-execution vulnerability scanning for ALL AI assistants (Claude, Copilot, Manus, etc.)
 - **Orchestrates multiple AI agents** with role-based task delegation
 - **Enforces security guardrails** — protected paths, blocked actions, approval workflows
 - **Classifies tasks** and creates execution plans before running anything

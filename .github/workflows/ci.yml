@@ -103,9 +103,18 @@ jobs:
             BUMP="patch"
           fi
 
+          # Extract breaking changes for release notes
+          BREAKING_CHANGES=""
+          if echo "$COMMITS" | grep -qiE 'BREAKING CHANGE'; then
+            BREAKING_CHANGES=$(echo "$COMMITS" | grep -iE 'BREAKING CHANGE' | sed 's/^/- ⚠️ /')
+          fi
+
           echo "BUMP=$BUMP" >> $GITHUB_OUTPUT
           echo "COMMITS<<EOF" >> $GITHUB_OUTPUT
           echo "$COMMITS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          echo "BREAKING_CHANGES<<EOF" >> $GITHUB_OUTPUT
+          echo "$BREAKING_CHANGES" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
           echo "LAST_TAG=$LAST_TAG" >> $GITHUB_OUTPUT
           echo "SKIP=false" >> $GITHUB_OUTPUT
@@ -154,20 +163,61 @@ jobs:
               : '';
 
             const bumpBadge = bump === 'major' ? '🚨 Major' : bump === 'minor' ? '✨ Minor' : '🔧 Patch';
+            const breakingChanges = `${{ steps.bump.outputs.BREAKING_CHANGES }}`;
 
-            const body = [
+            const bodyParts = [
               `## magneto-ai v${version} — ${bumpBadge}`,
               '',
               '### Install',
               '```bash',
               `npm install -g magneto-ai@${version}`,
               '```',
+            ];
+
+            // Add breaking changes section if present
+            if (breakingChanges && breakingChanges.trim()) {
+              bodyParts.push(
+                '',
+                '### ⚠️ Breaking Changes',
+                '**This release contains breaking changes. Please review before upgrading.**',
+                '',
+                breakingChanges,
+                '',
+                '**Migration Guide:** See [BREAKING_CHANGES.md](https://github.com/rijuvashisht/Magneto/blob/main/BREAKING_CHANGES.md) for detailed migration instructions.',
+                '',
+                '**Quick Migration:**',
+                '```bash',
+                '# Backup your project',
+                'cp -r .magneto .magneto.backup',
+                '',
+                '# Update to new version',
+                'npm install -g magneto-ai@' + version,
+                '',
+                '# Run diagnostics',
+                'magneto doctor',
+                'magneto adapter doctor',
+                '',
+                '# Validate all tasks',
+                'find .magneto/tasks -name "*.md" -exec magneto task validate {} \\;',
+                '```'
+              );
+            }
+
+            bodyParts.push(
               '',
               '### Changes',
               commits.split('\n').map(l => `- ${l}`).join('\n'),
               '',
               compareUrl ? `**Full diff:** ${compareUrl}` : '',
-            ].filter(Boolean).join('\n');
+              '',
+              '---',
+              '',
+              '📖 **Documentation:** https://github.com/rijuvashisht/Magneto#readme',
+              '📋 **Changelog:** https://github.com/rijuvashisht/Magneto/blob/main/CHANGELOG.md',
+              '⚠️ **Breaking Changes:** https://github.com/rijuvashisht/Magneto/blob/main/BREAKING_CHANGES.md'
+            );
+
+            const body = bodyParts.filter(Boolean).join('\n');
 
             await github.rest.repos.createRelease({
               owner: context.repo.owner,

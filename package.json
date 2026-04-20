@@ -16,9 +16,13 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "prepare": "npm run build",
-    "release:patch": "npm run build && npm test && npm version patch && git push origin HEAD --tags",
-    "release:minor": "npm run build && npm test && npm version minor && git push origin HEAD --tags",
-    "release:major": "npm run build && npm test && npm version major && git push origin HEAD --tags"
+    "prerelease": "npm run build && npm test",
+    "release:patch": "npm run prerelease && npm version patch && git push origin HEAD --tags",
+    "release:minor": "npm run prerelease && npm version minor && git push origin HEAD --tags",
+    "release:major": "npm run prerelease && npm version major && git push origin HEAD --tags",
+    "changelog:check": "node scripts/check-changelog.js",
+    "version:check": "node scripts/check-breaking-changes.js",
+    "docs:build": "echo 'Building documentation...' && npm run changelog:check"
   },
   "keywords": [
     "ai",
@@ -67,6 +71,8 @@
     "dist/",
     "src/templates/",
     "README.md",
+    "CHANGELOG.md",
+    "BREAKING_CHANGES.md",
     "LICENSE"
   ]
 }

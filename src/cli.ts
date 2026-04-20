@@ -19,6 +19,13 @@ import {
   adapterConfigCommand, 
   adapterDoctorCommand 
 } from './commands/adapter';
+import {
+  taskCreateCommand,
+  taskListCommand,
+  taskValidateCommand,
+  taskDeleteCommand,
+  taskShowCommand,
+} from './commands/task';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../package.json') as { version: string };
@@ -307,6 +314,69 @@ adapter
   .description('Validate all installed adapters are correctly configured')
   .action(async () => {
     await adapterDoctorCommand();
+  });
+
+const task = program
+  .command('task')
+  .description('Manage Magneto AI task files (.magneto/tasks/)');
+
+task
+  .command('create <type> <title>')
+  .description('Create a new task from template')
+  .option('--priority <level>', 'Priority: high, medium, low', 'medium')
+  .option('--roles <roles...>', 'Agent roles (orchestrator, backend, tester, etc.)')
+  .option('--edit', 'Open in editor after creation', false)
+  .addHelpText('after', `
+Task Types:
+  feature      New feature implementation
+  bug          Bug fix
+  security     Security audit or fix
+  performance  Performance optimization
+  test         Test implementation
+  refactor     Code refactoring
+  docs         Documentation
+
+Examples:
+  $ magneto task create feature "Add OAuth login"
+  $ magneto task create bug "Fix checkout error" --priority high
+  $ magneto task create security "Audit API endpoints" --roles orchestrator backend
+  $ magneto task create test "Add unit tests" --edit
+`)
+  .action(async (type, title, options) => {
+    await taskCreateCommand(type, title, options);
+  });
+
+task
+  .command('list')
+  .description('List all tasks with optional filters')
+  .option('--type <type>', 'Filter by type (feature, bug, etc.)')
+  .option('--priority <priority>', 'Filter by priority (high, medium, low)')
+  .option('--role <role>', 'Filter by role')
+  .option('--sort-by <field>', 'Sort by: name, priority', 'name')
+  .action(async (options) => {
+    await taskListCommand(options);
+  });
+
+task
+  .command('validate <taskFile>')
+  .description('Validate a task file against the schema')
+  .action(async (taskFile) => {
+    await taskValidateCommand(taskFile);
+  });
+
+task
+  .command('delete <taskFile>')
+  .description('Delete a task file')
+  .option('--force', 'Skip confirmation', false)
+  .action(async (taskFile, options) => {
+    await taskDeleteCommand(taskFile, options);
+  });
+
+task
+  .command('show <taskFile>')
+  .description('Display task details')
+  .action(async (taskFile) => {
+    await taskShowCommand(taskFile);
   });
 
 program.parse(process.argv);
