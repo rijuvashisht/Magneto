@@ -352,7 +352,25 @@ adapter
 
 const task = program
   .command('task')
-  .description('Manage Magneto AI task files (.magneto/tasks/)');
+  .description('Manage Magneto AI task files (.magneto/tasks/)')
+  .argument('[description]', 'Quick-create a feature task with this description')
+  .option('--type <type>', 'Task type for quick-create (feature, bug, etc.)', 'feature')
+  .option('--priority <level>', 'Priority for quick-create: high, medium, low', 'medium')
+  .addHelpText('after', `
+Quick Create:
+  $ magneto task "Add OAuth login"                    # Creates a feature task
+  $ magneto task "Fix checkout bug" --type bug         # Creates a bug task
+  $ magneto task "Audit endpoints" --type security     # Creates a security task
+
+Subcommands:
+  create, list, validate, delete, show
+`)
+  .action(async (description, options) => {
+    if (description) {
+      const type = options.type || 'feature';
+      await taskCreateCommand(type, description, { priority: options.priority });
+    }
+  });
 
 task
   .command('create <type> <title>')
