@@ -8,6 +8,7 @@
     "magneto": "dist/cli.js"
   },
   "scripts": {
+    "postinstall": "node scripts/postinstall.js",
     "build": "tsc",
     "dev": "tsc --watch",
     "start": "node dist/cli.js",
@@ -52,6 +53,7 @@
     "commander": "^12.1.0",
     "glob": "^10.3.10",
     "jsonschema": "^1.4.1",
+    "magneto": "^0.4.1",
     "magneto-ai": "^0.1.4",
     "openai": "^4.52.0",
     "uuid": "^9.0.0",
@@ -71,6 +73,7 @@
   "files": [
     "dist/",
     "src/templates/",
+    "scripts/postinstall.js",
     "docs/",
     "examples/",
     "README.md",
