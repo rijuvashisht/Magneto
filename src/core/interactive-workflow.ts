@@ -115,6 +115,9 @@ export class InteractiveWorkflow {
     logger.info(`  Timeout: ${this.options.timeout} minutes`);
     logger.info('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 
+    // Cleanup old session files (keep last 10)
+    await this.cleanupOldSessions();
+
     return this.session;
   }
 
@@ -557,5 +560,30 @@ export class InteractiveWorkflow {
     report += '\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
 
     return report;
+  }
+
+  private async cleanupOldSessions(maxFiles: number = 10): Promise<void> {
+    try {
+      const cacheDir = magnetoPath(this.projectRoot, 'cache');
+      const files = fs.readdirSync(cacheDir)
+        .filter(f => f.startsWith('interactive-session-') && f.endsWith('.json'))
+        .map(f => ({
+          name: f,
+          path: path.join(cacheDir, f),
+          mtime: fs.statSync(path.join(cacheDir, f)).mtime.getTime(),
+        }))
+        .sort((a, b) => b.mtime - a.mtime); // Sort by modification time, newest first
+
+      if (files.length > maxFiles) {
+        const filesToDelete = files.slice(maxFiles);
+        for (const file of filesToDelete) {
+          fs.unlinkSync(file.path);
+          logger.debug(`Deleted old session file: ${file.name}`);
+        }
+        logger.debug(`Cleaned up ${filesToDelete.length} old session files`);
+      }
+    } catch (error) {
+      logger.debug(`Failed to cleanup old session files: ${error}`);
+    }
   }
 }

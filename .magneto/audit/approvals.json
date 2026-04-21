@@ -1,0 +1,81 @@
+[
+  {
+    "sessionId": "approval-1776738788025-lw73ootjn",
+    "taskId": "1776738788025",
+    "startTime": "2026-04-21T02:33:23.064Z",
+    "decisions": [
+      {
+        "stepId": "0",
+        "decision": "reject",
+        "timestamp": "2026-04-21T02:33:23.063Z",
+        "reason": "not ccurate"
+      }
+    ],
+    "totalSteps": 4,
+    "approved": 0,
+    "rejected": 1,
+    "skipped": 0
+  },
+  {
+    "sessionId": "approval-1776738806708-87dykr0no",
+    "taskId": "1776738806708",
+    "startTime": "2026-04-21T02:33:46.066Z",
+    "decisions": [
+      {
+        "stepId": "0",
+        "decision": "approve",
+        "timestamp": "2026-04-21T02:33:31.665Z"
+      },
+      {
+        "stepId": "1",
+        "decision": "approve",
+        "timestamp": "2026-04-21T02:33:37.292Z"
+      },
+      {
+        "stepId": "2",
+        "decision": "skip",
+        "timestamp": "2026-04-21T02:33:42.257Z"
+      },
+      {
+        "stepId": "3",
+        "decision": "approve",
+        "timestamp": "2026-04-21T02:33:46.065Z"
+      }
+    ],
+    "totalSteps": 4,
+    "approved": 3,
+    "rejected": 0,
+    "skipped": 1
+  },
+  {
+    "sessionId": "approval-1776738951905-zrxkv1izn",
+    "taskId": "1776738951905",
+    "startTime": "2026-04-21T02:35:59.693Z",
+    "decisions": [
+      {
+        "stepId": "0",
+        "decision": "approve",
+        "timestamp": "2026-04-21T02:35:57.895Z"
+      },
+      {
+        "stepId": "1",
+        "decision": "approve",
+        "timestamp": "2026-04-21T02:35:58.597Z"
+      },
+      {
+        "stepId": "2",
+        "decision": "approve",
+        "timestamp": "2026-04-21T02:35:59.092Z"
+      },
+      {
+        "stepId": "3",
+        "decision": "approve",
+        "timestamp": "2026-04-21T02:35:59.692Z"
+      }
+    ],
+    "totalSteps": 4,
+    "approved": 4,
+    "rejected": 0,
+    "skipped": 0
+  }
+]
