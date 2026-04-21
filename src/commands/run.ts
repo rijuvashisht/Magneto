@@ -21,6 +21,7 @@ import {
 } from '../core/sub-agent-orchestrator';
 import { getGlobalTokenCollector, resetGlobalTokenCollector } from '../core/token-tracker';
 import { getGlobalPerformanceTracker } from '../core/performance-tracker';
+import { ApprovalWorkflow } from '../core/approval-workflow';
 import { listFiles } from '../utils/fs';
 
 export interface RunOptions {
@@ -96,6 +97,15 @@ export async function runCommand(taskFile: string, options: RunOptions): Promise
   }
 
   const taskId = (task as any).id || taskFile;
+
+  // Initialize approval workflow if approve-each is set
+  const approvalWorkflow = options.approveEach
+    ? new ApprovalWorkflow(projectRoot, taskId)
+    : null;
+
+  if (options.approveEach) {
+    logger.info('🔒 Interactive approval workflow enabled');
+  }
 
   // Start task timing
   perfTracker.startTask(taskId);
@@ -185,8 +195,34 @@ export async function runCommand(taskFile: string, options: RunOptions): Promise
   // Interactive mode
   if (options.interactive || options.approveEach) {
     logger.info('Starting interactive execution mode...');
-    
+
     const plan = generatePlanFromTask(task);
+
+    // Use ApprovalWorkflow if --approve-each is set
+    if (options.approveEach && approvalWorkflow) {
+      // Add plan steps to approval workflow
+      for (const step of plan.steps) {
+        approvalWorkflow.addStep({
+          id: step.index.toString(),
+          title: step.action,
+          description: step.description,
+          type: step.command ? 'command' : 'file-change',
+          riskLevel: step.riskLevel || 'medium',
+          command: step.command,
+        });
+      }
+
+      // Run interactive approval
+      const result = await approvalWorkflow.runInteractiveApproval();
+
+      if (!result.approved) {
+        logger.error('Approval workflow rejected. Execution aborted.');
+        process.exit(1);
+      }
+
+      logger.success('All steps approved. Proceeding with execution.');
+    }
+
     const workflow = new InteractiveWorkflow({
       autoApproveLowRisk: options.autoApproveLowRisk,
       requireDiffView: options.diff,
@@ -198,14 +234,14 @@ export async function runCommand(taskFile: string, options: RunOptions): Promise
     });
 
     const success = await workflow.runInteractiveSession();
-    
+
     if (success) {
       logger.success(workflow.generateReport());
     } else {
       logger.error('Interactive session ended with rejections');
       process.exit(1);
     }
-    
+
     return;
   }
 

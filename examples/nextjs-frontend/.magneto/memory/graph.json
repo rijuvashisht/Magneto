@@ -5,9 +5,9 @@
       "label": ".",
       "type": "module",
       "metadata": {
-        "files": 2,
-        "lines": 176,
-        "size": 5983
+        "files": 3,
+        "lines": 248,
+        "size": 8253
       },
       "community": 0,
       "degree": 0,
@@ -1492,6 +1492,20 @@
         "size": 1099
       },
       "community": 36,
+      "degree": 0,
+      "isGodNode": true
+    },
+    {
+      "id": "file:task.md",
+      "label": "task.md",
+      "type": "file",
+      "module": "_root",
+      "metadata": {
+        "extension": ".md",
+        "lines": 72,
+        "size": 2270
+      },
+      "community": 37,
       "degree": 0,
       "isGodNode": true
     },
@@ -3230,14 +3244,24 @@
       "topNodes": [
         "magneto.config.json"
       ]
+    },
+    {
+      "id": 37,
+      "nodeCount": 1,
+      "godNodes": [
+        "task.md"
+      ],
+      "topNodes": [
+        "task.md"
+      ]
     }
   ],
   "metadata": {
-    "generatedAt": "2026-04-21T02:05:10.141Z",
+    "generatedAt": "2026-04-21T02:21:32.805Z",
     "generator": "magneto-ai",
-    "totalNodes": 143,
+    "totalNodes": 144,
     "totalEdges": 177,
-    "totalCommunities": 37,
+    "totalCommunities": 38,
     "godNodes": [
       ".",
       "landing",
@@ -3276,7 +3300,8 @@
       "landing/src/components/landing/HowItWorks.tsx",
       "landing/src/components/landing/MagneticField.tsx",
       "landing/src/lib/version.ts",
-      "magneto.config.json"
+      "magneto.config.json",
+      "task.md"
     ]
   }
 }
