@@ -273,8 +273,25 @@ export class InteractiveWorkflow {
 
     // Handle modify option
     let modifiedCommand: string | undefined;
-    if (action === 'modify' && step.command) {
-      modifiedCommand = await this.promptInput('Enter modified command: ');
+    if (action === 'modify') {
+      if (step.command) {
+        modifiedCommand = await this.promptInput('Enter modified command: ');
+      } else {
+        logger.info('\nWhat would you like to modify?');
+        logger.info('  1. Description');
+        logger.info('  2. Add command');
+        const choice = await this.promptInput('Enter choice (1 or 2): ');
+        
+        if (choice === '1') {
+          const newDescription = await this.promptInput('Enter new description: ');
+          step.description = newDescription;
+        } else if (choice === '2') {
+          modifiedCommand = await this.promptInput('Enter command to add: ');
+        } else {
+          logger.warn('Invalid choice. Skipping modification.');
+          action = 'approve';
+        }
+      }
     }
 
     // Get reason for reject/skip
