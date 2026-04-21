@@ -1,22 +1,22 @@
 import * as vscode from 'vscode';
 import { MagnetoService, TaskPlan, SecurityCheck, AnalysisResult } from './magnetoService';
-import { TokenMetricsService } from './tokenMetrics';
-import { TokenGraphProvider } from './tokenGraph';
+import { PerformanceMetricsService } from './performanceMetrics';
+import { PerformanceGraphProvider } from './performanceGraph';
 
 export class AgentPanelProvider implements vscode.WebviewViewProvider {
     private _view?: vscode.WebviewView;
     private _magnetoService: MagnetoService;
     private _currentTask?: string;
-    private _tokenMetricsService: TokenMetricsService;
-    private _tokenGraphProvider: TokenGraphProvider;
+    private _performanceMetricsService: PerformanceMetricsService;
+    private _performanceGraphProvider: PerformanceGraphProvider;
 
     constructor(
         private readonly _extensionUri: vscode.Uri,
         magnetoService: MagnetoService
     ) {
         this._magnetoService = magnetoService;
-        this._tokenMetricsService = new TokenMetricsService(magnetoService);
-        this._tokenGraphProvider = new TokenGraphProvider(this._tokenMetricsService);
+        this._performanceMetricsService = new PerformanceMetricsService(magnetoService);
+        this._performanceGraphProvider = new PerformanceGraphProvider(this._performanceMetricsService);
     }
 
     resolveWebviewView(
@@ -58,7 +58,7 @@ export class AgentPanelProvider implements vscode.WebviewViewProvider {
                     await this.sendStatus();
                     break;
                 case 'refreshTokenMetrics':
-                    await this.refreshTokenMetrics();
+                    await this.refreshPerformanceMetrics();
                     break;
             }
         });
@@ -66,8 +66,8 @@ export class AgentPanelProvider implements vscode.WebviewViewProvider {
         // Send initial status
         this.sendStatus();
         
-        // Load token metrics
-        this.refreshTokenMetrics();
+        // Load performance metrics
+        this.refreshPerformanceMetrics();
     }
 
     private async sendStatus() {
@@ -255,13 +255,13 @@ export class AgentPanelProvider implements vscode.WebviewViewProvider {
         }
     }
 
-    async refreshTokenMetrics() {
+    async refreshPerformanceMetrics() {
         if (!this._view) return;
 
         try {
-            await this._tokenMetricsService.getMetrics();
-            const graphHtml = await this._tokenGraphProvider.updateGraph();
-            const styles = this._tokenGraphProvider.getStyles();
+            await this._performanceMetricsService.getMetrics();
+            const graphHtml = await this._performanceGraphProvider.updateGraph();
+            const styles = this._performanceGraphProvider.getStyles();
 
             this._view.webview.postMessage({
                 command: 'tokenGraphUpdate',
@@ -269,7 +269,7 @@ export class AgentPanelProvider implements vscode.WebviewViewProvider {
                 styles: styles,
             });
         } catch (error) {
-            console.error('Failed to refresh token metrics:', error);
+            console.error('Failed to refresh performance metrics:', error);
         }
     }
 
@@ -453,7 +453,7 @@ export class AgentPanelProvider implements vscode.WebviewViewProvider {
                 </div>
                 
                 <div class="section">
-                    <div class="section-title">Token Usage</div>
+                    <div class="section-title">Performance Metrics</div>
                     <div id="token-graph-container"></div>
                     <button onclick="refreshTokenMetrics()" style="margin-top: 8px;">🔄 Refresh</button>
                 </div>

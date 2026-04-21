@@ -6,6 +6,7 @@ import { handleMergeResults } from './tools/merge-results';
 import { handleSecurityCheck } from './tools/security-check';
 import { handleQueryGraph } from './tools/query-graph';
 import { handleTokenMetrics } from './tools/token-metrics';
+import { handlePerformanceMetrics } from './tools/performance-metrics';
 
 export interface MCPToolCall {
   tool: string;
@@ -97,6 +98,20 @@ const TOOLS_MANIFEST = {
         required: [],
       },
     },
+    {
+      name: 'performance_metrics',
+      description: 'Get performance metrics without requiring API keys. Tracks task completion time, context compression, and memory growth over time.',
+      parameters: {
+        type: 'object',
+        properties: {
+          projectRoot: { type: 'string', description: 'Project root directory (default: cwd)' },
+          sessionId: { type: 'string', description: 'Filter by specific session ID' },
+          taskId: { type: 'string', description: 'Filter by specific task ID' },
+          limit: { type: 'number', description: 'Max number of recent metrics to return (default: 100)' },
+        },
+        required: [],
+      },
+    },
   ],
 };
 
@@ -114,6 +129,8 @@ async function handleToolCall(call: MCPToolCall): Promise<MCPToolResult> {
       return handleQueryGraph(call.arguments);
     case 'token_metrics':
       return handleTokenMetrics(call.arguments);
+    case 'performance_metrics':
+      return handlePerformanceMetrics(call.arguments);
     default:
       return { success: false, data: null, error: `Unknown tool: ${call.tool}` };
   }

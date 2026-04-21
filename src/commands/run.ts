@@ -20,6 +20,8 @@ import {
   SubAgent 
 } from '../core/sub-agent-orchestrator';
 import { getGlobalTokenCollector, resetGlobalTokenCollector } from '../core/token-tracker';
+import { getGlobalPerformanceTracker } from '../core/performance-tracker';
+import { listFiles } from '../utils/fs';
 
 export interface RunOptions {
   runner: string;
@@ -44,6 +46,27 @@ export interface RunOptions {
   trackTokens?: boolean;
 }
 
+async function getTotalFiles(projectRoot: string): Promise<number> {
+  try {
+    const files = await listFiles(projectRoot);
+    // Filter out common exclude directories
+    const filtered = files.filter(f => 
+      !f.includes('node_modules') && 
+      !f.includes('.git') && 
+      !f.includes('dist') && 
+      !f.includes('build')
+    );
+    return filtered.length;
+  } catch {
+    return 0;
+  }
+}
+
+function calculateCompressionRatio(filesLoaded: number, totalFiles: number): number {
+  if (totalFiles === 0) return 0;
+  return ((totalFiles - filesLoaded) / totalFiles) * 100;
+}
+
 export async function runCommand(taskFile: string, options: RunOptions): Promise<void> {
   const projectRoot = resolveProjectRoot();
 
@@ -51,6 +74,9 @@ export async function runCommand(taskFile: string, options: RunOptions): Promise
     logger.error('Not a Magneto AI project. Run "magneto init" first.');
     process.exit(1);
   }
+
+  // Initialize performance tracker
+  const perfTracker = getGlobalPerformanceTracker(projectRoot);
 
   // Initialize token collector if tracking is enabled
   if (options.trackTokens) {
@@ -68,6 +94,11 @@ export async function runCommand(taskFile: string, options: RunOptions): Promise
     logger.error(`Failed to read task file: ${taskPath}`);
     process.exit(1);
   }
+
+  const taskId = (task as any).id || taskFile;
+
+  // Start task timing
+  perfTracker.startTask(taskId);
 
   // Security check
   const context = await buildContext(projectRoot, task);
@@ -253,6 +284,21 @@ export async function runCommand(taskFile: string, options: RunOptions): Promise
       });
 
       logger.success(`Task completed with streaming. Results saved: ${outputPath}`);
+
+      // Record performance metric
+      await perfTracker.recordMetric({
+        taskId,
+        taskType: task.type || 'general',
+        filesLoaded: context.relevantFiles.length,
+        totalFiles: await getTotalFiles(projectRoot),
+        compressionRatio: calculateCompressionRatio(context.relevantFiles.length, await getTotalFiles(projectRoot)),
+        graphNodes: 0, // Will be updated from graph
+        graphEdges: 0,
+        graphCommunities: 0,
+        success: true,
+        retries: 0,
+      });
+
       return;
     } catch (err: any) {
       await streamer.emitError(err.message);
@@ -283,6 +329,20 @@ export async function runCommand(taskFile: string, options: RunOptions): Promise
     });
 
     logger.success(`Task completed. Results saved: ${outputPath}`);
+
+    // Record performance metric
+    await perfTracker.recordMetric({
+      taskId,
+      taskType: task.type || 'general',
+      filesLoaded: context.relevantFiles.length,
+      totalFiles: await getTotalFiles(projectRoot),
+      compressionRatio: calculateCompressionRatio(context.relevantFiles.length, await getTotalFiles(projectRoot)),
+      graphNodes: 0, // Will be updated from graph
+      graphEdges: 0,
+      graphCommunities: 0,
+      success: true,
+      retries: 0,
+    });
   } catch (err: any) {
     logger.error(`Task execution failed: ${err.message}`);
     process.exit(1);
