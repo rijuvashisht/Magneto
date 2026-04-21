@@ -9,8 +9,8 @@ VS Code extension for Magneto AI - Agent control plane and reasoning framework.
 - **Security Check** - Evaluate security risks before executing tasks
 - **Project Analysis** - Analyze codebase and build knowledge graphs
 - **Context Refresh** - Update project context and power packs
-- **Token Tracking** - Track LLM token usage with A/B comparison (with/without Magneto context compression)
-- **Cost Visualization** - Real-time graph showing compression ratio and cost savings
+- **Performance Tracking** - Track task completion time, context compression, and improvement trend without API keys
+- **Performance Visualization** - Real-time graphs showing duration, compression ratio, and improvement over time
 
 ## Requirements
 
@@ -57,19 +57,23 @@ Search "Magneto AI" in the VS Code Extensions marketplace.
 2. Wait for analysis to complete
 3. View results in `.magneto/memory/`
 
-### Token Tracking
+### Performance Tracking
 
-1. Run tasks with token tracking enabled:
+1. Run tasks normally (no API key required):
    ```bash
-   magneto run task.md --track-tokens
+   magneto run task.md
    ```
-2. The extension will display a real-time graph showing:
-   - Token usage with Magneto (blue line)
-   - Token usage without Magneto (red line - baseline)
-   - Compression ratio percentage
-   - Cost savings in USD
-3. Click "Refresh" in the Token Usage section to update the graph
-4. Metrics are saved to `.magneto/token-metrics.json` for historical analysis
+2. The extension will automatically track and display:
+   - Task completion duration over time
+   - Context compression ratio (files loaded vs total files)
+   - Improvement trend (how much faster tasks get over time)
+3. Click "Refresh" in the Performance Metrics section to update the graphs
+4. Metrics are saved to `.magneto/performance-metrics.json` for historical analysis
+
+**Key Metrics:**
+- **Avg Duration**: Average time to complete tasks
+- **Compression**: Percentage of files NOT loaded (context compression)
+- **Improvement**: Percentage improvement in task completion time over time
 
 ## Configuration
 
