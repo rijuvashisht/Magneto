@@ -1,0 +1,129 @@
+{
+  "taskId": "task-1776735160046",
+  "title": "Task",
+  "context": {
+    "projectRoot": "/Users/rijuvashisht/Documents/AI/magneto/examples/nextjs-frontend",
+    "classification": "general",
+    "roles": [
+      "orchestrator"
+    ],
+    "subAgents": [
+      {
+        "id": "agent-orchestrator",
+        "role": "orchestrator",
+        "model": "gpt-4o",
+        "tools": [
+          "load_context",
+          "security_check",
+          "plan_task",
+          "merge_results"
+        ],
+        "scope": [
+          "**/*"
+        ]
+      }
+    ],
+    "relevantFiles": [],
+    "memoryContext": {},
+    "config": {
+      "version": "0.1.0",
+      "projectName": "",
+      "executionMode": "assist",
+      "security": {
+        "protectedPaths": [
+          "*.env",
+          "*.pem",
+          "*.key",
+          "secrets/**"
+        ],
+        "blockedActions": [
+          "delete-database",
+          "drop-table",
+          "rm -rf"
+        ],
+        "approvalRequired": [
+          "deploy",
+          "migrate",
+          "auth-change"
+        ],
+        "maxTelepathyLevel": 2
+      },
+      "powerPacks": [],
+      "adapters": [],
+      "runners": {
+        "default": "openai",
+        "available": [
+          "openai",
+          "copilot-local",
+          "copilot-cloud"
+        ]
+      },
+      "memoryMode": "internal-first",
+      "roles": [
+        "orchestrator",
+        "backend",
+        "tester",
+        "requirements"
+      ]
+    }
+  },
+  "security": {
+    "securityRisk": "low",
+    "approvalRequired": false,
+    "telepathyLevel": 2,
+    "reasons": [],
+    "blockedActions": [],
+    "protectedPathsAccessed": []
+  },
+  "steps": [
+    {
+      "order": 1,
+      "role": "analyst",
+      "action": "analyze",
+      "description": "Analyze task: Task",
+      "inputs": [
+        "# Task\n\nDescribe what i can to"
+      ],
+      "outputs": [
+        "analysis-report"
+      ]
+    },
+    {
+      "order": 2,
+      "role": "orchestrator",
+      "action": "execute",
+      "description": "Execute orchestrator responsibilities for: Task",
+      "inputs": [
+        "analysis-report"
+      ],
+      "outputs": [
+        "orchestrator-output"
+      ]
+    },
+    {
+      "order": 3,
+      "role": "orchestrator",
+      "action": "merge",
+      "description": "Merge all agent outputs",
+      "inputs": [
+        "orchestrator-output"
+      ],
+      "outputs": [
+        "final-report"
+      ]
+    },
+    {
+      "order": 4,
+      "role": "security",
+      "action": "review",
+      "description": "Final security review of merged output",
+      "inputs": [
+        "final-report"
+      ],
+      "outputs": [
+        "approved-report"
+      ]
+    }
+  ],
+  "createdAt": "2026-04-21T01:32:40.047Z"
+}

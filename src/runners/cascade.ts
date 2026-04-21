@@ -15,6 +15,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { Runner, RunnerInput, RunnerOutput } from './types';
 import { logger } from '../utils/logger';
+import { getGlobalTokenCollector } from '../core/token-tracker';
 
 export class CascadeRunner implements Runner {
   name = 'Cascade / Windsurf Runner';
@@ -55,6 +56,25 @@ export class CascadeRunner implements Runner {
     logger.info('═══════════════════════════════════════════════════');
     logger.info('');
 
+    // Estimate token usage (Cascade doesn't provide actual usage)
+    const promptTokens = Math.ceil(prompt.length / 4); // Rough estimate: ~4 chars per token
+    const contextSize = input.context.relevantFiles.length;
+
+    // Track token usage
+    const collector = getGlobalTokenCollector(input.projectRoot);
+    if (collector) {
+      await collector.recordMetric({
+        taskId: taskId,
+        runner: 'cascade',
+        model: 'cascade',
+        withMagneto: true,
+        inputTokens: promptTokens,
+        outputTokens: 0, // Cascade handles output separately
+        totalTokens: promptTokens,
+        contextSize,
+      });
+    }
+
     return {
       success: true,
       findings: [
@@ -73,6 +93,7 @@ export class CascadeRunner implements Runner {
         promptPath: cachePath,
         workflowPath: windsurfPath,
         handedOff: true,
+        tokensUsed: promptTokens,
       },
     };
   }

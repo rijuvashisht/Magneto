@@ -9,6 +9,8 @@ VS Code extension for Magneto AI - Agent control plane and reasoning framework.
 - **Security Check** - Evaluate security risks before executing tasks
 - **Project Analysis** - Analyze codebase and build knowledge graphs
 - **Context Refresh** - Update project context and power packs
+- **Token Tracking** - Track LLM token usage with A/B comparison (with/without Magneto context compression)
+- **Cost Visualization** - Real-time graph showing compression ratio and cost savings
 
 ## Requirements
 
@@ -54,6 +56,20 @@ Search "Magneto AI" in the VS Code Extensions marketplace.
 1. Click "Analyze Project" in Agent Panel
 2. Wait for analysis to complete
 3. View results in `.magneto/memory/`
+
+### Token Tracking
+
+1. Run tasks with token tracking enabled:
+   ```bash
+   magneto run task.md --track-tokens
+   ```
+2. The extension will display a real-time graph showing:
+   - Token usage with Magneto (blue line)
+   - Token usage without Magneto (red line - baseline)
+   - Compression ratio percentage
+   - Cost savings in USD
+3. Click "Refresh" in the Token Usage section to update the graph
+4. Metrics are saved to `.magneto/token-metrics.json` for historical analysis
 
 ## Configuration
 

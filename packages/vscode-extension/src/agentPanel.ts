@@ -1,16 +1,22 @@
 import * as vscode from 'vscode';
 import { MagnetoService, TaskPlan, SecurityCheck, AnalysisResult } from './magnetoService';
+import { TokenMetricsService } from './tokenMetrics';
+import { TokenGraphProvider } from './tokenGraph';
 
 export class AgentPanelProvider implements vscode.WebviewViewProvider {
     private _view?: vscode.WebviewView;
     private _magnetoService: MagnetoService;
     private _currentTask?: string;
+    private _tokenMetricsService: TokenMetricsService;
+    private _tokenGraphProvider: TokenGraphProvider;
 
     constructor(
         private readonly _extensionUri: vscode.Uri,
         magnetoService: MagnetoService
     ) {
         this._magnetoService = magnetoService;
+        this._tokenMetricsService = new TokenMetricsService(magnetoService);
+        this._tokenGraphProvider = new TokenGraphProvider(this._tokenMetricsService);
     }
 
     resolveWebviewView(
@@ -51,11 +57,17 @@ export class AgentPanelProvider implements vscode.WebviewViewProvider {
                 case 'getStatus':
                     await this.sendStatus();
                     break;
+                case 'refreshTokenMetrics':
+                    await this.refreshTokenMetrics();
+                    break;
             }
         });
 
         // Send initial status
         this.sendStatus();
+        
+        // Load token metrics
+        this.refreshTokenMetrics();
     }
 
     private async sendStatus() {
@@ -243,6 +255,24 @@ export class AgentPanelProvider implements vscode.WebviewViewProvider {
         }
     }
 
+    async refreshTokenMetrics() {
+        if (!this._view) return;
+
+        try {
+            await this._tokenMetricsService.getMetrics();
+            const graphHtml = await this._tokenGraphProvider.updateGraph();
+            const styles = this._tokenGraphProvider.getStyles();
+
+            this._view.webview.postMessage({
+                command: 'tokenGraphUpdate',
+                graph: graphHtml,
+                styles: styles,
+            });
+        } catch (error) {
+            console.error('Failed to refresh token metrics:', error);
+        }
+    }
+
     private _getHtmlForWebview(webview: vscode.Webview): string {
         return `<!DOCTYPE html>
         <html lang="en">
@@ -422,6 +452,12 @@ export class AgentPanelProvider implements vscode.WebviewViewProvider {
                     <button onclick="securityCheck()">🔒 Security Check</button>
                 </div>
                 
+                <div class="section">
+                    <div class="section-title">Token Usage</div>
+                    <div id="token-graph-container"></div>
+                    <button onclick="refreshTokenMetrics()" style="margin-top: 8px;">🔄 Refresh</button>
+                </div>
+                
                 <div class="loading" id="loading">
                     <span class="spinner">⏳</span>
                     <span id="loading-text">Processing...</span>
@@ -493,6 +529,17 @@ export class AgentPanelProvider implements vscode.WebviewViewProvider {
                             document.getElementById('loading').classList.remove('active');
                             showError(message.message);
                             break;
+                            
+                        case 'tokenGraphUpdate':
+                            document.getElementById('token-graph-container').innerHTML = message.graph;
+                            // Add styles if not already present
+                            if (!document.getElementById('token-graph-styles')) {
+                                const style = document.createElement('style');
+                                style.id = 'token-graph-styles';
+                                style.textContent = message.styles;
+                                document.head.appendChild(style);
+                            }
+                            break;
                     }
                 });
                 
@@ -527,6 +574,10 @@ export class AgentPanelProvider implements vscode.WebviewViewProvider {
                 
                 function refreshContext() {
                     vscode.postMessage({ command: 'refresh' });
+                }
+                
+                function refreshTokenMetrics() {
+                    vscode.postMessage({ command: 'refreshTokenMetrics' });
                 }
                 
                 function showResult(title, content) {

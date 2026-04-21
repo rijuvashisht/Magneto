@@ -139,6 +139,7 @@ program
   .option('--max-sub-agents <n>', 'Maximum sub-agents to spawn', parseInt)
   .option('--coordination <mode>', 'Coordination mode: sequential, parallel, hybrid', 'hybrid')
   .option('--watch-sub-agents', 'Monitor sub-agent progress', false)
+  .option('--track-tokens', 'Track token usage with A/B testing (with/without Magneto)', false)
   .addHelpText('after', `
 Runners:
   openai          Use OpenAI API (requires OPENAI_API_KEY)

@@ -1,6 +1,7 @@
 import OpenAI from 'openai';
 import { Runner, RunnerInput, RunnerOutput } from './types';
 import { logger } from '../utils/logger';
+import { getGlobalTokenCollector } from '../core/token-tracker';
 
 export class OpenAIRunner implements Runner {
   name = 'OpenAI Runner';
@@ -69,6 +70,25 @@ export class OpenAIRunner implements Runner {
       const content = response.choices[0]?.message?.content || '{}';
       const parsed = JSON.parse(content);
 
+      const inputTokens = response.usage?.prompt_tokens || 0;
+      const outputTokens = response.usage?.completion_tokens || 0;
+      const totalTokens = response.usage?.total_tokens || 0;
+
+      // Track token usage
+      const collector = getGlobalTokenCollector(input.projectRoot);
+      if (collector) {
+        await collector.recordMetric({
+          taskId: (input.task as any).id || 'unknown',
+          runner: 'openai',
+          model: 'gpt-4o',
+          withMagneto: true, // Will be set by A/B mode
+          inputTokens,
+          outputTokens,
+          totalTokens,
+          contextSize: input.context.relevantFiles.length,
+        });
+      }
+
       return {
         success: true,
         findings: parsed.findings || [],
@@ -78,6 +98,7 @@ export class OpenAIRunner implements Runner {
           model: 'gpt-4o',
           usage: response.usage,
           finishReason: response.choices[0]?.finish_reason,
+          tokensUsed: totalTokens,
         },
       };
     } catch (err: any) {

@@ -2,7 +2,7 @@
   "name": "magneto-ai",
   "displayName": "Magneto AI",
   "description": "VS Code extension for Magneto AI - Agent control plane and reasoning framework",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "magneto-ai",
   "engines": {
     "vscode": "^1.74.0"
@@ -60,11 +60,11 @@
       }
     ],
     "views": {
-      "explorer": [
+      "magneto": [
         {
           "id": "magneto.agentPanel",
-          "name": "Magneto AI",
-          "when": "magneto.enabled",
+          "name": "Agent Panel",
+          "type": "webview",
           "icon": "$(hubot)"
         }
       ]
@@ -81,8 +81,7 @@
     "menus": {
       "commandPalette": [
         {
-          "command": "magneto.openAgentPanel",
-          "when": "magneto.enabled"
+          "command": "magneto.openAgentPanel"
         }
       ],
       "editor/context": [
@@ -108,25 +107,21 @@
     "configuration": {
       "title": "Magneto AI",
       "properties": {
-        "magneto.enabled": {
-          "type": "boolean",
-          "default": true,
-          "description": "Enable Magneto AI extension"
-        },
         "magneto.mcpServerUrl": {
           "type": "string",
           "default": "http://localhost:3001",
-          "description": "MCP server URL for Magneto AI"
+          "description": "MCP server endpoint"
         },
         "magneto.autoAnalyzeOnOpen": {
           "type": "boolean",
           "default": false,
-          "description": "Automatically analyze project when opening"
+          "description": "Auto-analyze project on open"
         },
         "magneto.telepathyLevel": {
           "type": "number",
           "default": 1,
-          "enum": [0, 1, 2, 3],
+          "minimum": 0,
+          "maximum": 3,
           "description": "Default telepathy level (0=restricted, 3=full auto)"
         }
       }
@@ -159,7 +154,8 @@
     "tslint": "^6.1.2"
   },
   "dependencies": {
-    "axios": "^1.6.0"
+    "axios": "^1.6.0",
+    "chart.js": "^4.4.0"
   },
   "license": "MIT",
   "repository": {

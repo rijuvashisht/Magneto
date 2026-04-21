@@ -19,6 +19,7 @@ import {
   getGlobalSubAgentOrchestrator,
   SubAgent 
 } from '../core/sub-agent-orchestrator';
+import { getGlobalTokenCollector, resetGlobalTokenCollector } from '../core/token-tracker';
 
 export interface RunOptions {
   runner: string;
@@ -40,6 +41,7 @@ export interface RunOptions {
   maxSubAgents?: number;
   coordination?: 'sequential' | 'parallel' | 'hybrid';
   watchSubAgents?: boolean;
+  trackTokens?: boolean;
 }
 
 export async function runCommand(taskFile: string, options: RunOptions): Promise<void> {
@@ -48,6 +50,12 @@ export async function runCommand(taskFile: string, options: RunOptions): Promise
   if (!isMagnetoProject(projectRoot)) {
     logger.error('Not a Magneto AI project. Run "magneto init" first.');
     process.exit(1);
+  }
+
+  // Initialize token collector if tracking is enabled
+  if (options.trackTokens) {
+    const collector = getGlobalTokenCollector(projectRoot);
+    logger.info('📊 Token tracking enabled - A/B mode active');
   }
 
   const taskPath = path.resolve(projectRoot, taskFile);

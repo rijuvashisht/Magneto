@@ -5,6 +5,7 @@ import { handleLoadContext } from './tools/load-context';
 import { handleMergeResults } from './tools/merge-results';
 import { handleSecurityCheck } from './tools/security-check';
 import { handleQueryGraph } from './tools/query-graph';
+import { handleTokenMetrics } from './tools/token-metrics';
 
 export interface MCPToolCall {
   tool: string;
@@ -81,6 +82,21 @@ const TOOLS_MANIFEST = {
         required: ['query'],
       },
     },
+    {
+      name: 'token_metrics',
+      description: 'Get token usage metrics with A/B comparison (with/without Magneto context compression). Returns session data, individual metrics, and summary statistics including compression ratio and cost savings.',
+      parameters: {
+        type: 'object',
+        properties: {
+          projectRoot: { type: 'string', description: 'Project root directory (default: cwd)' },
+          sessionId: { type: 'string', description: 'Filter by specific session ID' },
+          taskId: { type: 'string', description: 'Filter by specific task ID' },
+          runner: { type: 'string', description: 'Filter by runner type (openai, cascade, etc.)' },
+          limit: { type: 'number', description: 'Max number of recent metrics to return (default: 100)' },
+        },
+        required: [],
+      },
+    },
   ],
 };
 
@@ -96,6 +112,8 @@ async function handleToolCall(call: MCPToolCall): Promise<MCPToolResult> {
       return handleSecurityCheck(call.arguments);
     case 'query_graph':
       return handleQueryGraph(call.arguments);
+    case 'token_metrics':
+      return handleTokenMetrics(call.arguments);
     default:
       return { success: false, data: null, error: `Unknown tool: ${call.tool}` };
   }

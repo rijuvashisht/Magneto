@@ -3,6 +3,7 @@ import * as child_process from 'child_process';
 import * as util from 'util';
 import * as path from 'path';
 import * as fs from 'fs';
+import axios from 'axios';
 
 const exec = util.promisify(child_process.exec);
 
@@ -36,7 +37,34 @@ export class MagnetoService {
 
     constructor() {
         const config = vscode.workspace.getConfiguration('magneto');
-        this.mcpUrl = config.get('mcpServerUrl') || 'http://localhost:3001';
+        this.mcpUrl = config.get('mcpServerUrl') || 'http://localhost:3100';
+    }
+
+    async callMCPTool(tool: string, args: Record<string, unknown>): Promise<{ success: boolean; data: unknown; error?: string }> {
+        try {
+            const response = await axios.post(`${this.mcpUrl}/mcp`, {
+                jsonrpc: '2.0',
+                id: Date.now(),
+                method: 'tools/call',
+                params: {
+                    name: tool,
+                    arguments: args,
+                },
+            });
+
+            return {
+                success: response.data.result?.success || false,
+                data: response.data.result?.data || null,
+                error: response.data.result?.error,
+            };
+        } catch (error) {
+            console.error('MCP tool call failed:', error);
+            return {
+                success: false,
+                data: null,
+                error: error instanceof Error ? error.message : 'Unknown error',
+            };
+        }
     }
 
     private async checkMagnetoInitialization(): Promise<boolean> {

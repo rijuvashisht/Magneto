@@ -14,6 +14,197 @@
       "isGodNode": true
     },
     {
+      "id": "mod:landing",
+      "label": "landing",
+      "type": "module",
+      "metadata": {
+        "files": 10,
+        "lines": 356,
+        "size": 10966
+      },
+      "community": 1,
+      "degree": 10,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:landing/src/app",
+      "label": "landing/src/app",
+      "type": "module",
+      "metadata": {
+        "files": 3,
+        "lines": 207,
+        "size": 5176
+      },
+      "community": 2,
+      "degree": 3,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:landing/src/app/docs",
+      "label": "landing/src/app/docs",
+      "type": "module",
+      "metadata": {
+        "files": 2,
+        "lines": 39,
+        "size": 1053
+      },
+      "community": 3,
+      "degree": 2
+    },
+    {
+      "id": "mod:landing/src/app/docs/architecture",
+      "label": "landing/src/app/docs/architecture",
+      "type": "module",
+      "metadata": {
+        "files": 1,
+        "lines": 218,
+        "size": 5023
+      },
+      "community": 4,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:landing/src/app/docs/commands",
+      "label": "landing/src/app/docs/commands",
+      "type": "module",
+      "metadata": {
+        "files": 1,
+        "lines": 283,
+        "size": 5250
+      },
+      "community": 5,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:landing/src/app/docs/configuration",
+      "label": "landing/src/app/docs/configuration",
+      "type": "module",
+      "metadata": {
+        "files": 1,
+        "lines": 108,
+        "size": 2250
+      },
+      "community": 6,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:landing/src/app/docs/getting-started",
+      "label": "landing/src/app/docs/getting-started",
+      "type": "module",
+      "metadata": {
+        "files": 1,
+        "lines": 151,
+        "size": 3464
+      },
+      "community": 7,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:landing/src/app/docs/knowledge-graph",
+      "label": "landing/src/app/docs/knowledge-graph",
+      "type": "module",
+      "metadata": {
+        "files": 1,
+        "lines": 120,
+        "size": 1894
+      },
+      "community": 8,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:landing/src/app/docs/power-packs",
+      "label": "landing/src/app/docs/power-packs",
+      "type": "module",
+      "metadata": {
+        "files": 1,
+        "lines": 163,
+        "size": 2933
+      },
+      "community": 9,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:landing/src/app/docs/security",
+      "label": "landing/src/app/docs/security",
+      "type": "module",
+      "metadata": {
+        "files": 1,
+        "lines": 172,
+        "size": 3088
+      },
+      "community": 10,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:landing/src/app/docs/token-savings",
+      "label": "landing/src/app/docs/token-savings",
+      "type": "module",
+      "metadata": {
+        "files": 1,
+        "lines": 317,
+        "size": 9640
+      },
+      "community": 11,
+      "degree": 1,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:landing/src/components",
+      "label": "landing/src/components",
+      "type": "module",
+      "metadata": {
+        "files": 1,
+        "lines": 139,
+        "size": 5156
+      },
+      "community": 12,
+      "degree": 1
+    },
+    {
+      "id": "mod:landing/src/components/docs",
+      "label": "landing/src/components/docs",
+      "type": "module",
+      "metadata": {
+        "files": 7,
+        "lines": 671,
+        "size": 21993
+      },
+      "community": 13,
+      "degree": 7
+    },
+    {
+      "id": "mod:landing/src/components/landing",
+      "label": "landing/src/components/landing",
+      "type": "module",
+      "metadata": {
+        "files": 8,
+        "lines": 1085,
+        "size": 41117
+      },
+      "community": 14,
+      "degree": 8,
+      "isGodNode": true
+    },
+    {
+      "id": "mod:landing/src/lib",
+      "label": "landing/src/lib",
+      "type": "module",
+      "metadata": {
+        "files": 2,
+        "lines": 21,
+        "size": 573
+      },
+      "community": 15,
+      "degree": 2
+    },
+    {
       "id": "mod:tasks",
       "label": "tasks",
       "type": "module",
@@ -22,7 +213,7 @@
         "lines": 135,
         "size": 4332
       },
-      "community": 1,
+      "community": 16,
       "degree": 3,
       "isGodNode": true
     },
@@ -36,9 +227,1259 @@
         "lines": 122,
         "size": 4884
       },
-      "community": 2,
+      "community": 17,
       "degree": 0,
       "isGodNode": true
+    },
+    {
+      "id": "file:landing/AGENTS.md",
+      "label": "landing/AGENTS.md",
+      "type": "file",
+      "module": "landing",
+      "metadata": {
+        "extension": ".md",
+        "lines": 6,
+        "size": 327
+      },
+      "community": 1,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/CLAUDE.md",
+      "label": "landing/CLAUDE.md",
+      "type": "file",
+      "module": "landing",
+      "metadata": {
+        "extension": ".md",
+        "lines": 2,
+        "size": 11
+      },
+      "community": 1,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/README.md",
+      "label": "landing/README.md",
+      "type": "file",
+      "module": "landing",
+      "metadata": {
+        "extension": ".md",
+        "lines": 37,
+        "size": 1450
+      },
+      "community": 1,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/eslint.config.mjs",
+      "label": "landing/eslint.config.mjs",
+      "type": "file",
+      "module": "landing",
+      "metadata": {
+        "extension": ".mjs",
+        "lines": 19,
+        "size": 465
+      },
+      "community": 18,
+      "degree": 5,
+      "isGodNode": true
+    },
+    {
+      "id": "export:landing/eslint.config.mjs:default: eslintConfig",
+      "label": "default: eslintConfig",
+      "type": "export",
+      "file": "landing/eslint.config.mjs",
+      "module": "landing",
+      "community": 18,
+      "degree": 1
+    },
+    {
+      "id": "pkg:eslint",
+      "label": "eslint",
+      "type": "package",
+      "community": 18,
+      "degree": 1
+    },
+    {
+      "id": "pkg:eslint-config-next",
+      "label": "eslint-config-next",
+      "type": "package",
+      "community": 18,
+      "degree": 2
+    },
+    {
+      "id": "file:landing/mdx-components.tsx",
+      "label": "landing/mdx-components.tsx",
+      "type": "file",
+      "module": "landing",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 184,
+        "size": 6407
+      },
+      "community": 19,
+      "degree": 9,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:landing/mdx-components.tsx:escapeHtml",
+      "label": "escapeHtml",
+      "type": "function",
+      "file": "landing/mdx-components.tsx",
+      "module": "landing",
+      "community": 19,
+      "degree": 1
+    },
+    {
+      "id": "fn:landing/mdx-components.tsx:useMDXComponents",
+      "label": "useMDXComponents",
+      "type": "function",
+      "file": "landing/mdx-components.tsx",
+      "module": "landing",
+      "community": 19,
+      "degree": 1
+    },
+    {
+      "id": "fn:landing/mdx-components.tsx:getRawText",
+      "label": "getRawText",
+      "type": "function",
+      "file": "landing/mdx-components.tsx",
+      "module": "landing",
+      "community": 19,
+      "degree": 1
+    },
+    {
+      "id": "export:landing/mdx-components.tsx:useMDXComponents",
+      "label": "useMDXComponents",
+      "type": "export",
+      "file": "landing/mdx-components.tsx",
+      "module": "landing",
+      "community": 19,
+      "degree": 1
+    },
+    {
+      "id": "pkg:mdx",
+      "label": "mdx",
+      "type": "package",
+      "community": 19,
+      "degree": 1
+    },
+    {
+      "id": "pkg:react",
+      "label": "react",
+      "type": "package",
+      "community": 20,
+      "degree": 14,
+      "isGodNode": true
+    },
+    {
+      "id": "pkg:@/components",
+      "label": "@/components",
+      "type": "package",
+      "community": 21,
+      "degree": 14,
+      "isGodNode": true
+    },
+    {
+      "id": "file:landing/next-env.d.ts",
+      "label": "landing/next-env.d.ts",
+      "type": "file",
+      "module": "landing",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 7,
+        "size": 247
+      },
+      "community": 1,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/next.config.ts",
+      "label": "landing/next.config.ts",
+      "type": "file",
+      "module": "landing",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 20,
+        "size": 442
+      },
+      "community": 22,
+      "degree": 4,
+      "isGodNode": true
+    },
+    {
+      "id": "export:landing/next.config.ts:default: withMDX",
+      "label": "default: withMDX",
+      "type": "export",
+      "file": "landing/next.config.ts",
+      "module": "landing",
+      "community": 22,
+      "degree": 1
+    },
+    {
+      "id": "pkg:next",
+      "label": "next",
+      "type": "package",
+      "community": 13,
+      "degree": 11,
+      "isGodNode": true
+    },
+    {
+      "id": "pkg:@next/mdx",
+      "label": "@next/mdx",
+      "type": "package",
+      "community": 22,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/package.json",
+      "label": "landing/package.json",
+      "type": "file",
+      "module": "landing",
+      "metadata": {
+        "extension": ".json",
+        "lines": 38,
+        "size": 853
+      },
+      "community": 1,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/postcss.config.mjs",
+      "label": "landing/postcss.config.mjs",
+      "type": "file",
+      "module": "landing",
+      "metadata": {
+        "extension": ".mjs",
+        "lines": 8,
+        "size": 94
+      },
+      "community": 23,
+      "degree": 2,
+      "isGodNode": true
+    },
+    {
+      "id": "export:landing/postcss.config.mjs:default: config",
+      "label": "default: config",
+      "type": "export",
+      "file": "landing/postcss.config.mjs",
+      "module": "landing",
+      "community": 23,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/app/docs/architecture/page.mdx",
+      "label": "landing/src/app/docs/architecture/page.mdx",
+      "type": "file",
+      "module": "landing/src/app/docs/architecture",
+      "metadata": {
+        "extension": ".mdx",
+        "lines": 218,
+        "size": 5023
+      },
+      "community": 4,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/app/docs/commands/page.mdx",
+      "label": "landing/src/app/docs/commands/page.mdx",
+      "type": "file",
+      "module": "landing/src/app/docs/commands",
+      "metadata": {
+        "extension": ".mdx",
+        "lines": 283,
+        "size": 5250
+      },
+      "community": 5,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/app/docs/configuration/page.mdx",
+      "label": "landing/src/app/docs/configuration/page.mdx",
+      "type": "file",
+      "module": "landing/src/app/docs/configuration",
+      "metadata": {
+        "extension": ".mdx",
+        "lines": 108,
+        "size": 2250
+      },
+      "community": 6,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/app/docs/getting-started/page.mdx",
+      "label": "landing/src/app/docs/getting-started/page.mdx",
+      "type": "file",
+      "module": "landing/src/app/docs/getting-started",
+      "metadata": {
+        "extension": ".mdx",
+        "lines": 151,
+        "size": 3464
+      },
+      "community": 7,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/app/docs/knowledge-graph/page.mdx",
+      "label": "landing/src/app/docs/knowledge-graph/page.mdx",
+      "type": "file",
+      "module": "landing/src/app/docs/knowledge-graph",
+      "metadata": {
+        "extension": ".mdx",
+        "lines": 120,
+        "size": 1894
+      },
+      "community": 8,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/app/docs/layout.tsx",
+      "label": "landing/src/app/docs/layout.tsx",
+      "type": "file",
+      "module": "landing/src/app/docs",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 33,
+        "size": 931
+      },
+      "community": 21,
+      "degree": 7
+    },
+    {
+      "id": "export:landing/src/app/docs/layout.tsx:metadata",
+      "label": "metadata",
+      "type": "export",
+      "file": "landing/src/app/docs/layout.tsx",
+      "module": "landing/src/app/docs",
+      "community": 21,
+      "degree": 1
+    },
+    {
+      "id": "export:landing/src/app/docs/layout.tsx:default: function DocsLayout",
+      "label": "default: function DocsLayout",
+      "type": "export",
+      "file": "landing/src/app/docs/layout.tsx",
+      "module": "landing/src/app/docs",
+      "community": 21,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/app/docs/page.tsx",
+      "label": "landing/src/app/docs/page.tsx",
+      "type": "file",
+      "module": "landing/src/app/docs",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 6,
+        "size": 122
+      },
+      "community": 3,
+      "degree": 3,
+      "isGodNode": true
+    },
+    {
+      "id": "export:landing/src/app/docs/page.tsx:default: function DocsIndex",
+      "label": "default: function DocsIndex",
+      "type": "export",
+      "file": "landing/src/app/docs/page.tsx",
+      "module": "landing/src/app/docs",
+      "community": 3,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/app/docs/power-packs/page.mdx",
+      "label": "landing/src/app/docs/power-packs/page.mdx",
+      "type": "file",
+      "module": "landing/src/app/docs/power-packs",
+      "metadata": {
+        "extension": ".mdx",
+        "lines": 163,
+        "size": 2933
+      },
+      "community": 9,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/app/docs/security/page.mdx",
+      "label": "landing/src/app/docs/security/page.mdx",
+      "type": "file",
+      "module": "landing/src/app/docs/security",
+      "metadata": {
+        "extension": ".mdx",
+        "lines": 172,
+        "size": 3088
+      },
+      "community": 10,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/app/docs/token-savings/page.mdx",
+      "label": "landing/src/app/docs/token-savings/page.mdx",
+      "type": "file",
+      "module": "landing/src/app/docs/token-savings",
+      "metadata": {
+        "extension": ".mdx",
+        "lines": 317,
+        "size": 9640
+      },
+      "community": 11,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/app/globals.css",
+      "label": "landing/src/app/globals.css",
+      "type": "file",
+      "module": "landing/src/app",
+      "metadata": {
+        "extension": ".css",
+        "lines": 121,
+        "size": 2671
+      },
+      "community": 2,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/app/layout.tsx",
+      "label": "landing/src/app/layout.tsx",
+      "type": "file",
+      "module": "landing/src/app",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 57,
+        "size": 1621
+      },
+      "community": 13,
+      "degree": 6
+    },
+    {
+      "id": "export:landing/src/app/layout.tsx:metadata",
+      "label": "metadata",
+      "type": "export",
+      "file": "landing/src/app/layout.tsx",
+      "module": "landing/src/app",
+      "community": 13,
+      "degree": 1
+    },
+    {
+      "id": "export:landing/src/app/layout.tsx:default: function RootLayout",
+      "label": "default: function RootLayout",
+      "type": "export",
+      "file": "landing/src/app/layout.tsx",
+      "module": "landing/src/app",
+      "community": 13,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/app/page.tsx",
+      "label": "landing/src/app/page.tsx",
+      "type": "file",
+      "module": "landing/src/app",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 29,
+        "size": 884
+      },
+      "community": 21,
+      "degree": 10
+    },
+    {
+      "id": "export:landing/src/app/page.tsx:default: function Home",
+      "label": "default: function Home",
+      "type": "export",
+      "file": "landing/src/app/page.tsx",
+      "module": "landing/src/app",
+      "community": 21,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/components/ThemeSwitcher.tsx",
+      "label": "landing/src/components/ThemeSwitcher.tsx",
+      "type": "file",
+      "module": "landing/src/components",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 139,
+        "size": 5156
+      },
+      "community": 12,
+      "degree": 9,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:landing/src/components/ThemeSwitcher.tsx:applyTheme",
+      "label": "applyTheme",
+      "type": "function",
+      "file": "landing/src/components/ThemeSwitcher.tsx",
+      "module": "landing/src/components",
+      "community": 12,
+      "degree": 1
+    },
+    {
+      "id": "fn:landing/src/components/ThemeSwitcher.tsx:handleThemeChange",
+      "label": "handleThemeChange",
+      "type": "function",
+      "file": "landing/src/components/ThemeSwitcher.tsx",
+      "module": "landing/src/components",
+      "community": 12,
+      "degree": 1
+    },
+    {
+      "id": "fn:landing/src/components/ThemeSwitcher.tsx:handleChange",
+      "label": "handleChange",
+      "type": "function",
+      "file": "landing/src/components/ThemeSwitcher.tsx",
+      "module": "landing/src/components",
+      "community": 12,
+      "degree": 1
+    },
+    {
+      "id": "fn:landing/src/components/ThemeSwitcher.tsx:getCurrentIcon",
+      "label": "getCurrentIcon",
+      "type": "function",
+      "file": "landing/src/components/ThemeSwitcher.tsx",
+      "module": "landing/src/components",
+      "community": 12,
+      "degree": 1
+    },
+    {
+      "id": "type:landing/src/components/ThemeSwitcher.tsx:Theme",
+      "label": "Theme",
+      "type": "type",
+      "file": "landing/src/components/ThemeSwitcher.tsx",
+      "module": "landing/src/components",
+      "community": 12,
+      "degree": 1
+    },
+    {
+      "id": "export:landing/src/components/ThemeSwitcher.tsx:default: function ThemeSwitcher",
+      "label": "default: function ThemeSwitcher",
+      "type": "export",
+      "file": "landing/src/components/ThemeSwitcher.tsx",
+      "module": "landing/src/components",
+      "community": 12,
+      "degree": 1
+    },
+    {
+      "id": "pkg:lucide-react",
+      "label": "lucide-react",
+      "type": "package",
+      "community": 24,
+      "degree": 9,
+      "isGodNode": true
+    },
+    {
+      "id": "file:landing/src/components/docs/CodeBlock.tsx",
+      "label": "landing/src/components/docs/CodeBlock.tsx",
+      "type": "file",
+      "module": "landing/src/components/docs",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 70,
+        "size": 2402
+      },
+      "community": 25,
+      "degree": 7,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:landing/src/components/docs/CodeBlock.tsx:CodeBlock",
+      "label": "CodeBlock",
+      "type": "function",
+      "file": "landing/src/components/docs/CodeBlock.tsx",
+      "module": "landing/src/components/docs",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "fn:landing/src/components/docs/CodeBlock.tsx:handleCopy",
+      "label": "handleCopy",
+      "type": "function",
+      "file": "landing/src/components/docs/CodeBlock.tsx",
+      "module": "landing/src/components/docs",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "iface:landing/src/components/docs/CodeBlock.tsx:CodeBlockProps",
+      "label": "CodeBlockProps",
+      "type": "interface",
+      "file": "landing/src/components/docs/CodeBlock.tsx",
+      "module": "landing/src/components/docs",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "export:landing/src/components/docs/CodeBlock.tsx:CodeBlock",
+      "label": "CodeBlock",
+      "type": "export",
+      "file": "landing/src/components/docs/CodeBlock.tsx",
+      "module": "landing/src/components/docs",
+      "community": 25,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/components/docs/CopyButton.tsx",
+      "label": "landing/src/components/docs/CopyButton.tsx",
+      "type": "file",
+      "module": "landing/src/components/docs",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 40,
+        "size": 1078
+      },
+      "community": 26,
+      "degree": 7,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:landing/src/components/docs/CopyButton.tsx:CopyButton",
+      "label": "CopyButton",
+      "type": "function",
+      "file": "landing/src/components/docs/CopyButton.tsx",
+      "module": "landing/src/components/docs",
+      "community": 26,
+      "degree": 1
+    },
+    {
+      "id": "fn:landing/src/components/docs/CopyButton.tsx:handleCopy",
+      "label": "handleCopy",
+      "type": "function",
+      "file": "landing/src/components/docs/CopyButton.tsx",
+      "module": "landing/src/components/docs",
+      "community": 26,
+      "degree": 1
+    },
+    {
+      "id": "iface:landing/src/components/docs/CopyButton.tsx:CopyButtonProps",
+      "label": "CopyButtonProps",
+      "type": "interface",
+      "file": "landing/src/components/docs/CopyButton.tsx",
+      "module": "landing/src/components/docs",
+      "community": 26,
+      "degree": 1
+    },
+    {
+      "id": "export:landing/src/components/docs/CopyButton.tsx:CopyButton",
+      "label": "CopyButton",
+      "type": "export",
+      "file": "landing/src/components/docs/CopyButton.tsx",
+      "module": "landing/src/components/docs",
+      "community": 26,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/components/docs/DocsHeader.tsx",
+      "label": "landing/src/components/docs/DocsHeader.tsx",
+      "type": "file",
+      "module": "landing/src/components/docs",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 61,
+        "size": 2611
+      },
+      "community": 27,
+      "degree": 7,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:landing/src/components/docs/DocsHeader.tsx:DocsHeader",
+      "label": "DocsHeader",
+      "type": "function",
+      "file": "landing/src/components/docs/DocsHeader.tsx",
+      "module": "landing/src/components/docs",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "export:landing/src/components/docs/DocsHeader.tsx:DocsHeader",
+      "label": "DocsHeader",
+      "type": "export",
+      "file": "landing/src/components/docs/DocsHeader.tsx",
+      "module": "landing/src/components/docs",
+      "community": 27,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/components/docs/DocsSidebar.tsx",
+      "label": "landing/src/components/docs/DocsSidebar.tsx",
+      "type": "file",
+      "module": "landing/src/components/docs",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 138,
+        "size": 4046
+      },
+      "community": 13,
+      "degree": 6
+    },
+    {
+      "id": "fn:landing/src/components/docs/DocsSidebar.tsx:DocsSidebar",
+      "label": "DocsSidebar",
+      "type": "function",
+      "file": "landing/src/components/docs/DocsSidebar.tsx",
+      "module": "landing/src/components/docs",
+      "community": 13,
+      "degree": 1
+    },
+    {
+      "id": "export:landing/src/components/docs/DocsSidebar.tsx:DocsSidebar",
+      "label": "DocsSidebar",
+      "type": "export",
+      "file": "landing/src/components/docs/DocsSidebar.tsx",
+      "module": "landing/src/components/docs",
+      "community": 13,
+      "degree": 1
+    },
+    {
+      "id": "pkg:@/lib",
+      "label": "@/lib",
+      "type": "package",
+      "community": 13,
+      "degree": 3
+    },
+    {
+      "id": "file:landing/src/components/docs/Mermaid.tsx",
+      "label": "landing/src/components/docs/Mermaid.tsx",
+      "type": "file",
+      "module": "landing/src/components/docs",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 82,
+        "size": 2229
+      },
+      "community": 28,
+      "degree": 7,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:landing/src/components/docs/Mermaid.tsx:Mermaid",
+      "label": "Mermaid",
+      "type": "function",
+      "file": "landing/src/components/docs/Mermaid.tsx",
+      "module": "landing/src/components/docs",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "fn:landing/src/components/docs/Mermaid.tsx:render",
+      "label": "render",
+      "type": "function",
+      "file": "landing/src/components/docs/Mermaid.tsx",
+      "module": "landing/src/components/docs",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "iface:landing/src/components/docs/Mermaid.tsx:MermaidProps",
+      "label": "MermaidProps",
+      "type": "interface",
+      "file": "landing/src/components/docs/Mermaid.tsx",
+      "module": "landing/src/components/docs",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "export:landing/src/components/docs/Mermaid.tsx:Mermaid",
+      "label": "Mermaid",
+      "type": "export",
+      "file": "landing/src/components/docs/Mermaid.tsx",
+      "module": "landing/src/components/docs",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "pkg:mermaid",
+      "label": "mermaid",
+      "type": "package",
+      "community": 28,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/components/docs/SearchModal.tsx",
+      "label": "landing/src/components/docs/SearchModal.tsx",
+      "type": "file",
+      "module": "landing/src/components/docs",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 138,
+        "size": 5240
+      },
+      "community": 29,
+      "degree": 9,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:landing/src/components/docs/SearchModal.tsx:SearchModal",
+      "label": "SearchModal",
+      "type": "function",
+      "file": "landing/src/components/docs/SearchModal.tsx",
+      "module": "landing/src/components/docs",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "fn:landing/src/components/docs/SearchModal.tsx:handleKeyDown",
+      "label": "handleKeyDown",
+      "type": "function",
+      "file": "landing/src/components/docs/SearchModal.tsx",
+      "module": "landing/src/components/docs",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "iface:landing/src/components/docs/SearchModal.tsx:SearchModalProps",
+      "label": "SearchModalProps",
+      "type": "interface",
+      "file": "landing/src/components/docs/SearchModal.tsx",
+      "module": "landing/src/components/docs",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "export:landing/src/components/docs/SearchModal.tsx:SearchModal",
+      "label": "SearchModal",
+      "type": "export",
+      "file": "landing/src/components/docs/SearchModal.tsx",
+      "module": "landing/src/components/docs",
+      "community": 29,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/components/docs/TableOfContents.tsx",
+      "label": "landing/src/components/docs/TableOfContents.tsx",
+      "type": "file",
+      "module": "landing/src/components/docs",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 142,
+        "size": 4387
+      },
+      "community": 13,
+      "degree": 11,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:landing/src/components/docs/TableOfContents.tsx:TableOfContents",
+      "label": "TableOfContents",
+      "type": "function",
+      "file": "landing/src/components/docs/TableOfContents.tsx",
+      "module": "landing/src/components/docs",
+      "community": 13,
+      "degree": 1
+    },
+    {
+      "id": "fn:landing/src/components/docs/TableOfContents.tsx:extractHeadings",
+      "label": "extractHeadings",
+      "type": "function",
+      "file": "landing/src/components/docs/TableOfContents.tsx",
+      "module": "landing/src/components/docs",
+      "community": 13,
+      "degree": 1
+    },
+    {
+      "id": "fn:landing/src/components/docs/TableOfContents.tsx:handleScroll",
+      "label": "handleScroll",
+      "type": "function",
+      "file": "landing/src/components/docs/TableOfContents.tsx",
+      "module": "landing/src/components/docs",
+      "community": 13,
+      "degree": 1
+    },
+    {
+      "id": "iface:landing/src/components/docs/TableOfContents.tsx:Heading",
+      "label": "Heading",
+      "type": "interface",
+      "file": "landing/src/components/docs/TableOfContents.tsx",
+      "module": "landing/src/components/docs",
+      "community": 13,
+      "degree": 1
+    },
+    {
+      "id": "iface:landing/src/components/docs/TableOfContents.tsx:TableOfContentsProps",
+      "label": "TableOfContentsProps",
+      "type": "interface",
+      "file": "landing/src/components/docs/TableOfContents.tsx",
+      "module": "landing/src/components/docs",
+      "community": 13,
+      "degree": 1
+    },
+    {
+      "id": "export:landing/src/components/docs/TableOfContents.tsx:TableOfContents",
+      "label": "TableOfContents",
+      "type": "export",
+      "file": "landing/src/components/docs/TableOfContents.tsx",
+      "module": "landing/src/components/docs",
+      "community": 13,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/components/landing/Architecture.tsx",
+      "label": "landing/src/components/landing/Architecture.tsx",
+      "type": "file",
+      "module": "landing/src/components/landing",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 118,
+        "size": 4113
+      },
+      "community": 20,
+      "degree": 4
+    },
+    {
+      "id": "export:landing/src/components/landing/Architecture.tsx:default: function Architecture",
+      "label": "default: function Architecture",
+      "type": "export",
+      "file": "landing/src/components/landing/Architecture.tsx",
+      "module": "landing/src/components/landing",
+      "community": 20,
+      "degree": 1
+    },
+    {
+      "id": "pkg:framer-motion",
+      "label": "framer-motion",
+      "type": "package",
+      "community": 30,
+      "degree": 6,
+      "isGodNode": true
+    },
+    {
+      "id": "file:landing/src/components/landing/CliDemo.tsx",
+      "label": "landing/src/components/landing/CliDemo.tsx",
+      "type": "file",
+      "module": "landing/src/components/landing",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 105,
+        "size": 4693
+      },
+      "community": 30,
+      "degree": 4
+    },
+    {
+      "id": "export:landing/src/components/landing/CliDemo.tsx:default: function CliDemo",
+      "label": "default: function CliDemo",
+      "type": "export",
+      "file": "landing/src/components/landing/CliDemo.tsx",
+      "module": "landing/src/components/landing",
+      "community": 30,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/components/landing/Features.tsx",
+      "label": "landing/src/components/landing/Features.tsx",
+      "type": "file",
+      "module": "landing/src/components/landing",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 140,
+        "size": 4580
+      },
+      "community": 31,
+      "degree": 4,
+      "isGodNode": true
+    },
+    {
+      "id": "export:landing/src/components/landing/Features.tsx:default: function Features",
+      "label": "default: function Features",
+      "type": "export",
+      "file": "landing/src/components/landing/Features.tsx",
+      "module": "landing/src/components/landing",
+      "community": 31,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/components/landing/Footer.tsx",
+      "label": "landing/src/components/landing/Footer.tsx",
+      "type": "file",
+      "module": "landing/src/components/landing",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 100,
+        "size": 4389
+      },
+      "community": 14,
+      "degree": 3
+    },
+    {
+      "id": "export:landing/src/components/landing/Footer.tsx:default: function Footer",
+      "label": "default: function Footer",
+      "type": "export",
+      "file": "landing/src/components/landing/Footer.tsx",
+      "module": "landing/src/components/landing",
+      "community": 14,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/components/landing/GetStarted.tsx",
+      "label": "landing/src/components/landing/GetStarted.tsx",
+      "type": "file",
+      "module": "landing/src/components/landing",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 130,
+        "size": 4897
+      },
+      "community": 32,
+      "degree": 7,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:landing/src/components/landing/GetStarted.tsx:CopyButton",
+      "label": "CopyButton",
+      "type": "function",
+      "file": "landing/src/components/landing/GetStarted.tsx",
+      "module": "landing/src/components/landing",
+      "community": 32,
+      "degree": 1
+    },
+    {
+      "id": "fn:landing/src/components/landing/GetStarted.tsx:handleCopy",
+      "label": "handleCopy",
+      "type": "function",
+      "file": "landing/src/components/landing/GetStarted.tsx",
+      "module": "landing/src/components/landing",
+      "community": 32,
+      "degree": 1
+    },
+    {
+      "id": "export:landing/src/components/landing/GetStarted.tsx:default: function GetStarted",
+      "label": "default: function GetStarted",
+      "type": "export",
+      "file": "landing/src/components/landing/GetStarted.tsx",
+      "module": "landing/src/components/landing",
+      "community": 32,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/components/landing/Hero.tsx",
+      "label": "landing/src/components/landing/Hero.tsx",
+      "type": "file",
+      "module": "landing/src/components/landing",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 122,
+        "size": 5685
+      },
+      "community": 24,
+      "degree": 5
+    },
+    {
+      "id": "export:landing/src/components/landing/Hero.tsx:default: function Hero",
+      "label": "default: function Hero",
+      "type": "export",
+      "file": "landing/src/components/landing/Hero.tsx",
+      "module": "landing/src/components/landing",
+      "community": 24,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/components/landing/HowItWorks.tsx",
+      "label": "landing/src/components/landing/HowItWorks.tsx",
+      "type": "file",
+      "module": "landing/src/components/landing",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 134,
+        "size": 5467
+      },
+      "community": 33,
+      "degree": 5,
+      "isGodNode": true
+    },
+    {
+      "id": "export:landing/src/components/landing/HowItWorks.tsx:default: function HowItWorks",
+      "label": "default: function HowItWorks",
+      "type": "export",
+      "file": "landing/src/components/landing/HowItWorks.tsx",
+      "module": "landing/src/components/landing",
+      "community": 33,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/components/landing/MagneticField.tsx",
+      "label": "landing/src/components/landing/MagneticField.tsx",
+      "type": "file",
+      "module": "landing/src/components/landing",
+      "metadata": {
+        "extension": ".tsx",
+        "lines": 236,
+        "size": 7293
+      },
+      "community": 34,
+      "degree": 9,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:landing/src/components/landing/MagneticField.tsx:getGradientColor",
+      "label": "getGradientColor",
+      "type": "function",
+      "file": "landing/src/components/landing/MagneticField.tsx",
+      "module": "landing/src/components/landing",
+      "community": 34,
+      "degree": 1
+    },
+    {
+      "id": "fn:landing/src/components/landing/MagneticField.tsx:resize",
+      "label": "resize",
+      "type": "function",
+      "file": "landing/src/components/landing/MagneticField.tsx",
+      "module": "landing/src/components/landing",
+      "community": 34,
+      "degree": 1
+    },
+    {
+      "id": "fn:landing/src/components/landing/MagneticField.tsx:handleMouseMove",
+      "label": "handleMouseMove",
+      "type": "function",
+      "file": "landing/src/components/landing/MagneticField.tsx",
+      "module": "landing/src/components/landing",
+      "community": 34,
+      "degree": 1
+    },
+    {
+      "id": "fn:landing/src/components/landing/MagneticField.tsx:handleMouseLeave",
+      "label": "handleMouseLeave",
+      "type": "function",
+      "file": "landing/src/components/landing/MagneticField.tsx",
+      "module": "landing/src/components/landing",
+      "community": 34,
+      "degree": 1
+    },
+    {
+      "id": "fn:landing/src/components/landing/MagneticField.tsx:startAnimation",
+      "label": "startAnimation",
+      "type": "function",
+      "file": "landing/src/components/landing/MagneticField.tsx",
+      "module": "landing/src/components/landing",
+      "community": 34,
+      "degree": 1
+    },
+    {
+      "id": "iface:landing/src/components/landing/MagneticField.tsx:Tick",
+      "label": "Tick",
+      "type": "interface",
+      "file": "landing/src/components/landing/MagneticField.tsx",
+      "module": "landing/src/components/landing",
+      "community": 34,
+      "degree": 1
+    },
+    {
+      "id": "export:landing/src/components/landing/MagneticField.tsx:default: function MagneticField",
+      "label": "default: function MagneticField",
+      "type": "export",
+      "file": "landing/src/components/landing/MagneticField.tsx",
+      "module": "landing/src/components/landing",
+      "community": 34,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/lib/utils.ts",
+      "label": "landing/src/lib/utils.ts",
+      "type": "file",
+      "module": "landing/src/lib",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 7,
+        "size": 169
+      },
+      "community": 15,
+      "degree": 5,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:landing/src/lib/utils.ts:cn",
+      "label": "cn",
+      "type": "function",
+      "file": "landing/src/lib/utils.ts",
+      "module": "landing/src/lib",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "export:landing/src/lib/utils.ts:cn",
+      "label": "cn",
+      "type": "export",
+      "file": "landing/src/lib/utils.ts",
+      "module": "landing/src/lib",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "pkg:clsx",
+      "label": "clsx",
+      "type": "package",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "pkg:tailwind-merge",
+      "label": "tailwind-merge",
+      "type": "package",
+      "community": 15,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/src/lib/version.ts",
+      "label": "landing/src/lib/version.ts",
+      "type": "file",
+      "module": "landing/src/lib",
+      "metadata": {
+        "extension": ".ts",
+        "lines": 14,
+        "size": 404
+      },
+      "community": 35,
+      "degree": 5,
+      "isGodNode": true
+    },
+    {
+      "id": "fn:landing/src/lib/version.ts:getVersionBadgeText",
+      "label": "getVersionBadgeText",
+      "type": "function",
+      "file": "landing/src/lib/version.ts",
+      "module": "landing/src/lib",
+      "community": 35,
+      "degree": 1
+    },
+    {
+      "id": "export:landing/src/lib/version.ts:MAGNETO_VERSION",
+      "label": "MAGNETO_VERSION",
+      "type": "export",
+      "file": "landing/src/lib/version.ts",
+      "module": "landing/src/lib",
+      "community": 35,
+      "degree": 1
+    },
+    {
+      "id": "export:landing/src/lib/version.ts:VERSION_HIGHLIGHTS",
+      "label": "VERSION_HIGHLIGHTS",
+      "type": "export",
+      "file": "landing/src/lib/version.ts",
+      "module": "landing/src/lib",
+      "community": 35,
+      "degree": 1
+    },
+    {
+      "id": "export:landing/src/lib/version.ts:getVersionBadgeText",
+      "label": "getVersionBadgeText",
+      "type": "export",
+      "file": "landing/src/lib/version.ts",
+      "module": "landing/src/lib",
+      "community": 35,
+      "degree": 1
+    },
+    {
+      "id": "file:landing/tsconfig.json",
+      "label": "landing/tsconfig.json",
+      "type": "file",
+      "module": "landing",
+      "metadata": {
+        "extension": ".json",
+        "lines": 35,
+        "size": 670
+      },
+      "community": 1,
+      "degree": 1
     },
     {
       "id": "file:magneto.config.json",
@@ -50,7 +1491,7 @@
         "lines": 54,
         "size": 1099
       },
-      "community": 3,
+      "community": 36,
       "degree": 0,
       "isGodNode": true
     },
@@ -64,7 +1505,7 @@
         "lines": 47,
         "size": 1446
       },
-      "community": 1,
+      "community": 16,
       "degree": 1
     },
     {
@@ -77,7 +1518,7 @@
         "lines": 43,
         "size": 1337
       },
-      "community": 1,
+      "community": 16,
       "degree": 1
     },
     {
@@ -90,11 +1531,1229 @@
         "lines": 45,
         "size": 1549
       },
-      "community": 1,
+      "community": 16,
       "degree": 1
     }
   ],
   "edges": [
+    {
+      "source": "file:landing/AGENTS.md",
+      "target": "mod:landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/CLAUDE.md",
+      "target": "mod:landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/README.md",
+      "target": "mod:landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/eslint.config.mjs",
+      "target": "mod:landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/eslint.config.mjs",
+      "target": "export:landing/eslint.config.mjs:default: eslintConfig",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/eslint.config.mjs",
+      "target": "pkg:eslint",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/eslint.config.mjs",
+      "target": "pkg:eslint-config-next",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/eslint.config.mjs",
+      "target": "pkg:eslint-config-next",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/mdx-components.tsx",
+      "target": "mod:landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/mdx-components.tsx",
+      "target": "fn:landing/mdx-components.tsx:escapeHtml",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/mdx-components.tsx",
+      "target": "fn:landing/mdx-components.tsx:useMDXComponents",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/mdx-components.tsx",
+      "target": "fn:landing/mdx-components.tsx:getRawText",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/mdx-components.tsx",
+      "target": "export:landing/mdx-components.tsx:useMDXComponents",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/mdx-components.tsx",
+      "target": "pkg:mdx",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/mdx-components.tsx",
+      "target": "pkg:react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/mdx-components.tsx",
+      "target": "pkg:@/components",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/mdx-components.tsx",
+      "target": "pkg:@/components",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/next-env.d.ts",
+      "target": "mod:landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/next.config.ts",
+      "target": "mod:landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/next.config.ts",
+      "target": "export:landing/next.config.ts:default: withMDX",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/next.config.ts",
+      "target": "pkg:next",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/next.config.ts",
+      "target": "pkg:@next/mdx",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/package.json",
+      "target": "mod:landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/postcss.config.mjs",
+      "target": "mod:landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/postcss.config.mjs",
+      "target": "export:landing/postcss.config.mjs:default: config",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/architecture/page.mdx",
+      "target": "mod:landing/src/app/docs/architecture",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/commands/page.mdx",
+      "target": "mod:landing/src/app/docs/commands",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/configuration/page.mdx",
+      "target": "mod:landing/src/app/docs/configuration",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/getting-started/page.mdx",
+      "target": "mod:landing/src/app/docs/getting-started",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/knowledge-graph/page.mdx",
+      "target": "mod:landing/src/app/docs/knowledge-graph",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/layout.tsx",
+      "target": "mod:landing/src/app/docs",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/layout.tsx",
+      "target": "export:landing/src/app/docs/layout.tsx:metadata",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/layout.tsx",
+      "target": "export:landing/src/app/docs/layout.tsx:default: function DocsLayout",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/layout.tsx",
+      "target": "pkg:next",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/layout.tsx",
+      "target": "pkg:@/components",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/layout.tsx",
+      "target": "pkg:@/components",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/layout.tsx",
+      "target": "pkg:@/components",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/page.tsx",
+      "target": "mod:landing/src/app/docs",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/page.tsx",
+      "target": "export:landing/src/app/docs/page.tsx:default: function DocsIndex",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/page.tsx",
+      "target": "pkg:next",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/power-packs/page.mdx",
+      "target": "mod:landing/src/app/docs/power-packs",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/security/page.mdx",
+      "target": "mod:landing/src/app/docs/security",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/docs/token-savings/page.mdx",
+      "target": "mod:landing/src/app/docs/token-savings",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/globals.css",
+      "target": "mod:landing/src/app",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/layout.tsx",
+      "target": "mod:landing/src/app",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/layout.tsx",
+      "target": "export:landing/src/app/layout.tsx:metadata",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/layout.tsx",
+      "target": "export:landing/src/app/layout.tsx:default: function RootLayout",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/layout.tsx",
+      "target": "pkg:next",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/layout.tsx",
+      "target": "pkg:next",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/layout.tsx",
+      "target": "pkg:@/components",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/page.tsx",
+      "target": "mod:landing/src/app",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/page.tsx",
+      "target": "export:landing/src/app/page.tsx:default: function Home",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/page.tsx",
+      "target": "pkg:@/components",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/page.tsx",
+      "target": "pkg:@/components",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/page.tsx",
+      "target": "pkg:@/components",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/page.tsx",
+      "target": "pkg:@/components",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/page.tsx",
+      "target": "pkg:@/components",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/page.tsx",
+      "target": "pkg:@/components",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/page.tsx",
+      "target": "pkg:@/components",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/app/page.tsx",
+      "target": "pkg:@/components",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/ThemeSwitcher.tsx",
+      "target": "mod:landing/src/components",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/ThemeSwitcher.tsx",
+      "target": "fn:landing/src/components/ThemeSwitcher.tsx:applyTheme",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/ThemeSwitcher.tsx",
+      "target": "fn:landing/src/components/ThemeSwitcher.tsx:handleThemeChange",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/ThemeSwitcher.tsx",
+      "target": "fn:landing/src/components/ThemeSwitcher.tsx:handleChange",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/ThemeSwitcher.tsx",
+      "target": "fn:landing/src/components/ThemeSwitcher.tsx:getCurrentIcon",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/ThemeSwitcher.tsx",
+      "target": "type:landing/src/components/ThemeSwitcher.tsx:Theme",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/ThemeSwitcher.tsx",
+      "target": "export:landing/src/components/ThemeSwitcher.tsx:default: function ThemeSwitcher",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/ThemeSwitcher.tsx",
+      "target": "pkg:react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/ThemeSwitcher.tsx",
+      "target": "pkg:lucide-react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/CodeBlock.tsx",
+      "target": "mod:landing/src/components/docs",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/CodeBlock.tsx",
+      "target": "fn:landing/src/components/docs/CodeBlock.tsx:CodeBlock",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/CodeBlock.tsx",
+      "target": "fn:landing/src/components/docs/CodeBlock.tsx:handleCopy",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/CodeBlock.tsx",
+      "target": "iface:landing/src/components/docs/CodeBlock.tsx:CodeBlockProps",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/CodeBlock.tsx",
+      "target": "export:landing/src/components/docs/CodeBlock.tsx:CodeBlock",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/CodeBlock.tsx",
+      "target": "pkg:react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/CodeBlock.tsx",
+      "target": "pkg:lucide-react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/CopyButton.tsx",
+      "target": "mod:landing/src/components/docs",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/CopyButton.tsx",
+      "target": "fn:landing/src/components/docs/CopyButton.tsx:CopyButton",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/CopyButton.tsx",
+      "target": "fn:landing/src/components/docs/CopyButton.tsx:handleCopy",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/CopyButton.tsx",
+      "target": "iface:landing/src/components/docs/CopyButton.tsx:CopyButtonProps",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/CopyButton.tsx",
+      "target": "export:landing/src/components/docs/CopyButton.tsx:CopyButton",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/CopyButton.tsx",
+      "target": "pkg:react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/CopyButton.tsx",
+      "target": "pkg:lucide-react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/DocsHeader.tsx",
+      "target": "mod:landing/src/components/docs",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/DocsHeader.tsx",
+      "target": "fn:landing/src/components/docs/DocsHeader.tsx:DocsHeader",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/DocsHeader.tsx",
+      "target": "export:landing/src/components/docs/DocsHeader.tsx:DocsHeader",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/DocsHeader.tsx",
+      "target": "pkg:react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/DocsHeader.tsx",
+      "target": "pkg:next",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/DocsHeader.tsx",
+      "target": "pkg:lucide-react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/DocsHeader.tsx",
+      "target": "file:landing/src/components/docs/SearchModal.tsx",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/DocsSidebar.tsx",
+      "target": "mod:landing/src/components/docs",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/DocsSidebar.tsx",
+      "target": "fn:landing/src/components/docs/DocsSidebar.tsx:DocsSidebar",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/DocsSidebar.tsx",
+      "target": "export:landing/src/components/docs/DocsSidebar.tsx:DocsSidebar",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/DocsSidebar.tsx",
+      "target": "pkg:next",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/DocsSidebar.tsx",
+      "target": "pkg:next",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/DocsSidebar.tsx",
+      "target": "pkg:@/lib",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/Mermaid.tsx",
+      "target": "mod:landing/src/components/docs",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/Mermaid.tsx",
+      "target": "fn:landing/src/components/docs/Mermaid.tsx:Mermaid",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/Mermaid.tsx",
+      "target": "fn:landing/src/components/docs/Mermaid.tsx:render",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/Mermaid.tsx",
+      "target": "iface:landing/src/components/docs/Mermaid.tsx:MermaidProps",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/Mermaid.tsx",
+      "target": "export:landing/src/components/docs/Mermaid.tsx:Mermaid",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/Mermaid.tsx",
+      "target": "pkg:react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/Mermaid.tsx",
+      "target": "pkg:mermaid",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/SearchModal.tsx",
+      "target": "mod:landing/src/components/docs",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/SearchModal.tsx",
+      "target": "fn:landing/src/components/docs/SearchModal.tsx:SearchModal",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/SearchModal.tsx",
+      "target": "fn:landing/src/components/docs/SearchModal.tsx:handleKeyDown",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/SearchModal.tsx",
+      "target": "iface:landing/src/components/docs/SearchModal.tsx:SearchModalProps",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/SearchModal.tsx",
+      "target": "export:landing/src/components/docs/SearchModal.tsx:SearchModal",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/SearchModal.tsx",
+      "target": "pkg:react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/SearchModal.tsx",
+      "target": "pkg:lucide-react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/SearchModal.tsx",
+      "target": "pkg:next",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/TableOfContents.tsx",
+      "target": "mod:landing/src/components/docs",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/TableOfContents.tsx",
+      "target": "fn:landing/src/components/docs/TableOfContents.tsx:TableOfContents",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/TableOfContents.tsx",
+      "target": "fn:landing/src/components/docs/TableOfContents.tsx:extractHeadings",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/TableOfContents.tsx",
+      "target": "fn:landing/src/components/docs/TableOfContents.tsx:handleScroll",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/TableOfContents.tsx",
+      "target": "iface:landing/src/components/docs/TableOfContents.tsx:Heading",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/TableOfContents.tsx",
+      "target": "iface:landing/src/components/docs/TableOfContents.tsx:TableOfContentsProps",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/TableOfContents.tsx",
+      "target": "export:landing/src/components/docs/TableOfContents.tsx:TableOfContents",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/TableOfContents.tsx",
+      "target": "pkg:react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/TableOfContents.tsx",
+      "target": "pkg:next",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/TableOfContents.tsx",
+      "target": "pkg:next",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/docs/TableOfContents.tsx",
+      "target": "pkg:@/lib",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/Architecture.tsx",
+      "target": "mod:landing/src/components/landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/Architecture.tsx",
+      "target": "export:landing/src/components/landing/Architecture.tsx:default: function Architecture",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/Architecture.tsx",
+      "target": "pkg:framer-motion",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/Architecture.tsx",
+      "target": "pkg:react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/CliDemo.tsx",
+      "target": "mod:landing/src/components/landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/CliDemo.tsx",
+      "target": "export:landing/src/components/landing/CliDemo.tsx:default: function CliDemo",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/CliDemo.tsx",
+      "target": "pkg:framer-motion",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/CliDemo.tsx",
+      "target": "pkg:react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/Features.tsx",
+      "target": "mod:landing/src/components/landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/Features.tsx",
+      "target": "export:landing/src/components/landing/Features.tsx:default: function Features",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/Features.tsx",
+      "target": "pkg:framer-motion",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/Features.tsx",
+      "target": "pkg:react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/Footer.tsx",
+      "target": "mod:landing/src/components/landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/Footer.tsx",
+      "target": "export:landing/src/components/landing/Footer.tsx:default: function Footer",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/Footer.tsx",
+      "target": "pkg:lucide-react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/GetStarted.tsx",
+      "target": "mod:landing/src/components/landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/GetStarted.tsx",
+      "target": "fn:landing/src/components/landing/GetStarted.tsx:CopyButton",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/GetStarted.tsx",
+      "target": "fn:landing/src/components/landing/GetStarted.tsx:handleCopy",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/GetStarted.tsx",
+      "target": "export:landing/src/components/landing/GetStarted.tsx:default: function GetStarted",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/GetStarted.tsx",
+      "target": "pkg:framer-motion",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/GetStarted.tsx",
+      "target": "pkg:react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/GetStarted.tsx",
+      "target": "pkg:lucide-react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/Hero.tsx",
+      "target": "mod:landing/src/components/landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/Hero.tsx",
+      "target": "export:landing/src/components/landing/Hero.tsx:default: function Hero",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/Hero.tsx",
+      "target": "pkg:framer-motion",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/Hero.tsx",
+      "target": "pkg:lucide-react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/Hero.tsx",
+      "target": "pkg:@/lib",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/HowItWorks.tsx",
+      "target": "mod:landing/src/components/landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/HowItWorks.tsx",
+      "target": "export:landing/src/components/landing/HowItWorks.tsx:default: function HowItWorks",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/HowItWorks.tsx",
+      "target": "pkg:framer-motion",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/HowItWorks.tsx",
+      "target": "pkg:react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/HowItWorks.tsx",
+      "target": "pkg:lucide-react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/MagneticField.tsx",
+      "target": "mod:landing/src/components/landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/MagneticField.tsx",
+      "target": "fn:landing/src/components/landing/MagneticField.tsx:getGradientColor",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/MagneticField.tsx",
+      "target": "fn:landing/src/components/landing/MagneticField.tsx:resize",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/MagneticField.tsx",
+      "target": "fn:landing/src/components/landing/MagneticField.tsx:handleMouseMove",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/MagneticField.tsx",
+      "target": "fn:landing/src/components/landing/MagneticField.tsx:handleMouseLeave",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/MagneticField.tsx",
+      "target": "fn:landing/src/components/landing/MagneticField.tsx:startAnimation",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/MagneticField.tsx",
+      "target": "iface:landing/src/components/landing/MagneticField.tsx:Tick",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/MagneticField.tsx",
+      "target": "export:landing/src/components/landing/MagneticField.tsx:default: function MagneticField",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/components/landing/MagneticField.tsx",
+      "target": "pkg:react",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/lib/utils.ts",
+      "target": "mod:landing/src/lib",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/lib/utils.ts",
+      "target": "fn:landing/src/lib/utils.ts:cn",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/lib/utils.ts",
+      "target": "export:landing/src/lib/utils.ts:cn",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/lib/utils.ts",
+      "target": "pkg:clsx",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/lib/utils.ts",
+      "target": "pkg:tailwind-merge",
+      "relation": "imports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/lib/version.ts",
+      "target": "mod:landing/src/lib",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/lib/version.ts",
+      "target": "fn:landing/src/lib/version.ts:getVersionBadgeText",
+      "relation": "defines",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/lib/version.ts",
+      "target": "export:landing/src/lib/version.ts:MAGNETO_VERSION",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/lib/version.ts",
+      "target": "export:landing/src/lib/version.ts:VERSION_HIGHLIGHTS",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/src/lib/version.ts",
+      "target": "export:landing/src/lib/version.ts:getVersionBadgeText",
+      "relation": "exports",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
+    {
+      "source": "file:landing/tsconfig.json",
+      "target": "mod:landing",
+      "relation": "belongs_to",
+      "tag": "EXTRACTED",
+      "confidence": 1
+    },
     {
       "source": "file:tasks/implement-auth-flow.md",
       "target": "mod:tasks",
@@ -130,6 +2789,186 @@
     },
     {
       "id": 1,
+      "nodeCount": 7,
+      "godNodes": [
+        "landing"
+      ],
+      "topNodes": [
+        "landing",
+        "landing/AGENTS.md",
+        "landing/CLAUDE.md",
+        "landing/README.md",
+        "landing/next-env.d.ts"
+      ]
+    },
+    {
+      "id": 2,
+      "nodeCount": 2,
+      "godNodes": [
+        "landing/src/app"
+      ],
+      "topNodes": [
+        "landing/src/app",
+        "landing/src/app/globals.css"
+      ]
+    },
+    {
+      "id": 3,
+      "nodeCount": 3,
+      "godNodes": [
+        "landing/src/app/docs/page.tsx"
+      ],
+      "topNodes": [
+        "landing/src/app/docs/page.tsx",
+        "landing/src/app/docs",
+        "default: function DocsIndex"
+      ]
+    },
+    {
+      "id": 4,
+      "nodeCount": 2,
+      "godNodes": [
+        "landing/src/app/docs/architecture"
+      ],
+      "topNodes": [
+        "landing/src/app/docs/architecture",
+        "landing/src/app/docs/architecture/page.mdx"
+      ]
+    },
+    {
+      "id": 5,
+      "nodeCount": 2,
+      "godNodes": [
+        "landing/src/app/docs/commands"
+      ],
+      "topNodes": [
+        "landing/src/app/docs/commands",
+        "landing/src/app/docs/commands/page.mdx"
+      ]
+    },
+    {
+      "id": 6,
+      "nodeCount": 2,
+      "godNodes": [
+        "landing/src/app/docs/configuration"
+      ],
+      "topNodes": [
+        "landing/src/app/docs/configuration",
+        "landing/src/app/docs/configuration/page.mdx"
+      ]
+    },
+    {
+      "id": 7,
+      "nodeCount": 2,
+      "godNodes": [
+        "landing/src/app/docs/getting-started"
+      ],
+      "topNodes": [
+        "landing/src/app/docs/getting-started",
+        "landing/src/app/docs/getting-started/page.mdx"
+      ]
+    },
+    {
+      "id": 8,
+      "nodeCount": 2,
+      "godNodes": [
+        "landing/src/app/docs/knowledge-graph"
+      ],
+      "topNodes": [
+        "landing/src/app/docs/knowledge-graph",
+        "landing/src/app/docs/knowledge-graph/page.mdx"
+      ]
+    },
+    {
+      "id": 9,
+      "nodeCount": 2,
+      "godNodes": [
+        "landing/src/app/docs/power-packs"
+      ],
+      "topNodes": [
+        "landing/src/app/docs/power-packs",
+        "landing/src/app/docs/power-packs/page.mdx"
+      ]
+    },
+    {
+      "id": 10,
+      "nodeCount": 2,
+      "godNodes": [
+        "landing/src/app/docs/security"
+      ],
+      "topNodes": [
+        "landing/src/app/docs/security",
+        "landing/src/app/docs/security/page.mdx"
+      ]
+    },
+    {
+      "id": 11,
+      "nodeCount": 2,
+      "godNodes": [
+        "landing/src/app/docs/token-savings"
+      ],
+      "topNodes": [
+        "landing/src/app/docs/token-savings",
+        "landing/src/app/docs/token-savings/page.mdx"
+      ]
+    },
+    {
+      "id": 12,
+      "nodeCount": 8,
+      "godNodes": [
+        "landing/src/components/ThemeSwitcher.tsx"
+      ],
+      "topNodes": [
+        "landing/src/components/ThemeSwitcher.tsx",
+        "landing/src/components",
+        "applyTheme",
+        "handleThemeChange",
+        "handleChange"
+      ]
+    },
+    {
+      "id": 13,
+      "nodeCount": 16,
+      "godNodes": [
+        "next",
+        "landing/src/components/docs/TableOfContents.tsx"
+      ],
+      "topNodes": [
+        "next",
+        "landing/src/components/docs/TableOfContents.tsx",
+        "landing/src/components/docs",
+        "landing/src/app/layout.tsx",
+        "landing/src/components/docs/DocsSidebar.tsx"
+      ]
+    },
+    {
+      "id": 14,
+      "nodeCount": 3,
+      "godNodes": [
+        "landing/src/components/landing"
+      ],
+      "topNodes": [
+        "landing/src/components/landing",
+        "landing/src/components/landing/Footer.tsx",
+        "default: function Footer"
+      ]
+    },
+    {
+      "id": 15,
+      "nodeCount": 6,
+      "godNodes": [
+        "landing/src/lib/utils.ts"
+      ],
+      "topNodes": [
+        "landing/src/lib/utils.ts",
+        "landing/src/lib",
+        "cn",
+        "cn",
+        "clsx"
+      ]
+    },
+    {
+      "id": 16,
       "nodeCount": 4,
       "godNodes": [
         "tasks"
@@ -142,7 +2981,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": 17,
       "nodeCount": 1,
       "godNodes": [
         "README.md"
@@ -152,7 +2991,238 @@
       ]
     },
     {
-      "id": 3,
+      "id": 18,
+      "nodeCount": 4,
+      "godNodes": [
+        "landing/eslint.config.mjs"
+      ],
+      "topNodes": [
+        "landing/eslint.config.mjs",
+        "eslint-config-next",
+        "default: eslintConfig",
+        "eslint"
+      ]
+    },
+    {
+      "id": 19,
+      "nodeCount": 6,
+      "godNodes": [
+        "landing/mdx-components.tsx"
+      ],
+      "topNodes": [
+        "landing/mdx-components.tsx",
+        "escapeHtml",
+        "useMDXComponents",
+        "getRawText",
+        "useMDXComponents"
+      ]
+    },
+    {
+      "id": 20,
+      "nodeCount": 3,
+      "godNodes": [
+        "react"
+      ],
+      "topNodes": [
+        "react",
+        "landing/src/components/landing/Architecture.tsx",
+        "default: function Architecture"
+      ]
+    },
+    {
+      "id": 21,
+      "nodeCount": 6,
+      "godNodes": [
+        "@/components"
+      ],
+      "topNodes": [
+        "@/components",
+        "landing/src/app/page.tsx",
+        "landing/src/app/docs/layout.tsx",
+        "metadata",
+        "default: function DocsLayout"
+      ]
+    },
+    {
+      "id": 22,
+      "nodeCount": 3,
+      "godNodes": [
+        "landing/next.config.ts"
+      ],
+      "topNodes": [
+        "landing/next.config.ts",
+        "default: withMDX",
+        "@next/mdx"
+      ]
+    },
+    {
+      "id": 23,
+      "nodeCount": 2,
+      "godNodes": [
+        "landing/postcss.config.mjs"
+      ],
+      "topNodes": [
+        "landing/postcss.config.mjs",
+        "default: config"
+      ]
+    },
+    {
+      "id": 24,
+      "nodeCount": 3,
+      "godNodes": [
+        "lucide-react"
+      ],
+      "topNodes": [
+        "lucide-react",
+        "landing/src/components/landing/Hero.tsx",
+        "default: function Hero"
+      ]
+    },
+    {
+      "id": 25,
+      "nodeCount": 5,
+      "godNodes": [
+        "landing/src/components/docs/CodeBlock.tsx"
+      ],
+      "topNodes": [
+        "landing/src/components/docs/CodeBlock.tsx",
+        "CodeBlock",
+        "handleCopy",
+        "CodeBlockProps",
+        "CodeBlock"
+      ]
+    },
+    {
+      "id": 26,
+      "nodeCount": 5,
+      "godNodes": [
+        "landing/src/components/docs/CopyButton.tsx"
+      ],
+      "topNodes": [
+        "landing/src/components/docs/CopyButton.tsx",
+        "CopyButton",
+        "handleCopy",
+        "CopyButtonProps",
+        "CopyButton"
+      ]
+    },
+    {
+      "id": 27,
+      "nodeCount": 3,
+      "godNodes": [
+        "landing/src/components/docs/DocsHeader.tsx"
+      ],
+      "topNodes": [
+        "landing/src/components/docs/DocsHeader.tsx",
+        "DocsHeader",
+        "DocsHeader"
+      ]
+    },
+    {
+      "id": 28,
+      "nodeCount": 6,
+      "godNodes": [
+        "landing/src/components/docs/Mermaid.tsx"
+      ],
+      "topNodes": [
+        "landing/src/components/docs/Mermaid.tsx",
+        "Mermaid",
+        "render",
+        "MermaidProps",
+        "Mermaid"
+      ]
+    },
+    {
+      "id": 29,
+      "nodeCount": 5,
+      "godNodes": [
+        "landing/src/components/docs/SearchModal.tsx"
+      ],
+      "topNodes": [
+        "landing/src/components/docs/SearchModal.tsx",
+        "SearchModal",
+        "handleKeyDown",
+        "SearchModalProps",
+        "SearchModal"
+      ]
+    },
+    {
+      "id": 30,
+      "nodeCount": 3,
+      "godNodes": [
+        "framer-motion"
+      ],
+      "topNodes": [
+        "framer-motion",
+        "landing/src/components/landing/CliDemo.tsx",
+        "default: function CliDemo"
+      ]
+    },
+    {
+      "id": 31,
+      "nodeCount": 2,
+      "godNodes": [
+        "landing/src/components/landing/Features.tsx"
+      ],
+      "topNodes": [
+        "landing/src/components/landing/Features.tsx",
+        "default: function Features"
+      ]
+    },
+    {
+      "id": 32,
+      "nodeCount": 4,
+      "godNodes": [
+        "landing/src/components/landing/GetStarted.tsx"
+      ],
+      "topNodes": [
+        "landing/src/components/landing/GetStarted.tsx",
+        "CopyButton",
+        "handleCopy",
+        "default: function GetStarted"
+      ]
+    },
+    {
+      "id": 33,
+      "nodeCount": 2,
+      "godNodes": [
+        "landing/src/components/landing/HowItWorks.tsx"
+      ],
+      "topNodes": [
+        "landing/src/components/landing/HowItWorks.tsx",
+        "default: function HowItWorks"
+      ]
+    },
+    {
+      "id": 34,
+      "nodeCount": 8,
+      "godNodes": [
+        "landing/src/components/landing/MagneticField.tsx"
+      ],
+      "topNodes": [
+        "landing/src/components/landing/MagneticField.tsx",
+        "getGradientColor",
+        "resize",
+        "handleMouseMove",
+        "handleMouseLeave"
+      ]
+    },
+    {
+      "id": 35,
+      "nodeCount": 5,
+      "godNodes": [
+        "landing/src/lib/version.ts"
+      ],
+      "topNodes": [
+        "landing/src/lib/version.ts",
+        "getVersionBadgeText",
+        "MAGNETO_VERSION",
+        "VERSION_HIGHLIGHTS",
+        "getVersionBadgeText"
+      ]
+    },
+    {
+      "id": 36,
       "nodeCount": 1,
       "godNodes": [
         "magneto.config.json"
@@ -163,15 +3233,49 @@
     }
   ],
   "metadata": {
-    "generatedAt": "2026-04-19T04:40:06.909Z",
+    "generatedAt": "2026-04-21T01:34:59.301Z",
     "generator": "magneto-ai",
-    "totalNodes": 7,
-    "totalEdges": 3,
-    "totalCommunities": 4,
+    "totalNodes": 143,
+    "totalEdges": 177,
+    "totalCommunities": 37,
     "godNodes": [
       ".",
+      "landing",
+      "landing/src/app",
+      "landing/src/app/docs/page.tsx",
+      "landing/src/app/docs/architecture",
+      "landing/src/app/docs/commands",
+      "landing/src/app/docs/configuration",
+      "landing/src/app/docs/getting-started",
+      "landing/src/app/docs/knowledge-graph",
+      "landing/src/app/docs/power-packs",
+      "landing/src/app/docs/security",
+      "landing/src/app/docs/token-savings",
+      "landing/src/components/ThemeSwitcher.tsx",
+      "next",
+      "landing/src/components/docs/TableOfContents.tsx",
+      "landing/src/components/landing",
+      "landing/src/lib/utils.ts",
       "tasks",
       "README.md",
+      "landing/eslint.config.mjs",
+      "landing/mdx-components.tsx",
+      "react",
+      "@/components",
+      "landing/next.config.ts",
+      "landing/postcss.config.mjs",
+      "lucide-react",
+      "landing/src/components/docs/CodeBlock.tsx",
+      "landing/src/components/docs/CopyButton.tsx",
+      "landing/src/components/docs/DocsHeader.tsx",
+      "landing/src/components/docs/Mermaid.tsx",
+      "landing/src/components/docs/SearchModal.tsx",
+      "framer-motion",
+      "landing/src/components/landing/Features.tsx",
+      "landing/src/components/landing/GetStarted.tsx",
+      "landing/src/components/landing/HowItWorks.tsx",
+      "landing/src/components/landing/MagneticField.tsx",
+      "landing/src/lib/version.ts",
       "magneto.config.json"
     ]
   }
