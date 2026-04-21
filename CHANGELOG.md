@@ -8,10 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- N/A
+- **Interactive Plan Approval Workflow** — Step-by-step approval with `--approve-each` flag
+  - Approve/reject/skip each step during execution
+  - Diff preview for file changes
+  - Modify option with prompts for description or command changes
+  - Audit logging of approval decisions to `.magneto/audit/approvals.json`
+  - Automatic session cleanup (keeps last 10 session files)
+- **Session File Cleanup** — Prevents unbounded file growth by keeping only last 10 interactive session files
 
 ### Changed
-- N/A
+- Modify option now prompts for input even when step has no command
+- Session files are automatically cleaned up when starting new interactive sessions
 
 ### Deprecated
 - N/A
@@ -20,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - N/A
 
 ### Fixed
-- N/A
+- Modify option now properly prompts for modification options (description or add command)
 
 ### Security
 - N/A

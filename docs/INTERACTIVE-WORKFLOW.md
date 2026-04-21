@@ -326,6 +326,27 @@ Check that backup directory exists:
 ls -la .magneto/backup/
 ```
 
+## Session Cleanup
+
+Interactive sessions are automatically cleaned up to prevent unbounded file growth. The system keeps only the last 10 session files in `.magneto/cache/`, automatically deleting older sessions when starting a new one.
+
+## Modify Option
+
+When you select "modify" for a step, the system prompts you to choose what to modify:
+
+```
+What would you like to modify?
+  1. Description
+  2. Add command
+Enter choice (1 or 2):
+```
+
+- **Option 1**: Modify the step description
+- **Option 2**: Add a command to the step (if it doesn't have one)
+- **Invalid choice**: Skips modification and proceeds with approval
+
+This ensures you always have control over how steps are modified, even for steps without existing commands.
+
 ## See Also
 
 - [Security Guardrails](./SECURITY.md)

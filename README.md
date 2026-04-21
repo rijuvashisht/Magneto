@@ -654,6 +654,7 @@ magneto-ai/
 | `magneto run <task>` | Execute a task |
 | `magneto run <task> --runner openai` | Execute with specific runner |
 | `magneto run <task> --mode observe` | Execute in observe mode |
+| `magneto run <task> --approve-each` | Execute with step-by-step approval workflow |
 | `magneto merge <outputDir>` | Merge agent results |
 | `magneto merge <outputDir> --format md` | Merge as Markdown report |
 | `magneto generate <task>` | Generate scoped prompt for Windsurf/Copilot |
@@ -667,7 +668,7 @@ magneto-ai/
 
 ## 🛣 Roadmap
 
-- [ ] Interactive plan approval workflow
+- [x] Interactive plan approval workflow
 - [ ] Streaming runner output
 - [ ] VS Code extension with agent panel
 - [ ] Custom power pack authoring guide
