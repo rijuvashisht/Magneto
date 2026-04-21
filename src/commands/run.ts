@@ -309,6 +309,7 @@ export async function runCommand(taskFile: string, options: RunOptions): Promise
   }
 
   // Non-streaming execution (original)
+  let taskSuccess = true;
   try {
     const result = await runner.execute({
       task,
@@ -329,8 +330,11 @@ export async function runCommand(taskFile: string, options: RunOptions): Promise
     });
 
     logger.success(`Task completed. Results saved: ${outputPath}`);
-
-    // Record performance metric
+  } catch (err: any) {
+    taskSuccess = false;
+    logger.error(`Task execution failed: ${err.message}`);
+  } finally {
+    // Record performance metric regardless of success/failure
     await perfTracker.recordMetric({
       taskId,
       taskType: task.type || 'general',
@@ -340,11 +344,12 @@ export async function runCommand(taskFile: string, options: RunOptions): Promise
       graphNodes: 0, // Will be updated from graph
       graphEdges: 0,
       graphCommunities: 0,
-      success: true,
+      success: taskSuccess,
       retries: 0,
     });
-  } catch (err: any) {
-    logger.error(`Task execution failed: ${err.message}`);
+  }
+
+  if (!taskSuccess) {
     process.exit(1);
   }
 }

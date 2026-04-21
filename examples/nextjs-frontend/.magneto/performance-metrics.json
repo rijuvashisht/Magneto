@@ -1,0 +1,121 @@
+{
+  "lastUpdated": "2026-04-21T02:16:29.478Z",
+  "sessions": [
+    {
+      "sessionId": "session-1776737789058-xa57r0gd5",
+      "startTime": "2026-04-21T02:16:29.478Z",
+      "tasks": [
+        "task-1776737789058"
+      ],
+      "metrics": [
+        {
+          "taskId": "task-1776737789058",
+          "taskType": "general",
+          "filesLoaded": 0,
+          "totalFiles": 2195,
+          "compressionRatio": 100,
+          "graphNodes": 0,
+          "graphEdges": 0,
+          "graphCommunities": 0,
+          "success": true,
+          "retries": 0,
+          "timestamp": "2026-04-21T02:16:29.478Z",
+          "sessionId": "session-1776737789058-xa57r0gd5",
+          "duration": 420
+        }
+      ],
+      "avgDuration": 420,
+      "avgCompressionRatio": 100,
+      "totalTasks": 1,
+      "successRate": 100,
+      "endTime": "2026-04-21T02:16:29.478Z"
+    },
+    {
+      "sessionId": "session-1776737633622-dnfgvt8g3",
+      "startTime": "2026-04-21T02:13:54.035Z",
+      "tasks": [
+        "task-1776737633623"
+      ],
+      "metrics": [
+        {
+          "taskId": "task-1776737633623",
+          "taskType": "general",
+          "filesLoaded": 0,
+          "totalFiles": 2195,
+          "compressionRatio": 100,
+          "graphNodes": 0,
+          "graphEdges": 0,
+          "graphCommunities": 0,
+          "success": true,
+          "retries": 0,
+          "timestamp": "2026-04-21T02:13:54.035Z",
+          "sessionId": "session-1776737633622-dnfgvt8g3",
+          "duration": 412
+        }
+      ],
+      "avgDuration": 412,
+      "avgCompressionRatio": 100,
+      "totalTasks": 1,
+      "successRate": 100,
+      "endTime": "2026-04-21T02:13:54.035Z"
+    },
+    {
+      "sessionId": "session-1776737557720-7q178azmg",
+      "startTime": "2026-04-21T02:12:38.173Z",
+      "tasks": [
+        "task-1776737557720"
+      ],
+      "metrics": [
+        {
+          "taskId": "task-1776737557720",
+          "taskType": "general",
+          "filesLoaded": 0,
+          "totalFiles": 2196,
+          "compressionRatio": 100,
+          "graphNodes": 0,
+          "graphEdges": 0,
+          "graphCommunities": 0,
+          "success": true,
+          "retries": 0,
+          "timestamp": "2026-04-21T02:12:38.173Z",
+          "sessionId": "session-1776737557720-7q178azmg",
+          "duration": 453
+        }
+      ],
+      "avgDuration": 453,
+      "avgCompressionRatio": 100,
+      "totalTasks": 1,
+      "successRate": 100,
+      "endTime": "2026-04-21T02:12:38.173Z"
+    },
+    {
+      "sessionId": "session-1776737307504-4nnqdzfv8",
+      "startTime": "2026-04-21T02:08:27.920Z",
+      "tasks": [
+        "task-1776737307504"
+      ],
+      "metrics": [
+        {
+          "taskId": "task-1776737307504",
+          "taskType": "general",
+          "filesLoaded": 0,
+          "totalFiles": 2194,
+          "compressionRatio": 100,
+          "graphNodes": 0,
+          "graphEdges": 0,
+          "graphCommunities": 0,
+          "success": true,
+          "retries": 0,
+          "timestamp": "2026-04-21T02:08:27.920Z",
+          "sessionId": "session-1776737307504-4nnqdzfv8",
+          "duration": 416
+        }
+      ],
+      "avgDuration": 416,
+      "avgCompressionRatio": 100,
+      "totalTasks": 1,
+      "successRate": 100,
+      "endTime": "2026-04-21T02:08:27.920Z"
+    }
+  ]
+}

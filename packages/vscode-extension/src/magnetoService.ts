@@ -42,20 +42,15 @@ export class MagnetoService {
 
     async callMCPTool(tool: string, args: Record<string, unknown>): Promise<{ success: boolean; data: unknown; error?: string }> {
         try {
-            const response = await axios.post(`${this.mcpUrl}/mcp`, {
-                jsonrpc: '2.0',
-                id: Date.now(),
-                method: 'tools/call',
-                params: {
-                    name: tool,
-                    arguments: args,
-                },
+            const response = await axios.post(`${this.mcpUrl}/execute`, {
+                tool: tool,
+                arguments: args,
             });
 
             return {
-                success: response.data.result?.success || false,
-                data: response.data.result?.data || null,
-                error: response.data.result?.error,
+                success: response.data.success || false,
+                data: response.data.data || null,
+                error: response.data.error,
             };
         } catch (error) {
             console.error('MCP tool call failed:', error);
