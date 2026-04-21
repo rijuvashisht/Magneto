@@ -1,0 +1,171 @@
+{
+  "name": "magneto-ai",
+  "displayName": "Magneto AI",
+  "description": "VS Code extension for Magneto AI - Agent control plane and reasoning framework",
+  "version": "0.1.0",
+  "publisher": "magneto-ai",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Machine Learning",
+    "Debuggers",
+    "Testing"
+  ],
+  "keywords": [
+    "ai",
+    "agent",
+    "orchestration",
+    "reasoning",
+    "magneto",
+    "copilot",
+    "mcp"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:magneto.openAgentPanel"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "magneto.openAgentPanel",
+        "title": "Open Agent Panel",
+        "icon": "$(hubot)"
+      },
+      {
+        "command": "magneto.planTask",
+        "title": "Plan Task",
+        "icon": "$(lightbulb)"
+      },
+      {
+        "command": "magneto.runTask",
+        "title": "Run Task",
+        "icon": "$(play)"
+      },
+      {
+        "command": "magneto.securityCheck",
+        "title": "Security Check",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "magneto.analyzeProject",
+        "title": "Analyze Project",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "magneto.refreshContext",
+        "title": "Refresh Context",
+        "icon": "$(refresh)"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "magneto.agentPanel",
+          "name": "Magneto AI",
+          "when": "magneto.enabled",
+          "icon": "$(hubot)"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "magneto",
+          "title": "Magneto AI",
+          "icon": "$(hubot)"
+        }
+      ]
+    },
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "magneto.openAgentPanel",
+          "when": "magneto.enabled"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "magneto.planTask",
+          "when": "editorHasSelection",
+          "group": "magneto@1"
+        },
+        {
+          "command": "magneto.securityCheck",
+          "when": "editorHasSelection",
+          "group": "magneto@2"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "magneto.analyzeProject",
+          "when": "explorerResourceIsFolder",
+          "group": "magneto@1"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Magneto AI",
+      "properties": {
+        "magneto.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Magneto AI extension"
+        },
+        "magneto.mcpServerUrl": {
+          "type": "string",
+          "default": "http://localhost:3001",
+          "description": "MCP server URL for Magneto AI"
+        },
+        "magneto.autoAnalyzeOnOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically analyze project when opening"
+        },
+        "magneto.telepathyLevel": {
+          "type": "number",
+          "default": 1,
+          "enum": [0, 1, 2, 3],
+          "description": "Default telepathy level (0=restricted, 3=full auto)"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "magneto.openAgentPanel",
+        "key": "ctrl+shift+m",
+        "mac": "cmd+shift+m"
+      },
+      {
+        "command": "magneto.planTask",
+        "key": "ctrl+shift+p",
+        "mac": "cmd+shift+p",
+        "when": "editorHasSelection"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.4",
+    "tslint": "^6.1.2"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rijuvashisht/Magneto.git",
+    "directory": "packages/vscode-extension"
+  },
+  "homepage": "https://github.com/rijuvashisht/Magneto/tree/main/packages/vscode-extension#readme"
+}
