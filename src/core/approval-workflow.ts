@@ -1,4 +1,6 @@
 import * as readline from 'readline';
+import * as fs from 'fs';
+import * as path from 'path';
 import { logger } from '../utils/logger';
 import { writeJson, fileExists, readJson } from '../utils/fs';
 import { magnetoPath } from '../utils/paths';
@@ -39,8 +41,10 @@ export class ApprovalWorkflow {
   private decisions: ApprovalDecision[] = [];
   private sessionId: string;
   private auditLogPath: string;
+  private projectRoot: string;
 
   constructor(projectRoot: string, taskId: string) {
+    this.projectRoot = projectRoot;
     this.sessionId = `approval-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     this.auditLogPath = magnetoPath(projectRoot, 'audit', 'approvals.json');
   }
@@ -54,6 +58,9 @@ export class ApprovalWorkflow {
       logger.info('No steps to approve');
       return { approved: true, decisions: [] };
     }
+
+    // Cleanup old session files (keep last 10)
+    await this.cleanupOldSessions();
 
     logger.info(`\n📋 Interactive Approval Workflow - ${this.steps.length} steps to review`);
     logger.info('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
@@ -215,6 +222,38 @@ export class ApprovalWorkflow {
       logger.debug(`Approval audit log saved to ${this.auditLogPath}`);
     } catch (error) {
       logger.error(`Failed to save approval audit log: ${error}`);
+    }
+  }
+
+  private async cleanupOldSessions(maxFiles: number = 10): Promise<void> {
+    try {
+      const cacheDir = magnetoPath(this.projectRoot, 'cache');
+      const files = await fs.promises.readdir(cacheDir)
+        .then(files => files.filter(f => f.startsWith('interactive-session-') && f.endsWith('.json')))
+        .catch(() => []);
+
+      if (files.length === 0) return;
+
+      const fileStats = await Promise.all(
+        files.map(async (f) => {
+          const filePath = path.join(cacheDir, f);
+          const stats = await fs.promises.stat(filePath);
+          return { name: f, path: filePath, mtime: stats.mtime.getTime() };
+        })
+      );
+
+      fileStats.sort((a, b) => b.mtime - a.mtime); // Sort by modification time, newest first
+
+      if (fileStats.length > maxFiles) {
+        const filesToDelete = fileStats.slice(maxFiles);
+        for (const file of filesToDelete) {
+          await fs.promises.unlink(file.path);
+          logger.debug(`Deleted old session file: ${file.name}`);
+        }
+        logger.debug(`Cleaned up ${filesToDelete.length} old session files`);
+      }
+    } catch (error) {
+      logger.debug(`Failed to cleanup old session files: ${error}`);
     }
   }
 
