@@ -1,0 +1,90 @@
+{
+  "name": "fastapi",
+  "category": "frameworks",
+  "version": "1.0.0",
+  "description": "FastAPI framework power pack — Pydantic validation, dependency injection, async correctness, OpenAPI hygiene, and security middleware",
+  "rules": [
+    "Always type request/response bodies with Pydantic models",
+    "Use Depends() for auth, DB sessions, and settings — never globals",
+    "Async endpoints only when actually doing async I/O",
+    "Add response_model and status_code to every route for accurate OpenAPI",
+    "Pin route order: specific paths before catch-alls",
+    "Use APIRouter to organize endpoints by domain, never one giant app.py",
+    "Validate path/query params with typed annotations + Field constraints",
+    "Use BackgroundTasks or a real queue (Celery/RQ/arq) for fire-and-forget work",
+    "Configure CORS explicitly — never allow_origins=['*'] with credentials",
+    "Wrap blocking I/O in run_in_threadpool or asyncio.to_thread"
+  ],
+  "checks": [
+    {
+      "id": "fastapi-cors-wildcard-with-credentials",
+      "description": "CORS allow_origins=['*'] combined with allow_credentials=True is a security vulnerability",
+      "severity": "error",
+      "pattern": "allow_origins\\s*=\\s*\\[[^\\]]*['\"]\\*['\"][^\\]]*\\][\\s\\S]{0,200}?allow_credentials\\s*=\\s*True",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "fastapi-missing-response-model",
+      "description": "Route declared without response_model — OpenAPI/clients will treat as Any",
+      "severity": "info",
+      "pattern": "@(?:app|router)\\.(get|post|put|delete|patch)\\s*\\([^)]*\\)\\s*\\n\\s*(async\\s+)?def\\s",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "fastapi-sync-io-in-async",
+      "description": "Synchronous requests/time.sleep/open inside async def blocks the event loop",
+      "severity": "warning",
+      "pattern": "async\\s+def[\\s\\S]*?(requests\\.(get|post|put|delete)|time\\.sleep|open\\s*\\()",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "fastapi-debug-true",
+      "description": "FastAPI(debug=True) leaks tracebacks — never enable in production",
+      "severity": "warning",
+      "pattern": "FastAPI\\s*\\([^)]*debug\\s*=\\s*True",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "fastapi-untyped-body",
+      "description": "POST/PUT endpoint accepting raw dict/Any instead of Pydantic model",
+      "severity": "warning",
+      "pattern": "@(?:app|router)\\.(post|put|patch)\\s*\\([^)]*\\)[\\s\\S]{0,80}?def\\s+\\w+\\s*\\([^)]*:\\s*(dict|Dict|Any)",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "fastapi-missing-auth-dependency",
+      "description": "Mutating route (POST/PUT/DELETE) without a Depends() — likely missing auth",
+      "severity": "info",
+      "pattern": "@(?:app|router)\\.(post|put|delete)\\s*\\([^)]*\\)\\s*\\n\\s*(async\\s+)?def\\s+\\w+\\s*\\((?![^)]*Depends)",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "fastapi-hardcoded-secret-key",
+      "description": "Hardcoded SECRET_KEY/JWT signing key — must come from env",
+      "severity": "error",
+      "pattern": "(SECRET_KEY|JWT_SECRET|SIGNING_KEY)\\s*=\\s*[\"'][A-Za-z0-9_\\-]{8,}[\"']",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "fastapi-trust-host-wildcard",
+      "description": "TrustedHostMiddleware with allowed_hosts=['*'] disables host header validation",
+      "severity": "warning",
+      "pattern": "TrustedHostMiddleware[\\s\\S]{0,100}?allowed_hosts\\s*=\\s*\\[[^\\]]*['\"]\\*['\"]",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "fastapi-bare-exception-handler",
+      "description": "Exception handler catching base Exception without re-raise hides bugs",
+      "severity": "info",
+      "pattern": "@app\\.exception_handler\\s*\\(\\s*Exception\\s*\\)",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "fastapi-deprecated-on-event",
+      "description": "@app.on_event is deprecated — use lifespan context manager",
+      "severity": "info",
+      "pattern": "@app\\.on_event\\s*\\(",
+      "scope": ["**/*.py"]
+    }
+  ]
+}
