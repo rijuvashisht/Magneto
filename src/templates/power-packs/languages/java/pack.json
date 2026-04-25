@@ -1,0 +1,118 @@
+{
+  "name": "java",
+  "category": "languages",
+  "version": "1.0.0",
+  "description": "Java language power pack — modern Java idioms (records, sealed types, var, switch expressions), concurrency safety, null handling, and common JVM pitfalls",
+  "rules": [
+    "Prefer records for immutable data carriers over POJOs with getters/setters",
+    "Use sealed interfaces for closed type hierarchies; enables exhaustive pattern matching",
+    "Avoid raw types — always parameterize generics",
+    "Never catch Throwable or Error — catch specific exceptions",
+    "Use try-with-resources for every Closeable; never manual close()",
+    "Prefer Optional<T> return over null for missing values (not for fields or params)",
+    "Use ConcurrentHashMap, not synchronized HashMap — finer-grained locking",
+    "Never ignore InterruptedException — rethrow or set Thread.currentThread().interrupt()",
+    "Use Objects.equals / requireNonNull / hash helpers over manual null checks",
+    "String concatenation in loops → use StringBuilder; keep single concat for readability"
+  ],
+  "checks": [
+    {
+      "id": "java-catch-throwable",
+      "description": "catch (Throwable) or catch (Error) — swallows JVM errors and InterruptedException",
+      "severity": "error",
+      "pattern": "catch\\s*\\(\\s*(Throwable|Error)\\s+\\w+\\s*\\)",
+      "scope": ["**/*.java"]
+    },
+    {
+      "id": "java-swallowed-interrupt",
+      "description": "InterruptedException caught without rethrow or interrupt() — breaks cancellation",
+      "severity": "error",
+      "pattern": "catch\\s*\\(\\s*InterruptedException\\s+\\w+\\s*\\)\\s*\\{[^}]{0,40}\\}",
+      "scope": ["**/*.java"]
+    },
+    {
+      "id": "java-thread-sleep-in-loop",
+      "description": "Thread.sleep inside a loop — consider ScheduledExecutorService",
+      "severity": "info",
+      "pattern": "(while|for)\\s*\\([^)]*\\)\\s*\\{[\\s\\S]{0,150}?Thread\\.sleep",
+      "scope": ["**/*.java"]
+    },
+    {
+      "id": "java-string-concat-in-loop",
+      "description": "String += in loop — O(n²) allocations; use StringBuilder",
+      "severity": "warning",
+      "pattern": "(?:while|for)\\s*\\([^)]*\\)\\s*\\{[\\s\\S]{0,200}?\\bString\\s+\\w+[\\s\\S]{0,100}?\\w+\\s*\\+=",
+      "scope": ["**/*.java"]
+    },
+    {
+      "id": "java-system-exit",
+      "description": "System.exit() in library/server code kills the JVM — propagate exceptions instead",
+      "severity": "warning",
+      "pattern": "System\\.exit\\s*\\(",
+      "scope": ["**/*.java"]
+    },
+    {
+      "id": "java-printstacktrace",
+      "description": "e.printStackTrace() writes to stderr — use a logger",
+      "severity": "warning",
+      "pattern": "\\.printStackTrace\\s*\\(\\s*\\)",
+      "scope": ["**/*.java"]
+    },
+    {
+      "id": "java-runtime-exec",
+      "description": "Runtime.exec with a single string is shell-parsed — command injection risk",
+      "severity": "error",
+      "pattern": "Runtime\\.getRuntime\\s*\\(\\s*\\)\\s*\\.\\s*exec\\s*\\(\\s*[\"']",
+      "scope": ["**/*.java"]
+    },
+    {
+      "id": "java-raw-type",
+      "description": "Raw generic type — parameterize with <...>",
+      "severity": "warning",
+      "pattern": "\\b(List|Map|Set|Collection|Iterator|Optional)\\s+\\w+\\s*=\\s*new\\s+(ArrayList|HashMap|HashSet|LinkedList|HashSet)\\s*\\(\\s*\\)",
+      "scope": ["**/*.java"]
+    },
+    {
+      "id": "java-hardcoded-secret",
+      "description": "Likely hardcoded API key / password / token literal",
+      "severity": "error",
+      "pattern": "(?:[Aa][Pp][Ii][_]?[Kk][Ee][Yy]|[Ss][Ee][Cc][Rr][Ee][Tt]|[Pp][Aa][Ss][Ss][Ww][Oo][Rr][Dd]|[Tt][Oo][Kk][Ee][Nn])\\s*=\\s*[\"'][A-Za-z0-9_\\-]{16,}[\"']",
+      "scope": ["**/*.java"]
+    },
+    {
+      "id": "java-unsafe-deserialize",
+      "description": "ObjectInputStream.readObject on untrusted input enables RCE",
+      "severity": "error",
+      "pattern": "new\\s+ObjectInputStream\\s*\\(",
+      "scope": ["**/*.java"]
+    },
+    {
+      "id": "java-sql-concat",
+      "description": "SQL string concatenation — use PreparedStatement with parameters",
+      "severity": "error",
+      "pattern": "(executeQuery|executeUpdate|execute)\\s*\\(\\s*[\"'][^\"']*[\"']\\s*\\+",
+      "scope": ["**/*.java"]
+    },
+    {
+      "id": "java-missing-override",
+      "description": "Missing @Override annotation on a method that looks like it overrides",
+      "severity": "info",
+      "pattern": "^\\s*public\\s+(String|int|long|boolean|void)\\s+(toString|equals|hashCode|compareTo)\\s*\\(",
+      "scope": ["**/*.java"]
+    },
+    {
+      "id": "java-public-mutable-static",
+      "description": "public static non-final field — global mutable state",
+      "severity": "warning",
+      "pattern": "^\\s*public\\s+static\\s+(?!final)\\w+(?:<[^>]+>)?\\s+\\w+\\s*;",
+      "scope": ["**/*.java"]
+    },
+    {
+      "id": "java-thread-new",
+      "description": "new Thread(...).start() — prefer ExecutorService for lifecycle & backpressure",
+      "severity": "info",
+      "pattern": "new\\s+Thread\\s*\\([^)]*\\)\\s*\\.\\s*start\\s*\\(\\s*\\)",
+      "scope": ["**/*.java"]
+    }
+  ]
+}

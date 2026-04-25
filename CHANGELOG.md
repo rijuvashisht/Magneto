@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Java Language Power Pack** — 14 checks covering modern Java idioms and JVM safety: catching Throwable/Error, swallowed InterruptedException, Thread.sleep in loops, String concat in loops, System.exit, e.printStackTrace, Runtime.exec shell parsing, raw generic types, hardcoded secrets, unsafe ObjectInputStream deserialization, SQL string concatenation, missing @Override, public mutable static fields, ad-hoc new Thread(). Comprehensive rules.md covers modern Java 17/21 (records, sealed types, pattern matching, virtual threads), null handling with Optional, generics with PECS, exceptions, concurrency, security, collections/streams, performance, build/dependencies, testing. Install via `magneto init --with java`.
 - **Auto-Detect & Suggest Power Packs** — `magneto init` now auto-detects the project's stack and prompts to install matching packs
   - New `magneto detect` command prints detected stack with confidence scores (read-only)
   - New `--auto-install` flag for CI environments

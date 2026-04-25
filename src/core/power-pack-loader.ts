@@ -22,6 +22,8 @@ export interface PackCheck {
 
 const PACK_CATEGORY_MAP: Record<string, string> = {
   typescript: 'languages/typescript',
+  python: 'languages/python',
+  java: 'languages/java',
   nextjs: 'frameworks/nextjs',
   react: 'frameworks/react',
   'ai-platform': 'project-types/ai-platform',

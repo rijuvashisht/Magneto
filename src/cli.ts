@@ -69,7 +69,7 @@ Documentation: https://github.com/rijuvashisht/Magneto#readme
 program
   .command('init')
   .description('Initialize Magneto AI in the current project. Scaffolds .magneto/, .github/agents/, and .vscode/mcp.json.')
-  .option('--with <packs...>', 'Include power packs (typescript, nextjs, ai-platform, azure)')
+  .option('--with <packs...>', 'Include power packs (typescript, python, java, nextjs, ai-platform, azure)')
   .option('--adapter <adapters...>', 'Include adapters (graphify)')
   .option('--force', 'Overwrite existing configuration', false)
   .option('--no-suggest', 'Skip auto-detection prompt for matching power packs')
