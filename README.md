@@ -644,9 +644,13 @@ magneto-ai/
 
 | Command | Description |
 |---|---|
-| `magneto init` | Initialize Magneto AI in the current project |
+| `magneto init` | Initialize Magneto AI (auto-detects stack and prompts to install matching packs) |
 | `magneto init --with <packs>` | Initialize with specific power packs |
 | `magneto init --adapter <name>` | Initialize with an adapter |
+| `magneto init --auto-install` | CI mode: auto-install all detected packs without prompting |
+| `magneto init --no-suggest` | Skip auto-detection prompt |
+| `magneto detect` | Print detected stack (languages, frameworks, clouds) and recommend packs — read-only |
+| `magneto detect --json` | Detection output as JSON for tooling |
 | `magneto refresh` | Refresh configuration and detect packs |
 | `magneto doctor` | Validate setup and diagnose issues |
 | `magneto plan <task>` | Generate execution plan (.md, .yaml, or .json) |

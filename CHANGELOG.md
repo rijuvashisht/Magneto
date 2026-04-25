@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Auto-Detect & Suggest Power Packs** — `magneto init` now auto-detects the project's stack and prompts to install matching packs
+  - New `magneto detect` command prints detected stack with confidence scores (read-only)
+  - New `--auto-install` flag for CI environments
+  - New `--no-suggest` flag to opt out of detection prompt
+  - Expanded detection: Python, Java, Go, Rust, Ruby, PHP, C#, Kotlin, FastAPI, Django, Flask, Spring Boot, Rails, Vue, Angular, Express, NestJS, AWS, GCP, Kubernetes, Mobile (React Native/Flutter)
+  - Each detection includes confidence score (0..1), human-readable reasons, and `available`/`planned` status
+  - New `detectPacksDetailed()` programmatic API — see `docs/AUTO-DETECT.md`
 - **Interactive Plan Approval Workflow** — Step-by-step approval with `--approve-each` flag
   - Approve/reject/skip each step during execution
   - Diff preview for file changes
