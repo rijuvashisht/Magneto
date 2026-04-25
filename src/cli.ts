@@ -4,6 +4,7 @@ import { Command } from 'commander';
 import { logger } from './utils/logger';
 import { initCommand } from './commands/init';
 import { refreshCommand } from './commands/refresh';
+import { detectCommand } from './commands/detect';
 import { doctorCommand } from './commands/doctor';
 import { planCommand } from './commands/plan';
 import { runCommand } from './commands/run';
@@ -71,15 +72,37 @@ program
   .option('--with <packs...>', 'Include power packs (typescript, nextjs, ai-platform, azure)')
   .option('--adapter <adapters...>', 'Include adapters (graphify)')
   .option('--force', 'Overwrite existing configuration', false)
+  .option('--no-suggest', 'Skip auto-detection prompt for matching power packs')
+  .option('--auto-install', 'Auto-install all detected power packs without prompting (CI mode)', false)
   .addHelpText('after', `
 Examples:
   $ magneto init
   $ magneto init --with typescript nextjs azure
   $ magneto init --with ai-platform --adapter graphify
+  $ magneto init --auto-install        # CI: auto-install detected packs
+  $ magneto init --no-suggest          # skip detection prompt
   $ magneto init --force
 `)
   .action(async (options) => {
     await initCommand(options);
+  });
+
+program
+  .command('detect')
+  .description('Detect the project stack (languages, frameworks, clouds) and recommend power packs without modifying the project.')
+  .option('--json', 'Output as JSON', false)
+  .option('--min-confidence <n>', 'Minimum confidence threshold (0..1)', parseFloat)
+  .addHelpText('after', `
+Examples:
+  $ magneto detect
+  $ magneto detect --json
+  $ magneto detect --min-confidence 0.8
+`)
+  .action(async (options) => {
+    await detectCommand({
+      json: options.json,
+      minConfidence: options.minConfidence,
+    });
   });
 
 program
