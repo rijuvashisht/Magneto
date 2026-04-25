@@ -45,7 +45,7 @@ interface DetectionRule {
 const SHIPPED_PACKS: Record<PackCategory, Set<string>> = {
   languages: new Set(['typescript']),
   frameworks: new Set(['nextjs']),
-  clouds: new Set(['azure']),
+  clouds: new Set(['azure', 'aws']),
   'project-types': new Set(['ai-platform']),
   integrations: new Set(['openclaw']),
 };

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **AWS Cloud Power Pack** — 16 high-value infrastructure security checks: IAM wildcard Action+Resource, AdministratorAccess attached, S3 public ACLs, missing S3 Block Public Access, SG 0.0.0.0/0 on SSH/RDP/DB ports, unencrypted RDS/EBS, hardcoded AKIA keys and secret access keys, Lambda without timeout/log retention, local Terraform state, wide-open egress. Comprehensive rules.md covers least-privilege IAM, S3 hardening, VPC/SG design, encryption at rest/in transit, Secrets Manager, Lambda/RDS best practices, cost governance, observability (CloudTrail/GuardDuty), Terraform & CDK practices, incident response. Install via `magneto init --with aws`.
 - **Auto-Detect & Suggest Power Packs** — `magneto init` now auto-detects the project's stack and prompts to install matching packs
   - New `magneto detect` command prints detected stack with confidence scores (read-only)
   - New `--auto-install` flag for CI environments
