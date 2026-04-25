@@ -389,6 +389,8 @@ Power Packs add domain-specific intelligence to Magneto AI.
 |---|---|---|
 | **TypeScript** | Language | Import graph analysis, type safety checks, `any` detection |
 | **Next.js** | Framework | Server/client boundaries, hydration safety, routing validation |
+| **FastAPI** | Framework | Pydantic validation, async correctness, CORS/auth security, lifespan hygiene |
+| **Spring Boot** | Framework | Spring Security review, JPA N+1 detection, transaction boundaries, actuator hardening |
 | **AI Platform** | Project Type | Prompt injection detection, RAG pipeline validation, token limits |
 | **Azure** | Cloud | Infrastructure reasoning, RBAC validation, networking checks |
 
