@@ -1,7 +1,7 @@
 import { ExecutionContext } from '../core/context';
 import { SecurityEvaluation, ExecutionMode } from '../core/security-engine';
 
-export type RunnerType = 'openai' | 'copilot-local' | 'copilot-cloud' | 'cascade' | 'antigravity' | 'gemini';
+export type RunnerType = 'openai' | 'copilot-local' | 'copilot-cloud' | 'cascade' | 'antigravity' | 'gemini' | 'ollama';
 
 export interface RunnerInput {
   task: Record<string, unknown>;
@@ -80,6 +80,11 @@ export function detectAgentEnvironment(projectRoot: string): RunnerType | null {
     return 'openai';
   }
 
+  // Final fallback: if user explicitly opted into Ollama, use it
+  if (process.env.OLLAMA_HOST || process.env.MAGNETO_USE_OLLAMA) {
+    return 'ollama';
+  }
+
   return null;
 }
 
@@ -108,6 +113,10 @@ export function createRunner(type: RunnerType): Runner {
     case 'gemini': {
       const { GeminiRunner } = require('./gemini');
       return new GeminiRunner();
+    }
+    case 'ollama': {
+      const { OllamaRunner } = require('./ollama');
+      return new OllamaRunner();
     }
     default:
       throw new Error(`Unknown runner type: ${type}`);

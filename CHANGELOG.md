@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Ollama Runner** — first fully-local, zero-egress runner. Executes Magneto reasoning tasks against a local [Ollama](https://ollama.com) server with no API key, no cloud calls, and no data leaving the machine. Reads `OLLAMA_HOST` (default `http://localhost:11434`) and `OLLAMA_MODEL` (default `llama3.1`). Includes pre-flight health check that verifies server reachability and confirms the requested model is pulled, with actionable guidance if not. Supports both blocking and NDJSON streaming. Tolerant JSON parser handles markdown-fenced and prose-wrapped output common from local models. Token usage tracked via `prompt_eval_count` / `eval_count`. Every result tagged `metadata.dataEgress = 'none'` for auditability. `detectAgentEnvironment()` selects Ollama as a fallback when `OLLAMA_HOST` or `MAGNETO_USE_OLLAMA` is set and no cloud key is present. Use via `magneto run task.md --runner ollama`. See `docs/RUNNER-OLLAMA.md` for hardware guidance, team self-hosting, and troubleshooting.
 - **Auto-Detect & Suggest Power Packs** — `magneto init` now auto-detects the project's stack and prompts to install matching packs
   - New `magneto detect` command prints detected stack with confidence scores (read-only)
   - New `--auto-install` flag for CI environments
