@@ -14,10 +14,21 @@ export interface DependencyVuln {
   referenceUrl: string;
 }
 
+export interface GroupedVulnerability {
+  packageName: string;
+  installedVersion: string;
+  ecosystem: 'npm' | 'PyPI' | 'Maven';
+  highestSeverity: 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW';
+  cveCount: number;
+  cves: DependencyVuln[];
+  recommendedFixVersion: string | null;
+}
+
 export interface DependencyScanResult {
   scannedManifests: string[];
   checkedPackages: number;
   vulnerabilities: DependencyVuln[];
+  groupedVulnerabilities: GroupedVulnerability[];
   durationMs: number;
   apiReachable: boolean;
 }
@@ -266,7 +277,7 @@ export async function runDependencyScanner(rootDir: string): Promise<DependencyS
   allPackages.push(...dedupedPackages);
 
   if (allPackages.length === 0) {
-    return { scannedManifests, checkedPackages: 0, vulnerabilities: [], durationMs: Date.now() - start, apiReachable: true };
+    return { scannedManifests, checkedPackages: 0, vulnerabilities: [], groupedVulnerabilities: [], durationMs: Date.now() - start, apiReachable: true };
   }
 
   logger.info(`[glasswing] Scanning ${allPackages.length} dependencies via OSV.dev...`);
@@ -307,42 +318,128 @@ export async function runDependencyScanner(rootDir: string): Promise<DependencyS
     }
   }
 
+  const sorted = vulnerabilities.sort((a, b) => {
+    const order = { CRITICAL: 0, HIGH: 1, MEDIUM: 2, LOW: 3 };
+    return order[a.severity] - order[b.severity];
+  });
+
+  const grouped = groupVulnerabilities(sorted);
+
   return {
     scannedManifests,
     checkedPackages: allPackages.length,
-    vulnerabilities: vulnerabilities.sort((a, b) => {
-      const order = { CRITICAL: 0, HIGH: 1, MEDIUM: 2, LOW: 3 };
-      return order[a.severity] - order[b.severity];
-    }),
+    vulnerabilities: sorted,
+    groupedVulnerabilities: grouped,
     durationMs: Date.now() - start,
     apiReachable,
   };
+}
+
+// ─── Grouping + semver fix selection ──────────────────────────────────────
+
+function parseSemver(v: string): [number, number, number] | null {
+  const m = v.match(/^v?(\d+)\.(\d+)\.(\d+)/);
+  if (!m) return null;
+  return [parseInt(m[1], 10), parseInt(m[2], 10), parseInt(m[3], 10)];
+}
+
+function compareSemver(a: string, b: string): number {
+  const pa = parseSemver(a);
+  const pb = parseSemver(b);
+  if (!pa || !pb) return a.localeCompare(b);
+  for (let i = 0; i < 3; i++) {
+    if (pa[i] !== pb[i]) return pa[i] - pb[i];
+  }
+  return 0;
+}
+
+function pickRecommendedFix(installed: string, fixSets: string[][]): string | null {
+  // Each CVE provides one or more fix versions. We need a single version that
+  // satisfies all CVEs (i.e., ≥ the lowest acceptable fix from each set).
+  if (fixSets.length === 0) return null;
+  const flatCandidates = Array.from(new Set(fixSets.flat())).filter((v) => parseSemver(v));
+  if (flatCandidates.length === 0) return null;
+
+  // Sort candidates ascending
+  const sortedCandidates = [...flatCandidates].sort(compareSemver);
+
+  // For each candidate, check that for every CVE, at least one of its fix versions is ≤ candidate
+  for (const candidate of sortedCandidates) {
+    if (compareSemver(candidate, installed) <= 0) continue;
+    const satisfiesAll = fixSets.every((set) =>
+      set.some((fix) => parseSemver(fix) && compareSemver(fix, candidate) <= 0)
+    );
+    if (satisfiesAll) return candidate;
+  }
+  // Fallback: highest fix from any CVE
+  return sortedCandidates[sortedCandidates.length - 1] ?? null;
+}
+
+export function groupVulnerabilities(vulns: DependencyVuln[]): GroupedVulnerability[] {
+  const buckets = new Map<string, DependencyVuln[]>();
+  for (const v of vulns) {
+    const key = `${v.ecosystem}:${v.packageName}@${v.installedVersion}`;
+    if (!buckets.has(key)) buckets.set(key, []);
+    buckets.get(key)!.push(v);
+  }
+
+  const order = { CRITICAL: 0, HIGH: 1, MEDIUM: 2, LOW: 3 };
+
+  const groups: GroupedVulnerability[] = [];
+  for (const cves of buckets.values()) {
+    const first = cves[0];
+    const highestSeverity = cves.reduce<DependencyVuln['severity']>(
+      (acc, c) => (order[c.severity] < order[acc] ? c.severity : acc),
+      'LOW'
+    );
+    const fixSets = cves.map((c) => c.fixedIn).filter((s) => s.length > 0);
+    groups.push({
+      packageName: first.packageName,
+      installedVersion: first.installedVersion,
+      ecosystem: first.ecosystem,
+      highestSeverity,
+      cveCount: cves.length,
+      cves,
+      recommendedFixVersion: pickRecommendedFix(first.installedVersion, fixSets),
+    });
+  }
+
+  return groups.sort((a, b) => {
+    const sevDiff = order[a.highestSeverity] - order[b.highestSeverity];
+    if (sevDiff !== 0) return sevDiff;
+    return b.cveCount - a.cveCount;
+  });
 }
 
 export function renderDependencyScanText(result: DependencyScanResult): string {
   const lines: string[] = [];
   lines.push('');
   lines.push('[glasswing] Dependency Scan Results (OSV.dev)');
-  lines.push(`  Manifests: ${result.scannedManifests.join(', ') || 'none found'}`);
-  lines.push(`  Packages checked: ${result.checkedPackages}`);
+  lines.push(`  Manifests: ${result.scannedManifests.length} · Packages checked: ${result.checkedPackages}`);
   if (!result.apiReachable) lines.push('  ⚠  OSV API unreachable — some packages may not have been checked');
   lines.push('');
 
-  if (result.vulnerabilities.length === 0) {
+  if (result.groupedVulnerabilities.length === 0) {
     lines.push('  ✅ No known vulnerable dependencies');
     return lines.join('\n');
   }
 
-  for (const v of result.vulnerabilities) {
-    const icon = { CRITICAL: '🔴', HIGH: '🟠', MEDIUM: '🟡', LOW: '🔵' }[v.severity];
-    lines.push(`${icon} [${v.severity}] ${v.packageName}@${v.installedVersion}`);
-    lines.push(`   ${v.vulnId}${v.aliases.length ? ' (' + v.aliases.join(', ') + ')' : ''}`);
-    lines.push(`   ${v.summary}`);
-    if (v.fixedIn.length) lines.push(`   Fix: upgrade to ${v.fixedIn.join(' or ')}`);
-    lines.push(`   Ref: ${v.referenceUrl}`);
+  for (const g of result.groupedVulnerabilities) {
+    const icon = { CRITICAL: '🔴', HIGH: '🟠', MEDIUM: '🟡', LOW: '🔵' }[g.highestSeverity];
+    const cveLabel = g.cveCount === 1 ? '1 CVE' : `${g.cveCount} CVEs`;
+    lines.push(`${icon} [${g.highestSeverity}] ${g.packageName}@${g.installedVersion}  (${cveLabel})`);
+    if (g.recommendedFixVersion) {
+      lines.push(`   → upgrade to ${g.recommendedFixVersion}`);
+    } else {
+      lines.push('   → no fix version available');
+    }
+    for (const c of g.cves.slice(0, 3)) {
+      lines.push(`   • ${c.vulnId}${c.aliases[0] ? ' (' + c.aliases[0] + ')' : ''} — ${c.summary.slice(0, 80)}`);
+    }
+    if (g.cves.length > 3) lines.push(`   • … and ${g.cves.length - 3} more`);
     lines.push('');
   }
 
-  lines.push(`  Total: ${result.vulnerabilities.length} vulnerable dependencies`);
+  lines.push(`  Total: ${result.groupedVulnerabilities.length} vulnerable packages · ${result.vulnerabilities.length} CVEs`);
   return lines.join('\n');
 }

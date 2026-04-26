@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { runSecurityAudit, renderText, renderMarkdown, renderJson, saveReport, AuditOptions } from '../core/security-audit';
 import { runDependencyScanner, renderDependencyScanText } from '../core/dependency-scanner';
+import { runDependencyFix, renderDependencyFixReport } from '../core/dependency-fixer';
 import { evaluateCompliance, renderComplianceText, renderComplianceMarkdown, ComplianceFramework, getAvailableFrameworks } from '../core/compliance-engine';
 import { runAutoFix, getFixableRuleIds } from '../core/security-fixer';
 import { logger } from '../utils/logger';
@@ -109,41 +110,73 @@ export async function securityScanCommand(options: { format?: string; output?: s
   }
 }
 
-export async function securityFixCommand(options: { dryRun?: boolean; format?: string } = {}): Promise<void> {
+export async function securityFixCommand(
+  options: { dryRun?: boolean; format?: string; deps?: boolean; code?: boolean } = {}
+): Promise<void> {
   const rootDir = process.cwd();
-  const report = await runSecurityAudit({ rootDir, severity: 'info' });
+  // If neither flag is given, fix both. If only one is given, only do that one.
+  const fixCode = options.code !== false && (options.code === true || !options.deps);
+  const fixDeps = options.deps !== false && (options.deps === true || !options.code);
+  const doBoth = !options.code && !options.deps;
+  const runCode = doBoth || options.code;
+  const runDeps = doBoth || options.deps;
 
-  if (report.findings.length === 0) {
-    logger.info('[glasswing] ✅ No findings — nothing to fix');
-    return;
-  }
-
-  const fixable = getFixableRuleIds();
-  const fixableFindings = report.findings.filter((f) => fixable.includes(f.id));
-  const unfixable = report.findings.filter((f) => !fixable.includes(f.id));
-
-  logger.info(`[glasswing] ${fixableFindings.length} auto-fixable · ${unfixable.length} require manual remediation`);
   if (options.dryRun) logger.info('[glasswing] Dry-run mode — no files will be written');
 
-  const fixReport = await runAutoFix(rootDir, fixableFindings, { dryRun: options.dryRun ?? false });
+  // ─── Code fixes (SAST) ───────────────────────────────────────────
+  if (runCode) {
+    const report = await runSecurityAudit({ rootDir, severity: 'info' });
+    if (report.findings.length === 0) {
+      logger.info('[glasswing] ✅ No code findings — nothing to fix');
+    } else {
+      const fixable = getFixableRuleIds();
+      const fixableFindings = report.findings.filter((f) => fixable.includes(f.id));
+      const unfixable = report.findings.filter((f) => !fixable.includes(f.id));
 
-  logger.info(`[glasswing] Applied: ${fixReport.applied} · Skipped: ${fixReport.skipped}`);
+      logger.info(`[glasswing] Code: ${fixableFindings.length} auto-fixable · ${unfixable.length} require manual remediation`);
 
-  for (const r of fixReport.results) {
-    if (r.applied && r.diff) {
-      logger.info(`  ✓ ${r.ruleId} — ${r.file}:${r.line}`);
-    } else if (!r.applied) {
-      logger.info(`  ⊘ ${r.ruleId} — ${r.file}:${r.line} (manual fix needed)`);
+      const fixReport = await runAutoFix(rootDir, fixableFindings, { dryRun: options.dryRun ?? false });
+      logger.info(`[glasswing] Code fixes: applied ${fixReport.applied} · skipped ${fixReport.skipped}`);
+
+      for (const r of fixReport.results) {
+        if (r.applied && r.diff) logger.info(`  ✓ ${r.ruleId} — ${r.file}:${r.line}`);
+        else if (!r.applied) logger.info(`  ⊘ ${r.ruleId} — ${r.file}:${r.line} (manual fix needed)`);
+      }
+
+      if (unfixable.length > 0) {
+        logger.info('');
+        logger.info('[glasswing] Code findings requiring manual remediation:');
+        for (const f of unfixable) {
+          logger.info(`  ✗ ${f.id} — ${f.file}:${f.line} — ${f.remediation ?? 'see docs'}`);
+        }
+      }
     }
   }
 
-  if (unfixable.length > 0) {
+  // ─── Dependency upgrades ───────────────────────────────────────────
+  if (runDeps) {
     logger.info('');
-    logger.info('[glasswing] Findings requiring manual remediation:');
-    for (const f of unfixable) {
-      logger.info(`  ✗ ${f.id} — ${f.file}:${f.line} — ${f.remediation ?? 'see docs'}`);
+    logger.info('[glasswing] Scanning dependencies for vulnerabilities...');
+    const scan = await runDependencyScanner(rootDir);
+
+    if (scan.groupedVulnerabilities.length === 0) {
+      logger.info('[glasswing] ✅ No vulnerable dependencies found');
+      return;
+    }
+
+    const fixReport = await runDependencyFix(rootDir, scan.groupedVulnerabilities, {
+      dryRun: options.dryRun ?? false,
+    });
+
+    console.log(renderDependencyFixReport(fixReport));
+
+    if (fixReport.fixesApplied.length > 0 && !options.dryRun) {
+      logger.info(`[glasswing] ✓ Updated ${fixReport.manifestsModified.length} manifest(s).`);
+      logger.info('[glasswing] Run the npm install commands above to update lockfiles.');
     }
   }
+  
+  void fixCode; void fixDeps; // suppress unused
 }
 
 export async function securityComplianceCommand(

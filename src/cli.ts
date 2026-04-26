@@ -759,12 +759,21 @@ Examples:
 
 security
   .command('fix')
-  .description('Auto-remediate fixable findings in-place. Safe patterns only — MD5→SHA256, hardcoded secrets→env refs, debug flags.')
+  .description('Auto-remediate findings: SAST patterns + vulnerable dependency upgrades. Updates package.json with safe semver-aware version bumps.')
   .option('--dry-run', 'Preview changes without writing files', false)
+  .option('--code', 'Only apply code fixes (skip dependency upgrades)', false)
+  .option('--deps', 'Only apply dependency upgrades (skip code fixes)', false)
   .addHelpText('after', `
 Examples:
-  $ magneto security fix --dry-run   # preview what would change
-  $ magneto security fix             # apply fixes
+  $ magneto security fix              # fix code findings + upgrade vulnerable deps
+  $ magneto security fix --dry-run    # preview everything that would change
+  $ magneto security fix --deps       # only upgrade vulnerable dependencies
+  $ magneto security fix --code       # only patch code findings (MD5→SHA256, etc)
+  $ magneto security fix --deps --dry-run   # preview dependency upgrades only
+
+The --deps mode reads the OSV.dev scan, picks a single fix version per package
+that resolves all its CVEs (semver-aware), and updates every matching package.json
+in the repo (preserving ^/~ range prefixes). Run npm install after to update lockfile.
 `)
   .action(async (options) => {
     await securityFixCommand(options);
