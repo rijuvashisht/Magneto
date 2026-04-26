@@ -36,3 +36,6 @@ examples/nextjs-frontend/.magneto/cache/
 # Magneto-generated reports (per-run output)
 .magneto/reports/
 .magneto/sandbox/
+.magneto/memory/memory.lock
+.magneto/memory/memory.lock.sig
+.magneto/state/
