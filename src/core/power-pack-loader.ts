@@ -22,7 +22,10 @@ export interface PackCheck {
 
 const PACK_CATEGORY_MAP: Record<string, string> = {
   typescript: 'languages/typescript',
+  python: 'languages/python',
   nextjs: 'frameworks/nextjs',
+  fastapi: 'frameworks/fastapi',
+  'spring-boot': 'frameworks/spring-boot',
   react: 'frameworks/react',
   'ai-platform': 'project-types/ai-platform',
   azure: 'clouds/azure',

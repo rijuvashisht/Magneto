@@ -69,7 +69,7 @@ Documentation: https://github.com/rijuvashisht/Magneto#readme
 program
   .command('init')
   .description('Initialize Magneto AI in the current project. Scaffolds .magneto/, .github/agents/, and .vscode/mcp.json.')
-  .option('--with <packs...>', 'Include power packs (typescript, python, nextjs, ai-platform, aws, azure)')
+  .option('--with <packs...>', 'Include power packs (typescript, python, nextjs, fastapi, spring-boot, aws, ai-platform, azure)')
   .option('--adapter <adapters...>', 'Include adapters (graphify)')
   .option('--force', 'Overwrite existing configuration', false)
   .option('--no-suggest', 'Skip auto-detection prompt for matching power packs')
@@ -143,7 +143,7 @@ Examples:
 program
   .command('run <taskFile>')
   .description('Execute a task through the Magneto AI pipeline using a specified runner and execution mode.')
-  .option('--runner <runner>', 'Runner: openai, copilot-local, copilot-cloud', 'openai')
+  .option('--runner <runner>', 'Runner: openai, copilot-local, copilot-cloud, ollama', 'openai')
   .option('--mode <mode>', 'Mode: observe, assist, execute, restricted', 'assist')
   .option('--interactive', 'Execute with interactive approval for each step', false)
   .option('--approve-each', 'Pause for approval at each execution stage', false)
@@ -168,6 +168,7 @@ Runners:
   openai          Use OpenAI API (requires OPENAI_API_KEY)
   copilot-local   Delegate to GitHub Copilot via local MCP agents
   copilot-cloud   Use Copilot Cloud API endpoint
+  ollama          Use local Ollama (no API key, no data egress; OLLAMA_HOST + OLLAMA_MODEL)
 
 Modes:
   observe         Read-only analysis, no changes
