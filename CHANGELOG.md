@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **FastAPI Framework Power Pack** — 10 checks covering CORS wildcard with credentials, hardcoded SECRET_KEY, sync I/O in async endpoints, deprecated `@app.on_event`, missing auth dependencies, untyped request bodies, debug=True. Comprehensive `rules.md` covers Pydantic validation, dependency injection, async correctness, security, lifecycle, testing, and performance. Install via `magneto init --with fastapi`.
+- **Spring Boot Framework Power Pack** — 12 checks covering field injection, actuator wildcard exposure, `ddl-auto=create`, hardcoded passwords, `@Transactional` on private methods, low BCrypt strength, CORS wildcard, broad exception catches. Comprehensive `rules.md` covers DI, configuration, JPA/N+1 prevention, transactions, Spring Security 6+, actuator hardening, controllers/DTOs, testing, performance. Install via `magneto init --with spring-boot`.
 - **Python Language Power Pack** — first non-TypeScript language pack
   - 14 security & quality checks: eval/exec, SQL injection, shell=True, pickle.loads, yaml unsafe load, hardcoded secrets, mutable default args, bare except, requests without timeout, assert in prod, DEBUG=True, print() debugging, missing type hints
   - Comprehensive `rules.md` covering type safety, security, async, framework-specific guidance (Django/FastAPI/Flask), testing, performance

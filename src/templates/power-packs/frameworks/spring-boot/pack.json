@@ -1,0 +1,104 @@
+{
+  "name": "spring-boot",
+  "category": "frameworks",
+  "version": "1.0.0",
+  "description": "Spring Boot framework power pack — Spring Security review, JPA N+1 detection, transaction boundaries, configuration hygiene, and actuator hardening",
+  "rules": [
+    "Use constructor injection — never @Autowired on fields",
+    "Annotate service-layer methods with @Transactional; never on @Controller",
+    "Avoid @Transactional on private/self-invoked methods (proxy bypass)",
+    "Use @ConfigurationProperties + Records for typed config — never @Value strings everywhere",
+    "JPA: use fetch joins / @EntityGraph to prevent N+1 queries",
+    "Disable Open Session In View (spring.jpa.open-in-view=false)",
+    "Lock down actuator endpoints — never expose /actuator/* publicly",
+    "Use ResponseEntity<T> with explicit status codes; document with @Operation",
+    "Prefer record DTOs over Lombok @Data on the API boundary",
+    "Configure CORS at SecurityFilterChain — not via @CrossOrigin sprinkled on controllers"
+  ],
+  "checks": [
+    {
+      "id": "spring-field-injection",
+      "description": "@Autowired on fields — use constructor injection instead (testability, immutability)",
+      "severity": "warning",
+      "pattern": "@Autowired\\s*\\n\\s*(?:private|protected|public)?\\s*\\w+\\s+\\w+\\s*;",
+      "scope": ["**/*.java", "**/*.kt"]
+    },
+    {
+      "id": "spring-permitall",
+      "description": "permitAll() in SecurityFilterChain on broad patterns can expose endpoints",
+      "severity": "warning",
+      "pattern": "\\.requestMatchers\\s*\\([^)]*[\"']/(\\*\\*|api/\\*\\*|.*)[\"'][^)]*\\)\\.permitAll\\s*\\(\\)",
+      "scope": ["**/*.java", "**/*.kt"]
+    },
+    {
+      "id": "spring-csrf-disable",
+      "description": "csrf().disable() — only acceptable for stateless APIs; verify intent",
+      "severity": "warning",
+      "pattern": "\\.csrf\\s*\\(\\s*\\)\\s*\\.\\s*disable\\s*\\(\\s*\\)",
+      "scope": ["**/*.java", "**/*.kt"]
+    },
+    {
+      "id": "spring-actuator-all-exposed",
+      "description": "management.endpoints.web.exposure.include=* exposes all actuators (heapdump, env, etc.)",
+      "severity": "error",
+      "pattern": "management\\.endpoints\\.web\\.exposure\\.include\\s*[=:]\\s*['\"]?\\*",
+      "scope": ["**/application*.yml", "**/application*.yaml", "**/application*.properties"]
+    },
+    {
+      "id": "spring-show-sql",
+      "description": "spring.jpa.show-sql=true logs every query — disable in production",
+      "severity": "info",
+      "pattern": "spring\\.jpa\\.show-sql\\s*[=:]\\s*true",
+      "scope": ["**/application*.yml", "**/application*.yaml", "**/application*.properties"]
+    },
+    {
+      "id": "spring-open-in-view",
+      "description": "spring.jpa.open-in-view defaults true — causes N+1 and lazy-load surprises in views",
+      "severity": "warning",
+      "pattern": "spring\\.jpa\\.open-in-view\\s*[=:]\\s*true",
+      "scope": ["**/application*.yml", "**/application*.yaml", "**/application*.properties"]
+    },
+    {
+      "id": "spring-ddl-create",
+      "description": "spring.jpa.hibernate.ddl-auto=create/create-drop wipes data on restart — never in prod",
+      "severity": "error",
+      "pattern": "spring\\.jpa\\.hibernate\\.ddl-auto\\s*[=:]\\s*(create|create-drop)\\b",
+      "scope": ["**/application*.yml", "**/application*.yaml", "**/application*.properties"]
+    },
+    {
+      "id": "spring-hardcoded-password",
+      "description": "Hardcoded password in application properties — use env var ${VAR}",
+      "severity": "error",
+      "pattern": "(spring\\.datasource\\.password|spring\\.security\\.user\\.password)\\s*[=:]\\s*(?!\\$\\{)[^\\s\\$]+",
+      "scope": ["**/application*.yml", "**/application*.yaml", "**/application*.properties"]
+    },
+    {
+      "id": "spring-transactional-on-private",
+      "description": "@Transactional on private/protected method — proxy ignores, no transaction applied",
+      "severity": "error",
+      "pattern": "@Transactional[\\s\\S]{0,80}?(?:private|protected)\\s+\\w+\\s+\\w+\\s*\\(",
+      "scope": ["**/*.java", "**/*.kt"]
+    },
+    {
+      "id": "spring-bcrypt-low-strength",
+      "description": "BCryptPasswordEncoder strength < 10 is too weak for production",
+      "severity": "warning",
+      "pattern": "new\\s+BCryptPasswordEncoder\\s*\\(\\s*([0-9]|0[0-9])\\s*\\)",
+      "scope": ["**/*.java", "**/*.kt"]
+    },
+    {
+      "id": "spring-cross-origin-wildcard",
+      "description": "@CrossOrigin(origins=\"*\") with credentials disables CORS protection",
+      "severity": "warning",
+      "pattern": "@CrossOrigin\\s*\\([^)]*origins\\s*=\\s*[\"']\\*[\"']",
+      "scope": ["**/*.java", "**/*.kt"]
+    },
+    {
+      "id": "spring-runtime-exception-broad-catch",
+      "description": "catch (Exception e) with no rethrow swallows business errors",
+      "severity": "info",
+      "pattern": "catch\\s*\\(\\s*(Exception|Throwable)\\s+\\w+\\s*\\)\\s*\\{[^}]{0,40}\\}",
+      "scope": ["**/*.java", "**/*.kt"]
+    }
+  ]
+}
