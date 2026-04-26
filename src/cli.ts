@@ -27,6 +27,12 @@ import {
   taskDeleteCommand,
   taskShowCommand,
 } from './commands/task';
+import {
+  securityAuditCommand,
+  securityReportCommand,
+  securityScanCommand,
+  securityCheckCommand,
+} from './commands/security';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../package.json') as { version: string };
@@ -56,6 +62,10 @@ Examples:
   $ magneto merge .magneto/cache --format md  Merge results as Markdown
   $ magneto generate task.md                 Generate scoped prompt for Windsurf/Copilot
   $ magneto analyze                           Analyze codebase and build memory
+  $ magneto security audit                    Full SAST + secrets scan (Project Glasswing)
+  $ magneto security audit --format json      JSON output for CI pipelines
+  $ magneto security check tasks/deploy.md    Pre-execution security gate
+  $ magneto security report --output report.md  Save markdown report
 
 Environment variables:
   OPENAI_API_KEY                  Required for the OpenAI runner
@@ -693,6 +703,68 @@ graph
   .description('Open interactive graph viewer')
   .action(async () => {
     await graphViewCommand();
+  });
+
+// ── Security (Project Glasswing) ──────────────────────────────────────────
+const security = program
+  .command('security')
+  .description('AI Security Audit & Vulnerability Detection (Project Glasswing). SAST, secrets detection, pre-execution gates.');
+
+security
+  .command('audit')
+  .description('Full SAST + secrets scan across the codebase. Detects OWASP Top 10, CWE patterns, hardcoded secrets.')
+  .option('--format <format>', 'Output format: text, json, markdown', 'text')
+  .option('--output <file>', 'Write report to file (defaults to .magneto/reports/)')
+  .option('--severity <level>', 'Minimum severity to report: critical, error, warning, info', 'info')
+  .option('--category <cats...>', 'Filter by category: secrets, injection, cryptography, misconfiguration, ssrf, logging')
+  .option('--exclude <patterns...>', 'Glob patterns to exclude')
+  .option('--fail-on <level>', 'Exit 1 if any finding at this severity or above: critical, error, warning', 'error')
+  .addHelpText('after', `
+Examples:
+  $ magneto security audit
+  $ magneto security audit --format json --output .magneto/reports/audit.json
+  $ magneto security audit --severity error              # only errors and above
+  $ magneto security audit --category secrets injection  # specific categories
+  $ magneto security audit --fail-on critical            # only fail on critical (CI)
+`)
+  .action(async (options) => {
+    await securityAuditCommand(options);
+  });
+
+security
+  .command('report')
+  .description('Generate a security report from the latest audit.')
+  .option('--format <format>', 'Output format: markdown, json', 'markdown')
+  .option('--output <file>', 'Output file path')
+  .action(async (options) => {
+    await securityReportCommand(options);
+  });
+
+security
+  .command('scan')
+  .description('Scan dependencies for known vulnerabilities via OSV.dev (no API key required). Reads package.json, requirements.txt, pom.xml.')
+  .option('--format <format>', 'Output format: text, json', 'text')
+  .option('--output <file>', 'Write results to file')
+  .addHelpText('after', `
+Examples:
+  $ magneto security scan
+  $ magneto security scan --format json
+  $ magneto security scan --output .magneto/reports/deps.json --format json
+`)
+  .action(async (options) => {
+    await securityScanCommand(options);
+  });
+
+security
+  .command('check <taskFile>')
+  .description('Pre-execution security gate — blocks task run if unresolved critical/error findings exist.')
+  .option('--strict', 'Exit 1 if check fails', false)
+  .addHelpText('after', `
+Example:
+  $ magneto security check tasks/deploy-prod.md
+`)
+  .action(async (taskFile, options) => {
+    await securityCheckCommand(taskFile, options);
   });
 
 program.parse(process.argv);

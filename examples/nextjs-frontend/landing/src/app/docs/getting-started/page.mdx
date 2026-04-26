@@ -1,150 +1,339 @@
 # Getting Started
 
-Welcome to **Magneto AI** — the AI Reasoning & Agent Control Plane that helps you ship features 3-5× faster.
+Welcome to **Magneto AI** — the multi-agent AI control plane that ships features 3–5× faster, catches security issues before they reach production, and keeps your source code under your control.
 
-## Quick Start
-
-Get up and running in under 60 seconds:
+## Quick Start (60 seconds)
 
 ```bash
-# Install Magneto AI globally
+# 1. Install globally
 npm install -g magneto-ai
 
-# Initialize in your project
+# 2. Initialize — auto-detects your stack, or pass packs explicitly
 cd your-project
-magneto init
+magneto init                                    # auto-detect everything
+magneto init --with typescript nextjs           # Next.js project
+magneto init --with python fastapi              # Python / FastAPI
+magneto init --with java spring-boot            # Java / Spring Boot
+magneto init --with aws                         # Terraform / AWS infra
 
-# Create your first task
-magneto task "Add user authentication"
+# 3. Plan a task (write a .md task file first, or use an example)
+magneto plan tasks/my-task.md
 
-# Execute with AI agents
-magneto run tasks/add-user-authentication.md --stream
-```
-
-## What is Magneto AI?
-
-Magneto AI sits inside your repo as a `.magneto/` directory and brings **structure, memory, and multi-agent reasoning** to your AI workflow.
-
-### Key Features
-
-- **Multi-Agent Orchestration** — Decompose tasks into subtasks, spawn specialized agents, and merge results
-- **Knowledge Graph** — Visualize codebase architecture and find dependencies
-- **Security Guardrails** — Every task evaluated for risk with approval gates
-- **Memory Persistence** — Agents retain context across sessions
-- **Streaming Output** — Real-time progress with progress bars and spinners
-- **Power Packs** — Plug-and-play configurations for TypeScript, Next.js, and more
-
-## Installation
-
-### Global Installation (Recommended)
-
-```bash
-npm install -g magneto-ai
-```
-
-### Local Installation
-
-```bash
-npm install --save-dev magneto-ai
-npx magneto init
-```
-
-## Initializing a Project
-
-Run the init command in any project:
-
-```bash
-magneto init
-```
-
-This creates the `.magneto/` directory with:
-- `tasks/` — Task files (.md format)
-- `memory/` — Project context and decisions
-- `cache/` — Generated prompts and results
-- `config.json` — Project settings
-
-### With Power Packs
-
-Initialize with pre-configured power packs:
-
-```bash
-magneto init --with typescript nextjs
-```
-
-Available packs:
-- `typescript` — TypeScript rules and patterns
-- `nextjs` — Next.js App Router conventions
-- `react` — React component patterns
-- `node` — Node.js backend patterns
-
-## Your First Task
-
-Create a task file:
-
-```bash
-magneto task create feature "Add dark mode toggle"
-```
-
-This generates `.magneto/tasks/add-dark-mode-toggle.md` with:
-- YAML frontmatter (type, priority, roles)
-- Structured template
-- Acceptance criteria
-
-View the task:
-
-```bash
-magneto task show add-dark-mode-toggle
-```
-
-## Generating a Plan
-
-Before executing, generate an execution plan:
-
-```bash
-magneto plan tasks/add-dark-mode-toggle.md
-```
-
-This analyzes:
-- Task classification (feature/bug/security)
-- Required roles (orchestrator, backend, tester)
-- Security risk level
-- Scoped files
-
-## Running a Task
-
-Execute with your preferred runner:
-
-```bash
-# With OpenAI
-magneto run tasks/add-dark-mode-toggle.md --runner openai
-
-# Interactive mode (approve each step)
-magneto run tasks/add-dark-mode-toggle.md --interactive
-
-# Stream output in real-time
-magneto run tasks/add-dark-mode-toggle.md --stream
-```
-
-## Next Steps
-
-- Learn about [Commands](/docs/commands) — Complete CLI reference
-- Explore [Power Packs](/docs/power-packs) — Framework-specific configurations
-- Understand [Security](/docs/security) — Guardrails and policies
-- Visualize with [Knowledge Graph](/docs/knowledge-graph) — Codebase architecture
-
-## Getting Help
-
-```bash
-# Show all commands
-magneto --help
-
-# Help for specific command
-magneto run --help
-
-# Validate your setup
-magneto doctor
+# 4. Run with streaming output
+magneto run tasks/my-task.md --stream
 ```
 
 ---
 
-**Ready to dive deeper?** Check out the [Architecture](/docs/architecture) overview to understand how Magneto AI works under the hood.
+## What Magneto Actually Does
+
+Raw AI assistants load whatever files look relevant and ask you to clarify. Magneto **classifies** your task, **scopes** exactly the files that matter, runs **3–4 specialised agents in parallel**, checks **security guardrails before touching anything**, and returns a merged, deduplicated report.
+
+| Without Magneto | With Magneto |
+|---|---|
+| 15–40 files loaded (shotgun) | 4–8 files (task-classified) |
+| 5–10 back-and-forth exchanges | 0 — all context pre-scoped |
+| Re-explains project every session | Persistent `.magneto/memory/` |
+| 1 generic agent pass | 3–4 parallel role-focused agents |
+| No security check | Every task evaluated before execution |
+
+---
+
+## Installation
+
+### Global (recommended)
+
+```bash
+npm install -g magneto-ai
+magneto --version   # 0.28.0
+```
+
+### Without installing
+
+```bash
+npx magneto-ai@latest init
+```
+
+---
+
+## Step 1 — Initialize Your Project
+
+### Auto-detect (zero config)
+
+```bash
+magneto detect          # shows confidence scores for every detected stack
+magneto init --auto-install   # installs all detected packs automatically
+```
+
+Example output:
+
+```
+Stack detected:
+  ✓ TypeScript   confidence: 0.98  (tsconfig.json, 47 .ts files)
+  ✓ Next.js      confidence: 0.95  (next.config.js, app/ router)
+  ✓ Python       confidence: 0.81  (requirements.txt, 12 .py files)
+  ✓ AWS          confidence: 0.92  (14 .tf files, aws provider)
+
+[magneto] ✓ 4 packs installed — 52 checks active
+```
+
+### Explicit stack
+
+```bash
+magneto init --with typescript nextjs         # Next.js app
+magneto init --with python fastapi            # FastAPI service
+magneto init --with java spring-boot          # Spring Boot API
+magneto init --with aws                       # Terraform / AWS
+magneto init --with java spring-boot aws      # combine packs freely
+```
+
+This creates:
+
+```
+.magneto/
+  config.json          ← project settings
+  memory/              ← persistent context across sessions
+  cache/               ← task plans, agent outputs
+  audit/approvals.json ← tamper-evident approval log
+.github/agents/        ← Copilot agent definitions
+.vscode/mcp.json       ← MCP tool registration
+```
+
+---
+
+## Step 2 — Write a Task File
+
+Tasks are plain Markdown (`.md`), YAML (`.yaml`), or JSON (`.json`). The simplest form:
+
+```markdown
+# Add analytics dashboard
+
+## Description
+Add a `/dashboard` page showing daily active users, revenue, and error rate.
+Uses the existing `/api/metrics` endpoint.
+
+## Acceptance Criteria
+- [ ] Page renders server-side
+- [ ] Charts use Recharts
+- [ ] All numbers have loading skeletons
+- [ ] Unit tests for the data-fetch hook
+```
+
+Save it as `tasks/add-dashboard.md`.
+
+---
+
+## Step 3 — Plan
+
+```bash
+magneto plan tasks/add-dashboard.md
+```
+
+Magneto classifies the task, evaluates security risk, and decomposes into parallel subtasks:
+
+```
+[magneto] Classification: feature-implementation
+[magneto] Security Risk: low ✓
+[magneto] Agents: orchestrator, backend, frontend, tester
+[magneto] Subtasks:
+[magneto]   1. Design /api/metrics response shape    → backend
+[magneto]   2. Build dashboard page + components     → frontend
+[magneto]   3. Write unit + integration tests        → tester
+[magneto] ✓ Plan saved to .magneto/cache/plan-add-dashboard.json
+```
+
+---
+
+## Step 4 — Run
+
+```bash
+magneto run tasks/add-dashboard.md --stream
+```
+
+```
+[magneto] ⚡ Executing with 4 agents in parallel...
+[backend]   Implementing API shape...            ██████████ 100%
+[frontend]  Building dashboard + components...  ██████████ 100%
+[tester]    Generating test suite...             ██████████ 100%
+[magneto] ✓ Task complete — 12 files · 847 lines · 31 tests
+```
+
+### Execution modes
+
+Control how much authority Magneto has:
+
+| Mode | What it does |
+|---|---|
+| `--mode observe` | Read-only analysis — no files touched |
+| `--mode assist` | Suggestions only — you apply changes *(default)* |
+| `--mode execute` | Writes files with guardrails |
+| `--mode restricted` | Every action requires explicit approval |
+
+```bash
+magneto run tasks/audit.md --mode observe          # safe read-only scan
+magneto run tasks/refactor.md --mode execute       # automated with guardrails
+magneto run tasks/deploy.md --mode restricted      # approve every step
+magneto run tasks/feature.md --approve-each        # interactive per-step
+```
+
+---
+
+## Choosing a Runner
+
+Magneto has six execution backends. It auto-selects based on your environment — or you override with `--runner`.
+
+| Runner | When to use | Data egress | Requires |
+|---|---|---|---|
+| `openai` | Default cloud runner | API call to OpenAI | `OPENAI_API_KEY` |
+| `copilot-local` | GitHub Copilot in your IDE | None | Copilot active |
+| `copilot-cloud` | Copilot Cloud endpoint | API call | `MAGNETO_COPILOT_CLOUD_TOKEN` |
+| `cascade` | Windsurf / Cascade IDE | None | Windsurf active |
+| `gemini` | Google AI models | API call to Google | `GEMINI_API_KEY` |
+| `ollama` | Air-gapped / regulated environments | **None** | `ollama serve` running |
+
+### Ollama — zero egress, no API key
+
+For healthcare, finance, or classified environments where source code cannot leave your machine:
+
+```bash
+# One-time setup
+ollama pull qwen2.5-coder
+ollama serve
+
+# Tell Magneto to use Ollama
+export OLLAMA_HOST=http://localhost:11434
+export OLLAMA_MODEL=qwen2.5-coder
+
+magneto run tasks/audit.md --runner ollama --stream
+```
+
+```
+[magneto] Runner:      ollama (qwen2.5-coder @ localhost)
+[magneto] Data egress: none ✓ — all processing is local
+[magneto] ✓ Task complete  metadata.dataEgress = "none"
+```
+
+Every result is tagged with `dataEgress: "none"` — verifiable in `.magneto/audit/approvals.json`.
+
+---
+
+## Power Packs — Domain Intelligence
+
+Power packs activate stack-specific checks. Each pack ships with real rules, not just suggestions.
+
+### Language packs
+
+| Pack | Checks | What it finds |
+|---|---|---|
+| `typescript` | 8 | Import cycles, `any` leakage, unsafe casts, missing return types |
+| `python` | 14 | Hardcoded secrets, `shell=True`, `eval`, missing timeouts, pickle risk |
+| `java` | 14 | Unsafe deserialization, `catch Throwable`, mutable statics, thread safety |
+
+### Framework packs
+
+| Pack | Checks | What it finds |
+|---|---|---|
+| `nextjs` | 10 | Missing `'use client'`, hydration violations, server/client boundary bugs |
+| `fastapi` | 10 | CORS wildcard + credentials, `debug=True`, missing Pydantic validation |
+| `spring-boot` | 12 | `open-in-view=true` (N+1), `@Transactional` on private, actuator wildcard |
+
+### Cloud / infra packs
+
+| Pack | Checks | What it finds |
+|---|---|---|
+| `aws` | 16 | IAM `*`, public S3 ACL, SSH 0.0.0.0/0, unencrypted RDS, hardcoded AKIA keys |
+| `azure` | ~12 | RBAC over-permission, public storage, unencrypted disks, NSG wide-open rules |
+
+```bash
+# Combine freely
+magneto init --with typescript nextjs python fastapi aws
+# → 58 checks active across your full stack
+```
+
+---
+
+## Real-World Use Cases
+
+### Pre-deploy security audit
+
+```bash
+magneto run tasks/pre-deploy-audit.md --mode observe
+# Scans all files, zero writes, flags issues before CI
+```
+
+### Feature implementation with agents
+
+```bash
+magneto plan tasks/add-payments.md
+magneto run tasks/add-payments.md --mode execute --stream
+magneto merge .magneto/cache --format markdown
+```
+
+### Infrastructure review (AWS)
+
+```bash
+magneto init --with aws
+magneto run tasks/infra-review.md --mode observe
+# Checks 31 .tf files for IAM, S3, SGs, encryption in ~10s
+```
+
+### Regulated / air-gapped environment
+
+```bash
+magneto run tasks/audit.md --runner ollama
+# Full AI reasoning, nothing leaves your network
+```
+
+### Auto-fix with approval
+
+```bash
+magneto run tasks/refactor.md --mode execute --approve-each
+# Presents each proposed change for your sign-off before writing
+```
+
+---
+
+## What Gets Scaffolded
+
+After `magneto init`:
+
+```
+your-project/
+├── .magneto/
+│   ├── config.json             ← magneto.config.json mirrors this
+│   ├── memory/
+│   │   ├── graph.json          ← dependency + module graph
+│   │   └── sessions/           ← per-task context snapshots
+│   ├── cache/                  ← plans, agent outputs, merge reports
+│   ├── audit/
+│   │   └── approvals.json      ← tamper-evident log of every action
+│   └── power-packs/            ← installed pack files
+├── .github/
+│   └── agents/
+│       ├── magneto-orchestrator.md
+│       ├── magneto-backend.md
+│       ├── magneto-tester.md
+│       └── magneto-requirements.md
+└── .vscode/
+    └── mcp.json                ← exposes plan_task, load_context, security_check
+```
+
+---
+
+## Validate Your Setup
+
+```bash
+magneto doctor
+```
+
+Checks: binary version, API key presence, `.magneto/` integrity, MCP registration, runner health.
+
+---
+
+## Next Steps
+
+- [Commands Reference](/docs/commands) — every flag and option
+- [Power Packs](/docs/power-packs) — detailed check lists per pack
+- [Security](/docs/security) — guardrails, protected paths, approval workflow
+- [Architecture](/docs/architecture) — how the six layers fit together
+- [Token Savings](/docs/token-savings) — benchmark data and cost calculator
