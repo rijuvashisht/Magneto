@@ -1,4 +1,15 @@
-# v0.29.0 — Glasswing, Sandbox, Memory Lock, Spec-Driven Development
+# v0.29.0 — Glasswing, Sandbox, Memory Lock, Spec-Driven Development [skip-release]
+
+> **Note for reviewer / merger**: this PR's title contains `[skip-release]` because the version bump (`0.28.1` → `0.29.0`) was pre-applied in the PR. The `auto-release` job in `ci.yml` would otherwise *re-bump* on merge (to `0.30.0`) and publish the wrong version. After merge, publish manually:
+>
+> ```bash
+> git checkout main && git pull
+> git tag v0.29.0
+> git push origin v0.29.0      # triggers .github/workflows/release.yml → npm publish
+> ```
+> The release workflow verifies `package.json` version matches the tag (`0.29.0` ↔ `v0.29.0`) before publishing.
+
+
 
 A flagship release covering four new feature surfaces. All shipped behind new subcommands; existing flows are untouched.
 

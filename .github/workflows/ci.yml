@@ -50,9 +50,14 @@ jobs:
     needs: build-and-test
     runs-on: ubuntu-latest
     # Run on: (1) direct push to main, or (2) PR merged to main
+    # Skip when the commit message or PR title contains [skip-release] —
+    # used for pre-bumped flagship releases that publish via release.yml
+    # (manual tag push) so the version in package.json is preserved exactly.
     if: |
-      (github.ref == 'refs/heads/main' && github.event_name == 'push') ||
-      (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main')
+      !contains(github.event.head_commit.message, '[skip-release]') &&
+      !contains(github.event.pull_request.title, '[skip-release]') &&
+      ((github.ref == 'refs/heads/main' && github.event_name == 'push') ||
+       (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'))
     permissions:
       contents: write
 
