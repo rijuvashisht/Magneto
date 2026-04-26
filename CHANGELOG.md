@@ -8,46 +8,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- **Java Language Power Pack** — 14 checks covering modern Java idioms and JVM safety: catching Throwable/Error, swallowed InterruptedException, Thread.sleep in loops, String concat in loops, System.exit, e.printStackTrace, Runtime.exec shell parsing, raw generic types, hardcoded secrets, unsafe ObjectInputStream deserialization, SQL string concatenation, missing @Override, public mutable static fields, ad-hoc new Thread(). Comprehensive rules.md covers modern Java 17/21 (records, sealed types, pattern matching, virtual threads), null handling with Optional, generics with PECS, exceptions, concurrency, security, collections/streams, performance, build/dependencies, testing. Install via `magneto init --with java`.
-- **AWS Cloud Power Pack** — 16 high-value infrastructure security checks: IAM wildcard Action+Resource, AdministratorAccess attached, S3 public ACLs, missing S3 Block Public Access, SG 0.0.0.0/0 on SSH/RDP/DB ports, unencrypted RDS/EBS, hardcoded AKIA keys and secret access keys, Lambda without timeout/log retention, local Terraform state, wide-open egress. Comprehensive rules.md covers least-privilege IAM, S3 hardening, VPC/SG design, encryption at rest/in transit, Secrets Manager, Lambda/RDS best practices, cost governance, observability (CloudTrail/GuardDuty), Terraform & CDK practices, incident response. Install via `magneto init --with aws`.
-- **Ollama Runner** — first fully-local, zero-egress runner. Executes Magneto reasoning tasks against a local [Ollama](https://ollama.com) server with no API key, no cloud calls, and no data leaving the machine. Reads `OLLAMA_HOST` (default `http://localhost:11434`) and `OLLAMA_MODEL` (default `llama3.1`). Includes pre-flight health check that verifies server reachability and confirms the requested model is pulled, with actionable guidance if not. Supports both blocking and NDJSON streaming. Tolerant JSON parser handles markdown-fenced and prose-wrapped output common from local models. Token usage tracked via `prompt_eval_count` / `eval_count`. Every result tagged `metadata.dataEgress = 'none'` for auditability. `detectAgentEnvironment()` selects Ollama as a fallback when `OLLAMA_HOST` or `MAGNETO_USE_OLLAMA` is set and no cloud key is present. Use via `magneto run task.md --runner ollama`. See `docs/RUNNER-OLLAMA.md` for hardware guidance, team self-hosting, and troubleshooting.
-- **FastAPI Framework Power Pack** — 10 checks covering CORS wildcard with credentials, hardcoded SECRET_KEY, sync I/O in async endpoints, deprecated `@app.on_event`, missing auth dependencies, untyped request bodies, debug=True. Comprehensive `rules.md` covers Pydantic validation, dependency injection, async correctness, security, lifecycle, testing, and performance. Install via `magneto init --with fastapi`.
-- **Spring Boot Framework Power Pack** — 12 checks covering field injection, actuator wildcard exposure, `ddl-auto=create`, hardcoded passwords, `@Transactional` on private methods, low BCrypt strength, CORS wildcard, broad exception catches. Comprehensive `rules.md` covers DI, configuration, JPA/N+1 prevention, transactions, Spring Security 6+, actuator hardening, controllers/DTOs, testing, performance. Install via `magneto init --with spring-boot`.
-- **Python Language Power Pack** — first non-TypeScript language pack
-  - 14 security & quality checks: eval/exec, SQL injection, shell=True, pickle.loads, yaml unsafe load, hardcoded secrets, mutable default args, bare except, requests without timeout, assert in prod, DEBUG=True, print() debugging, missing type hints
-  - Comprehensive `rules.md` covering type safety, security, async, framework-specific guidance (Django/FastAPI/Flask), testing, performance
-  - Detected automatically by `magneto detect` from `requirements.txt`, `pyproject.toml`, `setup.py`, `Pipfile`, or `poetry.lock`
-  - Install via `magneto init --with python`
-- **Auto-Detect & Suggest Power Packs** — `magneto init` now auto-detects the project's stack and prompts to install matching packs
-  - New `magneto detect` command prints detected stack with confidence scores (read-only)
-  - New `--auto-install` flag for CI environments
-  - New `--no-suggest` flag to opt out of detection prompt
-  - Expanded detection: Python, Java, Go, Rust, Ruby, PHP, C#, Kotlin, FastAPI, Django, Flask, Spring Boot, Rails, Vue, Angular, Express, NestJS, AWS, GCP, Kubernetes, Mobile (React Native/Flutter)
-  - Each detection includes confidence score (0..1), human-readable reasons, and `available`/`planned` status
-  - New `detectPacksDetailed()` programmatic API — see `docs/AUTO-DETECT.md`
-- **Interactive Plan Approval Workflow** — Step-by-step approval with `--approve-each` flag
-  - Approve/reject/skip each step during execution
-  - Diff preview for file changes
-  - Modify option with prompts for description or command changes
-  - Audit logging of approval decisions to `.magneto/audit/approvals.json`
-  - Automatic session cleanup (keeps last 10 session files)
-- **Session File Cleanup** — Prevents unbounded file growth by keeping only last 10 interactive session files
+- Nothing yet
+
+---
+
+## [0.28.0] - 2025-04-25
+
+### Added
+- **Java Language Power Pack** (`magneto init --with java`) — 14 checks: catching `Throwable`/`Error`, swallowed `InterruptedException`, `Thread.sleep` in loops, `String +=` in loops, `System.exit`, `e.printStackTrace`, `Runtime.exec` shell parsing (command injection), raw generic types, hardcoded secrets, unsafe `ObjectInputStream` (RCE), SQL string concat, missing `@Override`, public mutable static fields, ad-hoc `new Thread()`. Rules cover modern Java 17/21 (records, sealed types, pattern matching, virtual threads), null handling, generics (PECS), exceptions, concurrency, security, collections/streams, performance, build, testing.
+- **AWS Cloud Power Pack** (`magneto init --with aws`) — 16 infrastructure security checks: IAM wildcard `Action+Resource`, `AdministratorAccess` attached, S3 public ACLs, missing Block Public Access, SG `0.0.0.0/0` on SSH/RDP/DB ports, unencrypted RDS/EBS, hardcoded `AKIA` keys and secret access keys, Lambda without timeout/log retention, local Terraform state, wide-open egress. Comprehensive `rules.md` covers IAM, S3, VPC/SG, encryption at rest/in transit, Secrets Manager, Lambda, RDS, cost governance, CloudTrail/GuardDuty, Terraform & CDK practices, incident response.
+- **Ollama Runner** (`magneto run task.md --runner ollama`) — first fully-local, zero-egress runner. No API key, no cloud calls, no data leaving the machine. Reads `OLLAMA_HOST` (default `http://localhost:11434`) and `OLLAMA_MODEL` (default `llama3.1`). Pre-flight health check verifies server reachability and model availability with actionable guidance. Blocking and NDJSON streaming support. Tolerant JSON parser strips markdown fences. Token tracking via `prompt_eval_count`/`eval_count`. Every result tagged `metadata.dataEgress = 'none'`. `detectAgentEnvironment()` falls back to Ollama when `OLLAMA_HOST` or `MAGNETO_USE_OLLAMA` is set. See `docs/RUNNER-OLLAMA.md`.
+- **FastAPI Framework Power Pack** (`magneto init --with fastapi`) — 10 checks: CORS wildcard+credentials, hardcoded `SECRET_KEY`, sync I/O in async endpoints, `debug=True`, untyped request bodies, missing auth dependency on mutating routes, `TrustedHostMiddleware` wildcard, bare exception handler, deprecated `@app.on_event`. Rules cover Pydantic validation, DI, async correctness, routing, security, background tasks, lifespan, testing, performance.
+- **Spring Boot Framework Power Pack** (`magneto init --with spring-boot`) — 12 checks: `@Autowired` field injection, `permitAll()` on broad patterns, `csrf().disable()`, actuator wildcard exposure, `show-sql=true`, `open-in-view=true`, `ddl-auto=create/create-drop`, hardcoded datasource password, `@Transactional` on private methods, BCrypt strength < 10, `@CrossOrigin(origins="*")`, broad `catch(Exception)`. Rules cover DI, configuration, JPA/N+1, transactions, Spring Security 6+, actuator hardening, DTOs, error handling, async/scheduling, testing, performance, build.
+- **Python Language Power Pack** (`magneto init --with python`) — 14 checks: `eval`/`exec`, SQL injection via f-string, `shell=True`, `os.system`, `pickle.loads`, `yaml.load` without `SafeLoader`, bare `except:`, mutable default args, hardcoded secrets, `DEBUG=True`, missing type hints, `print()` debugging, `requests` without timeout, `assert` for security. Auto-detected from `requirements.txt`, `pyproject.toml`, `setup.py`, `Pipfile`, `poetry.lock`.
+- **Auto-Detect & Suggest Power Packs** — `magneto init` auto-detects project stack and prompts to install matching packs. New `magneto detect` command (read-only). New `--auto-install` flag for CI. New `--no-suggest` flag to opt out. Detection covers 20+ languages/frameworks/clouds with confidence scoring. New `detectPacksDetailed()` programmatic API. See `docs/AUTO-DETECT.md`.
+- **Interactive Plan Approval Workflow** — Step-by-step execution approval via `--approve-each`. Approve/reject/skip per step with diff preview, modify option, and audit log at `.magneto/audit/approvals.json`. Session files auto-pruned to last 10.
 
 ### Changed
-- Modify option now prompts for input even when step has no command
-- Session files are automatically cleaned up when starting new interactive sessions
-
-### Deprecated
-- N/A
-
-### Removed
-- N/A
+- `--with` pack list expanded: `typescript, python, java, nextjs, fastapi, spring-boot, aws, ai-platform, azure`
+- `detectAgentEnvironment()` now falls back to `ollama` when `OLLAMA_HOST`/`MAGNETO_USE_OLLAMA` set and no cloud API key present
+- Session files automatically cleaned up when starting new interactive sessions
 
 ### Fixed
-- Modify option now properly prompts for modification options (description or add command)
+- Modify option in interactive approval now properly prompts when step has no command
 
 ### Security
-- N/A
+- Replaced boilerplate `SECURITY.md` with accurate version support table, private reporting guidance, data-egress matrix per runner, secrets handling policy, and known considerations
+- Power packs actively detect hardcoded secrets and credentials across Python, Java, and AWS IaC files
 
 ---
 
