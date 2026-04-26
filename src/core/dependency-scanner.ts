@@ -143,6 +143,72 @@ function parsePomXml(filePath: string): Array<{ name: string; version: string }>
   }
 }
 
+// Parse package-lock.json v2/v3 — captures transitive deps (where most CVEs live)
+function parsePackageLock(filePath: string): Array<{ name: string; version: string }> {
+  try {
+    const raw = JSON.parse(fs.readFileSync(filePath, 'utf-8')) as {
+      lockfileVersion?: number;
+      packages?: Record<string, { version?: string; dev?: boolean }>;
+      dependencies?: Record<string, { version?: string; dev?: boolean; dependencies?: unknown }>;
+    };
+
+    const results: Array<{ name: string; version: string }> = [];
+
+    // lockfileVersion 2/3 — "packages" key with paths like "node_modules/foo"
+    if (raw.packages) {
+      for (const [pkgPath, info] of Object.entries(raw.packages)) {
+        if (!pkgPath || !info?.version) continue;
+        // Path is like "node_modules/foo" or "node_modules/foo/node_modules/bar"
+        const match = pkgPath.match(/node_modules\/((?:@[^/]+\/)?[^/]+)$/);
+        if (match) {
+          results.push({ name: match[1], version: info.version });
+        }
+      }
+    }
+
+    // lockfileVersion 1 fallback — "dependencies" tree
+    if (raw.dependencies && results.length === 0) {
+      const walk = (deps: Record<string, { version?: string; dependencies?: unknown }>) => {
+        for (const [name, info] of Object.entries(deps)) {
+          if (info?.version) results.push({ name, version: info.version });
+          if (info?.dependencies) walk(info.dependencies as Record<string, { version?: string; dependencies?: unknown }>);
+        }
+      };
+      walk(raw.dependencies);
+    }
+
+    return results;
+  } catch {
+    return [];
+  }
+}
+
+// Recursively find manifest files, skipping standard ignore dirs
+function findManifests(rootDir: string, filename: string): string[] {
+  const results: string[] = [];
+  const IGNORE = new Set(['node_modules', '.git', 'dist', 'build', '.next', 'coverage', '.magneto', '.turbo', '.cache']);
+
+  const walk = (dir: string, depth: number) => {
+    if (depth > 6) return;
+    let entries: fs.Dirent[];
+    try {
+      entries = fs.readdirSync(dir, { withFileTypes: true });
+    } catch {
+      return;
+    }
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        if (IGNORE.has(entry.name) || entry.name.startsWith('.') && entry.name !== '.github') continue;
+        walk(path.join(dir, entry.name), depth + 1);
+      } else if (entry.name === filename) {
+        results.push(path.join(dir, entry.name));
+      }
+    }
+  };
+  walk(rootDir, 0);
+  return results;
+}
+
 // ─── Main scanner ─────────────────────────────────────────────────────────────
 
 export async function runDependencyScanner(rootDir: string): Promise<DependencyScanResult> {
@@ -150,21 +216,54 @@ export async function runDependencyScanner(rootDir: string): Promise<DependencyS
   const scannedManifests: string[] = [];
   const allPackages: Array<{ name: string; version: string; ecosystem: 'npm' | 'PyPI' | 'Maven' }> = [];
 
-  // Find manifests
-  const candidates = [
-    { file: 'package.json', parser: parsePackageJson, ecosystem: 'npm' as const },
-    { file: 'requirements.txt', parser: parseRequirementsTxt, ecosystem: 'PyPI' as const },
-    { file: 'pom.xml', parser: parsePomXml, ecosystem: 'Maven' as const },
-  ];
+  // Discover all manifests recursively across the repo
+  const packageJsons = findManifests(rootDir, 'package.json');
+  const packageLocks = findManifests(rootDir, 'package-lock.json');
+  const requirementsFiles = findManifests(rootDir, 'requirements.txt');
+  const pomFiles = findManifests(rootDir, 'pom.xml');
 
-  for (const { file, parser, ecosystem } of candidates) {
-    const full = path.join(rootDir, file);
-    if (fs.existsSync(full)) {
-      scannedManifests.push(file);
-      const packages = parser(full);
-      allPackages.push(...packages.map((p) => ({ ...p, ecosystem })));
-    }
+  // package.json — direct deps
+  for (const full of packageJsons) {
+    const rel = path.relative(rootDir, full) || 'package.json';
+    scannedManifests.push(rel);
+    const packages = parsePackageJson(full);
+    allPackages.push(...packages.map((p) => ({ ...p, ecosystem: 'npm' as const })));
   }
+
+  // package-lock.json — transitive deps (where most CVEs hide)
+  for (const full of packageLocks) {
+    const rel = path.relative(rootDir, full) || 'package-lock.json';
+    scannedManifests.push(rel);
+    const packages = parsePackageLock(full);
+    allPackages.push(...packages.map((p) => ({ ...p, ecosystem: 'npm' as const })));
+  }
+
+  // requirements.txt
+  for (const full of requirementsFiles) {
+    const rel = path.relative(rootDir, full);
+    scannedManifests.push(rel);
+    const packages = parseRequirementsTxt(full);
+    allPackages.push(...packages.map((p) => ({ ...p, ecosystem: 'PyPI' as const })));
+  }
+
+  // pom.xml
+  for (const full of pomFiles) {
+    const rel = path.relative(rootDir, full);
+    scannedManifests.push(rel);
+    const packages = parsePomXml(full);
+    allPackages.push(...packages.map((p) => ({ ...p, ecosystem: 'Maven' as const })));
+  }
+
+  // Dedupe by name@version@ecosystem (lockfiles can list the same dep multiple times)
+  const seen = new Set<string>();
+  const dedupedPackages = allPackages.filter((p) => {
+    const key = `${p.ecosystem}:${p.name}@${p.version}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+  allPackages.length = 0;
+  allPackages.push(...dedupedPackages);
 
   if (allPackages.length === 0) {
     return { scannedManifests, checkedPackages: 0, vulnerabilities: [], durationMs: Date.now() - start, apiReachable: true };
