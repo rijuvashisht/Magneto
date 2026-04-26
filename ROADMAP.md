@@ -1,6 +1,6 @@
 # Magneto AI Roadmap
 
-## Current Status (v0.8.0)
+## Current Status (v0.28.0)
 
 ### ✅ Completed
 
@@ -13,13 +13,21 @@
 - [x] Multi-agent orchestration with roles
 - [x] Security engine with guardrails
 - [x] Power packs system (languages, frameworks, clouds)
+- [x] Auto-detect & suggest power packs (`magneto detect`, `--auto-install`, confidence scoring) — v0.24.0
+- [x] Python Language Power Pack (14 checks, Django/FastAPI/Flask rules) — v0.24.0
+- [x] FastAPI Framework Power Pack (10 checks) — v0.25.0
+- [x] Spring Boot Framework Power Pack (12 checks) — v0.25.0
+- [x] Ollama Runner (local, zero-egress, NDJSON streaming, health check) — v0.26.0
+- [x] AWS Cloud Power Pack (16 infrastructure security checks, Terraform/CDK) — v0.27.0
+- [x] Java Language Power Pack (14 checks, modern Java 17/21) — v0.28.0
+- [x] Interactive Plan Approval Workflow (`--approve-each`, audit log, diff preview) — v0.28.0
 
 ---
 
 ## Phase 1: Developer Experience (Next 2-4 weeks)
 
 ### 1.0 AI Security Audit & Vulnerability Detection (Project Glasswing) 🚨 CRITICAL PRIORITY
-**Status**: Not Started | **Risk Level**: Enterprise/Production
+**Status**: 🚧 In Progress | **Risk Level**: Enterprise/Production
 
 Inspired by Anthropic's Project Glasswing, implement comprehensive security auditing for AI-generated code across all adapters (Claude, GitHub Copilot, Manus, OpenClaw, NVIDIA NeoClaw, etc.).
 
@@ -90,7 +98,7 @@ Magneto will leverage these battle-tested open-source security tools:
 ---
 
 ### 1.1 Interactive Plan Approval Workflow ⭐ HIGH PRIORITY
-**Status**: ✅ Completed
+**Status**: ✅ Completed (v0.28.0)
 
 Implement interactive approval steps during plan execution:
 
@@ -118,7 +126,7 @@ magneto run task.md --approve-each  # Pause for approval at each stage
 ---
 
 ### 1.2 Streaming Runner Output ⭐ HIGH PRIORITY
-**Status**: Not Started
+**Status**: ✅ Completed (Ollama runner ships NDJSON streaming; all runners support `--stream`)
 
 Real-time streaming of agent output during execution:
 

@@ -183,10 +183,13 @@ Magneto AI generates full GitHub Copilot integration out of the box:
 - **MCP config** in `.vscode/mcp.json` connecting VS Code to the local MCP server
 
 ### Multiple Execution Runners
-Three built-in runners execute tasks through different AI backends:
-- **OpenAI Runner** — calls the Chat Completions API with structured JSON output, supports streaming via `executeStreaming()`, validates API key format (`sk-*`, 20+ chars)
-- **Copilot Local Runner** — prepares structured prompts for GitHub Copilot's local agent mode, expects Copilot to use MCP tools
-- **Copilot Cloud Runner** — sends payloads to a remote Copilot Cloud API endpoint with bearer token auth
+Six built-in runners execute tasks through different AI backends:
+- **OpenAI Runner** — Chat Completions API, structured JSON output, streaming, auto-selected when `OPENAI_API_KEY` is set
+- **Copilot Local Runner** — structured prompts for GitHub Copilot's local agent mode via MCP tools
+- **Copilot Cloud Runner** — remote Copilot Cloud API endpoint with bearer token auth
+- **Cascade / Antigravity Runner** — routes through the local Windsurf/Copilot process; no direct network call
+- **Gemini Runner** — Google AI API, auto-selected when `GEMINI_API_KEY` or `GOOGLE_AI_KEY` is set
+- **Ollama Runner** — fully local, zero-egress; no API key required. Set `OLLAMA_HOST` or `MAGNETO_USE_OLLAMA` to activate. See `docs/RUNNER-OLLAMA.md`.
 
 ### Adapter System
 Adapters import external tool data into Magneto's memory. The **Graphify adapter** reads `.graphify-out/graph.json` and maps dependency graph nodes/edges into Magneto's context, with configurable priority modes (`internal-first` or `external-first`).
@@ -554,21 +557,29 @@ Exposes tools to Copilot:
 
 ---
 
-## 🌐 OpenAI Runner
+## 🌐 Runners
 
-The OpenAI runner uses the Chat Completions API with structured JSON output:
+Magneto selects a runner automatically via `detectAgentEnvironment()` — priority order: Cascade/Windsurf → Copilot → Antigravity → Gemini → OpenAI → Ollama (fallback).
 
+| Runner | How to activate | Data egress |
+|--------|----------------|-------------|
+| `openai` | Set `OPENAI_API_KEY` | OpenAI API |
+| `copilot` | Set `MAGNETO_COPILOT_CLOUD_TOKEN` | GitHub Copilot |
+| `cascade` | Auto-detected in Windsurf | Local process |
+| `gemini` | Set `GEMINI_API_KEY` | Google AI API |
+| `ollama` | Set `OLLAMA_HOST` or `MAGNETO_USE_OLLAMA` | **None — fully local** |
+
+### OpenAI Runner
 ```bash
 magneto run task.json --runner openai --mode assist
 ```
+Requires `OPENAI_API_KEY`. Builds structured system prompt, parses JSON findings/risks, saves results to `.magneto/cache/`.
 
-Requires `OPENAI_API_KEY` environment variable.
-
-The runner:
-1. Builds a system prompt from task context and security constraints
-2. Sends structured analysis request
-3. Parses JSON response with findings, risks, and confidence scores
-4. Saves results to `.magneto/cache/`
+### Ollama Runner
+```bash
+magneto run task.md --runner ollama
+```
+No API key. No data leaves your machine. Requires [Ollama](https://ollama.com) running locally. See [`docs/RUNNER-OLLAMA.md`](./docs/RUNNER-OLLAMA.md) for setup, hardware guidance, and team self-hosting.
 
 ---
 
@@ -679,7 +690,10 @@ magneto-ai/
 ## 🛣 Roadmap
 
 - [x] Interactive plan approval workflow
-- [ ] Streaming runner output
+- [x] Ollama Runner (local, zero-egress)
+- [x] Python, Java, FastAPI, Spring Boot, AWS Power Packs
+- [x] Streaming runner output (Ollama NDJSON streaming)
+- [ ] AI Security Audit & Vulnerability Detection (Project Glasswing) 🚨
 - [ ] VS Code extension with agent panel
 - [ ] Custom power pack authoring guide
 - [ ] Agent memory persistence across sessions
