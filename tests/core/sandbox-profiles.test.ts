@@ -1,5 +1,5 @@
 import { getProfile, listProfiles, resolveProfilePaths } from '../../src/core/sandbox-profiles';
-import { generateMacOsSandboxProfile, generateDockerfile } from '../../src/core/sandbox';
+import { generateMacOsSandboxProfile, generateDockerfile, generateWindowsSandboxWsb } from '../../src/core/sandbox';
 
 describe('sandbox-profiles', () => {
   it('lists all 4 profiles', () => {
@@ -102,5 +102,33 @@ describe('sandbox runtime helpers', () => {
     const resolved = resolveProfilePaths(profile, '/proj');
     const sb = generateMacOsSandboxProfile(resolved, '/proj');
     expect(sb).toContain('(deny file-write* (subpath "/etc"))');
+  });
+
+  it('generateWindowsSandboxWsb creates valid XML with strict networking disabled', () => {
+    const strict = getProfile('strict');
+    const wsb = generateWindowsSandboxWsb(strict, 'C:\\Users\\Test\\project', ['magneto', 'security', 'audit']);
+    expect(wsb).toContain('<Configuration>');
+    expect(wsb).toContain('<Networking>Disable</Networking>');
+    expect(wsb).toContain('<HostFolder>C:\\Users\\Test\\project</HostFolder>');
+    expect(wsb).toContain('<ReadOnly>true</ReadOnly>');
+    expect(wsb).toContain('magneto security audit');
+    expect(wsb).toContain('</Configuration>');
+  });
+
+  it('generateWindowsSandboxWsb enables networking for non-strict profiles', () => {
+    const dev = getProfile('dev');
+    const wsb = generateWindowsSandboxWsb(dev, 'D:\\proj', ['npm', 'test']);
+    expect(wsb).toContain('<Networking>Enable</Networking>');
+    expect(wsb).toContain('<HostFolder>D:\\proj</HostFolder>');
+    expect(wsb).toContain('<ReadOnly>false</ReadOnly>'); // can write source
+  });
+
+  it('generateWindowsSandboxWsb maps workspace to WDAG Desktop', () => {
+    const std = getProfile('standard');
+    const wsb = generateWindowsSandboxWsb(std, 'E:\\repos\\magneto', ['echo', 'hi']);
+    expect(wsb).toContain('C:\\\\Users\\\\WDAGUtilityAccount\\\\Desktop\\\\workspace');
+    expect(wsb).toContain('<MappedFolders>');
+    expect(wsb).toContain('</MappedFolders>');
+    expect(wsb).toContain('cmd.exe /c');
   });
 });

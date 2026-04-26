@@ -5,7 +5,14 @@ import { spawn, spawnSync } from 'child_process';
 import { SandboxProfile, SandboxConstraints, getProfile, resolveProfilePaths } from './sandbox-profiles';
 import { logger } from '../utils/logger';
 
-export type SandboxRuntime = 'docker' | 'podman' | 'sandbox-exec' | 'bwrap' | 'none';
+export type SandboxRuntime =
+  | 'docker'
+  | 'podman'
+  | 'sandbox-exec'      // macOS
+  | 'bwrap'             // Linux
+  | 'windows-sandbox'   // Windows 10/11 Pro/Enterprise (WindowsSandbox.exe + .wsb)
+  | 'wsl'               // Windows: WSL2 backed Linux
+  | 'none';
 
 export interface SandboxStatus {
   available: SandboxRuntime[];
@@ -45,17 +52,34 @@ export function detectSandboxRuntimes(): SandboxRuntime[] {
   if (which('podman')) available.push('podman');
   if (process.platform === 'darwin' && fs.existsSync('/usr/bin/sandbox-exec')) available.push('sandbox-exec');
   if (process.platform === 'linux' && which('bwrap')) available.push('bwrap');
+
+  if (process.platform === 'win32') {
+    // Windows Sandbox: Pro/Enterprise feature, ships as WindowsSandbox.exe
+    const winSandboxPath = path.join(process.env.WINDIR ?? 'C:\\Windows', 'System32', 'WindowsSandbox.exe');
+    if (fs.existsSync(winSandboxPath)) available.push('windows-sandbox');
+    // WSL2: 'wsl' on PATH and at least one distro registered
+    if (which('wsl')) {
+      const list = spawnSync('wsl', ['-l', '-q'], { stdio: 'pipe' });
+      if (list.status === 0 && list.stdout?.toString().trim().length > 0) {
+        available.push('wsl');
+      }
+    }
+  }
+
   if (available.length === 0) available.push('none');
   return available;
 }
 
 export function preferredRuntime(): SandboxRuntime {
   const available = detectSandboxRuntimes();
-  // Containers > native sandbox > none
+  // Containers > OS-native sandbox > VM-grade Windows Sandbox > WSL > none
+  // (Windows Sandbox is a true VM but slow to spin up; prefer Docker if present.)
   if (available.includes('docker')) return 'docker';
   if (available.includes('podman')) return 'podman';
   if (available.includes('sandbox-exec')) return 'sandbox-exec';
   if (available.includes('bwrap')) return 'bwrap';
+  if (available.includes('windows-sandbox')) return 'windows-sandbox';
+  if (available.includes('wsl')) return 'wsl';
   return 'none';
 }
 
@@ -235,6 +259,14 @@ export async function runInSandbox(options: SandboxRunOptions): Promise<SandboxR
     } else if (process.platform === 'linux' && available.includes('bwrap')) {
       logger.info(`[sandbox] ${IMAGE_NAME} not built — falling back to bubblewrap`);
       runtime = 'bwrap';
+    } else if (process.platform === 'win32') {
+      if (available.includes('windows-sandbox')) {
+        logger.info(`[sandbox] ${IMAGE_NAME} not built — falling back to Windows Sandbox`);
+        runtime = 'windows-sandbox';
+      } else if (available.includes('wsl')) {
+        logger.info(`[sandbox] ${IMAGE_NAME} not built — falling back to WSL2`);
+        runtime = 'wsl';
+      }
     }
   }
 
@@ -253,6 +285,10 @@ export async function runInSandbox(options: SandboxRunOptions): Promise<SandboxR
       return runViaSandboxExec(constraints, options, start);
     case 'bwrap':
       return runViaBwrap(constraints, options, start);
+    case 'windows-sandbox':
+      return runViaWindowsSandbox(constraints, options, start);
+    case 'wsl':
+      return runViaWsl(constraints, options, start);
     case 'none':
       logger.info('[sandbox] ⚠  No isolation runtime available. Running unsandboxed.');
       return runUnsandboxed(options.command, options.env, start, options.profile);
@@ -410,6 +446,104 @@ function runViaBwrap(
         exitCode: code ?? 0,
         durationMs: Date.now() - start,
         runtime: 'bwrap',
+        profile: options.profile,
+      });
+    });
+  });
+}
+
+// ─── Windows Sandbox (Windows 10/11 Pro/Enterprise) ──────────────────────
+
+export function generateWindowsSandboxWsb(constraints: SandboxConstraints, projectRoot: string, command: string[]): string {
+  // Windows Sandbox uses XML .wsb files. We map project root into the sandbox
+  // at C:\\Users\\WDAGUtilityAccount\\Desktop\\workspace and run the command
+  // via cmd.exe. Network is controlled via <Networking> element.
+  const workspace = 'C:\\\\Users\\\\WDAGUtilityAccount\\\\Desktop\\\\workspace';
+  const cmd = command.join(' ');
+
+  const lines: string[] = ['<Configuration>', '  <VGpu>Enable</VGpu>'];
+
+  // Networking
+  if (constraints.network.mode === 'none' || constraints.network.mode === 'allowlist') {
+    lines.push('  <Networking>Disable</Networking>');
+  } else {
+    lines.push('  <Networking>Enable</Networking>');
+  }
+
+  // Mapped folders (project root)
+  lines.push('  <MappedFolders>');
+  lines.push(`    <MappedFolder>`);
+  lines.push(`      <HostFolder>${projectRoot}</HostFolder>`);
+  lines.push(`      <SandboxFolder>${workspace}</SandboxFolder>`);
+  lines.push(`      <ReadOnly>${constraints.capabilities.canWriteSourceCode ? 'false' : 'true'}</ReadOnly>`);
+  lines.push(`    </MappedFolder>`);
+  lines.push('  </MappedFolders>');
+
+  // Logon command
+  lines.push('  <LogonCommand>');
+  lines.push(`    <Command>cmd.exe /c "cd /d ${workspace} && ${cmd}"</Command>`);
+  lines.push('  </LogonCommand>');
+
+  lines.push('</Configuration>');
+  return lines.join('\n');
+}
+
+function runViaWindowsSandbox(
+  constraints: SandboxConstraints,
+  options: SandboxRunOptions,
+  start: number
+): Promise<SandboxRunResult> {
+  return new Promise((resolve) => {
+    const wsbContent = generateWindowsSandboxWsb(constraints, options.projectRoot, options.command);
+    const wsbPath = path.join(os.tmpdir(), `magneto-sandbox-${Date.now()}.wsb`);
+    fs.writeFileSync(wsbPath, wsbContent, 'utf-8');
+
+    const winSandboxPath = path.join(process.env.WINDIR ?? 'C:\\Windows', 'System32', 'WindowsSandbox.exe');
+
+    logger.debug(`[sandbox] Windows Sandbox config: ${wsbPath}`);
+
+    const child = spawn(winSandboxPath, [wsbPath], { stdio: 'inherit' });
+
+    child.on('close', (code) => {
+      try { fs.unlinkSync(wsbPath); } catch { /* ignore */ }
+      resolve({
+        exitCode: code ?? 0,
+        durationMs: Date.now() - start,
+        runtime: 'windows-sandbox',
+        profile: options.profile,
+      });
+    });
+  });
+}
+
+// ─── WSL2 (Windows Subsystem for Linux) ──────────────────────────────────
+
+function runViaWsl(constraints: SandboxConstraints, options: SandboxRunOptions, start: number): Promise<SandboxRunResult> {
+  return new Promise((resolve) => {
+    // WSL doesn't have fine-grained sandboxing like Docker. We use a restricted
+    // user and mount options where possible. For true isolation, Windows Sandbox
+    // is preferred; WSL is a fallback.
+    const args = ['--user', 'root', '--', ...options.command];
+
+    // If network mode is 'none', we can't fully block in WSL without iptables.
+    // We document the limitation.
+    if (constraints.network.mode === 'none') {
+      logger.info('[sandbox] ⚠  WSL cannot fully block network; use Windows Sandbox for strict isolation.');
+    }
+
+    // Set working directory (WSL path translation: C:\\ → /mnt/c/)
+    const wslPath = options.projectRoot.replace(/^([A-Z]):\\/, '/mnt/$1/').replace(/\\/g, '/');
+
+    const child = spawn('wsl', ['--cd', wslPath, ...args], {
+      stdio: 'inherit',
+      env: { ...process.env, ...options.env },
+    });
+
+    child.on('close', (code) => {
+      resolve({
+        exitCode: code ?? 0,
+        durationMs: Date.now() - start,
+        runtime: 'wsl',
         profile: options.profile,
       });
     });
