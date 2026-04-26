@@ -269,6 +269,65 @@ export function myFunction(paramName: string): string {
 
 ---
 
+## Spec-Driven Development (SDD)
+
+Magneto ships pluggable support for three SDD frameworks. Pick one on `magneto init`
+or run `magneto sdd init` later.
+
+| Framework | Best for | Layout |
+|---|---|---|
+| **OpenSpec** *(default)* | Brownfield / existing code | `openspec/{project.md,specs,changes/<name>/{proposal,design,tasks}.md}` |
+| **Spec Kit** | Greenfield / new projects | `.specify/constitution.md` + `specs/<slug>/{spec,plan,tasks}.md` |
+| **BMAD-METHOD** | Regulated / SOC2 audit trails | `bmad-core/agents/*.md` + `docs/{prd,architecture,stories,qa}/` |
+
+Recommended workflow:
+
+```bash
+magneto sdd init                              # interactive prompt
+magneto sdd new add-dark-mode "Toggle theme"  # scaffold a change
+# ...implement task by task...
+magneto sdd sync                              # reconcile spec ↔ code drift before merge
+```
+
+`magneto sdd sync` is the single most important command. It exits non-zero when drift
+is detected — wire it into CI alongside `magneto security audit`.
+
+**Constitution rules** must follow the WHY → WHAT → HOW pattern. Single-line
+prohibitions ("don't do X") are routinely ignored by LLMs (see EPAM Spec Kit
+brownfield case study). The default constitution Magneto generates already follows
+this pattern; preserve it when adding project-specific rules.
+
+References:
+- [Spec Kit vs BMAD vs OpenSpec — dev.to/willtorber](https://dev.to/willtorber/spec-kit-vs-bmad-vs-openspec-choosing-an-sdd-framework-in-2026-d3j)
+- [OpenSpec docs](https://openspec.dev)
+- [BMAD-METHOD docs](https://docs.bmad-method.org)
+- [GitHub Spec Kit](https://github.com/github/spec-kit)
+- arXiv 2602.00180v1 — Spec-Driven Development: From Code to Contract
+
+---
+
+## Skill & MCP scanning (Snyk Agent Scan)
+
+Before committing changes that touch `src/templates/power-packs/adapters/*/skills/`,
+or any MCP server configuration, run:
+
+```bash
+pip3 install --user snyk-agent-scan
+export SNYK_TOKEN=<your token from app.snyk.io/account>
+
+# Scan installed skills
+snyk-agent-scan --skills src/templates/power-packs/adapters/claude/skills
+snyk-agent-scan --skills src/templates/power-packs/adapters/antigravity/skills
+
+# Scan MCP server configurations
+snyk-agent-scan
+```
+
+This catches "ToxicSkills" — malicious AI agent skills that exfiltrate data or
+hijack tool calls. See https://snyk.io/blog/toxicskills-malicious-ai-agent-skills-clawhub/
+
+---
+
 ## Code of Conduct
 
 - Be respectful and constructive

@@ -8,6 +8,8 @@ import { scaffold } from '../core/scaffold';
 import { loadPowerPacks } from '../core/power-pack-loader';
 import { loadAdapters } from '../core/adapter-loader';
 import { detectPacksDetailed, DetectedPack } from '../core/detect-packs';
+import { sddInitCommand } from './sdd';
+import { detectFrameworks } from '../core/sdd/detector';
 
 export interface InitOptions {
   with?: string[];
@@ -17,6 +19,10 @@ export interface InitOptions {
   suggest?: boolean;
   /** Auto-install all detected packs without prompting (CI mode) */
   autoInstall?: boolean;
+  /** SDD framework to scaffold: openspec | speckit | bmad | none. */
+  sdd?: string;
+  /** Skip the SDD prompt entirely. */
+  noSdd?: boolean;
 }
 
 export async function initCommand(options: InitOptions): Promise<void> {
@@ -80,6 +86,19 @@ export async function initCommand(options: InitOptions): Promise<void> {
       await loadAdapters(projectRoot, adapter);
     }
     logger.success('Adapters loaded');
+  }
+
+  // SDD framework selection — only when nothing is scaffolded yet and the user
+  // didn't explicitly opt out via --no-sdd.
+  if (!options.noSdd && detectFrameworks(projectRoot).length === 0) {
+    if (options.sdd && options.sdd !== 'none') {
+      await sddInitCommand({ framework: options.sdd, force: options.force });
+    } else if (options.autoInstall) {
+      // CI mode → auto-pick recommended framework, no prompt.
+      await sddInitCommand({ yes: true, force: options.force });
+    } else if (process.stdin.isTTY && options.sdd !== 'none') {
+      await sddInitCommand({ force: options.force });
+    }
   }
 
   logger.success('Magneto AI initialized successfully!');

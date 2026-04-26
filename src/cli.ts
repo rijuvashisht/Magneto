@@ -43,6 +43,12 @@ import {
   sandboxShellCommand,
   sandboxDoctorCommand,
 } from './commands/sandbox';
+import {
+  sddInitCommand,
+  sddNewCommand,
+  sddStatusCommand,
+  sddSyncCommand,
+} from './commands/sdd';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../package.json') as { version: string };
@@ -91,6 +97,8 @@ program
   .description('Initialize Magneto AI in the current project. Scaffolds .magneto/, .github/agents/, and .vscode/mcp.json.')
   .option('--with <packs...>', 'Include power packs (typescript, python, java, nextjs, fastapi, spring-boot, aws, ai-platform, azure)')
   .option('--adapter <adapters...>', 'Include adapters (graphify)')
+  .option('--sdd <framework>', 'SDD framework to scaffold: openspec, speckit, bmad, none')
+  .option('--no-sdd', 'Skip the SDD framework prompt entirely')
   .option('--force', 'Overwrite existing configuration', false)
   .option('--no-suggest', 'Skip auto-detection prompt for matching power packs')
   .option('--auto-install', 'Auto-install all detected power packs without prompting (CI mode)', false)
@@ -901,5 +909,60 @@ sandbox
   .command('doctor')
   .description('Validate sandbox setup — runtime availability, image build, profile resolution.')
   .action(async () => { await sandboxDoctorCommand(); });
+
+// ── Spec-Driven Development (SDD) ──────────────────────────────────
+const sdd = program
+  .command('sdd')
+  .description('Spec-Driven Development. Scaffold and reconcile specs using OpenSpec, Spec Kit, or BMAD-METHOD.');
+
+sdd
+  .command('init')
+  .description('Initialize an SDD framework in this project. Prompts to choose between OpenSpec, Spec Kit, or BMAD.')
+  .option('--framework <name>', 'Framework: openspec, speckit, bmad (skips prompt)')
+  .option('--force', 'Overwrite existing scaffolding', false)
+  .option('--dry-run', 'Show what would be created without writing', false)
+  .option('-y, --yes', 'Auto-select the recommended framework (no prompt)', false)
+  .addHelpText('after', `
+Examples:
+  $ magneto sdd init                         # interactive prompt (recommended)
+  $ magneto sdd init --framework openspec    # brownfield projects
+  $ magneto sdd init --framework speckit     # greenfield projects
+  $ magneto sdd init --framework bmad        # regulated / SOC2 audit trails
+  $ magneto sdd init --yes                   # CI: pick the auto-recommended one
+
+Recommendation logic:
+  - existing project (src/, tests/, deps≥5)  → OpenSpec
+  - empty repo                               → Spec Kit
+  - in doubt                                 → OpenSpec
+`)
+  .action(async (options) => { await sddInitCommand(options); });
+
+sdd
+  .command('new <name> <description>')
+  .description('Scaffold a new spec/change/feature using the active SDD framework.')
+  .option('--dry-run', 'Show what would be created without writing', false)
+  .addHelpText('after', `
+Example:
+  $ magneto sdd new add-dark-mode "Add a dark theme toggle to settings"
+`)
+  .action(async (name, description, options) => { await sddNewCommand(name, description, options); });
+
+sdd
+  .command('status')
+  .description('Show which SDD framework is active, the constitution path, and active changes.')
+  .action(async () => { await sddStatusCommand(); });
+
+sdd
+  .command('sync')
+  .description('Reconcile spec ↔ code drift. Reports stale specs, undocumented code, and broken file references.')
+  .option('--dry-run', 'Report drift without writing the report file', false)
+  .addHelpText('after', `
+Example:
+  $ magneto sdd sync                # write .magneto/sdd-drift.md
+  $ magneto sdd sync --dry-run      # report only
+
+Exit code is 1 when drift is detected — wire this into CI.
+`)
+  .action(async (options) => { await sddSyncCommand(options); });
 
 program.parse(process.argv);
