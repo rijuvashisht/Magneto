@@ -29,6 +29,7 @@ const PACK_CATEGORY_MAP: Record<string, string> = {
   react: 'frameworks/react',
   'ai-platform': 'project-types/ai-platform',
   azure: 'clouds/azure',
+  aws: 'clouds/aws',
 };
 
 export async function loadPowerPacks(projectRoot: string, packName: string): Promise<void> {

@@ -1,0 +1,132 @@
+{
+  "name": "aws",
+  "category": "clouds",
+  "version": "1.0.0",
+  "description": "AWS cloud power pack — IAM least-privilege, S3 exposure, Terraform/CDK correctness, network security, and cost guardrails",
+  "rules": [
+    "IAM policies must be least-privilege — no Action:* with Resource:*",
+    "S3 buckets never public by default; enable Block Public Access at account + bucket",
+    "All S3 buckets must have SSE-KMS or SSE-S3 encryption enabled",
+    "RDS/EBS volumes encrypted at rest; snapshots must inherit encryption",
+    "Security Groups must not allow 0.0.0.0/0 on SSH (22), RDP (3389), or DB ports",
+    "Lambda functions must have explicit timeout, memory, and log retention",
+    "CloudTrail enabled in all regions with log file validation",
+    "Use parameter store / Secrets Manager — never hardcode credentials",
+    "Terraform state must be remote (S3 + DynamoDB lock) with encryption",
+    "Use resource tags for cost allocation (Environment, Owner, CostCenter)"
+  ],
+  "checks": [
+    {
+      "id": "aws-iam-wildcard-action-resource",
+      "description": "IAM policy with Action: '*' AND Resource: '*' grants unbounded access",
+      "severity": "error",
+      "pattern": "\"Action\"\\s*:\\s*\"\\*\"[\\s\\S]{0,200}?\"Resource\"\\s*:\\s*\"\\*\"",
+      "scope": ["**/*.json", "**/*.tf", "**/*.yaml", "**/*.yml"]
+    },
+    {
+      "id": "aws-iam-admin-access",
+      "description": "AdministratorAccess managed policy attached — use scoped policy",
+      "severity": "warning",
+      "pattern": "arn:aws:iam::aws:policy/AdministratorAccess",
+      "scope": ["**/*.json", "**/*.tf", "**/*.yaml", "**/*.yml"]
+    },
+    {
+      "id": "aws-s3-public-acl",
+      "description": "S3 bucket ACL set to public-read or public-read-write",
+      "severity": "error",
+      "pattern": "(acl\\s*[:=]\\s*[\"']?public-read(-write)?|PublicRead(Write)?)",
+      "scope": ["**/*.tf", "**/*.yaml", "**/*.yml", "**/*.json", "**/*.ts", "**/*.py"]
+    },
+    {
+      "id": "aws-s3-no-block-public-access",
+      "description": "S3 bucket without aws_s3_bucket_public_access_block — risk of accidental public exposure",
+      "severity": "warning",
+      "pattern": "resource\\s+\"aws_s3_bucket\"\\s+\"[^\"]+\"\\s*\\{(?![\\s\\S]*?aws_s3_bucket_public_access_block)",
+      "scope": ["**/*.tf"]
+    },
+    {
+      "id": "aws-sg-wide-open-ssh",
+      "description": "Security Group ingress 0.0.0.0/0 on port 22 (SSH) — attack surface",
+      "severity": "error",
+      "pattern": "(from_port\\s*[:=]\\s*22|FromPort\\s*[:=]\\s*22)[\\s\\S]{0,200}?(0\\.0\\.0\\.0/0|\"::/0\")",
+      "scope": ["**/*.tf", "**/*.yaml", "**/*.yml", "**/*.json"]
+    },
+    {
+      "id": "aws-sg-wide-open-rdp",
+      "description": "Security Group ingress 0.0.0.0/0 on port 3389 (RDP) — attack surface",
+      "severity": "error",
+      "pattern": "(from_port\\s*[:=]\\s*3389|FromPort\\s*[:=]\\s*3389)[\\s\\S]{0,200}?0\\.0\\.0\\.0/0",
+      "scope": ["**/*.tf", "**/*.yaml", "**/*.yml", "**/*.json"]
+    },
+    {
+      "id": "aws-sg-wide-open-db",
+      "description": "Security Group ingress 0.0.0.0/0 on DB ports (3306/5432/1433/27017/6379)",
+      "severity": "error",
+      "pattern": "(from_port\\s*[:=]\\s*(3306|5432|1433|27017|6379)|FromPort\\s*[:=]\\s*(3306|5432|1433|27017|6379))[\\s\\S]{0,200}?0\\.0\\.0\\.0/0",
+      "scope": ["**/*.tf", "**/*.yaml", "**/*.yml", "**/*.json"]
+    },
+    {
+      "id": "aws-rds-unencrypted",
+      "description": "RDS instance without storage_encrypted = true",
+      "severity": "error",
+      "pattern": "resource\\s+\"aws_db_instance\"\\s+\"[^\"]+\"\\s*\\{(?![\\s\\S]*?storage_encrypted\\s*=\\s*true)",
+      "scope": ["**/*.tf"]
+    },
+    {
+      "id": "aws-ebs-unencrypted",
+      "description": "EBS volume without encrypted = true",
+      "severity": "error",
+      "pattern": "resource\\s+\"aws_ebs_volume\"\\s+\"[^\"]+\"\\s*\\{(?![\\s\\S]*?encrypted\\s*=\\s*true)",
+      "scope": ["**/*.tf"]
+    },
+    {
+      "id": "aws-hardcoded-access-key",
+      "description": "Hardcoded AWS access key ID (AKIA...)",
+      "severity": "error",
+      "pattern": "AKIA[0-9A-Z]{16}",
+      "scope": ["**/*"]
+    },
+    {
+      "id": "aws-hardcoded-secret-key",
+      "description": "Hardcoded AWS secret access key (40-char base64-like)",
+      "severity": "error",
+      "pattern": "aws_secret_access_key\\s*[:=]\\s*[\"'][A-Za-z0-9/+=]{40}[\"']",
+      "scope": ["**/*"]
+    },
+    {
+      "id": "aws-lambda-no-timeout",
+      "description": "Lambda function without explicit timeout — defaults to 3s, may truncate work",
+      "severity": "info",
+      "pattern": "resource\\s+\"aws_lambda_function\"\\s+\"[^\"]+\"\\s*\\{(?![\\s\\S]*?timeout\\s*=)",
+      "scope": ["**/*.tf"]
+    },
+    {
+      "id": "aws-lambda-no-log-retention",
+      "description": "Lambda without aws_cloudwatch_log_group retention policy — logs kept forever (cost + compliance)",
+      "severity": "warning",
+      "pattern": "resource\\s+\"aws_lambda_function\"\\s+\"([^\"]+)\"",
+      "scope": ["**/*.tf"]
+    },
+    {
+      "id": "aws-cloudtrail-missing",
+      "description": "Verify CloudTrail is configured across all regions with log file validation",
+      "severity": "info",
+      "pattern": "resource\\s+\"aws_cloudtrail\"",
+      "scope": ["**/*.tf"]
+    },
+    {
+      "id": "aws-tf-local-state",
+      "description": "Terraform state stored locally — use S3 backend + DynamoDB lock",
+      "severity": "warning",
+      "pattern": "backend\\s+\"local\"",
+      "scope": ["**/*.tf"]
+    },
+    {
+      "id": "aws-sg-egress-wide-open",
+      "description": "Security Group egress 0.0.0.0/0 to all protocols — restrict when possible",
+      "severity": "info",
+      "pattern": "egress[\\s\\S]{0,200}?cidr_blocks\\s*=\\s*\\[\\s*\"0\\.0\\.0\\.0/0\"",
+      "scope": ["**/*.tf"]
+    }
+  ]
+}

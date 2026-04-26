@@ -393,6 +393,7 @@ Power Packs add domain-specific intelligence to Magneto AI.
 | **FastAPI** | Framework | Pydantic validation, async correctness, CORS/auth security, lifespan hygiene |
 | **Spring Boot** | Framework | Spring Security review, JPA N+1 detection, transaction boundaries, actuator hardening |
 | **AI Platform** | Project Type | Prompt injection detection, RAG pipeline validation, token limits |
+| **AWS** | Cloud | IAM least-privilege, S3 public-exposure, SG wide-open ports, encryption at rest, Terraform/CDK practices |
 | **Azure** | Cloud | Infrastructure reasoning, RBAC validation, networking checks |
 
 ### Using Packs
