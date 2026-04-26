@@ -1,6 +1,9 @@
+import * as fs from 'fs';
 import * as path from 'path';
 import { runSecurityAudit, renderText, renderMarkdown, renderJson, saveReport, AuditOptions } from '../core/security-audit';
 import { runDependencyScanner, renderDependencyScanText } from '../core/dependency-scanner';
+import { evaluateCompliance, renderComplianceText, renderComplianceMarkdown, ComplianceFramework, getAvailableFrameworks } from '../core/compliance-engine';
+import { runAutoFix, getFixableRuleIds } from '../core/security-fixer';
 import { logger } from '../utils/logger';
 import { FindingSeverity } from '../core/vulnerability-scanner';
 
@@ -103,6 +106,88 @@ export async function securityScanCommand(options: { format?: string; output?: s
     process.exitCode = 1;
   } else {
     logger.info('[glasswing] ✅ No critical/high dependency vulnerabilities');
+  }
+}
+
+export async function securityFixCommand(options: { dryRun?: boolean; format?: string } = {}): Promise<void> {
+  const rootDir = process.cwd();
+  const report = await runSecurityAudit({ rootDir, severity: 'info' });
+
+  if (report.findings.length === 0) {
+    logger.info('[glasswing] ✅ No findings — nothing to fix');
+    return;
+  }
+
+  const fixable = getFixableRuleIds();
+  const fixableFindings = report.findings.filter((f) => fixable.includes(f.id));
+  const unfixable = report.findings.filter((f) => !fixable.includes(f.id));
+
+  logger.info(`[glasswing] ${fixableFindings.length} auto-fixable · ${unfixable.length} require manual remediation`);
+  if (options.dryRun) logger.info('[glasswing] Dry-run mode — no files will be written');
+
+  const fixReport = await runAutoFix(rootDir, fixableFindings, { dryRun: options.dryRun ?? false });
+
+  logger.info(`[glasswing] Applied: ${fixReport.applied} · Skipped: ${fixReport.skipped}`);
+
+  for (const r of fixReport.results) {
+    if (r.applied && r.diff) {
+      logger.info(`  ✓ ${r.ruleId} — ${r.file}:${r.line}`);
+    } else if (!r.applied) {
+      logger.info(`  ⊘ ${r.ruleId} — ${r.file}:${r.line} (manual fix needed)`);
+    }
+  }
+
+  if (unfixable.length > 0) {
+    logger.info('');
+    logger.info('[glasswing] Findings requiring manual remediation:');
+    for (const f of unfixable) {
+      logger.info(`  ✗ ${f.id} — ${f.file}:${f.line} — ${f.remediation ?? 'see docs'}`);
+    }
+  }
+}
+
+export async function securityComplianceCommand(
+  frameworks: string[],
+  options: { format?: string; output?: string } = {}
+): Promise<void> {
+  const rootDir = process.cwd();
+  const available = getAvailableFrameworks();
+  const selected = (frameworks.length > 0 ? frameworks : available) as ComplianceFramework[];
+  const invalid = selected.filter((f) => !available.includes(f as ComplianceFramework));
+  if (invalid.length > 0) {
+    logger.info(`[glasswing] Unknown frameworks: ${invalid.join(', ')}. Available: ${available.join(', ')}`);
+    process.exitCode = 1;
+    return;
+  }
+
+  const [auditReport, depResult] = await Promise.all([
+    runSecurityAudit({ rootDir, severity: 'info' }),
+    runDependencyScanner(rootDir),
+  ]);
+
+  const complianceReport = evaluateCompliance(selected, auditReport.findings, depResult.vulnerabilities);
+
+  const format = options.format ?? 'text';
+  if (format === 'json') {
+    console.log(JSON.stringify(complianceReport, null, 2));
+  } else if (format === 'markdown') {
+    const md = renderComplianceMarkdown(complianceReport);
+    if (options.output) {
+      fs.mkdirSync(path.dirname(options.output), { recursive: true });
+      fs.writeFileSync(options.output, md, 'utf-8');
+      logger.info(`[glasswing] Compliance report saved → ${options.output}`);
+    } else {
+      console.log(md);
+    }
+  } else {
+    console.log(renderComplianceText(complianceReport));
+  }
+
+  if (!complianceReport.passed) {
+    logger.info(`[glasswing] ✗ Compliance FAILED — ${complianceReport.controls.failed} blocking control(s) violated`);
+    process.exitCode = 1;
+  } else {
+    logger.info('[glasswing] ✅ Compliance PASSED');
   }
 }
 

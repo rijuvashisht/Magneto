@@ -31,6 +31,8 @@ import {
   securityAuditCommand,
   securityReportCommand,
   securityScanCommand,
+  securityFixCommand,
+  securityComplianceCommand,
   securityCheckCommand,
 } from './commands/security';
 
@@ -753,6 +755,34 @@ Examples:
 `)
   .action(async (options) => {
     await securityScanCommand(options);
+  });
+
+security
+  .command('fix')
+  .description('Auto-remediate fixable findings in-place. Safe patterns only — MD5→SHA256, hardcoded secrets→env refs, debug flags.')
+  .option('--dry-run', 'Preview changes without writing files', false)
+  .addHelpText('after', `
+Examples:
+  $ magneto security fix --dry-run   # preview what would change
+  $ magneto security fix             # apply fixes
+`)
+  .action(async (options) => {
+    await securityFixCommand(options);
+  });
+
+security
+  .command('compliance [frameworks...]')
+  .description('Evaluate codebase against compliance frameworks: SOC2, HIPAA, GDPR, PCI-DSS. Runs audit + dep scan, maps findings to controls.')
+  .option('--format <format>', 'Output format: text, json, markdown', 'text')
+  .option('--output <file>', 'Write report to file')
+  .addHelpText('after', `
+Examples:
+  $ magneto security compliance                   # all frameworks
+  $ magneto security compliance SOC2 HIPAA        # specific frameworks
+  $ magneto security compliance GDPR --format markdown --output compliance.md
+`)
+  .action(async (frameworks, options) => {
+    await securityComplianceCommand(frameworks, options);
   });
 
 security
