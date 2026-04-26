@@ -568,6 +568,50 @@ memory
     await memoryStatsCommand();
   });
 
+// ─── Zero-Trust Memory Lock ──────────────────────────────────────────
+import {
+  memoryLockCommand,
+  memoryUnlockCommand,
+  memoryVerifyCommand,
+  memoryStatusCommand,
+} from './commands/memory-lock';
+
+memory
+  .command('lock')
+  .description('Lock memory in zero-trust mode. Hashes every file (SHA-256), HMAC-signs the manifest, and sets files read-only. While locked, no writes permitted; runtime writes always denied regardless of lock state.')
+  .option('--require-root', 'Require root (uid 0) to unlock', false)
+  .option('--no-owner', 'Do not require the locking user to unlock', false)
+  .addHelpText('after', `
+Examples:
+  $ magneto memory lock                    # owner-only unlock (default)
+  $ magneto memory lock --require-root     # only root can unlock
+`)
+  .action(async (options) => {
+    await memoryLockCommand(options);
+  });
+
+memory
+  .command('unlock')
+  .description('Unlock memory for offline editing. Verifies HMAC signature and every file hash; rejects if tampered. Cannot unlock while a task is running.')
+  .option('--force', 'Skip hash verification (DANGEROUS, audit log will record this)', false)
+  .action(async (options) => {
+    await memoryUnlockCommand(options);
+  });
+
+memory
+  .command('verify')
+  .description('Verify memory integrity without unlocking. Checks signature, file hashes, and detects injected files not in the manifest.')
+  .action(async () => {
+    await memoryVerifyCommand();
+  });
+
+memory
+  .command('status')
+  .description('Show current lock state, runtime gate status, and unlock policy.')
+  .action(async () => {
+    await memoryStatusCommand();
+  });
+
 // Checkpoint commands
 import {
   checkpointListCommand,
