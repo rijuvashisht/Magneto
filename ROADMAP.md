@@ -1,9 +1,10 @@
 # Magneto AI Roadmap
 
-## Current Status (v0.28.0)
+## Current Status (v0.28.x)
 
 ### ✅ Completed
 
+#### Core platform
 - [x] Core CLI commands: init, plan, run, merge, analyze, query, path
 - [x] Telepathy: automatic task discovery and execution
 - [x] Adapter system: Claude, Antigravity, Manus, OpenClaw, Graphify
@@ -22,12 +23,45 @@
 - [x] Java Language Power Pack (14 checks, modern Java 17/21) — v0.28.0
 - [x] Interactive Plan Approval Workflow (`--approve-each`, audit log, diff preview) — v0.28.0
 
+#### Project Glasswing (security audit) — **shipped**
+- [x] SAST engine (`magneto security audit`) with vulnerability scanner across 10+ languages
+- [x] Secrets scanning + entropy heuristics
+- [x] OSV.dev dependency vulnerability scanner (recursive manifest discovery, package-lock parsing, transitive deps)
+- [x] Grouped CVE output with semver-aware fix version selection
+- [x] Auto-fixer: `magneto security fix [--code] [--deps] [--dry-run]`
+- [x] Compliance engine: SOC2 / HIPAA / GDPR / PCI-DSS evaluation (`magneto security compliance`)
+- [x] Pre-execution security gate: `magneto security check <task>`
+
+#### Sandbox & isolation — **shipped**
+- [x] Multi-runtime detection: Docker, Podman, macOS `sandbox-exec`, Linux `bwrap`
+- [x] **Windows Sandbox** (`.wsb` XML config + `WindowsSandbox.exe`)
+- [x] **WSL2** runtime with DNS-leak hardening (`--resolv-conf`, `network.generateResolvconf=false`)
+- [x] Profiles: strict / standard / dev / off with FS, network, process constraints
+- [x] Auto-fallback (e.g. Docker image missing → native sandbox)
+- [x] CLI: `magneto sandbox status|init|build|run|shell|doctor`
+
+#### Zero-trust memory lock — **shipped**
+- [x] HMAC-SHA256 manifest signing with machine-bound key (`~/.magneto-key + hostname + uid`)
+- [x] SHA-256 per-file integrity hashes
+- [x] Runtime active-task gating (`assertMemoryWritable`)
+- [x] Owner / `--require-root` unlock policies
+- [x] Offline-only mutation (refuses unlock when network is up unless `--allow-online`)
+- [x] CLI: `magneto memory lock|unlock|verify|status`
+
+#### Spec-Driven Development — **shipped**
+- [x] Pluggable framework registry: OpenSpec (default), Spec Kit, BMAD-METHOD
+- [x] Auto-detect existing scaffolding; heuristic recommender (brownfield ⇒ OpenSpec, greenfield ⇒ Spec Kit)
+- [x] Shared constitution template enforcing WHY → WHAT → HOW rule format
+- [x] Static spec ↔ code drift reconciler (3 drift kinds, no LLM call)
+- [x] CLI: `magneto sdd init|new|status|sync` and `--sdd <fw>` on `magneto init`
+- [x] Snyk Agent Scan documentation for ToxicSkills detection on installed skills
+
 ---
 
 ## Phase 1: Developer Experience (Next 2-4 weeks)
 
-### 1.0 AI Security Audit & Vulnerability Detection (Project Glasswing) 🚨 CRITICAL PRIORITY
-**Status**: 🚧 In Progress | **Risk Level**: Enterprise/Production
+### 1.0 AI Security Audit & Vulnerability Detection (Project Glasswing) ✅ SHIPPED
+**Status**: ✅ Shipped (v0.28.x) | **Risk Level**: Enterprise/Production
 
 Inspired by Anthropic's Project Glasswing, implement comprehensive security auditing for AI-generated code across all adapters (Claude, GitHub Copilot, Manus, OpenClaw, NVIDIA NeoClaw, etc.).
 
@@ -330,20 +364,23 @@ magneto audit export           # Export for compliance
 ## Prioritization
 
 ### Must Have (Next Sprint)
-1. Interactive plan approval workflow
-2. Streaming runner output
-3. Agent memory persistence
+1. **Living-spec mode** — bidirectional spec ↔ code updates during agent runs (closes the drift loop the static reconciler can only flag)
+2. **VS Code extension MVP** — agent panel + inline approvals + drift indicator gutter
+3. **GitHub Actions integration** — preset workflows for `magneto security audit`, `magneto sdd sync`, `magneto memory verify`
+4. **`snyk-agent-scan` automation** — wrap behind `magneto security skills-scan` so users don't need to manage SNYK_TOKEN manually
 
 ### Should Have (Next Month)
-4. Jira/GitHub adapters
-5. VS Code extension MVP
-6. GitHub Actions integration
+5. Custom power pack authoring guide + cookiecutter
+6. Multi-repo orchestration (mono-repo + sibling-repo task dispatch)
+7. Cost tracking and budget limits per runner
+8. Sandbox: gVisor runtime + rootless Podman recipes
+9. Memory lock: HSM / TPM-backed key option (replace `~/.magneto-key`)
 
 ### Nice to Have (Future)
-7. Plugin marketplace
-8. Multi-repo orchestration
-9. Cost tracking
-10. Audit logging
+10. Plugin marketplace
+11. Audit logging connectors (Splunk, Datadog, OpenTelemetry)
+12. SDD: import existing PRDs / Confluence / Notion into OpenSpec deltas
+13. Sandbox: Apple's new `sandboxd` v2 rules (macOS 27+)
 
 ---
 

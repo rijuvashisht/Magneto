@@ -27,6 +27,28 @@ import {
   taskDeleteCommand,
   taskShowCommand,
 } from './commands/task';
+import {
+  securityAuditCommand,
+  securityReportCommand,
+  securityScanCommand,
+  securityFixCommand,
+  securityComplianceCommand,
+  securityCheckCommand,
+} from './commands/security';
+import {
+  sandboxStatusCommand,
+  sandboxBuildCommand,
+  sandboxInitCommand,
+  sandboxRunCommand,
+  sandboxShellCommand,
+  sandboxDoctorCommand,
+} from './commands/sandbox';
+import {
+  sddInitCommand,
+  sddNewCommand,
+  sddStatusCommand,
+  sddSyncCommand,
+} from './commands/sdd';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../package.json') as { version: string };
@@ -56,6 +78,10 @@ Examples:
   $ magneto merge .magneto/cache --format md  Merge results as Markdown
   $ magneto generate task.md                 Generate scoped prompt for Windsurf/Copilot
   $ magneto analyze                           Analyze codebase and build memory
+  $ magneto security audit                    Full SAST + secrets scan (Project Glasswing)
+  $ magneto security audit --format json      JSON output for CI pipelines
+  $ magneto security check tasks/deploy.md    Pre-execution security gate
+  $ magneto security report --output report.md  Save markdown report
 
 Environment variables:
   OPENAI_API_KEY                  Required for the OpenAI runner
@@ -71,6 +97,8 @@ program
   .description('Initialize Magneto AI in the current project. Scaffolds .magneto/, .github/agents/, and .vscode/mcp.json.')
   .option('--with <packs...>', 'Include power packs (typescript, python, java, nextjs, fastapi, spring-boot, aws, ai-platform, azure)')
   .option('--adapter <adapters...>', 'Include adapters (graphify)')
+  .option('--sdd <framework>', 'SDD framework to scaffold: openspec, speckit, bmad, none')
+  .option('--no-sdd', 'Skip the SDD framework prompt entirely')
   .option('--force', 'Overwrite existing configuration', false)
   .option('--no-suggest', 'Skip auto-detection prompt for matching power packs')
   .option('--auto-install', 'Auto-install all detected power packs without prompting (CI mode)', false)
@@ -163,6 +191,7 @@ program
   .option('--coordination <mode>', 'Coordination mode: sequential, parallel, hybrid', 'hybrid')
   .option('--watch-sub-agents', 'Monitor sub-agent progress', false)
   .option('--track-tokens', 'Track token usage with A/B testing (with/without Magneto)', false)
+  .option('--sandbox <profile>', 'Run inside a sandbox: strict | standard | dev | off')
   .addHelpText('after', `
 Runners:
   openai          Use OpenAI API (requires OPENAI_API_KEY)
@@ -547,6 +576,50 @@ memory
     await memoryStatsCommand();
   });
 
+// ─── Zero-Trust Memory Lock ──────────────────────────────────────────
+import {
+  memoryLockCommand,
+  memoryUnlockCommand,
+  memoryVerifyCommand,
+  memoryStatusCommand,
+} from './commands/memory-lock';
+
+memory
+  .command('lock')
+  .description('Lock memory in zero-trust mode. Hashes every file (SHA-256), HMAC-signs the manifest, and sets files read-only. While locked, no writes permitted; runtime writes always denied regardless of lock state.')
+  .option('--require-root', 'Require root (uid 0) to unlock', false)
+  .option('--no-owner', 'Do not require the locking user to unlock', false)
+  .addHelpText('after', `
+Examples:
+  $ magneto memory lock                    # owner-only unlock (default)
+  $ magneto memory lock --require-root     # only root can unlock
+`)
+  .action(async (options) => {
+    await memoryLockCommand(options);
+  });
+
+memory
+  .command('unlock')
+  .description('Unlock memory for offline editing. Verifies HMAC signature and every file hash; rejects if tampered. Cannot unlock while a task is running.')
+  .option('--force', 'Skip hash verification (DANGEROUS, audit log will record this)', false)
+  .action(async (options) => {
+    await memoryUnlockCommand(options);
+  });
+
+memory
+  .command('verify')
+  .description('Verify memory integrity without unlocking. Checks signature, file hashes, and detects injected files not in the manifest.')
+  .action(async () => {
+    await memoryVerifyCommand();
+  });
+
+memory
+  .command('status')
+  .description('Show current lock state, runtime gate status, and unlock policy.')
+  .action(async () => {
+    await memoryStatusCommand();
+  });
+
 // Checkpoint commands
 import {
   checkpointListCommand,
@@ -694,5 +767,202 @@ graph
   .action(async () => {
     await graphViewCommand();
   });
+
+// ── Security (Project Glasswing) ──────────────────────────────────────────
+const security = program
+  .command('security')
+  .description('AI Security Audit & Vulnerability Detection (Project Glasswing). SAST, secrets detection, pre-execution gates.');
+
+security
+  .command('audit')
+  .description('Full SAST + secrets scan across the codebase. Detects OWASP Top 10, CWE patterns, hardcoded secrets.')
+  .option('--format <format>', 'Output format: text, json, markdown', 'text')
+  .option('--output <file>', 'Write report to file (defaults to .magneto/reports/)')
+  .option('--severity <level>', 'Minimum severity to report: critical, error, warning, info', 'info')
+  .option('--category <cats...>', 'Filter by category: secrets, injection, cryptography, misconfiguration, ssrf, logging')
+  .option('--exclude <patterns...>', 'Glob patterns to exclude')
+  .option('--fail-on <level>', 'Exit 1 if any finding at this severity or above: critical, error, warning', 'error')
+  .addHelpText('after', `
+Examples:
+  $ magneto security audit
+  $ magneto security audit --format json --output .magneto/reports/audit.json
+  $ magneto security audit --severity error              # only errors and above
+  $ magneto security audit --category secrets injection  # specific categories
+  $ magneto security audit --fail-on critical            # only fail on critical (CI)
+`)
+  .action(async (options) => {
+    await securityAuditCommand(options);
+  });
+
+security
+  .command('report')
+  .description('Generate a security report from the latest audit.')
+  .option('--format <format>', 'Output format: markdown, json', 'markdown')
+  .option('--output <file>', 'Output file path')
+  .action(async (options) => {
+    await securityReportCommand(options);
+  });
+
+security
+  .command('scan')
+  .description('Scan dependencies for known vulnerabilities via OSV.dev (no API key required). Reads package.json, requirements.txt, pom.xml.')
+  .option('--format <format>', 'Output format: text, json', 'text')
+  .option('--output <file>', 'Write results to file')
+  .addHelpText('after', `
+Examples:
+  $ magneto security scan
+  $ magneto security scan --format json
+  $ magneto security scan --output .magneto/reports/deps.json --format json
+`)
+  .action(async (options) => {
+    await securityScanCommand(options);
+  });
+
+security
+  .command('fix')
+  .description('Auto-remediate findings: SAST patterns + vulnerable dependency upgrades. Updates package.json with safe semver-aware version bumps.')
+  .option('--dry-run', 'Preview changes without writing files', false)
+  .option('--code', 'Only apply code fixes (skip dependency upgrades)', false)
+  .option('--deps', 'Only apply dependency upgrades (skip code fixes)', false)
+  .addHelpText('after', `
+Examples:
+  $ magneto security fix              # fix code findings + upgrade vulnerable deps
+  $ magneto security fix --dry-run    # preview everything that would change
+  $ magneto security fix --deps       # only upgrade vulnerable dependencies
+  $ magneto security fix --code       # only patch code findings (MD5→SHA256, etc)
+  $ magneto security fix --deps --dry-run   # preview dependency upgrades only
+
+The --deps mode reads the OSV.dev scan, picks a single fix version per package
+that resolves all its CVEs (semver-aware), and updates every matching package.json
+in the repo (preserving ^/~ range prefixes). Run npm install after to update lockfile.
+`)
+  .action(async (options) => {
+    await securityFixCommand(options);
+  });
+
+security
+  .command('compliance [frameworks...]')
+  .description('Evaluate codebase against compliance frameworks: SOC2, HIPAA, GDPR, PCI-DSS. Runs audit + dep scan, maps findings to controls.')
+  .option('--format <format>', 'Output format: text, json, markdown', 'text')
+  .option('--output <file>', 'Write report to file')
+  .addHelpText('after', `
+Examples:
+  $ magneto security compliance                   # all frameworks
+  $ magneto security compliance SOC2 HIPAA        # specific frameworks
+  $ magneto security compliance GDPR --format markdown --output compliance.md
+`)
+  .action(async (frameworks, options) => {
+    await securityComplianceCommand(frameworks, options);
+  });
+
+security
+  .command('check <taskFile>')
+  .description('Pre-execution security gate — blocks task run if unresolved critical/error findings exist.')
+  .option('--strict', 'Exit 1 if check fails', false)
+  .addHelpText('after', `
+Example:
+  $ magneto security check tasks/deploy-prod.md
+`)
+  .action(async (taskFile, options) => {
+    await securityCheckCommand(taskFile, options);
+  });
+
+// ── Sandbox ───────────────────────────────────────────────────────
+const sandbox = program
+  .command('sandbox')
+  .description('Run Magneto and OpenClaw inside an isolated sandbox (Docker/Podman/sandbox-exec/bwrap). Strict, standard, dev, and off profiles available.');
+
+sandbox
+  .command('status')
+  .description('Show available isolation runtimes, image status, and profile descriptions.')
+  .action(async () => { await sandboxStatusCommand(); });
+
+sandbox
+  .command('init')
+  .description('Scaffold .magneto/sandbox/ with Dockerfile and per-profile constraint manifests.')
+  .action(async () => { await sandboxInitCommand(); });
+
+sandbox
+  .command('build')
+  .description('Build the magneto-sandbox container image (requires docker or podman).')
+  .action(async () => { await sandboxBuildCommand(); });
+
+sandbox
+  .command('run [command...]')
+  .description('Run an arbitrary command inside the sandbox.')
+  .option('--profile <profile>', 'Sandbox profile: strict, standard, dev, off', 'standard')
+  .addHelpText('after', `
+Examples:
+  $ magneto sandbox run --profile strict -- magneto security audit
+  $ magneto sandbox run --profile standard -- npm test
+  $ magneto sandbox run --profile dev -- npm install
+`)
+  .action(async (command, options) => { await sandboxRunCommand(command, options); });
+
+sandbox
+  .command('shell')
+  .description('Open an interactive shell inside the sandbox.')
+  .option('--profile <profile>', 'Sandbox profile: strict, standard, dev, off', 'dev')
+  .action(async (options) => { await sandboxShellCommand(options); });
+
+sandbox
+  .command('doctor')
+  .description('Validate sandbox setup — runtime availability, image build, profile resolution.')
+  .action(async () => { await sandboxDoctorCommand(); });
+
+// ── Spec-Driven Development (SDD) ──────────────────────────────────
+const sdd = program
+  .command('sdd')
+  .description('Spec-Driven Development. Scaffold and reconcile specs using OpenSpec, Spec Kit, or BMAD-METHOD.');
+
+sdd
+  .command('init')
+  .description('Initialize an SDD framework in this project. Prompts to choose between OpenSpec, Spec Kit, or BMAD.')
+  .option('--framework <name>', 'Framework: openspec, speckit, bmad (skips prompt)')
+  .option('--force', 'Overwrite existing scaffolding', false)
+  .option('--dry-run', 'Show what would be created without writing', false)
+  .option('-y, --yes', 'Auto-select the recommended framework (no prompt)', false)
+  .addHelpText('after', `
+Examples:
+  $ magneto sdd init                         # interactive prompt (recommended)
+  $ magneto sdd init --framework openspec    # brownfield projects
+  $ magneto sdd init --framework speckit     # greenfield projects
+  $ magneto sdd init --framework bmad        # regulated / SOC2 audit trails
+  $ magneto sdd init --yes                   # CI: pick the auto-recommended one
+
+Recommendation logic:
+  - existing project (src/, tests/, deps≥5)  → OpenSpec
+  - empty repo                               → Spec Kit
+  - in doubt                                 → OpenSpec
+`)
+  .action(async (options) => { await sddInitCommand(options); });
+
+sdd
+  .command('new <name> <description>')
+  .description('Scaffold a new spec/change/feature using the active SDD framework.')
+  .option('--dry-run', 'Show what would be created without writing', false)
+  .addHelpText('after', `
+Example:
+  $ magneto sdd new add-dark-mode "Add a dark theme toggle to settings"
+`)
+  .action(async (name, description, options) => { await sddNewCommand(name, description, options); });
+
+sdd
+  .command('status')
+  .description('Show which SDD framework is active, the constitution path, and active changes.')
+  .action(async () => { await sddStatusCommand(); });
+
+sdd
+  .command('sync')
+  .description('Reconcile spec ↔ code drift. Reports stale specs, undocumented code, and broken file references.')
+  .option('--dry-run', 'Report drift without writing the report file', false)
+  .addHelpText('after', `
+Example:
+  $ magneto sdd sync                # write .magneto/sdd-drift.md
+  $ magneto sdd sync --dry-run      # report only
+
+Exit code is 1 when drift is detected — wire this into CI.
+`)
+  .action(async (options) => { await sddSyncCommand(options); });
 
 program.parse(process.argv);

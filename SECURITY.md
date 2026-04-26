@@ -10,6 +10,8 @@ Only the latest minor release on the `main` branch receives security patches.
 | 0.27.x | ✅ (critical fixes only) |
 | < 0.27 | ❌ |
 
+Glasswing-era security features (sandbox, memory lock, SDD reconciler, dependency auto-fixer) require **0.28.x or newer**.
+
 ## Reporting a Vulnerability
 
 **Please do not file public GitHub issues for security vulnerabilities.**
@@ -35,10 +37,45 @@ Magneto AI operates entirely within your local repository. Understand what does 
 | Runner | Data sent externally |
 |--------|---------------------|
 | `openai` | Task context, file snippets, prompts → OpenAI API |
-| `copilot` | Task context → GitHub Copilot endpoint |
+| `copilot-local` | None — routed through your active Copilot IDE process |
+| `copilot-cloud` | Task context → your configured Copilot Cloud endpoint |
 | `gemini` | Task context → Google AI API |
 | `cascade` / `antigravity` | Via local Windsurf/Copilot process — no direct network call |
 | **`ollama`** | **Nothing — all local, zero egress** |
+
+Every runner result is tagged with `metadata.dataEgress` (`none` / `host` / `cloud`) and recorded to `.magneto/audit/approvals.json`.
+
+### Sandbox isolation (`magneto sandbox`)
+
+For untrusted AI output or regulated environments, run Magneto and OpenClaw inside an OS-level sandbox:
+
+| Profile | Filesystem | Network | Process | Use |
+|---|---|---|---|---|
+| `strict` | Read-only project | Allowlist (LLM APIs only) | `nobody`, no shell | Audits |
+| `standard` | RW project, denied `/etc /var /usr` | Allowlist + npm/pypi/maven | `magneto`, no sudo | Default for `execute` |
+| `dev` | RW project | Open | `magneto`, no sudo | Local dev |
+| `off` | Host | Host | Host | Trusted CI only |
+
+Supported runtimes: Docker, Podman, macOS `sandbox-exec`, Linux `bwrap` (bubblewrap), **Windows Sandbox** (`.wsb` + `WindowsSandbox.exe`), **WSL2** (with DNS-leak hardening). Magneto auto-detects the best available and falls back transparently. See `magneto sandbox doctor`.
+
+### Zero-trust memory lock
+
+`.magneto/memory/` carries cross-session agent context. Tampering with it can poison every future agent run.
+
+- `magneto memory lock` writes a manifest of SHA-256 hashes signed with HMAC-SHA256 using a key derived from `~/.magneto-key + hostname + uid`. The lock files become `chmod 0400`.
+- `magneto memory verify` exits non-zero on tamper, missing files, or unrecorded files (covers prompt-injection-style memory poisoning).
+- While a task is running, `assertMemoryWritable()` blocks any memory mutation — even the owner cannot edit memory mid-execution.
+- `unlock` is **offline-only** by default and refuses to run when a network interface is up. Override with `--allow-online` (audited).
+- `--require-root` policy restricts unlock to the root account.
+
+### Spec-Driven Development & drift
+
+`magneto sdd sync` is a security control as much as a docs control: stale specs mislead agents into shipping the wrong behavior. The reconciler exits non-zero when:
+- A spec references a file that does not exist (`spec-only`).
+- A `src/` subtree has zero spec coverage (`code-undocumented`).
+- A task marked `[x]` references missing files (`mismatch`).
+
+Wire `magneto sdd sync` into CI alongside `magneto security audit`.
 
 ### What Magneto stores locally
 
@@ -59,9 +96,11 @@ The security engine enforces a default blocklist of sensitive paths (`*.env`, `*
 
 ## Known Security Considerations
 
-- **AI-generated code is not audited by default** — Project Glasswing (`magneto security audit`) is on the roadmap to address this. Until released, review all AI output before committing.
+- **Project Glasswing is shipped** (v0.28.x). Run `magneto security audit` (SAST + secrets), `magneto security scan-deps` (OSV.dev), `magneto security compliance SOC2` and `magneto security fix` before merging AI-generated code. Pre-execution gate: `magneto security check <task>`.
 - **Power pack regex patterns** are run in-process. Malformed patterns in custom packs could cause catastrophic backtracking. All built-in patterns are tested. Validate custom patterns before installing.
 - **Ollama runner**: if `OLLAMA_HOST` points to a shared server, task context (code snippets, task descriptions) is sent to that host. Ensure it is trust-bounded.
+- **Memory key portability**: the HMAC key derives from `~/.magneto-key + hostname + uid`. Restoring `.magneto/memory/` from backup onto a different machine intentionally fails verification. To migrate, rotate the key and re-lock on the destination host.
+- **Skill / MCP supply chain**: AI agent skills can be malicious ("ToxicSkills"). Run `snyk-agent-scan --skills <dir>` against any third-party skill before installing. Magneto's bundled skills under `src/templates/power-packs/adapters/*/skills/` are scanned in CI. See [`CONTRIBUTING.md`](./CONTRIBUTING.md#skill--mcp-scanning-snyk-agent-scan).
 
 ## Dependency Vulnerabilities
 

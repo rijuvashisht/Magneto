@@ -1,10 +1,31 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, BookOpen, GitFork, Sparkles, Zap } from "lucide-react";
+import { ArrowRight, BookOpen, GitFork, Sparkles, Zap, Download } from "lucide-react";
 import { getVersionBadgeText } from "@/lib/version";
+import { useEffect, useState } from "react";
+
+function formatDownloads(n: number): string {
+  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
+  if (n >= 1_000) return (n / 1_000).toFixed(1) + "K";
+  return n.toLocaleString();
+}
 
 export default function Hero() {
+  const [downloads, setDownloads] = useState<number | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    fetch("https://api.npmjs.org/downloads/point/last-month/magneto-ai")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: { downloads?: number } | null) => {
+        if (!cancelled && d && typeof d.downloads === "number") {
+          setDownloads(d.downloads);
+        }
+      })
+      .catch(() => { /* silent */ });
+    return () => { cancelled = true; };
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-transparent">
       {/* Content - higher z-index than magnetic field */}
@@ -27,15 +48,29 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Version Badge */}
+        {/* Version + Downloads Badges */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="inline-flex items-center gap-2 px-4 py-2 mb-10 rounded-full border border-gray-300/50 dark:border-gray-700/50 bg-white/50 dark:bg-black/30 backdrop-blur-md text-sm"
+          className="flex flex-wrap justify-center gap-2 mb-10"
         >
-          <Sparkles className="w-4 h-4 text-purple-500" />
-          <span className="text-gray-600 dark:text-gray-400">{getVersionBadgeText()}</span>
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-300/50 dark:border-gray-700/50 bg-white/50 dark:bg-black/30 backdrop-blur-md text-sm">
+            <Sparkles className="w-4 h-4 text-purple-500" />
+            <span className="text-gray-600 dark:text-gray-400">{getVersionBadgeText()}</span>
+          </span>
+          <a
+            href="https://www.npmjs.com/package/magneto-ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-300/50 dark:border-emerald-700/40 bg-emerald-50/60 dark:bg-emerald-500/10 backdrop-blur-md text-sm hover:border-emerald-500/70 transition-colors"
+            aria-label="Magneto monthly downloads on npm"
+          >
+            <Download className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            <span className="text-gray-700 dark:text-gray-300">
+              {downloads !== null ? `${formatDownloads(downloads)} downloads / month` : "Loading downloads…"}
+            </span>
+          </a>
         </motion.div>
 
         {/* Headline + Subtitle - with subtle backdrop for readability */}
