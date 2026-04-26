@@ -43,7 +43,7 @@ interface DetectionRule {
 
 /** Packs that ship with current build (templates exist on disk) */
 const SHIPPED_PACKS: Record<PackCategory, Set<string>> = {
-  languages: new Set(['typescript', 'python']),
+  languages: new Set(['typescript', 'python', 'java']),
   frameworks: new Set(['nextjs', 'fastapi', 'spring-boot']),
   clouds: new Set(['azure', 'aws']),
   'project-types': new Set(['ai-platform']),
