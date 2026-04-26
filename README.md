@@ -388,9 +388,13 @@ Power Packs add domain-specific intelligence to Magneto AI.
 | Pack | Category | What It Does |
 |---|---|---|
 | **TypeScript** | Language | Import graph analysis, type safety checks, `any` detection |
+| **Python** | Language | Type hints (PEP 484), security checks (eval/SQL injection/pickle), Django/FastAPI/Flask guidance |
 | **Next.js** | Framework | Server/client boundaries, hydration safety, routing validation |
 | **Java** | Language | Modern Java idioms (records/sealed/pattern matching/virtual threads), concurrency safety, security (RCE/SQLi/XXE) |
+| **FastAPI** | Framework | Pydantic validation, async correctness, CORS/auth security, lifespan hygiene |
+| **Spring Boot** | Framework | Spring Security review, JPA N+1 detection, transaction boundaries, actuator hardening |
 | **AI Platform** | Project Type | Prompt injection detection, RAG pipeline validation, token limits |
+| **AWS** | Cloud | IAM least-privilege, S3 public-exposure, SG wide-open ports, encryption at rest, Terraform/CDK practices |
 | **Azure** | Cloud | Infrastructure reasoning, RBAC validation, networking checks |
 
 ### Using Packs
@@ -658,6 +662,7 @@ magneto-ai/
 | `magneto plan <task> --dry-run` | Preview plan without saving |
 | `magneto run <task>` | Execute a task |
 | `magneto run <task> --runner openai` | Execute with specific runner |
+| `magneto run <task> --runner ollama` | Execute locally via Ollama (no API key, no data egress) |
 | `magneto run <task> --mode observe` | Execute in observe mode |
 | `magneto run <task> --approve-each` | Execute with step-by-step approval workflow |
 | `magneto merge <outputDir>` | Merge agent results |
