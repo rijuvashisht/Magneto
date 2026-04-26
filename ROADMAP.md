@@ -361,26 +361,37 @@ magneto audit export           # Export for compliance
 
 ---
 
+## Adoption & GTM Roadmap
+
+Engineering velocity isn't the bottleneck — adoption is. The product-side companion to this engineering roadmap is **[`docs/ADOPTION-ROADMAP.md`](./docs/ADOPTION-ROADMAP.md)** — a 30-day plan to a Product Hunt #1 launch with measurable success criteria. Items in *Must Have (Next Sprint)* below feed directly into Phases 1 and 2 of that plan.
+
+---
+
 ## Prioritization
 
 ### Must Have (Next Sprint)
-1. **Living-spec mode** — bidirectional spec ↔ code updates during agent runs (closes the drift loop the static reconciler can only flag)
-2. **VS Code extension MVP** — agent panel + inline approvals + drift indicator gutter
-3. **GitHub Actions integration** — preset workflows for `magneto security audit`, `magneto sdd sync`, `magneto memory verify`
-4. **`snyk-agent-scan` automation** — wrap behind `magneto security skills-scan` so users don't need to manage SNYK_TOKEN manually
+1. **VS Code extension MVP** — agent panel + inline approvals + drift indicator gutter (Adoption Phase 2.3)
+2. **GitHub Action `magneto-action`** — drop-in `uses: rijuvashisht/magneto-action@v1` with PR security gate, weekly drift, dep auto-fix presets (Adoption Phase 2.4)
+3. **`npx magneto-ai demo`** — 30-second simulated flow, no install required (Adoption Phase 2.1)
+4. **MCP one-line install** — `claude mcp add magneto npx -- magneto-ai mcp` (Adoption Phase 2.2)
+5. **Living-spec mode** — bidirectional spec ↔ code updates during agent runs (closes the drift loop the static reconciler can only flag)
+6. **`snyk-agent-scan` automation** — wrap behind `magneto security skills-scan` so users don't need to manage `SNYK_TOKEN` manually
 
 ### Should Have (Next Month)
-5. Custom power pack authoring guide + cookiecutter
-6. Multi-repo orchestration (mono-repo + sibling-repo task dispatch)
-7. Cost tracking and budget limits per runner
-8. Sandbox: gVisor runtime + rootless Podman recipes
-9. Memory lock: HSM / TPM-backed key option (replace `~/.magneto-key`)
+7. **Power-pack registry MVP** — `magnetoai.vercel.app/packs` + `magneto pack publish` (Adoption Phase 6.2)
+8. **Rust + Go power packs** — high-leverage in underserved segments (Adoption Phase 6.3)
+9. Custom power pack authoring guide + cookiecutter
+10. Multi-repo orchestration (mono-repo + sibling-repo task dispatch)
+11. Cost tracking and budget limits per runner
+12. Sandbox: gVisor runtime + rootless Podman recipes
+13. Memory lock: HSM / TPM-backed key option (replace `~/.magneto-key`)
 
 ### Nice to Have (Future)
-10. Plugin marketplace
-11. Audit logging connectors (Splunk, Datadog, OpenTelemetry)
-12. SDD: import existing PRDs / Confluence / Notion into OpenSpec deltas
-13. Sandbox: Apple's new `sandboxd` v2 rules (macOS 27+)
+14. Audit logging connectors (Splunk, Datadog, OpenTelemetry)
+15. SDD: import existing PRDs / Confluence / Notion into OpenSpec deltas
+16. Sandbox: Apple's new `sandboxd` v2 rules (macOS 27+)
+17. Magneto Cloud (opt-in dashboard for teams) — Adoption Phase 7.3
+18. "Magneto Certified" SOC2 self-serve badge program — Adoption Phase 7.4
 
 ---
 
