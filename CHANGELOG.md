@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Python Language Power Pack** — first non-TypeScript language pack
+  - 14 security & quality checks: eval/exec, SQL injection, shell=True, pickle.loads, yaml unsafe load, hardcoded secrets, mutable default args, bare except, requests without timeout, assert in prod, DEBUG=True, print() debugging, missing type hints
+  - Comprehensive `rules.md` covering type safety, security, async, framework-specific guidance (Django/FastAPI/Flask), testing, performance
+  - Detected automatically by `magneto detect` from `requirements.txt`, `pyproject.toml`, `setup.py`, `Pipfile`, or `poetry.lock`
+  - Install via `magneto init --with python`
 - **Auto-Detect & Suggest Power Packs** — `magneto init` now auto-detects the project's stack and prompts to install matching packs
   - New `magneto detect` command prints detected stack with confidence scores (read-only)
   - New `--auto-install` flag for CI environments
