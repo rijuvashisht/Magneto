@@ -660,6 +660,7 @@ magneto-ai/
 | `magneto plan <task> --dry-run` | Preview plan without saving |
 | `magneto run <task>` | Execute a task |
 | `magneto run <task> --runner openai` | Execute with specific runner |
+| `magneto run <task> --runner ollama` | Execute locally via Ollama (no API key, no data egress) |
 | `magneto run <task> --mode observe` | Execute in observe mode |
 | `magneto run <task> --approve-each` | Execute with step-by-step approval workflow |
 | `magneto merge <outputDir>` | Merge agent results |

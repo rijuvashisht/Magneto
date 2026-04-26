@@ -143,7 +143,7 @@ Examples:
 program
   .command('run <taskFile>')
   .description('Execute a task through the Magneto AI pipeline using a specified runner and execution mode.')
-  .option('--runner <runner>', 'Runner: openai, copilot-local, copilot-cloud', 'openai')
+  .option('--runner <runner>', 'Runner: openai, copilot-local, copilot-cloud, ollama', 'openai')
   .option('--mode <mode>', 'Mode: observe, assist, execute, restricted', 'assist')
   .option('--interactive', 'Execute with interactive approval for each step', false)
   .option('--approve-each', 'Pause for approval at each execution stage', false)
@@ -168,6 +168,7 @@ Runners:
   openai          Use OpenAI API (requires OPENAI_API_KEY)
   copilot-local   Delegate to GitHub Copilot via local MCP agents
   copilot-cloud   Use Copilot Cloud API endpoint
+  ollama          Use local Ollama (no API key, no data egress; OLLAMA_HOST + OLLAMA_MODEL)
 
 Modes:
   observe         Read-only analysis, no changes
