@@ -40,7 +40,10 @@ Magneto AI is a multi-agent AI orchestration system that brings structured reaso
 
 Magneto AI is **not** another AI wrapper. It is a **reasoning engine**, **governance layer**, and **agent control plane** that sits between your team and any AI coding assistant — enforcing security, planning tasks, and building deep project understanding before a single line is written or deleted.
 
-- **🚨 AI Security Auditing (Project Glasswing)** — Pre-execution vulnerability scanning for ALL AI assistants (Claude, Copilot, Manus, etc.)
+- **🚨 AI Security Auditing (Project Glasswing)** — Pre-execution vulnerability scanning for ALL AI assistants (Claude, Copilot, Manus, etc.) with auto-fix for code findings *and* dependency upgrades
+- **🧱 Spec-Driven Development** — pluggable [OpenSpec / Spec Kit / BMAD](#-spec-driven-development) frameworks selected on `magneto init`, with a built-in spec↔code drift reconciler
+- **📐 OS-level Sandboxing** — run agents inside Docker, Podman, macOS `sandbox-exec`, Linux `bwrap`, **Windows Sandbox**, or **WSL2** with strict / standard / dev / off profiles
+- **🔐 Zero-Trust Memory Lock** — `memory.lock` files signed with HMAC-SHA256 (machine-bound key); offline-only memory mutation; root/owner unlock policies
 - **Orchestrates multiple AI agents** with role-based task delegation
 - **Enforces security guardrails** — protected paths, blocked actions, approval workflows
 - **Classifies tasks** and creates execution plans before running anything
@@ -71,7 +74,7 @@ Magneto AI acts as the **skill and governance layer** for the full ecosystem of 
 | **Kiro** | Skill files in `.kiro/skills/` + steering rules |
 | **Google Antigravity** | MCP-compatible `security_check` and `plan_task` tools |
 
-One `magneto init`. All assistants governed.
+One `magneto init`. All assistants governed. See **[AI Assistant Setup Guide](./docs/AI-ASSISTANTS.md)** for per-tool walkthroughs.
 
 ### Turn Any Folder Into a Queryable Knowledge Graph
 
@@ -596,7 +599,80 @@ evaluateSecurity(task): {
 
 ---
 
-## 🧩 Power Pack System
+## � Spec-Driven Development
+
+Magneto ships pluggable support for the three leading SDD frameworks. On `magneto init` you're prompted to choose; on existing repos the framework is auto-detected.
+
+| Framework | Best for | Layout |
+|---|---|---|
+| **OpenSpec** *(default)* | Brownfield / existing code | `openspec/{project.md, specs/, changes/<name>/{proposal,design,tasks}.md}` — delta-based (ADDED/MODIFIED/REMOVED) |
+| **Spec Kit** | Greenfield / new projects | `.specify/constitution.md` + `specs/<slug>/{spec,plan,tasks}.md` — branch-per-spec |
+| **BMAD-METHOD** | Regulated / SOC2 audit | `bmad-core/agents/*.md` (Analyst→PM→Architect→SM→Dev→QA) + versioned PRDs |
+
+```bash
+magneto sdd init                              # interactive prompt
+magneto sdd new add-dark-mode "Theme toggle"  # scaffold a change
+magneto sdd status                            # show active framework + changes
+magneto sdd sync                              # reconcile spec ↔ code drift (CI: exit 1 on drift)
+```
+
+**Constitution-as-code.** The default constitution template enforces a **WHY → WHAT → HOW** rule format that LLMs actually follow (single-line "don't do X" rules are routinely ignored — see [EPAM Spec Kit case study](https://www.epam.com/insights/ai/blogs/using-spec-kit-for-brownfield-codebase)).
+
+**Drift reconciler.** Catches three drift kinds statically (no LLM call): `spec-only` (spec references missing files), `code-undocumented` (`src/` subtrees with no spec coverage), `mismatch` (tasks marked done that reference missing files). Writes `.magneto/sdd-drift.md`.
+
+References: [OpenSpec](https://openspec.dev) · [GitHub Spec Kit](https://github.com/github/spec-kit) · [BMAD-METHOD](https://docs.bmad-method.org)
+
+---
+
+## 📐 Sandbox & Isolation
+
+Run Magneto, OpenClaw, and AI-generated code inside an OS-level sandbox. Magneto auto-detects the best runtime and falls back transparently.
+
+| Profile | Filesystem | Network | Process | Use |
+|---|---|---|---|---|
+| `strict` | Read-only project | Allowlist (LLM APIs only) | `nobody`, no shell | Audits |
+| `standard` | RW project, denied `/etc /var /usr` | Allowlist + npm/pypi/maven | `magneto`, no sudo | Default for `execute` |
+| `dev` | RW project | Open | `magneto`, no sudo | Local dev |
+| `off` | Host | Host | Host | Trusted CI only |
+
+| Runtime | Platform | Mechanism |
+|---|---|---|
+| `docker` / `podman` | All | Container with cap-drop, read-only mounts, network policy |
+| `sandbox-exec` | macOS | Native Apple sandbox with `.sb` profile + port-based net allowlist |
+| `bwrap` | Linux | `bubblewrap` user namespace + bind mounts |
+| **`windows-sandbox`** | Windows 10/11 Pro | `.wsb` XML config + `WindowsSandbox.exe` |
+| **`wsl`** | Windows | `wsl.exe` with DNS-leak hardening (`--resolv-conf`) |
+
+```bash
+magneto sandbox status                                   # detected runtimes + profiles
+magneto sandbox build                                    # build the magneto-sandbox container
+magneto sandbox run --profile strict -- magneto security audit
+magneto sandbox shell --profile dev                      # interactive shell inside sandbox
+magneto sandbox doctor                                   # validate setup
+```
+
+---
+
+## 🔐 Zero-Trust Memory Lock
+
+`.magneto/memory/` is the agent's persistent context. Tampering with it can poison every future agent run. Magneto locks it with cryptographic integrity:
+
+```bash
+magneto memory lock                          # SHA-256 each file, sign manifest with HMAC
+magneto memory lock --require-root           # only root may unlock
+magneto memory verify                        # exit 1 on tamper
+magneto memory unlock                        # owner unlocks; offline-only by default
+magneto memory status
+```
+
+- **Manifest signature**: HMAC-SHA256 with a key derived from `~/.magneto-key + hostname + uid` — copying lock files between machines fails verification.
+- **Runtime gating**: while a task is running, `assertMemoryWritable()` blocks any memory mutation.
+- **Offline-only updates**: by default, `unlock` refuses to run when a network interface is up. Override with `--allow-online` (audited).
+- **chmod 0400** while locked. `git` ignores the lock files via `.gitignore`.
+
+---
+
+## �🧩 Power Pack System
 
 Power Packs add domain-specific intelligence to Magneto AI.
 
@@ -903,18 +979,30 @@ magneto-ai/
 
 ## 🛣 Roadmap
 
+### Shipped
+
 - [x] Interactive plan approval workflow
 - [x] Ollama Runner (local, zero-egress)
 - [x] Python, Java, FastAPI, Spring Boot, AWS Power Packs
 - [x] Streaming runner output (Ollama NDJSON streaming)
-- [ ] AI Security Audit & Vulnerability Detection (Project Glasswing) 🚨
+- [x] **Project Glasswing** — AI Security Audit & Vulnerability Detection (SAST + secrets + OSV.dev dep scan + auto-fix)
+- [x] **Compliance engine** — SOC2 / HIPAA / GDPR / PCI-DSS evaluation
+- [x] **OS-level sandboxing** — Docker, Podman, sandbox-exec, bwrap, Windows Sandbox, WSL2
+- [x] **Zero-trust memory lock** — HMAC-signed manifest, offline-only mutation, runtime gating
+- [x] **Spec-Driven Development** — OpenSpec, Spec Kit, BMAD with shared reconciler
+- [x] Skill scanning via `snyk-agent-scan` (ToxicSkills detection)
+
+### In flight / next
+
 - [ ] VS Code extension with agent panel
 - [ ] Custom power pack authoring guide
-- [ ] Agent memory persistence across sessions
 - [ ] Multi-repo orchestration
 - [ ] GitHub Actions integration
 - [ ] Cost tracking and budget limits
 - [ ] Plugin marketplace
+- [ ] Living-spec mode (bidirectional spec↔code updates during agent runs)
+
+Full detail: [ROADMAP.md](./ROADMAP.md).
 
 ---
 

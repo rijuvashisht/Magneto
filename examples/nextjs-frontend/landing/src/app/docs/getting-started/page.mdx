@@ -8,19 +8,23 @@ Welcome to **Magneto AI** — the multi-agent AI control plane that ships featur
 # 1. Install globally
 npm install -g magneto-ai
 
-# 2. Initialize — auto-detects your stack, or pass packs explicitly
+# 2. Initialize — auto-detects your stack and prompts for SDD framework
 cd your-project
-magneto init                                    # auto-detect everything
+magneto init                                    # interactive
 magneto init --with typescript nextjs           # Next.js project
-magneto init --with python fastapi              # Python / FastAPI
-magneto init --with java spring-boot            # Java / Spring Boot
-magneto init --with aws                         # Terraform / AWS infra
+magneto init --with python fastapi --sdd openspec   # FastAPI + OpenSpec (brownfield)
+magneto init --with java spring-boot --sdd bmad     # Spring Boot + BMAD (audit trail)
+magneto init --with aws --sdd speckit               # Terraform + Spec Kit (greenfield)
+magneto init --no-sdd                           # skip SDD scaffolding
 
 # 3. Plan a task (write a .md task file first, or use an example)
 magneto plan tasks/my-task.md
 
-# 4. Run with streaming output
-magneto run tasks/my-task.md --stream
+# 4. Run with streaming output, sandboxed for safety
+magneto sandbox run --profile standard -- magneto run tasks/my-task.md --stream
+
+# 5. Reconcile spec ↔ code drift before merge
+magneto sdd sync
 ```
 
 ---
@@ -330,6 +334,102 @@ Checks: binary version, API key presence, `.magneto/` integrity, MCP registratio
 
 ---
 
+## Spec-Driven Development
+
+Magneto ships pluggable support for the three leading SDD frameworks. `magneto init` prompts you to choose; on existing repos the framework is auto-detected.
+
+| Framework | Best for | What it scaffolds |
+|---|---|---|
+| **OpenSpec** *(default)* | Brownfield / existing code | `openspec/{project.md, specs/, changes/<name>/{proposal,design,tasks}.md}` — delta-based |
+| **Spec Kit** | Greenfield projects | `.specify/constitution.md` + `specs/<slug>/{spec,plan,tasks}.md` — branch-per-spec |
+| **BMAD-METHOD** | Regulated / SOC2 audit | `bmad-core/agents/{analyst,pm,architect,scrum-master,developer,qa}.md` + versioned PRDs |
+
+```bash
+magneto sdd init                              # interactive prompt
+magneto sdd new add-dark-mode "Theme toggle"  # scaffold a change
+magneto sdd status                            # show active framework + changes
+magneto sdd sync                              # reconcile spec ↔ code drift (CI exits 1 on drift)
+```
+
+The default constitution template enforces a **WHY → WHAT → HOW** rule format because LLMs ignore terse prohibitions. The reconciler statically detects three drift kinds without an LLM call: `spec-only` (specs reference missing files), `code-undocumented` (`src/` subtrees with no spec coverage), `mismatch` (tasks marked done that reference missing files).
+
+---
+
+## Sandbox & Isolation
+
+Run Magneto, OpenClaw, and AI-generated code inside an OS-level sandbox with auto-detected runtime and graceful fallback.
+
+| Profile | Use case |
+|---|---|
+| `strict` | Read-only audits — no writes, allowlist network |
+| `standard` | Default for `execute` mode — RW project, denied system paths |
+| `dev` | Local dev — open network, RW project |
+| `off` | Trusted CI only — full host access |
+
+**Runtimes**: Docker, Podman, macOS `sandbox-exec`, Linux `bwrap`, **Windows Sandbox** (`.wsb`), and **WSL2**.
+
+```bash
+magneto sandbox status                                      # detected runtimes + image status
+magneto sandbox build                                       # build the magneto-sandbox container
+magneto sandbox run --profile strict -- magneto security audit
+magneto sandbox shell --profile dev                         # interactive shell
+magneto sandbox doctor                                      # validate setup
+```
+
+---
+
+## Zero-Trust Memory Lock
+
+`.magneto/memory/` carries cross-session agent context. Tampering with it can poison every future agent run. Magneto locks it cryptographically:
+
+```bash
+magneto memory lock                          # SHA-256 each file, sign manifest with HMAC
+magneto memory lock --require-root           # only root may unlock
+magneto memory verify                        # exit 1 on tamper, missing files, or unrecorded files
+magneto memory unlock                        # owner unlocks; offline-only by default
+magneto memory status
+```
+
+- HMAC-SHA256 manifest signature with a key derived from `~/.magneto-key + hostname + uid` — backups don't restore across machines (intentional).
+- Runtime active-task gating: while a task is running, even the owner cannot modify memory.
+- Offline-only mutation: `unlock` refuses when a network interface is up unless `--allow-online` is passed (audited).
+
+---
+
+## AI Assistant Setup
+
+Magneto governs every major AI coding assistant. After `magneto init`, the right files (skills, MCP configs, steering rules, `AGENTS.md`) are scaffolded automatically.
+
+| Assistant | What gets written | Runner |
+|---|---|---|
+| Claude Code | `.claude/skills/magneto/SKILL.md` + MCP server | — |
+| GitHub Copilot | `.github/copilot-instructions.md` + `.github/agents/` + `.vscode/mcp.json` | `copilot-local` / `copilot-cloud` |
+| Cursor | `.cursor/rules/magneto.mdc` | — |
+| Windsurf / Cascade | `.windsurf/workflows/*.md` + MCP | `cascade` |
+| Google Antigravity | `~/.antigravity/skills/magneto/` + MCP | — |
+| Gemini CLI | MCP-compatible auto-registration | `gemini` |
+| OpenClaw | ClawHub plugin (`magneto adapter install openclaw`) | — |
+| Aider / Trae / Hermes | `AGENTS.md` + skill files | — |
+| Kiro | `.kiro/skills/magneto/SKILL.md` + steering | — |
+| OpenAI / Codex | API runner | `openai` |
+| Ollama (zero-egress) | Local API | `ollama` |
+| Manus | API adapter (`magneto adapter install manus --api-key <key>`) | — |
+| OpenCode | Use `magneto generate <task>` for a pre-scoped prompt | — |
+
+**Most-secure setup** — combines the best of all features:
+
+```bash
+magneto memory lock --require-root
+magneto sandbox run --profile strict -- \
+  magneto run tasks/audit.md --runner ollama
+```
+
+Source code never leaves the machine, the agent process is filesystem-isolated, agent memory cannot be silently mutated, and AI output is scanned with `magneto security audit` before merge.
+
+Full per-tool walkthrough: [`docs/AI-ASSISTANTS.md`](https://github.com/rijuvashisht/Magneto/blob/main/docs/AI-ASSISTANTS.md).
+
+---
+
 ## Next Steps
 
 - [Commands Reference](/docs/commands) — every flag and option
@@ -337,3 +437,4 @@ Checks: binary version, API key presence, `.magneto/` integrity, MCP registratio
 - [Security](/docs/security) — guardrails, protected paths, approval workflow
 - [Architecture](/docs/architecture) — how the six layers fit together
 - [Token Savings](/docs/token-savings) — benchmark data and cost calculator
+- [AI Assistant Setup](https://github.com/rijuvashisht/Magneto/blob/main/docs/AI-ASSISTANTS.md) — per-tool walkthroughs

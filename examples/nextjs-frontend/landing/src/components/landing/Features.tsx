@@ -11,6 +11,10 @@ import {
   Puzzle,
   Eye,
   MessageSquareMore,
+  FileText,
+  Box,
+  Lock,
+  ShieldCheck,
 } from "lucide-react";
 
 const features = [
@@ -69,6 +73,34 @@ const features = [
     description: "Review each AI action before it runs. Approve, reject, or modify with inline diffs.",
     color: "#ec4899",
     lightColor: "#db2777",
+  },
+  {
+    icon: FileText,
+    title: "Spec-Driven Development",
+    description: "Pluggable OpenSpec / Spec Kit / BMAD frameworks. Constitution-as-code + spec↔code drift reconciler in CI.",
+    color: "#8b5cf6",
+    lightColor: "#7c3aed",
+  },
+  {
+    icon: Box,
+    title: "OS-Level Sandbox",
+    description: "Run agents in Docker, Podman, sandbox-exec, bwrap, Windows Sandbox, or WSL2. Strict / standard / dev profiles.",
+    color: "#0ea5e9",
+    lightColor: "#0284c7",
+  },
+  {
+    icon: Lock,
+    title: "Zero-Trust Memory Lock",
+    description: "HMAC-signed manifest, machine-bound keys, runtime gating, offline-only mutation. Memory cannot be poisoned.",
+    color: "#10b981",
+    lightColor: "#059669",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Glasswing Security Audit",
+    description: "SAST + secrets + OSV.dev dependency scan with grouped CVEs and semver-aware auto-fix. SOC2 / HIPAA / GDPR / PCI compliance reports.",
+    color: "#f43f5e",
+    lightColor: "#e11d48",
   },
 ];
 
