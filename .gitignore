@@ -35,3 +35,4 @@ examples/nextjs-frontend/.magneto/cache/
 
 # Magneto-generated reports (per-run output)
 .magneto/reports/
+.magneto/sandbox/

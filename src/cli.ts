@@ -35,6 +35,14 @@ import {
   securityComplianceCommand,
   securityCheckCommand,
 } from './commands/security';
+import {
+  sandboxStatusCommand,
+  sandboxBuildCommand,
+  sandboxInitCommand,
+  sandboxRunCommand,
+  sandboxShellCommand,
+  sandboxDoctorCommand,
+} from './commands/sandbox';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../package.json') as { version: string };
@@ -175,6 +183,7 @@ program
   .option('--coordination <mode>', 'Coordination mode: sequential, parallel, hybrid', 'hybrid')
   .option('--watch-sub-agents', 'Monitor sub-agent progress', false)
   .option('--track-tokens', 'Track token usage with A/B testing (with/without Magneto)', false)
+  .option('--sandbox <profile>', 'Run inside a sandbox: strict | standard | dev | off')
   .addHelpText('after', `
 Runners:
   openai          Use OpenAI API (requires OPENAI_API_KEY)
@@ -805,5 +814,48 @@ Example:
   .action(async (taskFile, options) => {
     await securityCheckCommand(taskFile, options);
   });
+
+// ── Sandbox ───────────────────────────────────────────────────────
+const sandbox = program
+  .command('sandbox')
+  .description('Run Magneto and OpenClaw inside an isolated sandbox (Docker/Podman/sandbox-exec/bwrap). Strict, standard, dev, and off profiles available.');
+
+sandbox
+  .command('status')
+  .description('Show available isolation runtimes, image status, and profile descriptions.')
+  .action(async () => { await sandboxStatusCommand(); });
+
+sandbox
+  .command('init')
+  .description('Scaffold .magneto/sandbox/ with Dockerfile and per-profile constraint manifests.')
+  .action(async () => { await sandboxInitCommand(); });
+
+sandbox
+  .command('build')
+  .description('Build the magneto-sandbox container image (requires docker or podman).')
+  .action(async () => { await sandboxBuildCommand(); });
+
+sandbox
+  .command('run [command...]')
+  .description('Run an arbitrary command inside the sandbox.')
+  .option('--profile <profile>', 'Sandbox profile: strict, standard, dev, off', 'standard')
+  .addHelpText('after', `
+Examples:
+  $ magneto sandbox run --profile strict -- magneto security audit
+  $ magneto sandbox run --profile standard -- npm test
+  $ magneto sandbox run --profile dev -- npm install
+`)
+  .action(async (command, options) => { await sandboxRunCommand(command, options); });
+
+sandbox
+  .command('shell')
+  .description('Open an interactive shell inside the sandbox.')
+  .option('--profile <profile>', 'Sandbox profile: strict, standard, dev, off', 'dev')
+  .action(async (options) => { await sandboxShellCommand(options); });
+
+sandbox
+  .command('doctor')
+  .description('Validate sandbox setup — runtime availability, image build, profile resolution.')
+  .action(async () => { await sandboxDoctorCommand(); });
 
 program.parse(process.argv);
