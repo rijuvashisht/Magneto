@@ -261,7 +261,221 @@ magneto merge .magneto/cache --format markdown
 
 ---
 
-## � Raw Windsurf/Copilot vs Magneto AI — Token & Cost Benchmarks
+## ⚡ See Magneto in Action
+
+Six real scenarios — pick the one that matches your stack.
+
+---
+
+### 🖥 Scenario 1 — Next.js Frontend Feature
+
+You have a Next.js + TypeScript project. You need a new analytics dashboard. One command sets up Magneto, then it plans and executes with 4 parallel agents.
+
+```bash
+$ magneto init --with typescript nextjs
+[magneto] Initializing Magneto AI...
+[magneto] ✓ Detected stack: TypeScript · Next.js 14 · React 18
+[magneto] ✓ Base scaffolding complete  (.magneto/, .github/agents/, .vscode/mcp.json)
+[magneto] ✓ Power packs loaded         (typescript, nextjs)
+[magneto] ✓ Magneto AI initialized successfully!
+
+$ magneto plan tasks/add-dashboard.md
+[magneto] Planning task: add-dashboard
+[magneto] Classification: feature-implementation
+[magneto] Security Risk: low ✓
+[magneto] Agents: orchestrator, backend, frontend, tester
+[magneto] Subtasks:
+[magneto]   1. Design analytics API route    → backend
+[magneto]   2. Build dashboard components    → frontend
+[magneto]   3. Write integration tests       → tester
+[magneto] ✓ Plan saved to .magneto/cache/plan-add-dashboard.json
+
+$ magneto run tasks/add-dashboard.md --stream
+[magneto] ⚡ Executing with 4 agents in parallel...
+[orchestrator] Decomposing into 3 subtasks...
+[backend]      Implementing API routes...         ████████░░  80%
+[frontend]     Building dashboard components...  ██████░░░░  60%
+[tester]       Generating test suite...           ██████████ 100%
+[backend]      API routes complete ✓
+[frontend]     Dashboard components complete ✓
+[magneto] ✓ Task completed — 12 files, 847 lines, 31 tests generated
+
+$ magneto merge .magneto/cache --format markdown
+[magneto] ✓ Merged 4 agent outputs → .magneto/reports/add-dashboard.md
+[magneto]   Findings: 3 · Risks: 0 · Confidence: 0.94
+```
+
+**What Magneto caught that raw Copilot missed:** missing `'use client'` on a component using `useState`, a server/client boundary violation that would have caused a hydration error at runtime.
+
+---
+
+### 🐍 Scenario 2 — Python FastAPI Security Audit
+
+You're about to deploy a FastAPI service. Magneto scans for the 10 most common FastAPI security mistakes before a single line ships.
+
+```bash
+$ magneto init --with python fastapi
+[magneto] ✓ Detected stack: Python 3.12 · FastAPI 0.110 · Pydantic v2
+[magneto] ✓ Power packs loaded  (python, fastapi)
+
+$ magneto run tasks/pre-deploy-audit.md --mode observe
+[magneto] ⚡ Running security audit (observe mode — read-only)...
+[magneto] Scanning 24 Python files...
+
+[python-pack]   py-hardcoded-secret     FOUND   src/config.py:14
+                → SECRET_KEY = "my-super-secret-key-12345"
+[python-pack]   py-shell-true           FOUND   src/utils/runner.py:38
+                → subprocess.run(cmd, shell=True)  ← command injection risk
+[fastapi-pack]  fastapi-cors-wildcard   FOUND   src/main.py:22
+                → allow_origins=["*"] + allow_credentials=True  ← blocked by browsers
+[fastapi-pack]  fastapi-debug-true      FOUND   src/main.py:7
+                → FastAPI(debug=True)  ← leaks tracebacks in production
+[python-pack]   py-requests-no-timeout  FOUND   src/integrations/stripe.py:51
+                → requests.post(url, json=payload)  ← hangs on unresponsive server
+
+[magneto] ✓ Audit complete — 5 issues across 4 files (3 error, 2 warning)
+[magneto] ✓ Report saved to .magneto/reports/pre-deploy-audit.md
+
+$ magneto run tasks/pre-deploy-audit.md --mode assist
+[magneto] Generating fixes for 5 issues...
+[magneto] ✓ Fix suggestions written to .magneto/reports/pre-deploy-fixes.md
+```
+
+**Time to catch this without Magneto:** 2–3 hours of manual code review, or one very bad production incident.
+
+---
+
+### ☕ Scenario 3 — Java Spring Boot Refactor
+
+Your Spring Boot service is mysteriously slow and occasionally throws `LazyInitializationException`. Magneto finds the N+1 query, the missing transaction boundary, and the exposed actuator — all in seconds.
+
+```bash
+$ magneto init --with java spring-boot
+[magneto] ✓ Detected stack: Java 21 · Spring Boot 3.2 · PostgreSQL
+[magneto] ✓ Power packs loaded  (java, spring-boot)
+
+$ magneto run tasks/perf-audit.md --mode observe --stream
+[magneto] ⚡ Scanning 67 Java files...
+
+[spring-pack]  spring-open-in-view         FOUND   src/main/resources/application.yml:12
+               → spring.jpa.open-in-view=true  ← N+1 queries in every controller
+[spring-pack]  spring-transactional-priv   FOUND   src/service/OrderService.java:84
+               → @Transactional on private method  ← proxy bypass, no transaction applied
+[spring-pack]  spring-actuator-all-exposed FOUND   src/main/resources/application-prod.yml:4
+               → management.endpoints.web.exposure.include=*  ← heapdump publicly accessible
+[java-pack]    java-catch-throwable        FOUND   src/service/PaymentService.java:127
+               → catch (Throwable t)  ← swallows OutOfMemoryError and InterruptedException
+[java-pack]    java-unsafe-deserialize     FOUND   src/legacy/MessageParser.java:33
+               → new ObjectInputStream(input)  ← RCE risk on untrusted data
+
+[magneto] ✓ Found 5 issues across 5 files (3 error, 2 warning)
+[magneto] ⚡ Orchestrating fixes with 3 agents...
+[backend]  Fixing application.yml + OrderService...  ██████████ 100%
+[tester]   Updating integration tests...              ██████████ 100%
+[magneto] ✓ 6 files changed — estimated 60–80% reduction in DB query count
+```
+
+---
+
+### ☁️ Scenario 4 — AWS Infrastructure Review
+
+You've written Terraform for a new microservice. Before `terraform apply`, Magneto scans every `.tf` file for the 16 AWS security checks — IAM, S3, SGs, encryption, hardcoded keys.
+
+```bash
+$ magneto init --with aws
+[magneto] ✓ Detected stack: Terraform 1.7 · AWS Provider 5.x
+[magneto] ✓ Power packs loaded  (aws)
+
+$ magneto run tasks/infra-pre-deploy.md --mode observe
+[magneto] ⚡ Scanning Terraform files (31 .tf files)...
+
+[aws-pack]  aws-iam-wildcard-action    FOUND   infra/iam.tf:18
+            → Action: "*", Resource: "*"  ← grants all AWS permissions
+[aws-pack]  aws-s3-public-acl          FOUND   infra/storage.tf:7
+            → acl = "public-read"  ← bucket contents publicly accessible
+[aws-pack]  aws-sg-ssh-open            FOUND   infra/networking.tf:44
+            → cidr_blocks = ["0.0.0.0/0"] on port 22  ← SSH open to internet
+[aws-pack]  aws-rds-unencrypted        FOUND   infra/database.tf:29
+            → storage_encrypted = false  ← RDS data unencrypted at rest
+[aws-pack]  aws-hardcoded-access-key   FOUND   infra/providers.tf:11
+            → access_key = "AKIA..."  ← hardcoded AWS key (rotate immediately)
+[aws-pack]  aws-lambda-no-timeout      FOUND   infra/lambda.tf:8
+            → No timeout set  ← unbounded execution, cost risk
+
+[magneto] ✗ 6 CRITICAL/HIGH issues found — deploy blocked pending review
+[magneto] ✓ Report: .magneto/reports/infra-pre-deploy.md
+```
+
+**Deploy blocked.** The hardcoded `AKIA` key alone would have triggered a GitHub secret scanner alert and potentially an AWS account compromise within minutes of pushing.
+
+---
+
+### 🔒 Scenario 5 — Regulated/Offline (Ollama — Zero Egress)
+
+You work in healthcare, finance, or a classified environment. Source code cannot leave your machine. Magneto with the Ollama runner gives you full AI-powered reasoning with **zero data egress**.
+
+```bash
+# One-time setup — pull a model locally
+$ ollama pull qwen2.5-coder
+$ ollama serve
+
+# Tell Magneto to use Ollama
+$ export OLLAMA_HOST=http://localhost:11434
+$ export OLLAMA_MODEL=qwen2.5-coder
+
+$ magneto run tasks/audit-auth-module.md --runner ollama --stream
+[magneto] Runner: ollama (qwen2.5-coder @ localhost)
+[magneto] Data egress: none ✓  — all processing is local
+[magneto] ⚡ Pre-flight health check...
+[magneto] ✓ Ollama reachable · model qwen2.5-coder available
+
+[magneto] Executing task via local model...
+[ollama]  Analyzing auth module (4 files, 612 lines)...  ████████████ 100%
+
+[magneto] ✓ Task complete
+[magneto]   Findings: 4 · Risks: 1 · Tokens: 2,847 · Egress: none
+[magneto]   metadata.dataEgress = "none"  ← audit-ready tag on every result
+
+# Every result is tagged — verifiable in your audit log
+$ cat .magneto/audit/approvals.json | jq '.[-1].metadata.dataEgress'
+"none"
+```
+
+**No API key. No cloud call. No data leaving your network.** Same structured findings, same agent output format, runs on a $2,000 developer laptop.
+
+---
+
+### 🔍 Scenario 6 — Auto-Detect Any Stack
+
+Don't know which packs to install? Just run `magneto detect`. Magneto reads your project files and tells you exactly what's there — with confidence scores.
+
+```bash
+$ magneto detect
+[magneto] Scanning project structure...
+
+Stack detected:
+  ✓ TypeScript      confidence: 0.98  (tsconfig.json, 47 .ts files)
+  ✓ Next.js         confidence: 0.95  (next.config.js, app/ router)
+  ✓ Python          confidence: 0.81  (requirements.txt, 12 .py files)
+  ✓ FastAPI         confidence: 0.79  (fastapi in requirements.txt)
+  ✓ AWS             confidence: 0.92  (14 .tf files, aws provider)
+
+Recommended packs:
+  → typescript   [available]   magneto init --with typescript
+  → nextjs       [available]   magneto init --with nextjs
+  → python       [available]   magneto init --with python
+  → fastapi      [available]   magneto init --with fastapi
+  → aws          [available]   magneto init --with aws
+
+$ magneto init --auto-install
+[magneto] Installing all 5 detected packs...
+[magneto] ✓ typescript · nextjs · python · fastapi · aws installed
+[magneto] ✓ Magneto AI ready — 67 checks active across your full stack
+```
+
+---
+
+## 📊 Raw Windsurf/Copilot vs Magneto AI — Token & Cost Benchmarks
 
 > **Same tasks. Measured token-by-token. Magneto AI uses 68% fewer tokens and delivers 3.5x faster.**
 
