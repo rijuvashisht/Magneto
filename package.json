@@ -1,6 +1,6 @@
 {
   "name": "magneto-ai",
-  "version": "0.23.0",
+  "version": "0.25.0",
   "description": "Repo-local AI reasoning framework and agent control plane for enterprise environments",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
