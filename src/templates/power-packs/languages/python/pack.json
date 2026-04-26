@@ -1,0 +1,118 @@
+{
+  "name": "python",
+  "category": "languages",
+  "version": "1.0.0",
+  "description": "Python language power pack — type safety, security checks, and Pythonic-code reasoning across Django/FastAPI/Flask projects",
+  "rules": [
+    "Enforce PEP 8 style and PEP 484 type hints on public functions",
+    "Detect unsafe eval/exec/__import__ usage",
+    "Flag SQL string concatenation and recommend parameterized queries",
+    "Catch bare except clauses and broad Exception handlers without re-raise",
+    "Detect mutable default arguments (def f(x=[]))",
+    "Flag os.system / shell=True subprocess calls",
+    "Verify pickle/yaml.load aren't used on untrusted input",
+    "Check requirements.txt / pyproject.toml for known-vulnerable packages",
+    "Detect missing __init__.py in package directories",
+    "Validate async/await consistency — no sync I/O in async functions"
+  ],
+  "checks": [
+    {
+      "id": "py-eval-exec",
+      "description": "Detect eval/exec usage which enables code injection",
+      "severity": "error",
+      "pattern": "\\b(eval|exec)\\s*\\(",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "py-sql-injection",
+      "description": "Detect SQL string concatenation/f-string interpolation in queries",
+      "severity": "error",
+      "pattern": "(execute|executemany)\\s*\\(\\s*[fr]?[\"'].*(\\{|\\+|%[sd])",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "py-shell-true",
+      "description": "Detect subprocess calls with shell=True (command injection risk)",
+      "severity": "error",
+      "pattern": "subprocess\\.(run|call|Popen|check_output|check_call)\\s*\\([^)]*shell\\s*=\\s*True",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "py-os-system",
+      "description": "Avoid os.system — prefer subprocess with shell=False",
+      "severity": "warning",
+      "pattern": "\\bos\\.system\\s*\\(",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "py-pickle-loads",
+      "description": "pickle.loads on untrusted data enables RCE",
+      "severity": "error",
+      "pattern": "pickle\\.(loads?|Unpickler)\\s*\\(",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "py-yaml-unsafe-load",
+      "description": "yaml.load without SafeLoader enables arbitrary object construction",
+      "severity": "error",
+      "pattern": "yaml\\.load\\s*\\((?![^)]*Loader\\s*=\\s*(yaml\\.)?Safe)",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "py-bare-except",
+      "description": "Bare 'except:' clauses swallow KeyboardInterrupt and SystemExit",
+      "severity": "warning",
+      "pattern": "^\\s*except\\s*:",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "py-mutable-default-arg",
+      "description": "Mutable default arguments are shared across calls (use None + early init)",
+      "severity": "warning",
+      "pattern": "def\\s+\\w+\\s*\\([^)]*=\\s*(\\[|\\{)",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "py-hardcoded-secret",
+      "description": "Detect likely hardcoded secrets (API keys, passwords, tokens)",
+      "severity": "error",
+      "pattern": "(?:[Aa][Pp][Ii][_-]?[Kk][Ee][Yy]|[Ss][Ee][Cc][Rr][Ee][Tt]|[Pp][Aa][Ss][Ss][Ww][Oo][Rr][Dd]|[Tt][Oo][Kk][Ee][Nn])\\s*=\\s*[\"'][A-Za-z0-9_\\-]{16,}[\"']",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "py-debug-true",
+      "description": "DEBUG = True in production-bound config",
+      "severity": "warning",
+      "pattern": "^\\s*DEBUG\\s*=\\s*True",
+      "scope": ["**/settings*.py", "**/config*.py", "**/*.py"]
+    },
+    {
+      "id": "py-missing-type-hints",
+      "description": "Public functions should have type hints (PEP 484)",
+      "severity": "info",
+      "pattern": "^def\\s+(?!_)\\w+\\s*\\([^)]*\\)\\s*:",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "py-print-debug",
+      "description": "print() left in non-CLI source — prefer logging module",
+      "severity": "info",
+      "pattern": "^\\s*print\\s*\\(",
+      "scope": ["src/**/*.py", "app/**/*.py", "lib/**/*.py"]
+    },
+    {
+      "id": "py-requests-no-timeout",
+      "description": "requests.{get,post,...} without timeout can hang indefinitely",
+      "severity": "warning",
+      "pattern": "requests\\.(get|post|put|delete|patch|head|options)\\s*\\((?![^)]*timeout\\s*=)",
+      "scope": ["**/*.py"]
+    },
+    {
+      "id": "py-assert-in-prod",
+      "description": "assert statements are stripped with python -O — don't use for security",
+      "severity": "warning",
+      "pattern": "^\\s*assert\\s+",
+      "scope": ["**/*.py"]
+    }
+  ]
+}
